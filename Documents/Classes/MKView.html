@@ -47,7 +47,7 @@
 
 <p> <strong> Drawing of Views </strong></p>
 
-<p> <a href="MKView.html">MKView</a> supports the use of <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> and conforms to the MKGraphicsFactory protocol. If you are not using a graphics dictionay you set a MKGraphicsInstance using the graphicsStructure property. <strong> Note. Setting the graphicsStucture property will cause the view to redraw itself. </strong> <a href="MKView.html">MKView</a> will look for following graphics properties: <ul><li> <code>fill</code>: if a fill propery is set, it will be used to color the view. If the fill property is nil, instance will look for top an bottom properties to create a gradiant fill. </li><li> <code>top</code>: this will be the top half of the views background fill. </li><li> <code>bottom</code>: this will be the bottom half of the view background fill. </li><li> <code>usesLinerShine</code>: tells if the backgound will have a liner shine added or not. </li></ul></p>
+<p> <a href="MKView.html">MKView</a> supports the use of <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> and conforms to the MKGraphicsFactory protocol. You set a MKGraphicsInstance using the graphicsStructure property. <strong> Note. Setting the graphicsStucture property will cause the view to redraw itself. </strong> <a href="MKView.html">MKView</a> will look for following graphics properties: <ul><li> fillColor : <code>default nil</code></li><li> topColor : <code>default nil</code></li><li> bottomColor : <code>default nil</code></li><li> usesLinerShine : <code>default NO</code></li></ul></p>
 
 <p> <strong> Required Frameworks </strong> <ul><li> UIKit </li><li> Foundation </li><li> Core Graphics </li></ul></p>
 
@@ -153,37 +153,25 @@
 </li>
 					</ul>
 					
-					<h3 class="subsubtitle task-title">MKTitleView Methods</h3>
+					<h3 class="subsubtitle task-title">MKTableHeader Methods</h3>
 
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/titleViewWithTitle:image:">+ titleViewWithTitle:image:</a></code>
-		<span class="tooltip"> Creates an autoreleased instance of <a href="MKView.html">MKView</a> Suited for display on a navigation bar. </span>
+		<code><a href="#//api/name/initWithTitle:type:">- initWithTitle:type:</a></code>
+		<span class="tooltip"> Returns an instace of <a href="MKView.html">MKView</a> sized for a grouped table header. </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithTitle:image:">- initWithTitle:image:</a></code>
-		<span class="tooltip"> Creates an instance of <a href="MKView.html">MKView</a> Suited for display on a navigation bar. </span>
-	</span>
-	
-</li>
-					</ul>
-					
-					<h3 class="subsubtitle task-title">IconMask Methods</h3>
-
-					<ul class="task-list">
-						<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initWithImage:gradient:MK_DEPRECATED_0_9:">- initWithImage:gradient:MK_DEPRECATED_0_9:</a></code>
-		<span class="tooltip"> <p class="warning"> <strong> Deprecated Method v0.9 </strong> Use <a href="MKImage.html">MKImage</a> methods instead. </p></span>
+		<code><a href="#//api/name/headerViewWithTitle:type:">+ headerViewWithTitle:type:</a></code>
+		<span class="tooltip"> Returns an instace of <a href="MKView.html">MKView</a> sized for a grouped table header. </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/MK_DEPRECATED_0_9"> MK_DEPRECATED_0_9</a></code>
-		<span class="tooltip"> <p class="warning"> <strong> Deprecated Property v0.9 </strong></p></span>
+		<code><a href="#//api/name/titleLabel"> titleLabel</a></code>
+		<span class="tooltip"> The UILabel instance that is displayed on the view </span>
 	</span>
 	
 </li>
@@ -255,25 +243,37 @@
 </li>
 					</ul>
 					
-					<h3 class="subsubtitle task-title">MKTableHeader Methods</h3>
+					<h3 class="subsubtitle task-title">MKTitleView Methods</h3>
 
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithTitle:type:">- initWithTitle:type:</a></code>
-		<span class="tooltip"> Returns an instace of <a href="MKView.html">MKView</a> sized for a grouped table header. </span>
+		<code><a href="#//api/name/titleViewWithTitle:image:">+ titleViewWithTitle:image:</a></code>
+		<span class="tooltip"> Creates an autoreleased instance of <a href="MKView.html">MKView</a> Suited for display on a navigation bar. </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/headerViewWithTitle:type:">+ headerViewWithTitle:type:</a></code>
-		<span class="tooltip"> Returns an instace of <a href="MKView.html">MKView</a> sized for a grouped table header. </span>
+		<code><a href="#//api/name/initWithTitle:image:">- initWithTitle:image:</a></code>
+		<span class="tooltip"> Creates an instance of <a href="MKView.html">MKView</a> Suited for display on a navigation bar. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">IconMask Methods</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithImage:gradient:MK_DEPRECATED_0_9:">- initWithImage:gradient:MK_DEPRECATED_0_9:</a></code>
+		<span class="tooltip"> <p class="warning"> <strong> Deprecated Method v0.9 </strong> Use <a href="MKImage.html">MKImage</a> methods instead. </p></span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/titleLabel"> titleLabel</a></code>
-		<span class="tooltip"> The UILabel instance that is displayed on the view </span>
+		<code><a href="#//api/name/MK_DEPRECATED_0_9"> MK_DEPRECATED_0_9</a></code>
+		<span class="tooltip"> <p class="warning"> <strong> Deprecated Property v0.9 </strong></p></span>
 	</span>
 	
 </li>
@@ -1369,7 +1369,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-26)</span><br />
+					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-30)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

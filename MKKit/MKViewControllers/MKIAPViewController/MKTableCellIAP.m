@@ -53,7 +53,7 @@
 - (void)completePurchase {
     NSSet *items = [NSSet setWithObject:self.IAPIdentifier];
     self.accessoryViewType = MKTableCellAccessoryActivity;
-    mButton.working = YES;
+    mButton.controlState = MKControlStateWorking;
     
     [MKIAPController purchaseRequestWithIdentifiers:items completion: ^ (SKPaymentTransaction *transaction, NSError *error) {
         NSSet *identifiers = [NSSet setWithObject:transaction.payment.productIdentifier];
@@ -61,7 +61,7 @@
             if ([mObserver respondsToSelector:@selector(didCompleteEvent:forIdentifiers:)]) {
                 [mObserver didCompleteEvent:MKIAPEventPurchaseComplete forIdentifiers:identifiers];
             }
-            mButton.working = NO;
+            mButton.controlState = MKControlStateNormal;
             mButton.buttonText = @"Installed";
             self.accessoryViewType = MKTableCellAccessoryInfoButton;
         }
@@ -69,7 +69,7 @@
             if ([mObserver respondsToSelector:@selector(didCompleteEvent:forIdentifiers:)]) {
                 [mObserver didCompleteEvent:MKIAPEventRequestFailed forIdentifiers:identifiers];
                 
-                mButton.working = NO;
+                mButton.controlState = MKControlStateNormal;
                 mButton.buttonText = @"Retry";
                 
                 self.accessoryViewType = MKTableCellAccessoryInfoButton;

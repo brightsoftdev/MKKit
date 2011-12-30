@@ -9,6 +9,8 @@
 #import "MKControl+Internal.h"
 
 #import "MKBarButtonItem.h"
+#import "MKButton.h"
+#import "MKPaging.h"
 
 @implementation MKControl (Internal)
 
@@ -20,9 +22,28 @@
     MKGraphicsStructures *graphics = [MKGraphicsStructures graphicsStructure];
     
     if ([self isMemberOfClass:[MKBarButtonItem class]]) {
-        graphics.fill = [UIColor whiteColor];
-        graphics.touched = [UIColor whiteColor];
-        graphics.disabled = MK_COLOR_HSB(345.0, 1.0, 99.0, 0.50);
+        graphics.fillColor = [UIColor whiteColor];
+        graphics.touchedColor = [UIColor whiteColor];
+        graphics.disabledColor = MK_COLOR_HSB(345.0, 1.0, 99.0, 0.50);
+    }
+    if ([self isMemberOfClass:[MKButton class]]) {
+        if ([(MKButton *)self type] == MKButtonTypeRoundedRect) {
+            graphics.topColor = MK_COLOR_HSB(240.0, 98.0, 98.0, 0.5);
+            graphics.bottomColor = MK_COLOR_HSB(240.0, 98.0, 98.0, 1.0);
+            graphics.disabledColor = MK_COLOR_HSB(240.0, 98.0, 98.0, 0.25);
+            graphics.touchedColor = MK_COLOR_HSB(240.0, 98.0, 98.0, 1.0);
+            graphics.bordered = YES;
+            graphics.borderWidth = 2.0;
+            graphics.borderColor = [UIColor blackColor];
+        }
+        if ([(MKButton *)self type] == MKButtonTypePlastic) {
+            graphics.fillColor = MK_COLOR_HSB(345.0, 0.0, 0.0, 1.0);
+            graphics.borderColor = [UIColor blackColor];
+        }
+    }
+    if ([self isMemberOfClass:[MKPaging class]]) {
+        graphics.fillColor = MK_COLOR_RGB(1.0, 1.0, 1.0, 1.0);
+        graphics.disabledColor = MK_COLOR_RGB(1.0, 1.0, 1.0, 0.5);
     }
     
     return graphics;

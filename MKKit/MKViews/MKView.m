@@ -33,12 +33,12 @@
 
 #pragma mark Graphics Factory
 
-- (id)initWithGraphicsNamed:(NSString *)structureName {
+- (id)initWithGraphics:(MKGraphicsStructures *)_graphicsStructure {
     self = [super init];
     if (self) {
         [self setUpView];
         
-        self.graphicsStructure = [MKGraphicsStructures graphicsWithName:structureName];
+        self.graphicsStructure = [_graphicsStructure retain];
     }
     return self;
 }

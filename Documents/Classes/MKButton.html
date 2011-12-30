@@ -38,11 +38,17 @@
 					
 <p> <strong> Overview </strong></p>
 
-<p> <a href="MKButton.html">MKButton</a> provides specalty buttons for various use. There are currently four types of buttons: <ul><li> <code>MKButtonTypeHelp</code>: a small round button with a question mark </li><li> <code>MKButtonTypeDisclosure</code>: a blue and white button that resembles iOS discloser button </li><li> `MKButtonTypeDropDownIndicator : a small button with down arrow on it. </li><li> <code>MKButtonTypeIAP</code>: a InApp Purchase button, mimics the purchase buttons from the appstore. </li><li> <code>MKButtonTypePlastic</code>: a button with a rounded shine, giving it a plasic look. Default tint is black. </li><li> <code>MKButtonTypeRoundedRect</code>: a rounded rect button that can be assigned a color. Default tint is blue. </li></ul></p>
+<p> <a href="MKButton.html">MKButton</a> provides specalty buttons for various use. There are currently four types of buttons: <ul><li> <code>MKButtonTypeHelp</code>: a small round button with a question mark </li><li> <code>MKButtonTypeDisclosure</code>: a blue and white button that resembles iOS discloser button </li><li> <code>MKButtonTypeIAP</code>: a InApp Purchase button, mimics the purchase buttons from the appstore. </li><li> <code>MKButtonTypePlastic</code>: a button with a rounded shine, giving it a plasic look. Default tint is black. </li><li> <code>MKButtonTypeRoundedRect</code>: a rounded rect button that can be assigned a color. Default tint is blue. </li></ul></p>
 
 <p> <strong> Graphic Display </strong></p>
 
-<p> Some <a href="MKButton.html">MKButton</a> types support graphics from the MKGraphicStructures class. Diffent types look for different parts of a graphic structure. If no graphics stucture is provide the buttons will default to a soild blue color. <ul><li> <code>MKButtonTypePlastic</code>: looks for the <strong> fill </strong> property of MKGraphicsStructures. </li><li> <code>MKButtonTypeRoundedRect</code>: looks for the <strong> top </strong> and <strong> bottom </strong> properties of MKGraphicisStructures. </li></ul></p>
+<p> Some <a href="MKButton.html">MKButton</a> types support graphics from the MKGraphicStructures class. Diffent types look for different parts of a graphic structure. If no graphics stucture is provide the buttons will default to a standard graphics structure. </p>
+
+<p> MKButtonTypePlastic looks for the following graphics properties: <ul><li> fill : <code>default is black</code></li><li> border : <code>default is black</code></li></ul></p>
+
+<p> MKButtonTypeRoundedRect <ul><li> top : <code>default is blue with 0.5 alpha</code></li><li> bottom : <code>default is blue</code></li><li> touched : <code>default is blue</code></li><li> disabled : <code>default is blue with 0.25 alpha</code></li><li> border : <code>default is black</code></li><li> bordered : <code>default is YES</code></li><li> borderWidth : <code>default is 2.0</code></li></ul></p>
+
+<p> MKButtonHelp, MKButtonDisclosure, and MKButtonIAP are drawn with a preset graphic structure, and do not respond an assigned graphics structure. </p>
 
 <p> <strong> Required Frameworks </strong> <ul><li> Foundation </li><li> UIKit </li><li> Quartz Core </li></ul></p>
 
@@ -79,7 +85,7 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithType:title:graphicsStructure:">- initWithType:title:graphicsStructure:</a></code>
+		<code><a href="#//api/name/initWithType:title:graphics:">- initWithType:title:graphics:</a></code>
 		<span class="tooltip"> Returns and instance of <a href="MKButton.html">MKButton</a></span>
 	</span>
 	
@@ -170,6 +176,11 @@
 	
 	
 	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKButton.html">MKButton</a> Instance </p>
+	</div>
+	
 	
 	
 	
@@ -217,6 +228,11 @@
 	
 	
 	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKButton.html">MKButton</a> Instance </p>
+	</div>
+	
 	
 	
 	
@@ -234,8 +250,8 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/initWithType:title:graphicsStructure:" title="initWithType:title:graphicsStructure:"></a>
-	<h3 class="subsubtitle method-title">initWithType:title:graphicsStructure:</h3>
+	<a name="//api/name/initWithType:title:graphics:" title="initWithType:title:graphics:"></a>
+	<h3 class="subsubtitle method-title">initWithType:title:graphics:</h3>
 	
 	
 	
@@ -244,7 +260,7 @@
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)initWithType:(MKButtonType)<em>type</em> title:(NSString *)<em>title</em> graphicsStructure:(MKGraphicsStructures *)<em>graphics</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithType:(MKButtonType)<em>type</em> title:(NSString *)<em>title</em> graphics:(MKGraphicsStructures *)<em>graphics</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -262,12 +278,17 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>graphics</em></dt>
-			<dd> the graphics structure to use when drawing this button. </dd>
+			<dd> the graphics structure to use when drawing this button or <code>nil</code> for the default graphics set. </dd>
 		</dl>
 		
 	</div>
 	
 	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKButton.html">MKButton</a> Instance </p>
+	</div>
 	
 	
 	
@@ -497,7 +518,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-27)</span><br />
+					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-30)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

@@ -138,7 +138,7 @@
         [self addSubview:topBar];
         [topBar release];
         
-        backItem = [[MKBarButtonItem alloc] initWithType:MKBarButtonItemBackArrow graphicNamed:nil];
+        backItem = [[MKBarButtonItem alloc] initWithType:MKBarButtonItemBackArrow graphics:nil];
         backItem.controlState = MKControlStateDisabled;
         [backItem completedAction: ^ (MKAction action) {
             if (action == MKActionTouchUp) {
@@ -146,7 +146,7 @@
             }
         }];
         
-        forwardItem = [[MKBarButtonItem alloc] initWithType:MKBarButtonItemForwardArrow graphicNamed:nil];
+        forwardItem = [[MKBarButtonItem alloc] initWithType:MKBarButtonItemForwardArrow graphics:nil];
         forwardItem.controlState = MKControlStateDisabled;
         [forwardItem completedAction: ^ (MKAction action) {
             if (action == MKActionTouchUp) {

@@ -25,6 +25,7 @@ typedef enum {
 
 CGColorRef topColorForControlState(MKControlState state, MKGraphicsStructures *graphics);
 CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures *graphics);
+CGColorRef borderColor(MKGraphicsStructures *graphics);
 
 @class MKGraphicsStructures;
 
@@ -141,8 +142,8 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
 /// @name Control States
 ///---------------------------------------------------------
 
-/** tells if the controll is in working state. Default is `NO`. */
-@property (nonatomic, assign) BOOL working;
+/** *DEPRECATED. Use controlState instead* */
+@property (nonatomic, assign) BOOL working MK_DEPRECATED_0_9;
 
 /** The state of a control object. Possible Values are:
  

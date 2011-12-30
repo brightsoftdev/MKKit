@@ -44,31 +44,7 @@
 
 <p> MKKit class that use the <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> class will refereance an instance when preforming drawing operations. </p>
 
-<p> <strong> Using a Graphic Dictionary </strong></p>
-
-<p> MKGraphicsStructure has support the loading of grapics information from a plits file. For example if you want to use the same background drawing for a set of views, you define a color patern in a property list an MKGraphicsStructure will will convert it to an instance for your view to use. </p>
-
-<p> To use a graphics dictionary you need to register a property list file. This only needs to be done once. You can register a propert list by calling resgisterGraphicsFile: method. Pass on the path to you property list. </p>
-
-<p> After a plist file has been registered you can create instances by calling the <a href="#//api/name/graphicsWithName:">graphicsWithName:</a> method. Or by calling the MKGraphicsFactory method initWithGraphicsName: for classes that conform to the MKGraphicsFactory protocol. </p>
-
-<p> Check the documentation of the class you are using to see MKGraphicsSturctures and/or MKGraphicsFactory is supported, and what graphic properties are expected for the class. <p class="warning"> <strong> Note </strong> the initWithGraphicsName: method is primarlly used by super classes. Check the documentation of classes you are using for creation methods that suport the use of MKGraphicStrutures. </p></p>
-
-<p> The Following Classes currently support the use of a graphics dictionary: <ul><li> <a href="MKBarButtonItem.html">MKBarButtonItem</a></li><li> <a href="MKImage.html">MKImage</a></li><li> <a href="MKView.html">MKView</a></li></ul></p>
-
-<p> <strong> Creating a Graphics Dictionary </strong></p>
-
-<p> An graphics dictionary is created with a property list file. The property list needs have an NSDictionary object as the main level. From there it should contain a NSDictionary object for each graphic structure you want to use in your app. The keys for these dictionary(s) are up to you. </p>
-
-<p> For example if you wanted a graphics structure for icons displayed on your navigation bar the key may be MyNavIcon. This dictionary should contain a series of NSString and NSDictionary objects that corrispond the apropreate vaules and keys. The following is list of expected keys and values: </p>
-
-<p> Colors <ul><li> key : <code>MKGraphicsFillColor</code> value : <code>NSDictionary</code></li><li> key : <code>MKGraphicsTopColor</code> value : <code>NSDictionary</code></li><li> key : <code>MKGrpahicsBottomColor</code> value : <code>NSDictionary</code></li><li> key : <code>MKGraphicsBorderColor</code> value : <code>NSDictionary</code></li><li> key : <code>MKGraphicsDisabledColor</code> value : <code>NSDictionary</code></li><li> key : <code>MKGraphicsTouchedColor</code> value : <code>NSDictionary</code></li></ul></p>
-
-<p> All color dictionaries should have the following structure: <ul><li> MKGraphicsFillColor, MKGraphicsTopColor, or MKGraphicsBottomColor Dictionary key : <code>MKGraphicsColorHSBA</code> or <code>MKGrapicsColorRGBA</code> value : <code>NSDictionary</code></li><li> MKGraphicsColorHSBA keys : <code>h, s, b, a</code>: value <code>NSString</code> to represent the hue, saturation, brightness, and alpha values of a color, given in raw values. </li><li> MKGraphicsColorRGBA keys : <code>r, g, b, a</code>: value <code>NSString</code> to respresent the red, green, blue, and alpha values of a color, given in raw values. </li></ul> <p class="warning"> <strong> Note </strong> If a <a href="#//api/name/fill">fill</a> color used a <a href="#//api/name/top">top</a> color and <a href="#//api/name/bottom">bottom</a> color does not need to be used and vise versa. </p></p>
-
-<p> Bools <ul><li> key : <code>MKGraphicsUseLinerShine</code> value : <code>NSString</code> <strong> YES </strong> to use a shine <strong> NO </strong> (or omit) to not. </li><li> key : <code>MKGraphicsBordered</code> value : <code>NSString</code> <strong> YES </strong> to draw a <a href="#//api/name/border">border</a> <strong> NO </strong> (or omit) to not. <strong> This key does not need to be assigned in your graphics dictionary, assigning a <a href="#//api/name/border">border</a> color will automatically set the value of this key to YES </strong> . </li></ul></p>
-
-<p> Floats <ul><li> key : <code>MKGraphicsBorderWidth</code> value : <code>NSString</code> the string representaion of a float value default is <strong> 2.0 </strong> . </li></ul> <p class="warning"> An example of an graphic dictonary property list is available from the downloads section of the MKKit github project. </p></p>
+<p> The Following Classes currently support the use of Graphics Structures: <ul><li> <a href="MKBarButtonItem.html">MKBarButtonItem</a></li><li> <a href="MKButton.html">MKButton</a></li><li> <a href="MKImage.html">MKImage</a></li><li> <a href="MKPaging.html">MKPaging</a></li><li> <a href="MKView.html">MKView</a></li></ul></p>
 
 <p> <strong> Required Classes </strong> <ul><li> <a href="MKObject.html">MKObject</a></li></ul></p>
 
@@ -93,26 +69,8 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/graphicsWithName:">+ graphicsWithName:</a></code>
-		<span class="tooltip"> Creates and autoreleaseing instance of <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> from the give name. The name should corispond with on of the keys from you graphics dictionary. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/linearGradientWithTopColor:bottomColor:">+ linearGradientWithTopColor:bottomColor:</a></code>
 		<span class="tooltip"> An instance of MKGraphisStructures that sets the colors for a linear gradient. </span>
-	</span>
-	
-</li>
-					</ul>
-					
-					<h3 class="subsubtitle task-title">Graphics Dictonary</h3>
-
-					<ul class="task-list">
-						<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/registerGraphicsFile:">+ registerGraphicsFile:</a></code>
-		<span class="tooltip"> Registers a property list file that used to build <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> instances for use in your app. </span>
 	</span>
 	
 </li>
@@ -135,20 +93,20 @@
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/top"> top</a></code>
-		<span class="tooltip"> the <a href="#//api/name/top">top</a> color of the gradient </span>
+		<code><a href="#//api/name/topColor"> topColor</a></code>
+		<span class="tooltip"> the top color of the gradient </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/bottom"> bottom</a></code>
-		<span class="tooltip"> the <a href="#//api/name/bottom">bottom</a> color of the gradient </span>
+		<code><a href="#//api/name/bottomColor"> bottomColor</a></code>
+		<span class="tooltip"> the bottom color of the gradient </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/fill"> fill</a></code>
-		<span class="tooltip"> the <a href="#//api/name/fill">fill</a> color of an UI object. </span>
+		<code><a href="#//api/name/fillColor"> fillColor</a></code>
+		<span class="tooltip"> the fill color of an UI object. </span>
 	</span>
 	
 </li>
@@ -159,26 +117,20 @@
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/border"> border</a></code>
-		<span class="tooltip"> the <a href="#//api/name/border">border</a> color for an object </span>
+		<code><a href="#//api/name/disabledColor"> disabledColor</a></code>
+		<span class="tooltip"> the color of a disabled object </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/disabled"> disabled</a></code>
-		<span class="tooltip"> the color of a <a href="#//api/name/disabled">disabled</a> object </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/touched"> touched</a></code>
-		<span class="tooltip"> the color of a <a href="#//api/name/touched">touched</a> object </span>
+		<code><a href="#//api/name/touchedColor"> touchedColor</a></code>
+		<span class="tooltip"> the color of a touched object </span>
 	</span>
 	
 </li>
 					</ul>
 					
-					<h3 class="subsubtitle task-title">Styling</h3>
+					<h3 class="subsubtitle task-title">Shining</h3>
 
 					<ul class="task-list">
 						<li>
@@ -187,16 +139,58 @@
 		<span class="tooltip"> <code>YES</code> if a liner shine should be used on view drawing. </span>
 	</span>
 	
-</li><li>
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Boarders</h3>
+
+					<ul class="task-list">
+						<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/bordered"> bordered</a></code>
-		<span class="tooltip"> <code>YES</code> if an object should have a <a href="#//api/name/border">border</a> drawn for it. </span>
+		<span class="tooltip"> <code>YES</code> if an object should have a border drawn for it. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/borderColor"> borderColor</a></code>
+		<span class="tooltip"> the border color for an object </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/borderWidth"> borderWidth</a></code>
-		<span class="tooltip"> The width of a <a href="#//api/name/border">border</a> if any. Default is <code>2.0</code>. </span>
+		<span class="tooltip"> The width of a border if any. Default is <code>2.0</code>. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Shadows</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/shadowed"> shadowed</a></code>
+		<span class="tooltip"> <code>YES</code> if a shadow should be drawn. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/shadowOffset"> shadowOffset</a></code>
+		<span class="tooltip"> The size of a shadows offset </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/shadowBlur"> shadowBlur</a></code>
+		<span class="tooltip"> The blur of a shadow 0.0 is solid line </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/shadowColor"> shadowColor</a></code>
+		<span class="tooltip"> The color of a shadow </span>
 	</span>
 	
 </li>
@@ -253,43 +247,6 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/graphicsWithName:" title="graphicsWithName:"></a>
-	<h3 class="subsubtitle method-title">graphicsWithName:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p> Creates and autoreleaseing instance of <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> from the give name. The name should corispond with on of the keys from you graphics dictionary. </p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>+ (id)graphicsWithName:(NSString *)<em>name</em></code></div>
-	
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p> MKGraphicsStructure instance. </p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKGraphicsStructures.h</code><br />
-	</div>				
-	
-	
-</div>
-					
-					<div class="section-method">
 	<a name="//api/name/linearGradientWithTopColor:bottomColor:" title="linearGradientWithTopColor:bottomColor:"></a>
 	<h3 class="subsubtitle method-title">linearGradientWithTopColor:bottomColor:</h3>
 	
@@ -308,12 +265,12 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>topColor</em></dt>
-			<dd> the color on the <a href="#//api/name/top">top</a> of the gradient. </dd>
+			<dd> the color on the top of the gradient. </dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>bottomColor</em></dt>
-			<dd> the color on the <a href="#//api/name/bottom">bottom</a> of the gradient. </dd>
+			<dd> the color on the bottom of the gradient. </dd>
 		</dl>
 		
 	</div>
@@ -326,47 +283,6 @@
 	</div>
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKGraphicsStructures.h</code><br />
-	</div>				
-	
-	
-</div>
-					
-					<div class="section-method">
-	<a name="//api/name/registerGraphicsFile:" title="registerGraphicsFile:"></a>
-	<h3 class="subsubtitle method-title">registerGraphicsFile:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p> Registers a property list file that used to build <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> instances for use in your app. </p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>+ (void)registerGraphicsFile:(NSString *)<em>path</em></code></div>
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		
-		<p> Registers a property list file that used to build <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> instances for use in your app. </p>
-		
-		<p> After a file is registered you can use <a href="#//api/name/graphicsWithName:">graphicsWithName:</a> method to retrive the instance for the specified graphic. </p>
-		
-	</div>
 	
 	
 	
@@ -408,12 +324,12 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>topColor</em></dt>
-			<dd> the color on the <a href="#//api/name/top">top</a> of the gradient. </dd>
+			<dd> the color on the top of the gradient. </dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>bottomColor</em></dt>
-			<dd> the color on the <a href="#//api/name/bottom">bottom</a> of the gradient. </dd>
+			<dd> the color on the bottom of the gradient. </dd>
 		</dl>
 		
 	</div>
@@ -444,17 +360,17 @@
 					<h2 class="subtitle subtitle-methods">Properties</h2>
 					
 					<div class="section-method">
-	<a name="//api/name/border" title="border"></a>
-	<h3 class="subsubtitle method-title">border</h3>
+	<a name="//api/name/borderColor" title="borderColor"></a>
+	<h3 class="subsubtitle method-title">borderColor</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> the <a href="#//api/name/border">border</a> color for an object </p>
+		<p> the border color for an object </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *border</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *borderColor</code></div>
 	
 	
 	
@@ -482,7 +398,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> The width of a <a href="#//api/name/border">border</a> if any. Default is <code>2.0</code>. </p>
+		<p> The width of a border if any. Default is <code>2.0</code>. </p>
 	</div>		
 	
 	
@@ -514,7 +430,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> <code>YES</code> if an object should have a <a href="#//api/name/border">border</a> drawn for it. </p>
+		<p> <code>YES</code> if an object should have a border drawn for it. </p>
 	</div>		
 	
 	
@@ -540,17 +456,17 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/bottom" title="bottom"></a>
-	<h3 class="subsubtitle method-title">bottom</h3>
+	<a name="//api/name/bottomColor" title="bottomColor"></a>
+	<h3 class="subsubtitle method-title">bottomColor</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> the <a href="#//api/name/bottom">bottom</a> color of the gradient </p>
+		<p> the bottom color of the gradient </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *bottom</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *bottomColor</code></div>
 	
 	
 	
@@ -572,17 +488,17 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/disabled" title="disabled"></a>
-	<h3 class="subsubtitle method-title">disabled</h3>
+	<a name="//api/name/disabledColor" title="disabledColor"></a>
+	<h3 class="subsubtitle method-title">disabledColor</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> the color of a <a href="#//api/name/disabled">disabled</a> object </p>
+		<p> the color of a disabled object </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *disabled</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *disabledColor</code></div>
 	
 	
 	
@@ -604,17 +520,17 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/fill" title="fill"></a>
-	<h3 class="subsubtitle method-title">fill</h3>
+	<a name="//api/name/fillColor" title="fillColor"></a>
+	<h3 class="subsubtitle method-title">fillColor</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> the <a href="#//api/name/fill">fill</a> color of an UI object. </p>
+		<p> the fill color of an UI object. </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *fill</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *fillColor</code></div>
 	
 	
 	
@@ -636,17 +552,17 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/top" title="top"></a>
-	<h3 class="subsubtitle method-title">top</h3>
+	<a name="//api/name/shadowBlur" title="shadowBlur"></a>
+	<h3 class="subsubtitle method-title">shadowBlur</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> the <a href="#//api/name/top">top</a> color of the gradient </p>
+		<p> The blur of a shadow 0.0 is solid line </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *top</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGFloat shadowBlur</code></div>
 	
 	
 	
@@ -668,17 +584,145 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/touched" title="touched"></a>
-	<h3 class="subsubtitle method-title">touched</h3>
+	<a name="//api/name/shadowColor" title="shadowColor"></a>
+	<h3 class="subsubtitle method-title">shadowColor</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> the color of a <a href="#//api/name/touched">touched</a> object </p>
+		<p> The color of a shadow </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *touched</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *shadowColor</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKGraphicsStructures.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/shadowOffset" title="shadowOffset"></a>
+	<h3 class="subsubtitle method-title">shadowOffset</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The size of a shadows offset </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGSize shadowOffset</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKGraphicsStructures.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/shadowed" title="shadowed"></a>
+	<h3 class="subsubtitle method-title">shadowed</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> <code>YES</code> if a shadow should be drawn. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL shadowed</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKGraphicsStructures.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/topColor" title="topColor"></a>
+	<h3 class="subsubtitle method-title">topColor</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> the top color of the gradient </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *topColor</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKGraphicsStructures.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/touchedColor" title="touchedColor"></a>
+	<h3 class="subsubtitle method-title">touchedColor</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> the color of a touched object </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *touchedColor</code></div>
 	
 	
 	
@@ -744,7 +788,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-27)</span><br />
+					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-30)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

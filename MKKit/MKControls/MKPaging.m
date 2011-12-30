@@ -17,12 +17,20 @@
 - (id)initWithPages:(NSInteger)numOfPages {
     self = [super init];
     if (self) {
+        self = [self initWithPages:numOfPages graphics:nil];
+    }
+    return self;
+}
+
+- (id)initWithPages:(NSInteger)numOfPages graphics:(MKGraphicsStructures *)graphics {
+    self = [super initWithGraphics:graphics];
+    if (self) {
         self.frame = CGRectMake(0.0, 0.0, 300.0, 30.0);
         self.backgroundColor = CLEAR;
         self.opaque = NO;
-        
         self.numberOfPages = numOfPages;
         self.currentPage = 1;
+        self.controlState = MKControlStateNormal;
         
         MKPagingFlags.leftArrowActive = NO;
         MKPagingFlags.rightArrowActive = NO;
@@ -91,8 +99,8 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetAllowsAntialiasing(context, YES);
     
-    CGColorRef activeArrowColor = MK_COLOR_RGB(1.0, 1.0, 1.0, 1.0).CGColor;
-    CGColorRef inactiveArrowColor = MK_COLOR_RGB(1.0, 1.0, 1.0, 0.5).CGColor;
+    CGColorRef activeArrowColor = bottomColorForControlState(MKControlStateNormal, self.graphicsStructure); 
+    CGColorRef inactiveArrowColor = bottomColorForControlState(MKControlStateDisabled, self.graphicsStructure);
     
     CGFloat dotFrameWidth = (self.numberOfPages * 12);
     
@@ -127,10 +135,10 @@
 
     
     for (int i = 0; self.numberOfPages > i; i++) {
-        CGColorRef dotColor = LIGHT_GRAY.CGColor;
+        CGColorRef dotColor = bottomColorForControlState(MKControlStateDisabled, self.graphicsStructure);
         
         if ((i + 1) == self.currentPage) {
-            dotColor = BLACK.CGColor;
+            dotColor = bottomColorForControlState(MKControlStateNormal, self.graphicsStructure);
         }
         
         CGFloat xAdjust = (i * 12.0);

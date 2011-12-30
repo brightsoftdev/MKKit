@@ -22,17 +22,15 @@
  
  MKImage intances are supported by MKGraphicsStrutures. GraphicStrutures can
  be passes to images during their creation. Since MKImages are non-mutable 
- objcets, the class does not conform to the MKGraphicsFactory protocol. You
- can still set image grapics in you Graphic Dictonary and access them by
- calling the graphicsWithName: class method of MKGraphicsStructures. MKImage
+ objcets, the class does not conform to the MKGraphicsFactory protocol. MKImage
  looks for the following graphic properties:
  
- * `fill` : If a fill is set, the image will colored in with the fill color.
- If fill is nil, MKImage will look for top and bottom properties to create 
- a gradient fill.
- * `top` : the top half of the images color.
- * `bottom` : the bottom half of the images color.
- * `useLinerShine` : `YES` if an image should be given a liner shine.
+ * fillColor : `default black`
+ * topColor : `default nil`
+ * bottomColor : `default nil`
+ * useLinerShine : `default NO`
+ * shadowColor : `default nil`
+ * shadowOffset : `default nil`
  
  *Required Frameworks*
  

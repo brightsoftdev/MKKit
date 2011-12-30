@@ -12,6 +12,7 @@
 
 - (id)initWithName:(NSString *)name graphicStruct:(MKGraphicsStructures *)graphicStruct;
 - (MKImage *)maskFromImage:(UIImage *)image graphicStruct:(MKGraphicsStructures *)graphicStruct;
+- (MKGraphicsStructures *)defaultGraphics;
 
 @end
 
@@ -46,9 +47,22 @@
     [super dealloc];
 }
 
+#pragma mark - Default Graphics
+
+- (MKGraphicsStructures *)defaultGraphics {
+    MKGraphicsStructures *graphics = [MKGraphicsStructures graphicsStructure];
+    graphics.fillColor = [UIColor blackColor];
+    
+    return graphics;
+}
+
 #pragma mark - Masking
 
 - (MKImage *)maskFromImage:(UIImage *)image graphicStruct:(MKGraphicsStructures *)graphicStruct {
+    if (!graphicStruct) {
+        graphicStruct = [self defaultGraphics];
+    }
+    
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(image.size.width, image.size.height), NO, 2.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetAllowsAntialiasing(context, YES);
@@ -56,16 +70,28 @@
     CGRect imageRect = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
     CGImageRef imageRef = image.CGImage;
     
+    CGContextSaveGState(context);
     CGContextTranslateCTM(context, 0.0, image.size.height);
 	CGContextScaleCTM(context, 1.0, -1.0);
-    
     CGContextClipToMask(context, imageRect, imageRef);
     drawWithGraphicsStructure(context, imageRect, graphicStruct);
+    CGContextRestoreGState(context);
     
-    UIImage *maskedImage = UIGraphicsGetImageFromCurrentImageContext();
+    if (graphicStruct.shadowed) {
+        UIImage *maskedImage = UIGraphicsGetImageFromCurrentImageContext();
+        
+        CGContextSaveGState(context);
+        CGContextSetFillColorWithColor(context, CLEAR.CGColor);
+        CGContextSetShadowWithColor(context, graphicStruct.shadowOffset, graphicStruct.shadowBlur, graphicStruct.shadowColor.CGColor);
+        [maskedImage drawInRect:imageRect];
+        CGContextRestoreGState(context);
+    }
+    
+    UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
+    
     UIGraphicsEndImageContext();
        
-    MKImage *rtnImage = (MKImage *)maskedImage;
+    MKImage *rtnImage = (MKImage *)finalImage;
         
     return rtnImage;
 }

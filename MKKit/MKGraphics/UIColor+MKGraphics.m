@@ -11,20 +11,20 @@
 @implementation UIColor (MKGraphics)
 
 + (UIColor *)colorWithHSBADictionary:(NSDictionary *)dictionary {
-    NSInteger h = [[dictionary objectForKey:@"h"] floatValue];
-    NSInteger s = [[dictionary objectForKey:@"s"] floatValue];
-    NSInteger b = [[dictionary objectForKey:@"b"] floatValue];
-    NSInteger a = [[dictionary objectForKey:@"a"] floatValue];
+    float h = [[dictionary objectForKey:@"h"] floatValue];
+    float s = [[dictionary objectForKey:@"s"] floatValue];
+    float b = [[dictionary objectForKey:@"b"] floatValue];
+    float a = [[dictionary objectForKey:@"a"] floatValue];
     
     UIColor *hsbaColor = MK_COLOR_HSB(h, s, b, a);
     return hsbaColor;
 }
 
 + (UIColor *)colorWithRGBADictionary:(NSDictionary *)dictionary {
-    NSInteger r = [[dictionary objectForKey:@"r"] floatValue];
-    NSInteger g = [[dictionary objectForKey:@"g"] floatValue];
-    NSInteger b = [[dictionary objectForKey:@"b"] floatValue];
-    NSInteger a = [[dictionary objectForKey:@"a"] floatValue];
+    float r = [[dictionary objectForKey:@"r"] floatValue];
+    float g = [[dictionary objectForKey:@"g"] floatValue];
+    float b = [[dictionary objectForKey:@"b"] floatValue];
+    float a = [[dictionary objectForKey:@"a"] floatValue];
     
     UIColor *rgbaColor = MK_COLOR_RGB(r, g, b, a);
     return rgbaColor;

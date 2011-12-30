@@ -49,7 +49,7 @@
 
 <p> <strong> Changing/Observing Control States </strong></p>
 
-<p> Contols states can be observed or changed with use of the <a href="#//api/name/controlState">controlState</a> property. This property will be on of four values: <ul><li> <code>MKControlStateNormal</code>: A control the is enabled and can receive actions </li><li> <code>MKControlStateHighlighted</code>: A control that is being touched </li><li> <code>MKControlStateDisabled</code>: A control that is disabled and cannot recive actions </li><li> <code>MKControlStateWorking</code>: A contol the procecessing an action. Control will be disabled while in a <a href="#//api/name/working">working</a> state. </li></ul></p>
+<p> Contols states can be observed or changed with use of the <a href="#//api/name/controlState">controlState</a> property. This property will be on of four values: <ul><li> <code>MKControlStateNormal</code>: A control the is enabled and can receive actions </li><li> <code>MKControlStateHighlighted</code>: A control that is being touched </li><li> <code>MKControlStateDisabled</code>: A control that is disabled and cannot recive actions </li><li> <code>MKControlStateWorking</code>: A contol the procecessing an action. Control will be disabled while in a working state. </li></ul></p>
 
 <p> <strong> MKGraphics Support </strong></p>
 
@@ -104,14 +104,14 @@
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/working"> working</a></code>
-		<span class="tooltip"> tells if the controll is in <a href="#//api/name/working">working</a> state. Default is <code>NO</code>. </span>
+		<code><a href="#//api/name/MK_DEPRECATED_0_9"> MK_DEPRECATED_0_9</a></code>
+		<span class="tooltip"> <strong> DEPRECATED. Use <a href="#//api/name/controlState">controlState</a> instead </strong></span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/controlState"> controlState</a></code>
-		<span class="tooltip"> The state of a control object. Possible Values are: <ul><li> <code>MKControlStateNormal</code>: A control the is enabled and can receive actions </li><li> <code>MKControlStateHighlighted</code>: A control that is being touched </li><li> <code>MKControlStateDisabled</code>: A control that is disabled and cannot recive actions </li><li> <code>MKControlStateWorking</code>: A contol the procecessing an action. Control will be disabled while in a <a href="#//api/name/working">working</a> state. </li></ul></span>
+		<span class="tooltip"> The state of a control object. Possible Values are: <ul><li> <code>MKControlStateNormal</code>: A control the is enabled and can receive actions </li><li> <code>MKControlStateHighlighted</code>: A control that is being touched </li><li> <code>MKControlStateDisabled</code>: A control that is disabled and cannot recive actions </li><li> <code>MKControlStateWorking</code>: A contol the procecessing an action. Control will be disabled while in a working state. </li></ul></span>
 	</span>
 	
 </li>
@@ -561,6 +561,38 @@
 					<h2 class="subtitle subtitle-methods">Properties</h2>
 					
 					<div class="section-method">
+	<a name="//api/name/MK_DEPRECATED_0_9" title="MK_DEPRECATED_0_9"></a>
+	<h3 class="subsubtitle method-title">MK_DEPRECATED_0_9</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> <strong> DEPRECATED. Use <a href="#//api/name/controlState">controlState</a> instead </strong></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL working MK_DEPRECATED_0_9</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKControl.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
 	<a name="//api/name/action" title="action"></a>
 	<h3 class="subsubtitle method-title">action</h3>
 	
@@ -599,7 +631,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> The state of a control object. Possible Values are: <ul><li> <code>MKControlStateNormal</code>: A control the is enabled and can receive actions </li><li> <code>MKControlStateHighlighted</code>: A control that is being touched </li><li> <code>MKControlStateDisabled</code>: A control that is disabled and cannot recive actions </li><li> <code>MKControlStateWorking</code>: A contol the procecessing an action. Control will be disabled while in a <a href="#//api/name/working">working</a> state. </li></ul></p>
+		<p> The state of a control object. Possible Values are: <ul><li> <code>MKControlStateNormal</code>: A control the is enabled and can receive actions </li><li> <code>MKControlStateHighlighted</code>: A control that is being touched </li><li> <code>MKControlStateDisabled</code>: A control that is disabled and cannot recive actions </li><li> <code>MKControlStateWorking</code>: A contol the procecessing an action. Control will be disabled while in a working state. </li></ul></p>
 	</div>		
 	
 	
@@ -720,38 +752,6 @@
 	
 </div>
 					
-					<div class="section-method">
-	<a name="//api/name/working" title="working"></a>
-	<h3 class="subsubtitle method-title">working</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p> tells if the controll is in <a href="#//api/name/working">working</a> state. Default is <code>NO</code>. </p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL working</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKControl.h</code><br />
-	</div>				
-	
-	
-</div>
-					
 				</div>
 				
 				
@@ -765,7 +765,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-27)</span><br />
+					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-30)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

@@ -49,16 +49,14 @@ typedef enum {
  
  *Drawing of Views*
  
- MKView supports the use of MKGraphicsStructures and conforms to the MKGraphicsFactory protocol. If you
- are not using a graphics dictionay you set a MKGraphicsInstance using the graphicsStructure property. 
- *Note. Setting the graphicsStucture property will cause the view to redraw itself.* MKView will look for 
- following graphics properties:
+ MKView supports the use of MKGraphicsStructures and conforms to the MKGraphicsFactory protocol. You set 
+ a MKGraphicsInstance using the graphicsStructure property. *Note. Setting the graphicsStucture property 
+ will cause the view to redraw itself.* MKView will look for following graphics properties:
  
- * `fill` : if a fill propery is set, it will be used to color the view. If the fill property is nil, 
- instance will look for top an bottom properties to create a gradiant fill.
- * `top` : this will be the top half of the views background fill.
- * `bottom` : this will be the bottom half of the view background fill.
- * `usesLinerShine` : tells if the backgound will have a liner shine added or not.
+ * fillColor : `default nil`
+ * topColor : `default nil`
+ * bottomColor : `default nil`
+ * usesLinerShine : `default NO`
  
  *Required Frameworks*
  

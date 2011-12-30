@@ -26,6 +26,14 @@
  of the interface, these properties should be updated when transitions
  are completed.
  
+ *Graphics*
+ 
+ MKGraphics structures are supported by this control. MKPaging looks for the 
+ follow graphic properties:
+ 
+ * fillColor : `default black`
+ * disabledColor : `default lightGray`
+ 
  *Dispatched Actions*
  
  MKPaging dispatches two types of actions:
@@ -51,16 +59,26 @@
 ///-----------------------------------------
 
 /**
- Creates an instance of MKPaging for the given 
- number of Pages. The number of pages can be 
+ Creates an instance of MKPaging for the given number of Pages. The number of pages can be 
  changed using the numberOfPages property.
  
- @param numOfPages The number of pages (dots) the
- interface will display.
+ @param numOfPages The number of pages (dots) the interface will display.
  
  @return MKPaging instance
 */
 - (id)initWithPages:(NSInteger)numOfPages;
+
+/**
+ Creates an instance of MKPaging for the given number of Pages and a graphics structure. The 
+ number of pages can be changed using the numberOfPages property.
+ 
+ @param numOfPages The number of pages (dots) the interface will display.
+ 
+ @param graphics an instance of MKGraphicsStructures used to draw the control.
+ 
+ @return MKPaging instance
+*/
+- (id)initWithPages:(NSInteger)numOfPages graphics:(MKGraphicsStructures *)graphics;
 
 ///-----------------------------------------
 /// @name Page Control

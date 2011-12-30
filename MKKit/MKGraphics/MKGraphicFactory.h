@@ -26,13 +26,13 @@
 
 /**
  Craetes an instance of a MKKit UI object and assigns it a graphics Structure
- with the given name from a graphics property list file.
+ with the given instance
  
- @param structureName the name of the structure to use on the object.
+ @param graphicsStucture an instance of MKGraphicsStructures.
  
  @return MKKit UI object Instance
 */
-- (id)initWithGraphicsNamed:(NSString *)structureName;
+- (id)initWithGraphics:(MKGraphicsStructures *)graphicsStructure;
 
 ///-------------------------------------
 /// @name Referencing

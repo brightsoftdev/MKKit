@@ -15,17 +15,17 @@ CGColorRef topColorForControlState(MKControlState state, MKGraphicsStructures *g
     CGColorRef color = nil;
     
     if (state == MKControlStateDisabled) {
-        color = graphics.disabled.CGColor;
+        color = graphics.disabledColor.CGColor;
     }
     else if (state == MKControlStateHighlighted) {
-        color = graphics.touched.CGColor;
+        color = graphics.touchedColor.CGColor;
     }
     else if (state == MKControlStateNormal) {
-        if (graphics.fill) {
-            color = graphics.fill.CGColor;
+        if (graphics.fillColor) {
+            color = graphics.fillColor.CGColor;
         }
         else {
-            color = graphics.top.CGColor;
+            color = graphics.topColor.CGColor;
         }
     }
     
@@ -36,28 +36,40 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
     CGColorRef color = nil;
     
     if (state == MKControlStateDisabled) {
-        color = graphics.disabled.CGColor;
+        color = graphics.disabledColor.CGColor;
     }
     else if (state == MKControlStateHighlighted) {
-        color = graphics.touched.CGColor;
+        color = graphics.touchedColor.CGColor;
     }
     else if (state == MKControlStateNormal) {
-        if (graphics.fill) {
-            color = graphics.fill.CGColor;
+        if (graphics.fillColor) {
+            color = graphics.fillColor.CGColor;
         }
         else {
-            color = graphics.bottom.CGColor;
+            color = graphics.bottomColor.CGColor;
         }
     }
     
     return color;
 }
 
+CGColorRef borderColor(MKGraphicsStructures *graphics) {
+    CGColorRef color = nil;
+    
+    if (graphics.borderColor) {
+        color = graphics.borderColor.CGColor;
+    }
+    else {
+        color = BLACK.CGColor;
+    }
+    return color;
+}
+
 @implementation MKControl
 
-@synthesize delegate=mDelegate, working=mWorking, action, graphicsStructure=mGraphics;
+@synthesize delegate=mDelegate, working=mWorking, action;
 
-@dynamic location, controlState;
+@dynamic location, controlState, graphicsStructure;
 
 #pragma mark - Creation 
 
@@ -69,10 +81,15 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
     return self;
 }
 
-- (id)initWithGraphicsNamed:(NSString *)structureName {
+- (id)initWithGraphics:(MKGraphicsStructures *)_graphicsStructure {
     self = [super init];
     if (self) {
-        mGraphics = [[MKGraphicsStructures graphicsWithName:structureName] retain];
+        if (_graphicsStructure) {
+            self.graphicsStructure = [_graphicsStructure retain];
+        }
+        else {
+            self.graphicsStructure = [self defaultGraphics];
+        }
     }
     return self;
 }
@@ -164,13 +181,15 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
 #pragma mark - Touches
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (self.controlState != MKControlStateDisabled) {
+    if (self.controlState != MKControlStateDisabled || self.controlState != MKControlStateWorking) {
+        self.controlState = MKControlStateHighlighted;
         [self processAction:MKActionTouchDown];
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if (self.controlState != MKControlStateDisabled) {
+        self.controlState = MKControlStateNormal;
         [self processAction:MKActionTouchUp];
     }
 }

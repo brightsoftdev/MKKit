@@ -11,7 +11,6 @@
 typedef enum {
     MKButtonTypeHelp,
     MKButtonTypeDisclosure,
-    MKButtonTypeDropDownIndicator,
     MKButtonTypeIAP,
     MKButtonTypePlastic,
     MKButtonTypeRoundedRect,
@@ -33,7 +32,6 @@ static const float kButtonTextPadding           = 10.0;
  
  * `MKButtonTypeHelp` : a small round button with a question mark
  * `MKButtonTypeDisclosure` : a blue and white button that resembles iOS discloser button
- * `MKButtonTypeDropDownIndicator : a small button with down arrow on it.
  * `MKButtonTypeIAP` : a InApp Purchase button, mimics the purchase buttons from the appstore.
  * `MKButtonTypePlastic` : a button with a rounded shine, giving it a plasic look. Default tint is black.
  * `MKButtonTypeRoundedRect` : a rounded rect button that can be assigned a color. Default tint is blue.
@@ -42,10 +40,25 @@ static const float kButtonTextPadding           = 10.0;
  
  Some MKButton types support graphics from the MKGraphicStructures class. Diffent types look
  for different parts of a graphic structure. If no graphics stucture is provide the buttons
- will default to a soild blue color.
+ will default to a standard graphics structure.
  
- * `MKButtonTypePlastic` : looks for the *fill* property of MKGraphicsStructures.
- * `MKButtonTypeRoundedRect` : looks for the *top* and *bottom* properties of MKGraphicisStructures.
+ MKButtonTypePlastic looks for the following graphics properties:
+
+ * fill : `default is black`
+ * border : `default is black`
+ 
+ MKButtonTypeRoundedRect
+ 
+ * top : `default is blue with 0.5 alpha`
+ * bottom : `default is blue`
+ * touched : `default is blue`
+ * disabled : `default is blue with 0.25 alpha`
+ * border : `default is black`
+ * bordered : `default is YES`
+ * borderWidth : `default is 2.0`
+ 
+ MKButtonHelp, MKButtonDisclosure, and MKButtonIAP are drawn with a preset graphic structure, and do not
+ respond an assigned graphics structure.
  
  *Required Frameworks*
  
@@ -61,15 +74,14 @@ static const float kButtonTextPadding           = 10.0;
 @interface MKButton : MKControl {
     MKButtonType mType;
     NSString *mButtonText;
-    //MKGraphicsStructures *mGraphics;
 
 @private
     UILabel *mButtonLabel;
     
     struct {
-        bool isWorking;
-        bool isHighlighted;
-        CGColorRef tintColor;
+        //bool isWorking;
+        //bool isHighlighted;
+        //CGColorRef tintColor;
         CGFloat fontSize;
     } MKButtonFlags;
 }
@@ -84,6 +96,8 @@ static const float kButtonTextPadding           = 10.0;
  @param type the type of button to use
  
  @param title the text of the button
+ 
+ @return MKButton Instance
 */
 - (id)initWithType:(MKButtonType)type;
 
@@ -93,6 +107,8 @@ static const float kButtonTextPadding           = 10.0;
  @param type the type of button to use
  
  @param title the text of the button
+ 
+ @return MKButton Instance
 */
 - (id)initWithType:(MKButtonType)type title:(NSString *)title;
 
@@ -108,9 +124,12 @@ static const float kButtonTextPadding           = 10.0;
  
  @param title the text of the button
  
- @param graphics the graphics structure to use when drawing this button. 
+ @param graphics the graphics structure to use when drawing this button or `nil` for the default
+ graphics set. 
+ 
+ @return MKButton Instance
 */
-- (id)initWithType:(MKButtonType)type title:(NSString *)title graphicsStructure:(MKGraphicsStructures *)graphics;
+- (id)initWithType:(MKButtonType)type title:(NSString *)title graphics:(MKGraphicsStructures *)graphics;
 
 
 ///---------------------------------------------------------

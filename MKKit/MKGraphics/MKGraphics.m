@@ -219,13 +219,13 @@ void drawWithGraphicsStructure(CGContextRef context, CGRect rect, MKGraphicsStru
     CGColorRef top;
     CGColorRef bottom;
     
-    if (graphics.fill) {
-        top = graphics.fill.CGColor;
-        bottom = graphics.fill.CGColor;
+    if (graphics.fillColor) {
+        top = graphics.fillColor.CGColor;
+        bottom = graphics.fillColor.CGColor;
     }
     else {
-        top = graphics.top.CGColor;
-        bottom = graphics.bottom.CGColor;
+        top = graphics.topColor.CGColor;
+        bottom = graphics.bottomColor.CGColor;
     }
     
     CGContextSaveGState(context);

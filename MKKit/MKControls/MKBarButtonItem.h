@@ -31,18 +31,18 @@ typedef enum {
  *MKGraphics support*
  
  MKGraphicsSturctures are supported by MKBarButtonItem instances. Use the initWithType:graphics
- method to set a MKGraphicsStructures instance from your gaphics dictionary. If you are not using
- a graphics dicionary your can pass `nil` for the graphics name and a default graphic structure
- will be created, or create you own and set it to the graphicStructure property. Instaces will look
- for the following properties of MKGraphicsSturctures:
+ method to set a MKGraphicsStructures instance. If you are not using graphics your can pass `nil` 
+ for the graphics parameter and a default graphic structure will be created, or create you own and 
+ set it to the graphicStructure property. Instaces will look for the following properties of 
+ MKGraphicsSturctures:
  
- * top : `default nil`
- * bottom : `default nil`
- * fill : `default white`
- * disabled : `default white with 0.5 alpha`
- * touch : `default white`
- * border : `default nil`
- * usesLinerShine : `default NO`
+ * topColor : `default nil`
+ * bottomColor : `default nil`
+ * fillColor : `default white`
+ * disabledColor : `default white with 0.5 alpha`
+ * touchColor : `default white`
+ * borderColor : `default nil`
+ * usesLinerShineColor : `default NO`
  * boarderd : `default NO`
  * boarderWidth : `default 0.0`
  
@@ -89,13 +89,12 @@ typedef enum {
  * `MKBarButtonItemBackArrow` : a triangle pointing to the left.
  * `MKBarButtonItemForwardArrow` : a triangle pointing to the right.
  
- @param name the name of the graphic sturcture from your graphics dictionary or
- `nil` for the default graphic settings (see above in class overview).
+ @param an instance of MKGraphicsStructures of `nil` for the default graphic 
+ settings (see above in class overview).
  
  @return MKBarButtonItem instance
 */
-- (id)initWithType:(MKBarButtonItemType)type graphicNamed:(NSString *)name;
-
+- (id)initWithType:(MKBarButtonItemType)type graphics:(MKGraphicsStructures *)graphics;
 /**
  Creates an instace of MKBarButtonItem from an image.
  
