@@ -32,13 +32,11 @@
             graphics.bottomColor = MK_COLOR_HSB(240.0, 98.0, 98.0, 1.0);
             graphics.disabledColor = MK_COLOR_HSB(240.0, 98.0, 98.0, 0.25);
             graphics.touchedColor = MK_COLOR_HSB(240.0, 98.0, 98.0, 1.0);
-            graphics.bordered = YES;
-            graphics.borderWidth = 2.0;
-            graphics.borderColor = [UIColor blackColor];
+            graphics.border = MKGraphicBorderMake(2.0, [UIColor blackColor]);
         }
         if ([(MKButton *)self type] == MKButtonTypePlastic) {
             graphics.fillColor = MK_COLOR_HSB(345.0, 0.0, 0.0, 1.0);
-            graphics.borderColor = [UIColor blackColor];
+            graphics.border = MKGraphicBorderMake(2.0, [UIColor blackColor]);
         }
     }
     if ([self isMemberOfClass:[MKPaging class]]) {

@@ -151,8 +151,6 @@ typedef enum {
 /** The MKViewDelegate */
 @property (nonatomic, assign) id<MKViewDelegate> delegate;
 
-- (void)didRelease;
-
 @end
 
 /**-----------------------------------------------------------------------

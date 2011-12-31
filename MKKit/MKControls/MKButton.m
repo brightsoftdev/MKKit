@@ -62,6 +62,9 @@ bool mHighlighted = NO;
         self.controlState = MKControlStateNormal;
         
         mType = type;
+        if (!graphics) {
+            self.graphicsStructure = [self defaultGraphics];
+        }
         
         if  (mType == MKButtonTypeHelp) {
             MKButtonFlags.fontSize = kHelpButtonFontSize;
@@ -231,36 +234,40 @@ void drawIAPButton(CGContextRef context, CGRect rect, MKControlState state) {
 #pragma mark Plastic Button
 
 void drawPlasticButton(CGContextRef context, CGRect rect, MKGraphicsStructures *graphics, MKControlState state) {
-    CGFloat outerMargin = 1.0;
+    CGFloat margin = 1.0;
+    CGRect buttonRect = CGRectInset(rect, margin, margin);
     
-    CGRect innerRect = CGRectInset(rect, outerMargin, outerMargin);
-    CGMutablePathRef outlinePath = createRoundedRectForRect(innerRect, 7.0);
-    
-    CGColorRef fillColor = graphics.fillColor.CGColor;
+    CGMutablePathRef borderPath = createRoundedRectForRect(rect, 7.0);
+    CGMutablePathRef buttonPath = createRoundedRectForRect(buttonRect, 6.0);
+
+    CGColorRef bottom = bottomColorForControlState(state, graphics);
+    CGColorRef border = graphics.border.color;
     
     CGContextSaveGState(context);
-    CGContextSetFillColorWithColor(context, fillColor);
-    CGContextAddPath(context, outlinePath);
-    CGContextFillPath(context);
+    CGContextSetFillColorWithColor(context, bottom);
+    CGContextAddPath(context, buttonPath);
+    CGContextFillPath(context),
     CGContextRestoreGState(context);
     
-    CGContextSaveGState(context);
-    CGContextAddPath(context, outlinePath);
-    CGContextClip(context);
     if (state != MKControlStateHighlighted) {
-        drawCurvedGloss(context, innerRect, innerRect.size.width);
+        CGContextSaveGState(context);
+        CGContextAddPath(context, buttonPath);
+        CGContextClip(context);
+        drawCurvedGloss(context, buttonRect, rect.size.width);
+        CGContextRestoreGState(context);
     }
-    CGContextRestoreGState(context);
+        
+    drawOutlinePath(context, buttonPath, graphics.border.width, border);
     
-    drawOutlinePath(context, outlinePath, 2.0, graphics.borderColor.CGColor);
-    
-    CFRelease(outlinePath);
+    CFRelease(buttonPath);
+    CFRelease(borderPath);
 }
 
 #pragma mark Rounded Rect Button
 
 void drawRoundRectButton(CGContextRef context, CGRect rect, MKGraphicsStructures *graphics,  MKControlState state) {
-    CGFloat margin = graphics.borderWidth;
+    CGFloat margin = graphics.border.width;
+    
     CGRect buttonRect = CGRectInset(rect, margin, margin);
     CGRect innerRect = CGRectInset(buttonRect, 1.0, 1.0);
     CGRect onePixRect = rectFor1pxStroke(innerRect);
@@ -270,7 +277,7 @@ void drawRoundRectButton(CGContextRef context, CGRect rect, MKGraphicsStructures
     
     CGColorRef top = topColorForControlState(state, graphics);
     CGColorRef bottom = bottomColorForControlState(state, graphics);
-    CGColorRef border = graphics.borderColor.CGColor;
+    CGColorRef border = graphics.border.color;
     
     CGContextSaveGState(context);
     CGContextSetFillColorWithColor(context, WHITE.CGColor);
@@ -284,7 +291,7 @@ void drawRoundRectButton(CGContextRef context, CGRect rect, MKGraphicsStructures
     drawGlossAndLinearGradient(context, buttonRect, top, bottom);
     CGContextRestoreGState(context);
     
-    drawOutlinePath(context, rrectPath, graphics.borderWidth, border);
+    drawOutlinePath(context, rrectPath, graphics.border.width, border);
     drawOutlinePath(context, innerRectPath, 1.0, bottom);
     
     CFRelease(innerRectPath);

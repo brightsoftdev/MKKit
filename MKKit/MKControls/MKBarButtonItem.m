@@ -49,6 +49,9 @@ void drawButtonWithGraphics(CGContextRef context, CGRect rect, MKGraphicsStructu
         [self setUpControl];
         
         mType = type;
+        if (!graphics) {
+            self.graphicsStructure = [self defaultGraphics];
+        }
         
         MKBarButtonItemFlags.requiresDrawing = YES;
         
@@ -124,8 +127,8 @@ void drawButtonWithGraphics(CGContextRef context, CGRect rect, MKGraphicsStructu
     CFRelease(buttonPath);
     
     if (graphics.bordered) {
-        CGColorRef borderColor = graphics.borderColor.CGColor;
-        CGFloat borderWidth = graphics.borderWidth;
+        CGColorRef borderColor = graphics.border.color;
+        CGFloat borderWidth = graphics.border.width;
         CGMutablePathRef roundedRect = createRoundedRectForRect(rect, 5.0);
         
         CGContextSaveGState(context);

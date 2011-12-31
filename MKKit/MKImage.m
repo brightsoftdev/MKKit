@@ -63,29 +63,37 @@
         graphicStruct = [self defaultGraphics];
     }
     
+    CGRect imageRect = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+    CGImageRef imageRef = image.CGImage;
+    
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(image.size.width, image.size.height), NO, 2.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetAllowsAntialiasing(context, YES);
     
-    CGRect imageRect = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-    CGImageRef imageRef = image.CGImage;
+    CGColorRef bgColor;
+    
+    if (graphicStruct.shadowed) {
+        bgColor = [UIColor whiteColor].CGColor;
+        CGContextSetShadowWithColor(context, graphicStruct.shadow.offset, graphicStruct.shadow.blur, graphicStruct.shadow.color);
+    }
+    else {
+        bgColor = [UIColor clearColor].CGColor;
+    }
+        
+    CGContextBeginTransparencyLayer(context, NULL);
+    CGContextTranslateCTM(context, 0.0, image.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextClipToMask(context, imageRect, imageRef);
+    CGContextSetFillColorWithColor(context, bgColor);
+    CGContextFillRect(context, imageRect);
+    CGContextEndTransparencyLayer(context);
     
     CGContextSaveGState(context);
     CGContextTranslateCTM(context, 0.0, image.size.height);
 	CGContextScaleCTM(context, 1.0, -1.0);
     CGContextClipToMask(context, imageRect, imageRef);
-    drawWithGraphicsStructure(context, imageRect, graphicStruct);
+    drawLinearGradient(context, imageRect, graphicStruct.fillColor.CGColor, graphicStruct.fillColor.CGColor);    
     CGContextRestoreGState(context);
-    
-    if (graphicStruct.shadowed) {
-        UIImage *maskedImage = UIGraphicsGetImageFromCurrentImageContext();
-        
-        CGContextSaveGState(context);
-        CGContextSetFillColorWithColor(context, CLEAR.CGColor);
-        CGContextSetShadowWithColor(context, graphicStruct.shadowOffset, graphicStruct.shadowBlur, graphicStruct.shadowColor.CGColor);
-        [maskedImage drawInRect:imageRect];
-        CGContextRestoreGState(context);
-    }
     
     UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
     

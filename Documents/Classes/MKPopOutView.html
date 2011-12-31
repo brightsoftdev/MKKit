@@ -36,11 +36,19 @@
 				<div class="section section-overview">
 					<h2 class="subtitle subtitle-overview">Overview</h2>
 					
+<p> <strong> Overview </strong></p>
+
 <p> <a href="MKPopOutView.html">MKPopOutView</a> provides a view that displays additional information. The view looks like Apples UIMenuView. The content of the view is taken from a UIView that you provide. </p>
 
-<p> There are three types of pop out views to choose from. The types control how the view is displayed. <ul><li> <code>MKPopOutAuto</code>: will display the view above or below the item depending on its location. </li><li> <code>MKPopOutAbove</code>: displays the view above the item. </li><li> <code>MKPopOutBelow</code>: displays the view below the item. </li></ul></p>
+<p> <strong> Display Options </strong> There are three types of pop out views to choose from. The types control how the view is displayed. <ul><li> <code>MKPopOutAuto</code>: will display the view above or below the item depending on its location. </li><li> <code>MKPopOutAbove</code>: displays the view above the item. </li><li> <code>MKPopOutBelow</code>: displays the view below the item. </li></ul></p>
 
-<p> <a href="MKPopOutView.html">MKPopOutView</a> listens for the <code>MK_POP_OUT_VIEW_SHOULD_REMOVE_NOTIFICATION</code> to remove itself. </p>
+<p> <strong> Graphics </strong></p>
+
+<p> MKPopoutView supports the use of <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> instances, to provide how it is drawn. MKPopoutView instance will look for the following graphic properties: <ul><li> fill : <code>default black</code></li><li> useLinerShine : <code>default YES</code></li></ul></p>
+
+<p> <strong> Listeners </strong></p>
+
+<p> <a href="MKPopOutView.html">MKPopOutView</a> listens for the <code>MKPopOutViewShouldRemoveNotification</code> to remove itself. </p>
 
 				</div>
 				
@@ -59,6 +67,12 @@
 		<span class="tooltip"> Returns and intialized instance of MKPopoutView </span>
 	</span>
 	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithView:type:graphics:">- initWithView:type:graphics:</a></code>
+		<span class="tooltip"> Creates a new instance of MKPopoutView </span>
+	</span>
+	
 </li>
 					</ul>
 					
@@ -67,7 +81,7 @@
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/tintColor"> tintColor</a></code>
+		<code><a href="#//api/name/MK_DEPRECATED_0_9"> MK_DEPRECATED_0_9</a></code>
 		<span class="tooltip"> The tint color of the popout view. Default is black. </span>
 	</span>
 	
@@ -172,7 +186,64 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p> MKTableCellPopoutView instance </p>
+		<p> <a href="MKPopOutView.html">MKPopOutView</a> instance </p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKPopOutView.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/initWithView:type:graphics:" title="initWithView:type:graphics:"></a>
+	<h3 class="subsubtitle method-title">initWithView:type:graphics:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates a new instance of MKPopoutView </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithView:(UIView *)<em>view</em> type:(MKPopOutViewType)<em>type</em> graphics:(MKGraphicsStructures *)<em>graphics</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>view</em></dt>
+			<dd> the content of the popout view </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>type</em></dt>
+			<dd> the <a href="#//api/name/type">type</a> of the popout view </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>graphics</em></dt>
+			<dd> and instance of <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> that is used when drawing the pop over view. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKPopOutView.html">MKPopOutView</a> instance </p>
 	</div>
 	
 	
@@ -340,6 +411,38 @@
 					<h2 class="subtitle subtitle-methods">Properties</h2>
 					
 					<div class="section-method">
+	<a name="//api/name/MK_DEPRECATED_0_9" title="MK_DEPRECATED_0_9"></a>
+	<h3 class="subsubtitle method-title">MK_DEPRECATED_0_9</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The tint color of the popout view. Default is black. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGColorRef tintColor MK_DEPRECATED_0_9</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKPopOutView.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
 	<a name="//api/name/aIndexPath" title="aIndexPath"></a>
 	<h3 class="subsubtitle method-title">aIndexPath</h3>
 	
@@ -383,38 +486,6 @@
 	
 	
 	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGFloat arrowPosition</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKPopOutView.h</code><br />
-	</div>				
-	
-	
-</div>
-					
-					<div class="section-method">
-	<a name="//api/name/tintColor" title="tintColor"></a>
-	<h3 class="subsubtitle method-title">tintColor</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p> The tint color of the popout view. Default is black. </p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGColorRef tintColor</code></div>
 	
 	
 	
@@ -480,7 +551,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-22)</span><br />
+					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-31)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

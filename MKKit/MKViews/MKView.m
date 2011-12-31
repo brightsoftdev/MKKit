@@ -55,6 +55,25 @@
     MKViewFlags.isHeaderView = NO;
 }
 
+#pragma mark - Memory Management
+
+- (void)didRelease {
+    //For use by catagories
+}
+
+- (void)dealloc {
+    [self didRelease];
+    
+    mController = nil;
+    
+    self.controller = nil;
+    self.graphicsStructure = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MKViewShouldRemoveNotification object:nil];
+    
+	[super dealloc];
+}
+
 #pragma mark - Accessor methods
 
 #pragma mark Setters
@@ -77,7 +96,6 @@
 
 - (void)setGraphicsStructure:(MKGraphicsStructures *)_graphicsStructure {
     MKViewFlags.usesBackGroundFill = YES;
-    
     mGraphics = [_graphicsStructure retain];
     [self setNeedsDisplay];
 }
@@ -261,25 +279,6 @@
                              completion: ^ (BOOL finished) { [self removeFromSuperview]; }];
         }
     }
-}
-
-#pragma mark - Memory Management
-
-- (void)didRelease {
-    //For use by catagories
-}
-
-- (void)dealloc {
-    [self didRelease];
-    
-    mController = nil;
-    
-    self.controller = nil;
-    self.graphicsStructure = nil;
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MKViewShouldRemoveNotification object:nil];
-    
-	[super dealloc];
 }
 
 @end

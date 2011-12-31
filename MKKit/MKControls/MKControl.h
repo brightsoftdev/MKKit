@@ -25,7 +25,6 @@ typedef enum {
 
 CGColorRef topColorForControlState(MKControlState state, MKGraphicsStructures *graphics);
 CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures *graphics);
-CGColorRef borderColor(MKGraphicsStructures *graphics);
 
 @class MKGraphicsStructures;
 

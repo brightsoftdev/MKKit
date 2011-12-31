@@ -15,9 +15,12 @@ typedef enum {
 } MKPopOutViewType;
 
 /**----------------------------------------------------------------------------------
+ *Overview*
+ 
  MKPopOutView provides a view that displays additional information. The view looks like 
  Apples UIMenuView. The content of the view is taken from a UIView that you provide. 
  
+ *Display Options*
  There are three types of pop out views to choose from. The types control how the view
  is displayed.
  
@@ -25,7 +28,17 @@ typedef enum {
  * `MKPopOutAbove` : displays the view above the item. 
  * `MKPopOutBelow` : displays the view below the item. 
  
- MKPopOutView listens for the `MK_POP_OUT_VIEW_SHOULD_REMOVE_NOTIFICATION` to remove itself. 
+ *Graphics*
+ 
+ MKPopoutView supports the use of MKGraphicsStructures instances, to provide how it is 
+ drawn. MKPopoutView instance will look for the following graphic properties:
+ 
+ * fill : `default black`
+ * useLinerShine : `default YES`
+ 
+ *Listeners*
+ 
+ MKPopOutView listens for the `MKPopOutViewShouldRemoveNotification` to remove itself. 
  ------------------------------------------------------------------------------------*/
 
 @interface MKPopOutView : MKView {
@@ -33,7 +46,6 @@ typedef enum {
     MKPopOutViewType mAutoType;
     UIView *mView;
     
-    CGColorRef mTintColor;
     CGFloat mArrowPosition;
 }
 
@@ -48,16 +60,29 @@ typedef enum {
  
  @param type the type of popout view
  
- @return MKTableCellPopoutView instance
+ @return MKPopOutView instance
  */
 - (id)initWithView:(UIView *)view type:(MKPopOutViewType)type;
+
+/**
+ Creates a new instance of MKPopoutView 
+ 
+ @param view the content of the popout view
+ 
+ @param type the type of the popout view
+ 
+ @param graphics and instance of MKGraphicsStructures that is used when drawing the pop over view.
+ 
+ @return MKPopOutView instance
+*/
+- (id)initWithView:(UIView *)view type:(MKPopOutViewType)type graphics:(MKGraphicsStructures *)graphics;
 
 ///-------------------------------------------------------
 /// @name Appearance
 ///-------------------------------------------------------
 
 /** The tint color of the popout view. Default is black. */
-@property (nonatomic, assign) CGColorRef tintColor;
+@property (nonatomic, assign) CGColorRef tintColor MK_DEPRECATED_0_9;
 
 /** The tip of the arrow position on the x-axis. */
 @property (nonatomic, assign) CGFloat arrowPosition;

@@ -53,18 +53,6 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
     return color;
 }
 
-CGColorRef borderColor(MKGraphicsStructures *graphics) {
-    CGColorRef color = nil;
-    
-    if (graphics.borderColor) {
-        color = graphics.borderColor.CGColor;
-    }
-    else {
-        color = BLACK.CGColor;
-    }
-    return color;
-}
-
 @implementation MKControl
 
 @synthesize delegate=mDelegate, working=mWorking, action;
@@ -86,9 +74,6 @@ CGColorRef borderColor(MKGraphicsStructures *graphics) {
     if (self) {
         if (_graphicsStructure) {
             self.graphicsStructure = [_graphicsStructure retain];
-        }
-        else {
-            self.graphicsStructure = [self defaultGraphics];
         }
     }
     return self;

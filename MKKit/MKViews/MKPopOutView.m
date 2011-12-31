@@ -8,22 +8,38 @@
 
 #import "MKPopOutView.h"
 
+#import "MKView+Internal.h"
+
 @implementation MKPopOutView
 
-#pragma mark - Initalizer
+#pragma mark - Creation
 
 @synthesize type=mType, arrowPosition=mArrowPosition, tintColor;
 
 - (id)initWithView:(UIView *)view type:(MKPopOutViewType)type {
     self = [super initWithFrame:CGRectMake(0.0, 0.0, (kPopOutViewWidth + 5.0), (view.frame.size.height + 30.0))];
     if (self) {
+        self = [self initWithView:view type:type graphics:nil];
+    }
+    return self;
+}
+
+- (id)initWithView:(UIView *)view type:(MKPopOutViewType)type graphics:(MKGraphicsStructures *)graphics {
+    self = [super initWithFrame:CGRectMake(0.0, 0.0, (kPopOutViewWidth + 5.0), (view.frame.size.height + 30.0))];
+    if (self) {
         mView = [view retain];
         mType = type;
-        mTintColor = BLACK.CGColor;
         
         self.alpha = 0.0;
         self.backgroundColor = CLEAR;
         self.opaque = YES;
+        
+        if (!graphics) {
+            self.graphicsStructure = [self defaultGraphics];
+        }
+        else {
+            self.graphicsStructure = graphics;
+        }
         
         if (type == MKPopOutBelow) {
             view.frame = CGRectMake(0.0, 30.0, view.frame.size.width, view.frame.size.height);
@@ -38,6 +54,14 @@
     return self;
 }
 
+#pragma mark - Memory
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MKPopOutViewShouldRemoveNotification object:nil];
+    
+    [super dealloc];
+}
+
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect {
@@ -45,6 +69,7 @@
     CGContextSetAllowsAntialiasing(context, YES);
     
     CGRect drawRect = CGRectZero;
+    CGColorRef fillColor = self.graphicsStructure.fillColor.CGColor;
     
     switch (mAutoType) {
         case MKPopOutBelow:
@@ -63,7 +88,7 @@
     
     CGContextSaveGState(context);
     CGContextSetShadowWithColor(context, CGSizeMake(0.0, 3.0), 3.0, MK_SHADOW_COLOR);
-    CGContextSetFillColorWithColor(context, mTintColor);
+    CGContextSetFillColorWithColor(context, fillColor);
     CGContextAddPath(context, path);
     CGContextFillPath(context);
     CGContextSaveGState(context);
@@ -71,7 +96,12 @@
     CGContextSaveGState(context);
     CGContextAddPath(context, innerPath);
     CGContextClip(context);
-    drawGlossAndLinearGradient(context, innerRect, mTintColor, mTintColor);
+    if (self.graphicsStructure.useLinerShine) {
+        drawGlossAndLinearGradient(context, innerRect, fillColor, fillColor);
+    }
+    else {
+        drawLinearGradient(context, innerRect, fillColor, fillColor);
+    }
     CGContextRestoreGState(context);
     
     if (mAutoType == MKPopOutBelow) {
@@ -87,7 +117,7 @@
         CGMutablePathRef pointerPath = createPathForUpPointer(pointerRect);
         
         CGContextSaveGState(context);
-        CGContextSetFillColorWithColor(context, mTintColor);
+        CGContextSetFillColorWithColor(context, fillColor);
         CGContextAddPath(context, pointerPath);
         CGContextFillPath(context);
         CGContextSaveGState(context);
@@ -99,7 +129,7 @@
         CGMutablePathRef pointerPath = createPathForDownPointer(pointerRect);
         
         CGContextSaveGState(context);
-        CGContextSetFillColorWithColor(context, mTintColor);
+        CGContextSetFillColorWithColor(context, fillColor);
         CGContextAddPath(context, pointerPath);
         CGContextFillPath(context);
         CGContextSaveGState(context);
@@ -112,11 +142,6 @@
 }
 
 #pragma mark - Accessor Methods
-
-- (void)setTintColor:(CGColorRef)tint {
-    mTintColor = tint;
-    [self setNeedsDisplay];
-}
 
 - (void)setArrowPosition:(CGFloat)position {
     mArrowPosition = position;
@@ -131,14 +156,6 @@
     if ([touch tapCount] == 1) {
         [self removeView];
     }
-}
-
-#pragma mark - Memory Managment
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MKPopOutViewShouldRemoveNotification object:nil];
-    
-    [super dealloc];
 }
 
 @end

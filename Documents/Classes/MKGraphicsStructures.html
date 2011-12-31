@@ -44,7 +44,7 @@
 
 <p> MKKit class that use the <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> class will refereance an instance when preforming drawing operations. </p>
 
-<p> The Following Classes currently support the use of Graphics Structures: <ul><li> <a href="MKBarButtonItem.html">MKBarButtonItem</a></li><li> <a href="MKButton.html">MKButton</a></li><li> <a href="MKImage.html">MKImage</a></li><li> <a href="MKPaging.html">MKPaging</a></li><li> <a href="MKView.html">MKView</a></li></ul></p>
+<p> The Following Classes currently support the use of Graphics Structures: <ul><li> <a href="MKBarButtonItem.html">MKBarButtonItem</a></li><li> <a href="MKButton.html">MKButton</a></li><li> <a href="MKImage.html">MKImage</a></li><li> <a href="MKPaging.html">MKPaging</a></li><li> MKPopOverView </li><li> <a href="MKView.html">MKView</a></li></ul> <p class="warning"> <strong> Note </strong> Not all classes that support <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> use every graphic property. Check the documentaion of the individual classes to see which properies they use. </p></p>
 
 <p> <strong> Required Classes </strong> <ul><li> <a href="MKObject.html">MKObject</a></li></ul></p>
 
@@ -69,8 +69,8 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/linearGradientWithTopColor:bottomColor:">+ linearGradientWithTopColor:bottomColor:</a></code>
-		<span class="tooltip"> An instance of MKGraphisStructures that sets the colors for a linear gradient. </span>
+		<code><a href="#//api/name/linearGradientWithTopColor:bottomColor:MK_DEPRECATED_0_9:">+ linearGradientWithTopColor:bottomColor:MK_DEPRECATED_0_9:</a></code>
+		<span class="tooltip"> <strong> DEPRECIATED v0.9 </strong></span>
 	</span>
 	
 </li>
@@ -81,8 +81,8 @@
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/assignGradientTopColor:bottomColor:">- assignGradientTopColor:bottomColor:</a></code>
-		<span class="tooltip"> Assigns colors for a linear gradient </span>
+		<code><a href="#//api/name/assignGradientTopColor:bottomColor:MK_DEPRECATED_0_9:">- assignGradientTopColor:bottomColor:MK_DEPRECATED_0_9:</a></code>
+		<span class="tooltip"> <strong> DEPRECIATED v0.9 </strong></span>
 	</span>
 	
 </li>
@@ -148,19 +148,13 @@
 						<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/bordered"> bordered</a></code>
-		<span class="tooltip"> <code>YES</code> if an object should have a border drawn for it. </span>
+		<span class="tooltip"> <code>YES</code> if an object should have a <a href="#//api/name/border">border</a> drawn for it. Default is <code>NO</code>, property is changed to <code>YES</code> when <a href="#//api/name/border">border</a> is set. </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/borderColor"> borderColor</a></code>
-		<span class="tooltip"> the border color for an object </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/borderWidth"> borderWidth</a></code>
-		<span class="tooltip"> The width of a border if any. Default is <code>2.0</code>. </span>
+		<code><a href="#//api/name/border"> border</a></code>
+		<span class="tooltip"> Set a <a href="#//api/name/border">border</a> for the drawing use the MKGrpahicsBorderMake(CGFloat width, UIColor *color) funtion to create a border. </span>
 	</span>
 	
 </li>
@@ -172,25 +166,13 @@
 						<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/shadowed"> shadowed</a></code>
-		<span class="tooltip"> <code>YES</code> if a shadow should be drawn. </span>
+		<span class="tooltip"> <code>YES</code> if a <a href="#//api/name/shadow">shadow</a> should be drawn. Default is <code>NO</code>, property is is changed to <code>YES</code> when a <a href="#//api/name/shadow">shadow</a> is set. </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/shadowOffset"> shadowOffset</a></code>
-		<span class="tooltip"> The size of a shadows offset </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/shadowBlur"> shadowBlur</a></code>
-		<span class="tooltip"> The blur of a shadow 0.0 is solid line </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/shadowColor"> shadowColor</a></code>
-		<span class="tooltip"> The color of a shadow </span>
+		<code><a href="#//api/name/shadow"> shadow</a></code>
+		<span class="tooltip"> Sets a <a href="#//api/name/shadow">shadow</a> to be drawn on the view/contontol. Use the MKGraphicsShadowMake(CGSize offset, CGFloat blur, UIColor *color) to created a shadow. </span>
 	</span>
 	
 </li>
@@ -247,40 +229,20 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/linearGradientWithTopColor:bottomColor:" title="linearGradientWithTopColor:bottomColor:"></a>
-	<h3 class="subsubtitle method-title">linearGradientWithTopColor:bottomColor:</h3>
+	<a name="//api/name/linearGradientWithTopColor:bottomColor:MK_DEPRECATED_0_9:" title="linearGradientWithTopColor:bottomColor:MK_DEPRECATED_0_9:"></a>
+	<h3 class="subsubtitle method-title">linearGradientWithTopColor:bottomColor:MK_DEPRECATED_0_9:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> An instance of MKGraphisStructures that sets the colors for a linear gradient. </p>
+		<p> <strong> DEPRECIATED v0.9 </strong></p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>+ (id)linearGradientWithTopColor:(UIColor *)<em>topColor</em> bottomColor:(UIColor *)<em>bottomColor</em></code></div>
-	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>topColor</em></dt>
-			<dd> the color on the top of the gradient. </dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>bottomColor</em></dt>
-			<dd> the color on the bottom of the gradient. </dd>
-		</dl>
-		
-	</div>
+	<div class="method-subsection method-declaration"><code>+ (id)linearGradientWithTopColor:(UIColor *)<em>topColor</em> bottomColor:(UIColor *)<em>bottomColor</em> MK_DEPRECATED_0_9</code></div>
 	
 	
 	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p> MKGraphicsStructure instance </p>
-	</div>
 	
 	
 	
@@ -306,33 +268,18 @@
 					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 					
 					<div class="section-method">
-	<a name="//api/name/assignGradientTopColor:bottomColor:" title="assignGradientTopColor:bottomColor:"></a>
-	<h3 class="subsubtitle method-title">assignGradientTopColor:bottomColor:</h3>
+	<a name="//api/name/assignGradientTopColor:bottomColor:MK_DEPRECATED_0_9:" title="assignGradientTopColor:bottomColor:MK_DEPRECATED_0_9:"></a>
+	<h3 class="subsubtitle method-title">assignGradientTopColor:bottomColor:MK_DEPRECATED_0_9:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Assigns colors for a linear gradient </p>
+		<p> <strong> DEPRECIATED v0.9 </strong></p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)assignGradientTopColor:(UIColor *)<em>topColor</em> bottomColor:(UIColor *)<em>bottomColor</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)assignGradientTopColor:(UIColor *)<em>topColor</em> bottomColor:(UIColor *)<em>bottomColor</em> MK_DEPRECATED_0_9</code></div>
 	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>topColor</em></dt>
-			<dd> the color on the top of the gradient. </dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>bottomColor</em></dt>
-			<dd> the color on the bottom of the gradient. </dd>
-		</dl>
-		
-	</div>
 	
 	
 	
@@ -360,49 +307,17 @@
 					<h2 class="subtitle subtitle-methods">Properties</h2>
 					
 					<div class="section-method">
-	<a name="//api/name/borderColor" title="borderColor"></a>
-	<h3 class="subsubtitle method-title">borderColor</h3>
+	<a name="//api/name/border" title="border"></a>
+	<h3 class="subsubtitle method-title">border</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> the border color for an object </p>
+		<p> Set a <a href="#//api/name/border">border</a> for the drawing use the MKGrpahicsBorderMake(CGFloat width, UIColor *color) funtion to create a border. </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *borderColor</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKGraphicsStructures.h</code><br />
-	</div>				
-	
-	
-</div>
-					
-					<div class="section-method">
-	<a name="//api/name/borderWidth" title="borderWidth"></a>
-	<h3 class="subsubtitle method-title">borderWidth</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p> The width of a border if any. Default is <code>2.0</code>. </p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) float borderWidth</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) MKGraphicsBorder border</code></div>
 	
 	
 	
@@ -430,11 +345,11 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> <code>YES</code> if an object should have a border drawn for it. </p>
+		<p> <code>YES</code> if an object should have a <a href="#//api/name/border">border</a> drawn for it. Default is <code>NO</code>, property is changed to <code>YES</code> when <a href="#//api/name/border">border</a> is set. </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL bordered</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) BOOL bordered</code></div>
 	
 	
 	
@@ -552,81 +467,17 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/shadowBlur" title="shadowBlur"></a>
-	<h3 class="subsubtitle method-title">shadowBlur</h3>
+	<a name="//api/name/shadow" title="shadow"></a>
+	<h3 class="subsubtitle method-title">shadow</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> The blur of a shadow 0.0 is solid line </p>
+		<p> Sets a <a href="#//api/name/shadow">shadow</a> to be drawn on the view/contontol. Use the MKGraphicsShadowMake(CGSize offset, CGFloat blur, UIColor *color) to created a shadow. </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGFloat shadowBlur</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKGraphicsStructures.h</code><br />
-	</div>				
-	
-	
-</div>
-					
-					<div class="section-method">
-	<a name="//api/name/shadowColor" title="shadowColor"></a>
-	<h3 class="subsubtitle method-title">shadowColor</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p> The color of a shadow </p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIColor *shadowColor</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKGraphicsStructures.h</code><br />
-	</div>				
-	
-	
-</div>
-					
-					<div class="section-method">
-	<a name="//api/name/shadowOffset" title="shadowOffset"></a>
-	<h3 class="subsubtitle method-title">shadowOffset</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p> The size of a shadows offset </p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGSize shadowOffset</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) MKGraphicsShadow shadow</code></div>
 	
 	
 	
@@ -654,11 +505,11 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> <code>YES</code> if a shadow should be drawn. </p>
+		<p> <code>YES</code> if a <a href="#//api/name/shadow">shadow</a> should be drawn. Default is <code>NO</code>, property is is changed to <code>YES</code> when a <a href="#//api/name/shadow">shadow</a> is set. </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL shadowed</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) BOOL shadowed</code></div>
 	
 	
 	
@@ -788,7 +639,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-30)</span><br />
+					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-31)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

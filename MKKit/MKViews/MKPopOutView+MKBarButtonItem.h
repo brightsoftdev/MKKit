@@ -10,17 +10,6 @@
 
 @class MKBarButtonItem;
 
-/**---------------------------------------------------------------------
- *Overview*
- 
- This catagory provides specal methods for displaying an MKPopOverView
- instance from a MKBarButtonItem.
- 
- *Required Classes*
- 
- * MKPopOutView
- * MKBarButtonItem
-----------------------------------------------------------------------*/
 @interface MKPopOutView (MKBarButtonItem) 
 
 ///-------------------------------

@@ -14,7 +14,13 @@
 
 @end
 
+static const char *TitleLabelKey = "TitleLabelKey";
+
 @implementation MKView (MKTitleView)
+
+@dynamic titleLabel;
+
+#pragma mark - Creation
 
 + (id)titleViewWithTitle:(NSString *)title image:(MKImage *)icon {
     return [[[self alloc] initWithTitle:title image:icon] autorelease];
@@ -39,21 +45,40 @@
     return self;
 }
 
+#pragma mark - Memory
+
+- (void)didRelease {
+    self.titleLabel = nil;
+    objc_removeAssociatedObjects(self);
+}
+
 #pragma mark - Helpers
 
 - (void)titleViewLabelWithText:(NSString *)text {
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(32.0, 5.0, MK_TEXT_WIDTH(text, VERDANA_BOLD(20.0)), 23.0)];
-    titleLabel.backgroundColor = CLEAR;
-    titleLabel.font = VERDANA_BOLD(20.0);
-    titleLabel.adjustsFontSizeToFitWidth = YES;
-    titleLabel.textColor = WHITE;
-    titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    titleLabel.shadowColor = BLACK;
-    titleLabel.shadowOffset = CGSizeMake(0.0, -1.0);
-    titleLabel.text = text;
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(32.0, 5.0, MK_TEXT_WIDTH(text, VERDANA_BOLD(20.0)), 23.0)];
+    self.titleLabel.backgroundColor = CLEAR;
+    self.titleLabel.font = VERDANA_BOLD(20.0);
+    self.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.titleLabel.textColor = WHITE;
+    self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.titleLabel.shadowColor = BLACK;
+    self.titleLabel.shadowOffset = CGSizeMake(0.0, -1.0);
+    self.titleLabel.text = text;
     
-    [self addSubview:titleLabel];
-    [titleLabel release];
+    [self addSubview:self.titleLabel];
+}
+
+#pragma mark - Accessor Methods
+#pragma mark Setters
+
+- (void)setTitleLabel:(UILabel *)titleLabel {
+    objc_setAssociatedObject(self, TitleLabelKey, titleLabel, OBJC_ASSOCIATION_RETAIN);
+}
+
+#pragma mark Getters
+
+- (UILabel *)titleLabel {
+    return (UILabel *)objc_getAssociatedObject(self, TitleLabelKey);
 }
 
 @end

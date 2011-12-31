@@ -6,6 +6,8 @@
 //  Copyright (c) 2011 Matt King. All rights reserved.
 //
 
+#import <objc/runtime.h>
+
 #import "MKView.h"
 
 @class MKImage;
@@ -39,5 +41,12 @@
 @return MKView instance
 */
 - (id)initWithTitle:(NSString *)title image:(MKImage *)image;
+
+///---------------------------------------------
+/// @name Elements
+///---------------------------------------------
+
+/** Reference to the label that display the title text. */
+@property (nonatomic, retain) UILabel *titleLabel;
 
 @end
