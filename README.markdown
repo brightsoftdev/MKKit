@@ -6,6 +6,9 @@ several specialty view controllers, views, controls, table cells, and specialty 
 The goal of MKKit is to provide a framework that makes creating apps a faster process. MKKit focuses on custom contols, custom views 
 and commom controllers. 
 
+For updates about MKKit follow on Twitter <https://twitter.com/#!/MKKit1>, or to get added to the mailing list send a messgae to 
+matt62king@gmail.com
+
 ### v0.9 Notes ###
 
 Version 0.9 brings a lot of changes to MKKit. A new library has been, MKFeeds, this gives the basic framework for parsing RSS, ATOM, and JSON
@@ -16,9 +19,9 @@ Check the release notes for a full list of changes <https://github.com/matt62kin
 
 ### v1.0 Goals ###
 
-A lot of work is going into the 1.0 release of MKKit. The focus is going to be further intigration of the MKGraphicsStructures Class, and 
-further intigration with the new features of iOS 5.0, storyboards in particular. As always the documention will continue to improve with more
-details on usage of classes. As reminder v0.8 deprecations will removed completely in v1.0.
+A lot of work is going into the 1.0 release of MKKit. The focus is going to be further intigration of the MKGraphicsStructures Class, further 
+intigration with the new features of iOS 5.0, storyboards in particular, and more network connectivity features. As always the documention will 
+continue to improve with more details on usage of classes. As reminder v0.8 deprecations will removed completely in v1.0.
 
 The development of v1.0 will updated on the development branch. Remember the development branch is experimental so API's may change without
 warning. 
