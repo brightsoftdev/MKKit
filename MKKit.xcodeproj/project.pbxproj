@@ -27,7 +27,7 @@
 		AA02DE4512DAE2B7003B3560 /* MKSounds.m in Sources */ = {isa = PBXBuildFile; fileRef = AA02DDEC12DAE2B7003B3560 /* MKSounds.m */; };
 		AA02DE4612DAE2B7003B3560 /* MKStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = AA02DDED12DAE2B7003B3560 /* MKStrings.h */; };
 		AA02DE4712DAE2B7003B3560 /* MKStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = AA02DDEE12DAE2B7003B3560 /* MKStrings.m */; };
-		AA02DE4812DAE2B7003B3560 /* MKTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AA02DDF012DAE2B7003B3560 /* MKTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA02DE4812DAE2B7003B3560 /* MKTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AA02DDF012DAE2B7003B3560 /* MKTableCell.h */; settings = {ATTRIBUTES = (); }; };
 		AA02DE4912DAE2B7003B3560 /* MKTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA02DDF112DAE2B7003B3560 /* MKTableCell.m */; };
 		AA02DE4A12DAE2B7003B3560 /* MKTableCellDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AA02DDF212DAE2B7003B3560 /* MKTableCellDelegate.h */; };
 		AA02DE5912DAE2B7003B3560 /* MKTableCellCheckBox.h in Headers */ = {isa = PBXBuildFile; fileRef = AA02DE0212DAE2B7003B3560 /* MKTableCellCheckBox.h */; };
@@ -54,7 +54,7 @@
 		AA02DE7A12DAE2B7003B3560 /* MKLoadingView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA02DE2712DAE2B7003B3560 /* MKLoadingView.h */; };
 		AA02DE7B12DAE2B7003B3560 /* MKLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA02DE2812DAE2B7003B3560 /* MKLoadingView.m */; };
 		AA02DF6E12DAEA54003B3560 /* MKViewHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = AA02DF6C12DAEA54003B3560 /* MKViewHeader.h */; };
-		AA02DF9912DAEC19003B3560 /* MKTableCellHeaders.h in Headers */ = {isa = PBXBuildFile; fileRef = AA02DF9712DAEC19003B3560 /* MKTableCellHeaders.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA02DF9912DAEC19003B3560 /* MKTableCellHeaders.h in Headers */ = {isa = PBXBuildFile; fileRef = AA02DF9712DAEC19003B3560 /* MKTableCellHeaders.h */; settings = {ATTRIBUTES = (); }; };
 		AA02DFF212DAF0AD003B3560 /* MKKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AA02DFF112DAF0AD003B3560 /* MKKit.h */; };
 		AA02E12112DAFAFA003B3560 /* MKCheckBox.h in Headers */ = {isa = PBXBuildFile; fileRef = AA02E11912DAFAFA003B3560 /* MKCheckBox.h */; };
 		AA02E12212DAFAFA003B3560 /* MKCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = AA02E11A12DAFAFA003B3560 /* MKCheckBox.m */; };
@@ -90,11 +90,30 @@
 		AA1B84E713AD9E7700B8CF6D /* MKBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AA1B84E513AD9E7600B8CF6D /* MKBarButtonItem.h */; };
 		AA1B84E813AD9E7700B8CF6D /* MKBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1B84E613AD9E7700B8CF6D /* MKBarButtonItem.m */; };
 		AA1D506913919384009DD3B6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1D506813919384009DD3B6 /* StoreKit.framework */; };
+		AA21BA9614A7F17600556B06 /* MKGraphicFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = AA21BA9514A7F17600556B06 /* MKGraphicFactory.h */; };
+		AA21BA9C14A8AF4B00556B06 /* UIColor+MKGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = AA21BA9A14A8AF4B00556B06 /* UIColor+MKGraphics.h */; };
+		AA21BA9D14A8AF4B00556B06 /* UIColor+MKGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21BA9B14A8AF4B00556B06 /* UIColor+MKGraphics.m */; };
+		AA21BAA014A914B500556B06 /* MKControl+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = AA21BA9E14A914B400556B06 /* MKControl+Internal.h */; };
+		AA21BAA114A914B500556B06 /* MKControl+Internal.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21BA9F14A914B500556B06 /* MKControl+Internal.m */; };
+		AA21BAA414A9364E00556B06 /* MKObject+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = AA21BAA214A9364E00556B06 /* MKObject+Internal.h */; };
+		AA21BAA514A9364E00556B06 /* MKObject+Internal.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21BAA314A9364E00556B06 /* MKObject+Internal.m */; };
 		AA24B49312DEC3000076A44B /* MKWarningIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = AA24B49112DEC3000076A44B /* MKWarningIcon.h */; };
 		AA24B49412DEC3000076A44B /* MKWarningIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = AA24B49212DEC3000076A44B /* MKWarningIcon.m */; };
+		AA24FDFF149D1B240015D03A /* MKPopOutView+MKBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AA24FDFD149D1B240015D03A /* MKPopOutView+MKBarButtonItem.h */; };
+		AA24FE00149D1B240015D03A /* MKPopOutView+MKBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA24FDFE149D1B240015D03A /* MKPopOutView+MKBarButtonItem.m */; };
 		AA2CE708138200680088C9B2 /* MKReflectedImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2CE706138200680088C9B2 /* MKReflectedImageView.h */; };
 		AA2CE709138200680088C9B2 /* MKReflectedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CE707138200680088C9B2 /* MKReflectedImageView.m */; };
 		AA2FBE4513444550002441C2 /* MKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2FBE4413444550002441C2 /* MKMacros.h */; };
+		AA3210161456536800F9F08A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3210151456536800F9F08A /* libxml2.dylib */; };
+		AA3297A8144FD03A00982DCE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		AA3297B4144FD0B600982DCE /* MKFeedParser.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3297B2144FD0B600982DCE /* MKFeedParser.h */; };
+		AA3297B5144FD0B600982DCE /* MKFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3297B3144FD0B600982DCE /* MKFeedParser.m */; };
+		AA3297BE144FD7CE00982DCE /* MKFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3297BC144FD7CE00982DCE /* MKFeed.h */; };
+		AA3297C9144FD9A300982DCE /* MKFeedsAvailability.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3297C7144FD9A300982DCE /* MKFeedsAvailability.h */; };
+		AA3BFC261481485E003C59A9 /* MKFeedItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3BFC241481485D003C59A9 /* MKFeedItem.h */; };
+		AA3BFC271481485E003C59A9 /* MKFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3BFC251481485E003C59A9 /* MKFeedItem.m */; };
+		AA3FF65A14A542F9000E2263 /* MKPullTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3FF65814A542F9000E2263 /* MKPullTableViewController.h */; };
+		AA3FF65B14A542F9000E2263 /* MKPullTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3FF65914A542F9000E2263 /* MKPullTableViewController.m */; };
 		AA56A535128EDF0300E5DD5C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA56A534128EDF0300E5DD5C /* MessageUI.framework */; };
 		AA61791B141BCF12001859E7 /* MKSwipeCellItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AA617919141BCF11001859E7 /* MKSwipeCellItem.h */; };
 		AA61791C141BCF12001859E7 /* MKSwipeCellItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA61791A141BCF12001859E7 /* MKSwipeCellItem.m */; };
@@ -126,10 +145,20 @@
 		AA7B66AB1418658200B0188E /* MKGraphDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = AA7B66A81418658200B0188E /* MKGraphDataSet.h */; };
 		AA7B66AC1418658200B0188E /* MKGraphDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7B66A91418658200B0188E /* MKGraphDataSet.m */; };
 		AA7B66AD1418658200B0188E /* MKGraphDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = AA7B66AA1418658200B0188E /* MKGraphDataSource.h */; };
+		AA7D517B14AFC936007F3E66 /* MKPopoutView+MKTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AA7D517914AFC936007F3E66 /* MKPopoutView+MKTableCell.h */; };
+		AA7D517C14AFC936007F3E66 /* MKPopoutView+MKTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D517A14AFC936007F3E66 /* MKPopoutView+MKTableCell.m */; };
+		AA7E1FFB148DA30E00F029EA /* MKView+MKTitleView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA7E1FF9148DA30E00F029EA /* MKView+MKTitleView.h */; };
+		AA7E1FFC148DA30E00F029EA /* MKView+MKTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7E1FFA148DA30E00F029EA /* MKView+MKTitleView.m */; };
 		AA7EA176110122760090E6EB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA7EA175110122760090E6EB /* CoreData.framework */; };
 		AA7EFCF310FFE90900B4C1BC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA7EFCF210FFE90900B4C1BC /* CoreGraphics.framework */; };
 		AA7EFCF510FFE91B00B4C1BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA7EFCF410FFE91B00B4C1BC /* UIKit.framework */; };
 		AA7EFD5410FFE94100B4C1BC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA7EFD5310FFE94100B4C1BC /* QuartzCore.framework */; };
+		AA86F5611457B0BA00A7D4FC /* MKHTMLExtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = AA86F55B1457B0BA00A7D4FC /* MKHTMLExtractor.h */; };
+		AA86F5621457B0BA00A7D4FC /* MKHTMLExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86F55C1457B0BA00A7D4FC /* MKHTMLExtractor.m */; };
+		AA86F5631457B0BA00A7D4FC /* MKHTMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = AA86F55D1457B0BA00A7D4FC /* MKHTMLNode.h */; };
+		AA86F5641457B0BA00A7D4FC /* MKHTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86F55E1457B0BA00A7D4FC /* MKHTMLNode.m */; };
+		AA86F5651457B0BA00A7D4FC /* MKHTMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = AA86F55F1457B0BA00A7D4FC /* MKHTMLParser.h */; };
+		AA86F5661457B0BA00A7D4FC /* MKHTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86F5601457B0BA00A7D4FC /* MKHTMLParser.m */; };
 		AA99D3161405B1BE00CFFD56 /* MKObjectDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AA99D3151405B1BE00CFFD56 /* MKObjectDelegate.h */; };
 		AA99D3191405B71E00CFFD56 /* MKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = AA99D3171405B71E00CFFD56 /* MKObject.h */; };
 		AA99D31A1405B71E00CFFD56 /* MKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AA99D3181405B71E00CFFD56 /* MKObject.m */; };
@@ -140,10 +169,16 @@
 		AAA3BE8D13EBA12C00594F55 /* MKTabbedViewProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA3BE8C13EBA12C00594F55 /* MKTabbedViewProtocols.h */; };
 		AAA3BE9013EBB53700594F55 /* MKTabItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA3BE8E13EBB53700594F55 /* MKTabItem.h */; };
 		AAA3BE9113EBB53700594F55 /* MKTabItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3BE8F13EBB53700594F55 /* MKTabItem.m */; };
+		AAA6ABC214AEAB44003B4A53 /* MKView+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA6ABC014AEAB43003B4A53 /* MKView+Internal.h */; };
+		AAA6ABC314AEAB44003B4A53 /* MKView+Internal.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA6ABC114AEAB44003B4A53 /* MKView+Internal.m */; };
 		AAA97EED13915840009EBCDE /* MKTableCellLoading.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA97EEB13915840009EBCDE /* MKTableCellLoading.h */; };
 		AAA97EEE13915840009EBCDE /* MKTableCellLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA97EEC13915840009EBCDE /* MKTableCellLoading.m */; };
 		AAA97EF11391659A009EBCDE /* MKButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA97EEF1391659A009EBCDE /* MKButton.h */; };
 		AAA97EF21391659A009EBCDE /* MKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA97EF01391659A009EBCDE /* MKButton.m */; };
+		AAAE8712148A688C003E2060 /* MKImage.h in Headers */ = {isa = PBXBuildFile; fileRef = AAAE8710148A688C003E2060 /* MKImage.h */; };
+		AAAE8713148A688C003E2060 /* MKImage.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAE8711148A688C003E2060 /* MKImage.m */; };
+		AAAE8716148BC657003E2060 /* MKPaging.h in Headers */ = {isa = PBXBuildFile; fileRef = AAAE8714148BC656003E2060 /* MKPaging.h */; };
+		AAAE8717148BC657003E2060 /* MKPaging.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAE8715148BC656003E2060 /* MKPaging.m */; };
 		AAB4D1E113E86A720061A6BD /* MKPopOutView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB4D1DF13E86A700061A6BD /* MKPopOutView.h */; };
 		AAB4D1E213E86A720061A6BD /* MKPopOutView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB4D1E013E86A700061A6BD /* MKPopOutView.m */; };
 		AAB4D1E513E884410061A6BD /* MKTitleView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB4D1E313E884400061A6BD /* MKTitleView.h */; };
@@ -152,8 +187,11 @@
 		AAB4D1F213E8C9810061A6BD /* MKElementAccentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB4D1F013E8C9810061A6BD /* MKElementAccentView.m */; };
 		AAB5EE831426B93C00AFE278 /* MKGraphicsStructures.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB5EE811426B93C00AFE278 /* MKGraphicsStructures.h */; };
 		AAB5EE841426B93C00AFE278 /* MKGraphicsStructures.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB5EE821426B93C00AFE278 /* MKGraphicsStructures.m */; };
+		AAB6F17E14AFE20E00779B9B /* MKSegmentedPopOutView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB6F17C14AFE20E00779B9B /* MKSegmentedPopOutView.h */; };
+		AAB6F17F14AFE20E00779B9B /* MKSegmentedPopOutView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6F17D14AFE20E00779B9B /* MKSegmentedPopOutView.m */; };
 		AAB76CE4141B3682007829EB /* MKSwipeCellView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB76CE2141B3682007829EB /* MKSwipeCellView.h */; };
 		AAB76CE5141B3682007829EB /* MKSwipeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB76CE3141B3682007829EB /* MKSwipeCellView.m */; };
+		AABD97BF146E260D004F1AA1 /* MKHTMLExtractorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AABD97BE146E260D004F1AA1 /* MKHTMLExtractorDelegate.h */; };
 		AABE3D581376CFE500ECC539 /* MKLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AABE3D551376CFE500ECC539 /* MKLoginViewController.h */; };
 		AABE3D591376CFE500ECC539 /* MKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABE3D561376CFE500ECC539 /* MKLoginViewController.m */; };
 		AABF4D8C13921A24001B547A /* MKIAPViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AABF4D8A13921A24001B547A /* MKIAPViewController.h */; };
@@ -164,12 +202,14 @@
 		AABF4D9513921E1A001B547A /* MKTableCellIAP.m in Sources */ = {isa = PBXBuildFile; fileRef = AABF4D9313921E1A001B547A /* MKTableCellIAP.m */; };
 		AAD0024214131FAE0088D5F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		AAD0026A141323300088D5F9 /* MKGraphs.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD00269141323300088D5F9 /* MKGraphs.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AAE70D23140DB7B700797D84 /* MKPhotoView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE70D21140DB7B700797D84 /* MKPhotoView.h */; };
-		AAE70D24140DB7B700797D84 /* MKPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE70D22140DB7B700797D84 /* MKPhotoView.m */; };
 		AAEDEA771390A732007EA362 /* MKNoticeView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAEDEA751390A730007EA362 /* MKNoticeView.h */; };
 		AAEDEA781390A732007EA362 /* MKNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEDEA761390A731007EA362 /* MKNoticeView.m */; };
 		AAEFE115121873BA008143E4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAEFE114121873BA008143E4 /* CoreLocation.framework */; };
+		AAF37FE814703885001AE209 /* NSString+MKFeedParser.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF37FE614703885001AE209 /* NSString+MKFeedParser.h */; };
+		AAF37FE914703885001AE209 /* NSString+MKFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF37FE714703885001AE209 /* NSString+MKFeedParser.m */; };
 		AAF5FD761423B8AE00907C96 /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AAF5FD751423B8AD00907C96 /* libobjc.A.dylib */; };
+		AAFB412F148717260002D494 /* MKPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFB412D148717260002D494 /* MKPageControl.h */; };
+		AAFB4130148717260002D494 /* MKPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFB412E148717260002D494 /* MKPageControl.m */; };
 		AAFC9898141534F30071B91C /* MKGraphDrawing.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFC9896141534F30071B91C /* MKGraphDrawing.h */; };
 		AAFC9899141534F30071B91C /* MKGraphDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFC9897141534F30071B91C /* MKGraphDrawing.m */; };
 		AAFC989C141599E90071B91C /* MKGraphPlotting.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFC989A141599E90071B91C /* MKGraphPlotting.h */; };
@@ -180,8 +220,8 @@
 		AA02ABF6112B876000C598E3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AA02DDCF12DAE2B7003B3560 /* MKAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKAlerts.h; sourceTree = "<group>"; };
 		AA02DDD012DAE2B7003B3560 /* MKAlerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKAlerts.m; sourceTree = "<group>"; };
-		AA02DDD112DAE2B7003B3560 /* MKAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKAnimations.h; sourceTree = "<group>"; };
-		AA02DDD212DAE2B7003B3560 /* MKAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKAnimations.m; sourceTree = "<group>"; };
+		AA02DDD112DAE2B7003B3560 /* MKAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAnimations.h; path = ../MKAnimations.h; sourceTree = "<group>"; };
+		AA02DDD212DAE2B7003B3560 /* MKAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAnimations.m; path = ../MKAnimations.m; sourceTree = "<group>"; };
 		AA02DDD312DAE2B7003B3560 /* MKClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKClock.h; sourceTree = "<group>"; };
 		AA02DDD412DAE2B7003B3560 /* MKClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKClock.m; sourceTree = "<group>"; };
 		AA02DDDD12DAE2B7003B3560 /* MKCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKCoreData.h; sourceTree = "<group>"; };
@@ -193,8 +233,8 @@
 		AA02DDE812DAE2B7003B3560 /* MKNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNotificationController.m; sourceTree = "<group>"; };
 		AA02DDE912DAE2B7003B3560 /* MKRandoms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRandoms.h; sourceTree = "<group>"; };
 		AA02DDEA12DAE2B7003B3560 /* MKRandoms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRandoms.m; sourceTree = "<group>"; };
-		AA02DDEB12DAE2B7003B3560 /* MKSounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSounds.h; sourceTree = "<group>"; };
-		AA02DDEC12DAE2B7003B3560 /* MKSounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSounds.m; sourceTree = "<group>"; };
+		AA02DDEB12DAE2B7003B3560 /* MKSounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKSounds.h; path = ../MKSounds.h; sourceTree = "<group>"; };
+		AA02DDEC12DAE2B7003B3560 /* MKSounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKSounds.m; path = ../MKSounds.m; sourceTree = "<group>"; };
 		AA02DDED12DAE2B7003B3560 /* MKStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStrings.h; sourceTree = "<group>"; };
 		AA02DDEE12DAE2B7003B3560 /* MKStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStrings.m; sourceTree = "<group>"; };
 		AA02DDF012DAE2B7003B3560 /* MKTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKTableCell.h; sourceTree = "<group>"; };
@@ -260,11 +300,31 @@
 		AA1B84E513AD9E7600B8CF6D /* MKBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBarButtonItem.h; sourceTree = "<group>"; };
 		AA1B84E613AD9E7700B8CF6D /* MKBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKBarButtonItem.m; sourceTree = "<group>"; };
 		AA1D506813919384009DD3B6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		AA21BA9514A7F17600556B06 /* MKGraphicFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGraphicFactory.h; sourceTree = "<group>"; };
+		AA21BA9A14A8AF4B00556B06 /* UIColor+MKGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MKGraphics.h"; sourceTree = "<group>"; };
+		AA21BA9B14A8AF4B00556B06 /* UIColor+MKGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MKGraphics.m"; sourceTree = "<group>"; };
+		AA21BA9E14A914B400556B06 /* MKControl+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKControl+Internal.h"; sourceTree = "<group>"; };
+		AA21BA9F14A914B500556B06 /* MKControl+Internal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKControl+Internal.m"; sourceTree = "<group>"; };
+		AA21BAA214A9364E00556B06 /* MKObject+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKObject+Internal.h"; sourceTree = "<group>"; };
+		AA21BAA314A9364E00556B06 /* MKObject+Internal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKObject+Internal.m"; sourceTree = "<group>"; };
 		AA24B49112DEC3000076A44B /* MKWarningIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKWarningIcon.h; sourceTree = "<group>"; };
 		AA24B49212DEC3000076A44B /* MKWarningIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKWarningIcon.m; sourceTree = "<group>"; };
+		AA24FDFD149D1B240015D03A /* MKPopOutView+MKBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKPopOutView+MKBarButtonItem.h"; sourceTree = "<group>"; };
+		AA24FDFE149D1B240015D03A /* MKPopOutView+MKBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPopOutView+MKBarButtonItem.m"; sourceTree = "<group>"; };
 		AA2CE706138200680088C9B2 /* MKReflectedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKReflectedImageView.h; sourceTree = "<group>"; };
 		AA2CE707138200680088C9B2 /* MKReflectedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKReflectedImageView.m; sourceTree = "<group>"; };
 		AA2FBE4413444550002441C2 /* MKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMacros.h; sourceTree = "<group>"; };
+		AA3210151456536800F9F08A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		AA3297A7144FD03A00982DCE /* libMKFeeds.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMKFeeds.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA3297AB144FD03A00982DCE /* MKFeeds-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MKFeeds-Prefix.pch"; sourceTree = "<group>"; };
+		AA3297B2144FD0B600982DCE /* MKFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKFeedParser.h; sourceTree = "<group>"; };
+		AA3297B3144FD0B600982DCE /* MKFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKFeedParser.m; sourceTree = "<group>"; };
+		AA3297BC144FD7CE00982DCE /* MKFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKFeed.h; path = ../MKFeed.h; sourceTree = "<group>"; };
+		AA3297C7144FD9A300982DCE /* MKFeedsAvailability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKFeedsAvailability.h; sourceTree = "<group>"; };
+		AA3BFC241481485D003C59A9 /* MKFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKFeedItem.h; sourceTree = "<group>"; };
+		AA3BFC251481485E003C59A9 /* MKFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKFeedItem.m; sourceTree = "<group>"; };
+		AA3FF65814A542F9000E2263 /* MKPullTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPullTableViewController.h; sourceTree = "<group>"; };
+		AA3FF65914A542F9000E2263 /* MKPullTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPullTableViewController.m; sourceTree = "<group>"; };
 		AA56A534128EDF0300E5DD5C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		AA617919141BCF11001859E7 /* MKSwipeCellItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSwipeCellItem.h; sourceTree = "<group>"; };
 		AA61791A141BCF12001859E7 /* MKSwipeCellItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSwipeCellItem.m; sourceTree = "<group>"; };
@@ -297,12 +357,22 @@
 		AA7B66A81418658200B0188E /* MKGraphDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKGraphDataSet.h; path = MKGraphs/MKGraphData/MKGraphDataSet.h; sourceTree = SOURCE_ROOT; };
 		AA7B66A91418658200B0188E /* MKGraphDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKGraphDataSet.m; path = MKGraphs/MKGraphData/MKGraphDataSet.m; sourceTree = SOURCE_ROOT; };
 		AA7B66AA1418658200B0188E /* MKGraphDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKGraphDataSource.h; path = MKGraphs/MKGraphData/MKGraphDataSource.h; sourceTree = SOURCE_ROOT; };
+		AA7D517914AFC936007F3E66 /* MKPopoutView+MKTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKPopoutView+MKTableCell.h"; sourceTree = "<group>"; };
+		AA7D517A14AFC936007F3E66 /* MKPopoutView+MKTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPopoutView+MKTableCell.m"; sourceTree = "<group>"; };
+		AA7E1FF9148DA30E00F029EA /* MKView+MKTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKView+MKTitleView.h"; sourceTree = "<group>"; };
+		AA7E1FFA148DA30E00F029EA /* MKView+MKTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKView+MKTitleView.m"; sourceTree = "<group>"; };
 		AA7EA175110122760090E6EB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		AA7EFCE510FFE8C900B4C1BC /* MKKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MKKit-Info.plist"; sourceTree = "<group>"; };
 		AA7EFCEE10FFE8E900B4C1BC /* libMKKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMKKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA7EFCF210FFE90900B4C1BC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AA7EFCF410FFE91B00B4C1BC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AA7EFD5310FFE94100B4C1BC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AA86F55B1457B0BA00A7D4FC /* MKHTMLExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKHTMLExtractor.h; path = MKFeeds/MKHTML/MKHTMLExtractor.h; sourceTree = SOURCE_ROOT; };
+		AA86F55C1457B0BA00A7D4FC /* MKHTMLExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKHTMLExtractor.m; path = MKFeeds/MKHTML/MKHTMLExtractor.m; sourceTree = SOURCE_ROOT; };
+		AA86F55D1457B0BA00A7D4FC /* MKHTMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKHTMLNode.h; path = MKFeeds/MKHTML/MKHTMLNode.h; sourceTree = SOURCE_ROOT; };
+		AA86F55E1457B0BA00A7D4FC /* MKHTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKHTMLNode.m; path = MKFeeds/MKHTML/MKHTMLNode.m; sourceTree = SOURCE_ROOT; };
+		AA86F55F1457B0BA00A7D4FC /* MKHTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKHTMLParser.h; path = MKFeeds/MKHTML/MKHTMLParser.h; sourceTree = SOURCE_ROOT; };
+		AA86F5601457B0BA00A7D4FC /* MKHTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKHTMLParser.m; path = MKFeeds/MKHTML/MKHTMLParser.m; sourceTree = SOURCE_ROOT; };
 		AA99D3151405B1BE00CFFD56 /* MKObjectDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKObjectDelegate.h; sourceTree = "<group>"; };
 		AA99D3171405B71E00CFFD56 /* MKObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKObject.h; sourceTree = "<group>"; };
 		AA99D3181405B71E00CFFD56 /* MKObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKObject.m; sourceTree = "<group>"; };
@@ -314,12 +384,18 @@
 		AAA3BE8E13EBB53700594F55 /* MKTabItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKTabItem.h; sourceTree = "<group>"; };
 		AAA3BE8F13EBB53700594F55 /* MKTabItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKTabItem.m; sourceTree = "<group>"; };
 		AAA5A1AC1345589C00D2C23F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		AAA6ABC014AEAB43003B4A53 /* MKView+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKView+Internal.h"; sourceTree = "<group>"; };
+		AAA6ABC114AEAB44003B4A53 /* MKView+Internal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKView+Internal.m"; sourceTree = "<group>"; };
 		AAA836CF143299FF006381E5 /* MKApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKApplication.h; sourceTree = "<group>"; };
 		AAA836D0143299FF006381E5 /* MKApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKApplication.m; sourceTree = "<group>"; };
 		AAA97EEB13915840009EBCDE /* MKTableCellLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKTableCellLoading.h; sourceTree = "<group>"; };
 		AAA97EEC13915840009EBCDE /* MKTableCellLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKTableCellLoading.m; sourceTree = "<group>"; };
 		AAA97EEF1391659A009EBCDE /* MKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKButton.h; sourceTree = "<group>"; };
 		AAA97EF01391659A009EBCDE /* MKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKButton.m; sourceTree = "<group>"; };
+		AAAE8710148A688C003E2060 /* MKImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKImage.h; sourceTree = "<group>"; };
+		AAAE8711148A688C003E2060 /* MKImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKImage.m; sourceTree = "<group>"; };
+		AAAE8714148BC656003E2060 /* MKPaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPaging.h; sourceTree = "<group>"; };
+		AAAE8715148BC656003E2060 /* MKPaging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPaging.m; sourceTree = "<group>"; };
 		AAB4D1DF13E86A700061A6BD /* MKPopOutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPopOutView.h; sourceTree = "<group>"; };
 		AAB4D1E013E86A700061A6BD /* MKPopOutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPopOutView.m; sourceTree = "<group>"; };
 		AAB4D1E313E884400061A6BD /* MKTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKTitleView.h; sourceTree = "<group>"; };
@@ -328,8 +404,11 @@
 		AAB4D1F013E8C9810061A6BD /* MKElementAccentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKElementAccentView.m; sourceTree = "<group>"; };
 		AAB5EE811426B93C00AFE278 /* MKGraphicsStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGraphicsStructures.h; sourceTree = "<group>"; };
 		AAB5EE821426B93C00AFE278 /* MKGraphicsStructures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGraphicsStructures.m; sourceTree = "<group>"; };
+		AAB6F17C14AFE20E00779B9B /* MKSegmentedPopOutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSegmentedPopOutView.h; sourceTree = "<group>"; };
+		AAB6F17D14AFE20E00779B9B /* MKSegmentedPopOutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSegmentedPopOutView.m; sourceTree = "<group>"; };
 		AAB76CE2141B3682007829EB /* MKSwipeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSwipeCellView.h; sourceTree = "<group>"; };
 		AAB76CE3141B3682007829EB /* MKSwipeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSwipeCellView.m; sourceTree = "<group>"; };
+		AABD97BE146E260D004F1AA1 /* MKHTMLExtractorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKHTMLExtractorDelegate.h; path = MKFeeds/MKHTML/MKHTMLExtractorDelegate.h; sourceTree = SOURCE_ROOT; };
 		AABE3D551376CFE500ECC539 /* MKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKLoginViewController.h; sourceTree = "<group>"; };
 		AABE3D561376CFE500ECC539 /* MKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKLoginViewController.m; sourceTree = "<group>"; };
 		AABF4D8A13921A24001B547A /* MKIAPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKIAPViewController.h; sourceTree = "<group>"; };
@@ -342,12 +421,14 @@
 		AAD0024114131FAE0088D5F9 /* libMKGraphs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMKGraphs.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD0024514131FAE0088D5F9 /* MKGraphs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MKGraphs-Prefix.pch"; sourceTree = "<group>"; };
 		AAD00269141323300088D5F9 /* MKGraphs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGraphs.h; sourceTree = SOURCE_ROOT; };
-		AAE70D21140DB7B700797D84 /* MKPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPhotoView.h; sourceTree = "<group>"; };
-		AAE70D22140DB7B700797D84 /* MKPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPhotoView.m; sourceTree = "<group>"; };
 		AAEDEA751390A730007EA362 /* MKNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNoticeView.h; sourceTree = "<group>"; };
 		AAEDEA761390A731007EA362 /* MKNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNoticeView.m; sourceTree = "<group>"; };
 		AAEFE114121873BA008143E4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		AAF37FE614703885001AE209 /* NSString+MKFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MKFeedParser.h"; sourceTree = "<group>"; };
+		AAF37FE714703885001AE209 /* NSString+MKFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MKFeedParser.m"; sourceTree = "<group>"; };
 		AAF5FD751423B8AD00907C96 /* libobjc.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjc.A.dylib; path = usr/lib/libobjc.A.dylib; sourceTree = SDKROOT; };
+		AAFB412D148717260002D494 /* MKPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPageControl.h; sourceTree = "<group>"; };
+		AAFB412E148717260002D494 /* MKPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPageControl.m; sourceTree = "<group>"; };
 		AAFC9896141534F30071B91C /* MKGraphDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGraphDrawing.h; sourceTree = "<group>"; };
 		AAFC9897141534F30071B91C /* MKGraphDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGraphDrawing.m; sourceTree = "<group>"; };
 		AAFC989A141599E90071B91C /* MKGraphPlotting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGraphPlotting.h; sourceTree = "<group>"; };
@@ -355,6 +436,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AA3297A4144FD03A00982DCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA3210161456536800F9F08A /* libxml2.dylib in Frameworks */,
+				AA3297A8144FD03A00982DCE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AA7EFCEC10FFE8E900B4C1BC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -387,6 +477,7 @@
 			children = (
 				AA7EFCEE10FFE8E900B4C1BC /* libMKKit.a */,
 				AAD0024114131FAE0088D5F9 /* libMKGraphs.a */,
+				AA3297A7144FD03A00982DCE /* libMKFeeds.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -397,10 +488,12 @@
 				AA02DFF112DAF0AD003B3560 /* MKKit.h */,
 				AA02DDB612DAE2B7003B3560 /* MKKit */,
 				AAD0024314131FAE0088D5F9 /* MKGraphs */,
+				AA3297A9144FD03A00982DCE /* MKFeeds */,
 				AA1F0FD2128B7C4F003EB755 /* Resources */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
+				AA7D518114AFDFFA007F3E66 /* Depreceated v0.9 */,
 				AA7EFCE510FFE8C900B4C1BC /* MKKit-Info.plist */,
 			);
 			name = MKKit;
@@ -409,6 +502,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA3210151456536800F9F08A /* libxml2.dylib */,
 				AAF5FD751423B8AD00907C96 /* libobjc.A.dylib */,
 				AA1D506813919384009DD3B6 /* StoreKit.framework */,
 				AA56A534128EDF0300E5DD5C /* MessageUI.framework */,
@@ -435,32 +529,7 @@
 		AA02DDB612DAE2B7003B3560 /* MKKit */ = {
 			isa = PBXGroup;
 			children = (
-				AA02DDDF12DAE2B7003B3560 /* MKDeffinitions.h */,
-				AA2FBE4413444550002441C2 /* MKMacros.h */,
-				AA77679C1413E90A0064579F /* MKAvailability.h */,
-				AAA836CF143299FF006381E5 /* MKApplication.h */,
-				AAA836D0143299FF006381E5 /* MKApplication.m */,
-				AA02DDCF12DAE2B7003B3560 /* MKAlerts.h */,
-				AA02DDD012DAE2B7003B3560 /* MKAlerts.m */,
-				AA02DDD112DAE2B7003B3560 /* MKAnimations.h */,
-				AA02DDD212DAE2B7003B3560 /* MKAnimations.m */,
-				AA02DDD312DAE2B7003B3560 /* MKClock.h */,
-				AA02DDD412DAE2B7003B3560 /* MKClock.m */,
-				AA02DDDD12DAE2B7003B3560 /* MKCoreData.h */,
-				AA02DDDE12DAE2B7003B3560 /* MKCoreData.m */,
-				AA02DDE512DAE2B7003B3560 /* MKMath.h */,
-				AA02DDE612DAE2B7003B3560 /* MKMath.m */,
-				AA02DDE712DAE2B7003B3560 /* MKNotificationController.h */,
-				AA02DDE812DAE2B7003B3560 /* MKNotificationController.m */,
-				AA99D3171405B71E00CFFD56 /* MKObject.h */,
-				AA99D3181405B71E00CFFD56 /* MKObject.m */,
-				AA99D3151405B1BE00CFFD56 /* MKObjectDelegate.h */,
-				AA02DDE912DAE2B7003B3560 /* MKRandoms.h */,
-				AA02DDEA12DAE2B7003B3560 /* MKRandoms.m */,
-				AA02DDEB12DAE2B7003B3560 /* MKSounds.h */,
-				AA02DDEC12DAE2B7003B3560 /* MKSounds.m */,
-				AA02DDED12DAE2B7003B3560 /* MKStrings.h */,
-				AA02DDEE12DAE2B7003B3560 /* MKStrings.m */,
+				AA21BA9714A7F93F00556B06 /* MKCore */,
 				AA02E11812DAFAFA003B3560 /* MKControls */,
 				AA02E17312DB04CF003B3560 /* MKErrorContol */,
 				AA778BE113A8616500AFF686 /* MKGraphics */,
@@ -521,17 +590,11 @@
 				AA6DF3F6138E04B90091B912 /* MKMenuView */,
 				AAEDEA751390A730007EA362 /* MKNoticeView.h */,
 				AAEDEA761390A731007EA362 /* MKNoticeView.m */,
-				AAE70D21140DB7B700797D84 /* MKPhotoView.h */,
-				AAE70D22140DB7B700797D84 /* MKPhotoView.m */,
 				AA6DF3ED138E02590091B912 /* MKPrompts */,
-				AAB4D1DF13E86A700061A6BD /* MKPopOutView.h */,
-				AAB4D1E013E86A700061A6BD /* MKPopOutView.m */,
-				AA02DE2212DAE2B7003B3560 /* MKPopOverView.h */,
-				AA02DE2312DAE2B7003B3560 /* MKPopOverView.m */,
+				AA3FF66014A63FCD000E2263 /* MKPopOutView */,
 				AA2CE706138200680088C9B2 /* MKReflectedImageView.h */,
 				AA2CE707138200680088C9B2 /* MKReflectedImageView.m */,
-				AAB4D1E313E884400061A6BD /* MKTitleView.h */,
-				AAB4D1E413E884400061A6BD /* MKTitleView.m */,
+				AAB6F18514AFE4A200779B9B /* View Categories */,
 			);
 			path = MKViews;
 			sourceTree = "<group>";
@@ -549,10 +612,13 @@
 				AAA97EF01391659A009EBCDE /* MKButton.m */,
 				AA02E11912DAFAFA003B3560 /* MKCheckBox.h */,
 				AA02E11A12DAFAFA003B3560 /* MKCheckBox.m */,
+				AAAE8714148BC656003E2060 /* MKPaging.h */,
+				AAAE8715148BC656003E2060 /* MKPaging.m */,
 				AA02E11F12DAFAFA003B3560 /* MKSlider.h */,
 				AA02E12012DAFAFA003B3560 /* MKSlider.m */,
 				AA02E1AD12DB0899003B3560 /* MKTextField.h */,
 				AA02E1AE12DB0899003B3560 /* MKTextField.m */,
+				AAB6F18414AFE3F300779B9B /* Control Categories */,
 			);
 			path = MKControls;
 			sourceTree = "<group>";
@@ -564,11 +630,10 @@
 				AA6330DE1344163F00886CE3 /* MKViewControllerDelegate.h */,
 				AA6330D9134415B900886CE3 /* MKViewController.h */,
 				AA6330DA134415B900886CE3 /* MKViewController.m */,
-				AA02E13C12DAFC14003B3560 /* MKCredits */,
 				AABF4D89139219F9001B547A /* MKIAPViewController */,
 				AABE3D541376CFB800ECC539 /* MKLoginViewController */,
-				AA02E14112DAFC14003B3560 /* MKTabBar */,
 				AAA3BE8313EB92F400594F55 /* MKTabbedViewController */,
+				AA3FF65714A5426A000E2263 /* MKTableViewController */,
 				AA6330D81344155700886CE3 /* MKWebViewController */,
 			);
 			path = MKViewControllers;
@@ -580,7 +645,8 @@
 				AA02E13F12DAFC14003B3560 /* MKCreditsViewContoller.h */,
 				AA02E14012DAFC14003B3560 /* MKCreditsViewContoller.m */,
 			);
-			path = MKCredits;
+			name = MKCredits;
+			path = ../MKViewControllers/MKCredits;
 			sourceTree = "<group>";
 		};
 		AA02E14112DAFC14003B3560 /* MKTabBar */ = {
@@ -593,7 +659,8 @@
 				AA02E14612DAFC14003B3560 /* MKTabViewController.h */,
 				AA02E14712DAFC14003B3560 /* MKTabViewController.m */,
 			);
-			path = MKTabBar;
+			name = MKTabBar;
+			path = ../MKViewControllers/MKTabBar;
 			sourceTree = "<group>";
 		};
 		AA02E17312DB04CF003B3560 /* MKErrorContol */ = {
@@ -619,6 +686,81 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		AA21BA9714A7F93F00556B06 /* MKCore */ = {
+			isa = PBXGroup;
+			children = (
+				AA02DDDF12DAE2B7003B3560 /* MKDeffinitions.h */,
+				AA2FBE4413444550002441C2 /* MKMacros.h */,
+				AA77679C1413E90A0064579F /* MKAvailability.h */,
+				AAA836CF143299FF006381E5 /* MKApplication.h */,
+				AAA836D0143299FF006381E5 /* MKApplication.m */,
+				AA02DDCF12DAE2B7003B3560 /* MKAlerts.h */,
+				AA02DDD012DAE2B7003B3560 /* MKAlerts.m */,
+				AA02DDD312DAE2B7003B3560 /* MKClock.h */,
+				AA02DDD412DAE2B7003B3560 /* MKClock.m */,
+				AA02DDDD12DAE2B7003B3560 /* MKCoreData.h */,
+				AA02DDDE12DAE2B7003B3560 /* MKCoreData.m */,
+				AAAE8710148A688C003E2060 /* MKImage.h */,
+				AAAE8711148A688C003E2060 /* MKImage.m */,
+				AA02DDE512DAE2B7003B3560 /* MKMath.h */,
+				AA02DDE612DAE2B7003B3560 /* MKMath.m */,
+				AA02DDE712DAE2B7003B3560 /* MKNotificationController.h */,
+				AA02DDE812DAE2B7003B3560 /* MKNotificationController.m */,
+				AA99D3171405B71E00CFFD56 /* MKObject.h */,
+				AA99D3181405B71E00CFFD56 /* MKObject.m */,
+				AA99D3151405B1BE00CFFD56 /* MKObjectDelegate.h */,
+				AAFB412D148717260002D494 /* MKPageControl.h */,
+				AAFB412E148717260002D494 /* MKPageControl.m */,
+				AA02DDE912DAE2B7003B3560 /* MKRandoms.h */,
+				AA02DDEA12DAE2B7003B3560 /* MKRandoms.m */,
+				AA02DDED12DAE2B7003B3560 /* MKStrings.h */,
+				AA02DDEE12DAE2B7003B3560 /* MKStrings.m */,
+				AA21BAA214A9364E00556B06 /* MKObject+Internal.h */,
+				AA21BAA314A9364E00556B06 /* MKObject+Internal.m */,
+			);
+			name = MKCore;
+			sourceTree = "<group>";
+		};
+		AA2662091454EF6D009696D0 /* MKHTML */ = {
+			isa = PBXGroup;
+			children = (
+				AA86F55B1457B0BA00A7D4FC /* MKHTMLExtractor.h */,
+				AA86F55C1457B0BA00A7D4FC /* MKHTMLExtractor.m */,
+				AABD97BE146E260D004F1AA1 /* MKHTMLExtractorDelegate.h */,
+				AA86F55D1457B0BA00A7D4FC /* MKHTMLNode.h */,
+				AA86F55E1457B0BA00A7D4FC /* MKHTMLNode.m */,
+				AA86F55F1457B0BA00A7D4FC /* MKHTMLParser.h */,
+				AA86F5601457B0BA00A7D4FC /* MKHTMLParser.m */,
+			);
+			name = MKHTML;
+			path = MKTextExtractor;
+			sourceTree = "<group>";
+		};
+		AA3297A9144FD03A00982DCE /* MKFeeds */ = {
+			isa = PBXGroup;
+			children = (
+				AA3297BC144FD7CE00982DCE /* MKFeed.h */,
+				AA3297C7144FD9A300982DCE /* MKFeedsAvailability.h */,
+				AA3BFC241481485D003C59A9 /* MKFeedItem.h */,
+				AA3BFC251481485E003C59A9 /* MKFeedItem.m */,
+				AA3297B2144FD0B600982DCE /* MKFeedParser.h */,
+				AA3297B3144FD0B600982DCE /* MKFeedParser.m */,
+				AAF37FE614703885001AE209 /* NSString+MKFeedParser.h */,
+				AAF37FE714703885001AE209 /* NSString+MKFeedParser.m */,
+				AA2662091454EF6D009696D0 /* MKHTML */,
+				AA3297AA144FD03A00982DCE /* Supporting Files */,
+			);
+			path = MKFeeds;
+			sourceTree = "<group>";
+		};
+		AA3297AA144FD03A00982DCE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA3297AB144FD03A00982DCE /* MKFeeds-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		AA33055C13C3EC2F006B2D11 /* MKTableElements */ = {
 			isa = PBXGroup;
 			children = (
@@ -631,6 +773,26 @@
 				AA0D155713F3081F0067BA2A /* MKTableCellBadgeView.m */,
 			);
 			path = MKTableElements;
+			sourceTree = "<group>";
+		};
+		AA3FF65714A5426A000E2263 /* MKTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AA3FF65814A542F9000E2263 /* MKPullTableViewController.h */,
+				AA3FF65914A542F9000E2263 /* MKPullTableViewController.m */,
+			);
+			path = MKTableViewController;
+			sourceTree = "<group>";
+		};
+		AA3FF66014A63FCD000E2263 /* MKPopOutView */ = {
+			isa = PBXGroup;
+			children = (
+				AAB4D1DF13E86A700061A6BD /* MKPopOutView.h */,
+				AAB4D1E013E86A700061A6BD /* MKPopOutView.m */,
+				AAB6F17C14AFE20E00779B9B /* MKSegmentedPopOutView.h */,
+				AAB6F17D14AFE20E00779B9B /* MKSegmentedPopOutView.m */,
+			);
+			name = MKPopOutView;
 			sourceTree = "<group>";
 		};
 		AA61791D141BCFB4001859E7 /* MKSwipeCellView */ = {
@@ -706,6 +868,9 @@
 				AA778BE313A8617E00AFF686 /* MKGraphics.m */,
 				AAB5EE811426B93C00AFE278 /* MKGraphicsStructures.h */,
 				AAB5EE821426B93C00AFE278 /* MKGraphicsStructures.m */,
+				AA21BA9514A7F17600556B06 /* MKGraphicFactory.h */,
+				AA21BA9A14A8AF4B00556B06 /* UIColor+MKGraphics.h */,
+				AA21BA9B14A8AF4B00556B06 /* UIColor+MKGraphics.m */,
 			);
 			path = MKGraphics;
 			sourceTree = "<group>";
@@ -717,6 +882,24 @@
 				AA7767981413E2330064579F /* MKBarGraphView.m */,
 			);
 			name = MKGraphTypes;
+			sourceTree = "<group>";
+		};
+		AA7D518114AFDFFA007F3E66 /* Depreceated v0.9 */ = {
+			isa = PBXGroup;
+			children = (
+				AA02DDEB12DAE2B7003B3560 /* MKSounds.h */,
+				AA02DDEC12DAE2B7003B3560 /* MKSounds.m */,
+				AA02DDD112DAE2B7003B3560 /* MKAnimations.h */,
+				AA02DDD212DAE2B7003B3560 /* MKAnimations.m */,
+				AA02E14112DAFC14003B3560 /* MKTabBar */,
+				AA02E13C12DAFC14003B3560 /* MKCredits */,
+				AA02DE2212DAE2B7003B3560 /* MKPopOverView.h */,
+				AA02DE2312DAE2B7003B3560 /* MKPopOverView.m */,
+				AAB4D1E313E884400061A6BD /* MKTitleView.h */,
+				AAB4D1E413E884400061A6BD /* MKTitleView.m */,
+			);
+			name = "Depreceated v0.9";
+			path = MKKit/MKViews;
 			sourceTree = "<group>";
 		};
 		AAA3BE8313EB92F400594F55 /* MKTabbedViewController */ = {
@@ -731,6 +914,30 @@
 				AAA3BE8F13EBB53700594F55 /* MKTabItem.m */,
 			);
 			path = MKTabbedViewController;
+			sourceTree = "<group>";
+		};
+		AAB6F18414AFE3F300779B9B /* Control Categories */ = {
+			isa = PBXGroup;
+			children = (
+				AA21BA9E14A914B400556B06 /* MKControl+Internal.h */,
+				AA21BA9F14A914B500556B06 /* MKControl+Internal.m */,
+			);
+			name = "Control Categories";
+			sourceTree = "<group>";
+		};
+		AAB6F18514AFE4A200779B9B /* View Categories */ = {
+			isa = PBXGroup;
+			children = (
+				AAA6ABC014AEAB43003B4A53 /* MKView+Internal.h */,
+				AAA6ABC114AEAB44003B4A53 /* MKView+Internal.m */,
+				AA7E1FF9148DA30E00F029EA /* MKView+MKTitleView.h */,
+				AA7E1FFA148DA30E00F029EA /* MKView+MKTitleView.m */,
+				AA24FDFD149D1B240015D03A /* MKPopOutView+MKBarButtonItem.h */,
+				AA24FDFE149D1B240015D03A /* MKPopOutView+MKBarButtonItem.m */,
+				AA7D517914AFC936007F3E66 /* MKPopoutView+MKTableCell.h */,
+				AA7D517A14AFC936007F3E66 /* MKPopoutView+MKTableCell.m */,
+			);
+			name = "View Categories";
 			sourceTree = "<group>";
 		};
 		AABE3D541376CFB800ECC539 /* MKLoginViewController */ = {
@@ -783,6 +990,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		AA3297A5144FD03A00982DCE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA3297B4144FD0B600982DCE /* MKFeedParser.h in Headers */,
+				AA3297BE144FD7CE00982DCE /* MKFeed.h in Headers */,
+				AA3297C9144FD9A300982DCE /* MKFeedsAvailability.h in Headers */,
+				AA86F5611457B0BA00A7D4FC /* MKHTMLExtractor.h in Headers */,
+				AA86F5631457B0BA00A7D4FC /* MKHTMLNode.h in Headers */,
+				AA86F5651457B0BA00A7D4FC /* MKHTMLParser.h in Headers */,
+				AABD97BF146E260D004F1AA1 /* MKHTMLExtractorDelegate.h in Headers */,
+				AAF37FE814703885001AE209 /* NSString+MKFeedParser.h in Headers */,
+				AA3BFC261481485E003C59A9 /* MKFeedItem.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AA7EFCEA10FFE8E900B4C1BC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -862,11 +1085,23 @@
 				AA99D3161405B1BE00CFFD56 /* MKObjectDelegate.h in Headers */,
 				AA99D3191405B71E00CFFD56 /* MKObject.h in Headers */,
 				AA737F261409DBBA0078830C /* MKTableCellAccentView.h in Headers */,
-				AAE70D23140DB7B700797D84 /* MKPhotoView.h in Headers */,
 				AA77679D1413E90A0064579F /* MKAvailability.h in Headers */,
 				AAB76CE4141B3682007829EB /* MKSwipeCellView.h in Headers */,
 				AA61791B141BCF12001859E7 /* MKSwipeCellItem.h in Headers */,
 				AAB5EE831426B93C00AFE278 /* MKGraphicsStructures.h in Headers */,
+				AAFB412F148717260002D494 /* MKPageControl.h in Headers */,
+				AAAE8712148A688C003E2060 /* MKImage.h in Headers */,
+				AAAE8716148BC657003E2060 /* MKPaging.h in Headers */,
+				AA7E1FFB148DA30E00F029EA /* MKView+MKTitleView.h in Headers */,
+				AA24FDFF149D1B240015D03A /* MKPopOutView+MKBarButtonItem.h in Headers */,
+				AA3FF65A14A542F9000E2263 /* MKPullTableViewController.h in Headers */,
+				AA21BA9614A7F17600556B06 /* MKGraphicFactory.h in Headers */,
+				AA21BA9C14A8AF4B00556B06 /* UIColor+MKGraphics.h in Headers */,
+				AA21BAA014A914B500556B06 /* MKControl+Internal.h in Headers */,
+				AA21BAA414A9364E00556B06 /* MKObject+Internal.h in Headers */,
+				AAA6ABC214AEAB44003B4A53 /* MKView+Internal.h in Headers */,
+				AA7D517B14AFC936007F3E66 /* MKPopoutView+MKTableCell.h in Headers */,
+				AAB6F17E14AFE20E00779B9B /* MKSegmentedPopOutView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -889,6 +1124,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		AA3297A6144FD03A00982DCE /* MKFeeds */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA3297AF144FD03A00982DCE /* Build configuration list for PBXNativeTarget "MKFeeds" */;
+			buildPhases = (
+				AA3297A3144FD03A00982DCE /* Sources */,
+				AA3297A4144FD03A00982DCE /* Frameworks */,
+				AA3297A5144FD03A00982DCE /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MKFeeds;
+			productName = MKFeeds;
+			productReference = AA3297A7144FD03A00982DCE /* libMKFeeds.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		AA7EFCED10FFE8E900B4C1BC /* MKKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA7EFCF110FFE90700B4C1BC /* Build configuration list for PBXNativeTarget "MKKit" */;
@@ -949,11 +1201,25 @@
 			targets = (
 				AA7EFCED10FFE8E900B4C1BC /* MKKit */,
 				AAD0024014131FAE0088D5F9 /* MKGraphs */,
+				AA3297A6144FD03A00982DCE /* MKFeeds */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AA3297A3144FD03A00982DCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA3297B5144FD0B600982DCE /* MKFeedParser.m in Sources */,
+				AA86F5621457B0BA00A7D4FC /* MKHTMLExtractor.m in Sources */,
+				AA86F5641457B0BA00A7D4FC /* MKHTMLNode.m in Sources */,
+				AA86F5661457B0BA00A7D4FC /* MKHTMLParser.m in Sources */,
+				AAF37FE914703885001AE209 /* NSString+MKFeedParser.m in Sources */,
+				AA3BFC271481485E003C59A9 /* MKFeedItem.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AA7EFCEB10FFE8E900B4C1BC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1016,10 +1282,21 @@
 				AA0D155913F308200067BA2A /* MKTableCellBadgeView.m in Sources */,
 				AA99D31A1405B71E00CFFD56 /* MKObject.m in Sources */,
 				AA737F271409DBBA0078830C /* MKTableCellAccentView.m in Sources */,
-				AAE70D24140DB7B700797D84 /* MKPhotoView.m in Sources */,
 				AAB76CE5141B3682007829EB /* MKSwipeCellView.m in Sources */,
 				AA61791C141BCF12001859E7 /* MKSwipeCellItem.m in Sources */,
 				AAB5EE841426B93C00AFE278 /* MKGraphicsStructures.m in Sources */,
+				AAFB4130148717260002D494 /* MKPageControl.m in Sources */,
+				AAAE8713148A688C003E2060 /* MKImage.m in Sources */,
+				AAAE8717148BC657003E2060 /* MKPaging.m in Sources */,
+				AA7E1FFC148DA30E00F029EA /* MKView+MKTitleView.m in Sources */,
+				AA24FE00149D1B240015D03A /* MKPopOutView+MKBarButtonItem.m in Sources */,
+				AA3FF65B14A542F9000E2263 /* MKPullTableViewController.m in Sources */,
+				AA21BA9D14A8AF4B00556B06 /* UIColor+MKGraphics.m in Sources */,
+				AA21BAA114A914B500556B06 /* MKControl+Internal.m in Sources */,
+				AA21BAA514A9364E00556B06 /* MKObject+Internal.m in Sources */,
+				AAA6ABC314AEAB44003B4A53 /* MKView+Internal.m in Sources */,
+				AA7D517C14AFC936007F3E66 /* MKPopoutView+MKTableCell.m in Sources */,
+				AAB6F17F14AFE20E00779B9B /* MKSegmentedPopOutView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1052,6 +1329,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1067,6 +1345,56 @@
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AA3297B0144FD03A00982DCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/MKFeeds.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MKFeeds/MKFeeds-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"$(MKKIT)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AA3297B1144FD03A00982DCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/MKFeeds.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MKFeeds/MKFeeds-Prefix.pch";
+				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"$(MKKIT)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -1074,20 +1402,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"ARCHS[sdk=iphoneos*]" = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
-				CODE_SIGN_IDENTITY = "iPhone Developer: Matthew King (T7T4P8SAWZ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "MK_MAX_VERSION_ALLOWED=8";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				HEADER_SEARCH_PATHS = "/Users/Jullie/Desktop/iPhone-Projects/Frameworks/";
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = MKKit;
-				PROVISIONING_PROFILE = "BD18C3A7-781D-4C23-B12F-9D85F3175485";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1098,18 +1422,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"ARCHS[sdk=iphoneos*]" = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
-				CODE_SIGN_IDENTITY = "iPhone Developer: Matthew King (T7T4P8SAWZ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				HEADER_SEARCH_PATHS = "/Users/Jullie/Desktop/iPhone-Projects/Frameworks/";
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = MKKit;
-				PROVISIONING_PROFILE = "BD18C3A7-781D-4C23-B12F-9D85F3175485";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1121,10 +1442,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"ARCHS[sdk=iphoneos*]" = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
 				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/MKGraphs.dst;
@@ -1136,7 +1453,6 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "MKKIT_AVAILABLE=1";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "$(MKKIT)";
@@ -1152,17 +1468,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"ARCHS[sdk=iphoneos5.0]" = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
 				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/MKGraphs.dst;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MKGraphs/MKGraphs-Prefix.pch";
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "MKKIT_AVAILABLE=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "$(MKKIT)";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
@@ -1182,6 +1493,15 @@
 			buildConfigurations = (
 				1DEB922308733DC00010E9CD /* Debug */,
 				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AA3297AF144FD03A00982DCE /* Build configuration list for PBXNativeTarget "MKFeeds" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA3297B0144FD03A00982DCE /* Debug */,
+				AA3297B1144FD03A00982DCE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

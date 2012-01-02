@@ -61,6 +61,7 @@
 #define BLUE                                            [UIColor blueColor]
 #define CLEAR                                           [UIColor clearColor]
 #define GRAY                                            [UIColor grayColor]
+#define GREEN                                           [UIColor greenColor]
 #define DARK_GRAY                                       [UIColor darkGrayColor]
 #define LIGHT_GRAY                                      [UIColor lightGrayColor]
 #define RED                                             [UIColor redColor]

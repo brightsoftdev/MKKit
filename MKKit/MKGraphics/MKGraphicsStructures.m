@@ -8,52 +8,104 @@
 
 #import "MKGraphicsStructures.h"
 
-@implementation MKGraphicsStructures
+MKGraphicsBorder MKGraphicBorderMake(CGFloat width, UIColor *color) {
+    MKGraphicsBorder border;
+    border.width = width;
+    border.color = color.CGColor;
+    
+    return border;
+}
+
+MKGraphicsShadow MKGraphicShadowMake(CGSize offset, CGFloat blur, UIColor *color) {
+    MKGraphicsShadow shadow;
+    shadow.offset = offset;
+    shadow.blur = blur;
+    shadow.color = color.CGColor;
+    
+    return shadow;
+}
+
+@interface MKGraphicsStructures ()
+
+//- (id)initWithLinearGradientTopColor:(UIColor *)topColor bottomColor:(UIColor *)bottomColor;
 
 @end
 
-static const char *TopColorTag = "TopColorTag";
-static const char *BottomColorTag = "BottomColorTag";
+@implementation MKGraphicsStructures
 
-@implementation MKGraphicsStructures (LinearGradient)
+@synthesize fillColor, useLinerShine, topColor, bottomColor, disabledColor, touchedColor;
 
-@dynamic top, bottom;
+@dynamic bordered, shadowed, border, shadow;
 
-#pragma mark - Creating
+#pragma mark - Creation
+
++ (id)graphicsStructure {
+    return [[[[self class] alloc] init] autorelease];
+}
 
 + (id)linearGradientWithTopColor:(UIColor *)topColor bottomColor:(UIColor *)bottomColor {
-    MKGraphicsStructures *gradient = [[[[self class] alloc] init] autorelease];
-    gradient.top = topColor;
-    gradient.bottom = bottomColor;
+    return nil;//[[[[self class] alloc] initWithLinearGradientTopColor:topColor bottomColor:bottomColor] autorelease];
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        [self setObjectKeys];
+    }
+    return self;
+}
+
+- (id)initWithLinearGradientTopColor:(UIColor *)_topColor bottomColor:(UIColor *)_bottomColor {
+    return nil;
+}
+
+#pragma mark - Memory Managment
+
+- (void)dealloc {
+    self.topColor = nil;
+    self.bottomColor = nil;
+    self.fillColor= nil;
+    self.disabledColor = nil;
+    self.touchedColor = nil;
     
-    return gradient;
+    [super dealloc];
 }
 
 #pragma mark - Accessor Methods
 #pragma mark Setters
 
-- (void)setTop:(UIColor *)topColor {
-    objc_setAssociatedObject(self, TopColorTag, topColor, OBJC_ASSOCIATION_RETAIN);
+- (void)setBorder:(MKGraphicsBorder)_border {
+    mBordered = YES;
+    mBorder = _border;
 }
 
-- (void)setBottom:(UIColor *)bottomColor {
-    objc_setAssociatedObject(self, BottomColorTag, bottomColor, OBJC_ASSOCIATION_RETAIN);
+- (void)setShadow:(MKGraphicsShadow)_shadow {
+    mShadowed = YES;
+    mShadow = _shadow;
 }
 
 #pragma mark Getters
 
-- (UIColor *)top {
-    return (UIColor *)objc_getAssociatedObject(self, TopColorTag);
+- (BOOL)bordered {
+    return mBordered;
 }
 
-- (UIColor *)bottom {
-    return (UIColor *)objc_getAssociatedObject(self, BottomColorTag);
+- (BOOL)shadowed {
+    return mShadowed;
 }
 
-#pragma mark - Memory Managment
+- (MKGraphicsBorder)border {
+    return mBorder;
+}
 
-- (void)didRelease {
-    objc_removeAssociatedObjects(self);
+- (MKGraphicsShadow)shadow {
+    return mShadow;
+}
+
+#pragma mark - Adding Structures
+
+- (void)assignGradientTopColor:(UIColor *)_topColor bottomColor:(UIColor *)_bottomColor {
+   
 }
 
 @end

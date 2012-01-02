@@ -9,34 +9,70 @@
 #import "MKView.h"
 #import "MKPopOverView.h"
 
-#pragma mark -
-#pragma mark MKView
+#import "MKView+Internal.h"
+
+@interface MKView ()
+
+- (void)setUpView;
+
+@end
 
 @implementation MKView
 
-@synthesize x, y, width, height, gradient=mGradient, controller=mController, delegate=mDelegate;
+@synthesize x, y, width, height, gradient, controller, delegate=mDelegate;
 
-#pragma mark - Initalizer
+@dynamic graphicsStructure;
+
+#pragma mark - Creating
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.userInteractionEnabled = YES;
-        self.autoresizesSubviews = YES;
-        
-        mShouldRemoveView = YES;
-        
-        self.x = frame.origin.x;
-        self.y = frame.origin.y;
-        self.width = frame.size.width;
-        self.height = frame.size.height;
-        
-        MKViewShouldRemoveNotification = @"MKViewShouldRemoveNotification";
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeView) name:MKViewShouldRemoveNotification object:nil];
-        
-        MKViewFlags.isHeaderView = NO;
+        [self setUpView];
     }
     return self;
+}
+
+#pragma mark Graphics Factory
+
+- (id)initWithGraphics:(MKGraphicsStructures *)_graphicsStructure {
+    self = [super init];
+    if (self) {
+        [self setUpView];
+        
+        if (_graphicsStructure) {
+            self.graphicsStructure = [_graphicsStructure retain];
+        }
+        else {
+            self.graphicsStructure = [self defaultGraphics];
+        }
+    }
+    return self;
+}
+
+- (void)setUpView {
+    self.userInteractionEnabled = YES;
+    self.autoresizesSubviews = YES;
+    
+    mShouldRemoveView = YES;
+    
+    MKViewShouldRemoveNotification = @"MKViewShouldRemoveNotification";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeView) name:MKViewShouldRemoveNotification object:nil];
+    
+    MKViewFlags.isHeaderView = NO;
+}
+
+#pragma mark - Memory Management
+
+- (void)dealloc {
+    self.controller = nil;
+    self.graphicsStructure = nil;
+    
+    objc_removeAssociatedObjects(self);
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MKViewShouldRemoveNotification object:nil];
+    
+	[super dealloc];
 }
 
 #pragma mark - Accessor methods
@@ -59,9 +95,9 @@
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, lHeight);
 }
 
-- (void)setGradient:(MKGraphicsStructures *)grade {
-    mGradient = [grade retain];
-    MKViewFlags.usesGradient = YES;
+- (void)setGraphicsStructure:(MKGraphicsStructures *)_graphicsStructure {
+    MKViewFlags.usesBackGroundFill = YES;
+    mGraphics = [_graphicsStructure retain];
     [self setNeedsDisplay];
 }
 
@@ -83,11 +119,20 @@
     return self.frame.size.height;
 }
 
+- (MKGraphicsStructures *)graphicsStructure {
+    return mGraphics;
+}
+
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetAllowsAntialiasing(context, YES);
+    
+    if (MKViewFlags.usesBackGroundFill) {
+        drawWithGraphicsStructure(context, rect, self.graphicsStructure);
+    }
 
     if (MKViewFlags.isHeaderView && MKViewFlags.isHeaderPlain) {
         CGColorRef topColor = MK_COLOR_HSB(345.0, 2.0, 99.0, 1.0).CGColor;
@@ -97,6 +142,8 @@
         drawGlossAndLinearGradient(context, rect, topColor, bottomColor);
         CGContextSaveGState(context);
     }
+    /*
+    //DEPRECATIED V_0_9 /////////////////////////////////////////////////////
     if (MKViewFlags.isIconMask) {
         CGColorRef bottomColor = MK_COLOR_HSB(354.0, 1.0, 99.0, 1.0).CGColor;
         CGColorRef topColor = MK_COLOR_HSB(354.0, 1.0, 99.0, 1.0).CGColor;
@@ -113,6 +160,7 @@
         drawLinearGradient(context, rect, topColor, bottomColor);
         CGContextRestoreGState(context);
     }
+    */
 }
 
 #pragma mark - Showing the View
@@ -156,17 +204,17 @@
 }
 
 
-- (void)showOnViewController:(UIViewController *)controller animationType:(MKViewAnimationType)type {
-    [controller.view addSubview:self];
+- (void)showOnViewController:(UIViewController *)_controller animationType:(MKViewAnimationType)type {
+    [_controller.view addSubview:self];
     
     CGFloat lheight = 460.0;
     CGFloat lwidth = 320.0; 
     
-    if (controller.interfaceOrientation == UIInterfaceOrientationPortrait || controller.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+    if (_controller.interfaceOrientation == UIInterfaceOrientationPortrait || _controller.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         lheight = 460.0;
         lwidth = 320.0;
     }
-    if (controller.interfaceOrientation == UIInterfaceOrientationLandscapeRight || controller.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+    if (_controller.interfaceOrientation == UIInterfaceOrientationLandscapeRight || _controller.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         lheight = 300.0;
         lwidth = 480.0;
     }
@@ -232,26 +280,6 @@
                              completion: ^ (BOOL finished) { [self removeFromSuperview]; }];
         }
     }
-}
-
-#pragma mark - Memory Management
-
-- (void)didRelease {
-    //For use by catagories
-}
-
-- (void)dealloc {
-    [self didRelease];
-    
-    mController = nil;
-    
-    if (mGradient) {
-        [mGradient release];
-    }
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MKViewShouldRemoveNotification object:nil];
-    
-	[super dealloc];
 }
 
 @end
@@ -322,7 +350,7 @@ UILabel *mTitleLabel;
 
 @end
 
-static const char *ImageTag = "imageTag";
+///// DEPRECATED CATAGORY ////// 
 
 @implementation MKView (IconMask) 
 
@@ -331,6 +359,7 @@ static const char *ImageTag = "imageTag";
 #pragma mark - Initalizer
 
 - (id)initWithImage:(UIImage *)image gradient:(MKGraphicsStructures *)aGradient {
+    /*
     self = [super initWithFrame:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
     if (self) {
         self.backgroundColor = CLEAR;
@@ -345,26 +374,26 @@ static const char *ImageTag = "imageTag";
         mShouldRemoveView = NO;
         MKViewFlags.isIconMask = YES;
     }
-    return self;
+    */
+    return nil;
 }
 
 #pragma mark - Accessor Methods
 #pragma mark setters
 - (void)setImage:(UIImage *)image {
+    /*
     objc_setAssociatedObject(self, ImageTag, image, OBJC_ASSOCIATION_RETAIN);
     [self setNeedsDisplay];
+    */
 }
 
 #pragma mark getters
 
 - (UIImage *)image {
+    /*
     return objc_getAssociatedObject(self, ImageTag);
-}
-
-#pragma mark - Memory Managment
-
-- (void)didRelease {
-    objc_removeAssociatedObjects(self);
+    */
+    return nil;
 }
 
 @end

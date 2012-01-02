@@ -58,7 +58,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 @protocol MKTableCellDelegate;
 @protocol MKInputValidation;
 
-@class MKBadgeCellView, MKView, MKSwipeCellView, MKTableCellAccentView;
+@class MKBadgeCellView, MKView, MKSwipeCellView, MKTableCellAccentView, MKImage;
 
 /**-------------------------------------------------------------------------------------
  *Overview*
@@ -93,6 +93,24 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
  @warning *Note* If the indexPath property is not set the delegate will pass 'nil' as the 
  indexPath parameter.
  
+ *Subclassing Notes*
+ 
+ MKTableCells use a special catigory of MKView to control the cells content. If you are subclassing
+ a table cell you can the method from this catigory to add content to cell. See MKTableCell methods
+ of MKView for information on how to use these methods.
+ 
+ *Using as Storyboard Prototypes*
+ 
+ MKTableCell can be used as Storyboard prototype cells. It is important to set the stroryboardPrototype
+ property to `YES` when you are using MKTableCell as a prototype. This is required for the cell to 
+ function properly. When using MKTableCell as a prototype cell, the preset cell types are not avalilble. 
+ Instead certain display elements have been made availble to Interface Builder. Simply create the prototype 
+ cell in the Storyboard editor and make the conections to the needed elements. Ensure that the you set class 
+ the MKTableCell in the inspector so the elements are visable make conections.
+ 
+ @warning *Note* The MKTableCell category of MKView is not used for prototype cells. The layout and 
+ resizing of the cells contect is up to you to handle.
+ 
  *Validating User Input*
  
  MKTableCell works with MKValidator to validate user input. To validate input of a form, set
@@ -113,6 +131,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
  * MKDeffinitions
  * MKElementAccentView
  * MKMacros
+ * MKImage
  * MKStrings
  * MKSwipeCellView
  * MKTableCellAccentView
@@ -152,7 +171,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 }
 
 ///---------------------------------------------------------------------------------------
-/// @name Initalizing
+/// @name Creating
 ///---------------------------------------------------------------------------------------
 
 /** 
@@ -190,7 +209,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
  Sets an image as the cells accessory. If you want to use on the prebuilt accessory types
  set the accessoryViewType property.
 */
-@property (nonatomic, retain) UIImage *accessoryIcon;
+@property (nonatomic, retain) MKImage *accessoryImage;
 
 ///---------------------------------------------------------------------------------------
 /// @name Referencing
@@ -214,29 +233,16 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 ///---------------------------------------------------------------------------------------
 
 //** A refercnce to the view that holds the cell elements */
-@property (nonatomic, retain) MKView *cellView;
+@property (nonatomic, retain) IBOutlet MKView *cellView;
 
 /** A reference to the primary label of all MKTableCell Subclass that have at least on label. */
-@property (nonatomic, retain) UILabel *theLabel;
+@property (nonatomic, retain) IBOutlet UILabel *theLabel;
 
 /** A reference to the secondary label of all MKTableCell Subclasses that have two labels. */
-@property (nonatomic, retain) UILabel *smallLabel;
+@property (nonatomic, retain) IBOutlet UILabel *smallLabel;
 
-/** The image displayed on cell that suport image views */
-@property (nonatomic, retain) UIImage *icon;
-
-/** 
- An imaged to be masked. The masking is completed by the MKView (IconView) catagory. The
- default gradient for the mask is a dark gray top moving to a lighter bottom.
- 
- The masks gradient can be set by accessing the icon of the cell.
- 
-    [(MKView *)cell.cellview viewForTag:kIconViewTag].gradient = someGradient;
- 
- @see MKView
- @see MKGraphicStructures
- */
-@property (nonatomic, retain) UIImage *iconMask;
+/** An image to use as the cells icon. */
+@property (nonatomic, retain) MKImage *image;
 
 /** 
  A bagde that is displayed on the left hand side of the cell. A badge can
@@ -285,7 +291,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
  view style pass `MKTableCellMiddle` for all cells.
  
  @param trim the width to trim the accent view down to.
- */
+*/
 - (void)accentPrimaryViewForCellAtPosition:(MKTableCellPosition)position trim:(CGFloat)trim;
 
 /** The width of the accent view. */
@@ -318,11 +324,6 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 ///--------------------------------------------------------------------------------------
 
 /** 
- @warning *This method has been deprecated. Use `validtedWithType:` instead.*
-*/
-- (void)validateWithType:(MKValidationType)aType MK_DEPRECATED_0_8;
-
-/** 
  Tells the validator to valiate the input using the specified type. If you set a `validationType`
  other than `MKValidationNone` you will not need to call this method directly. 
  
@@ -349,6 +350,17 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 @property (nonatomic, assign) BOOL recognizeLongPress;
 
 ///---------------------------------------------------------------------------------------
+/// @name Storyboard Prototype
+///---------------------------------------------------------------------------------------
+
+/** 
+ Set to `YES` if you are using MKTableCell as a prototype cell. If you are using the 
+ cell for a prototype and do not set this property to yes, some elements may not function
+ propery. Default is `NO`.
+*/
+@property (nonatomic, assign) BOOL stroryboardPrototype;
+
+///---------------------------------------------------------------------------------------
 /// @name Adopted Protocols
 ///---------------------------------------------------------------------------------------
 
@@ -356,7 +368,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
  
  @see MKTableCellDelegate
 */
-@property (assign) id<MKTableCellDelegate> delegate;
+@property (assign) IBOutlet id<MKTableCellDelegate> delegate;
 
 /** 
  The `MKInputValidation`. This is automatically assigned when a `validationType` is set. 
@@ -371,43 +383,29 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 */
 @property (assign) id<MKInputValidation> validator;
 
-@end
+///------------------------------------------------------------------------------------------
+/// @name Deprecations
+///------------------------------------------------------------------------------------------
 
-//MKTableCellAccessoryViewType mType MK_VISIBLE_ATTRIBUTE;
-
-/**--------------------------------------------------------------------------
- This catagory of MKControl provides the control for table cell accessories.
----------------------------------------------------------------------------*/
-@interface MKControl (MKTableCell)
-
-///------------------------------------------
-/// @name Creating
-///------------------------------------------
-
-/**
- Retuns an istance for the specified type.
- 
- @param type the type of accessory to create
- 
- @return MKControl instance
+/** 
+ @warning *Deprecated Method v0.8* Use validtedWithType: instead. 
 */
-- (id)initWithType:(MKTableCellAccessoryViewType)type;
+- (void)validateWithType:(MKValidationType)aType MK_DEPRECATED_0_8;
 
-/**
- Returns an instance that displays the specified image.
- 
- @param image the image to display as the cells accessory
- 
- @return MKControl instance
+/** 
+ @warning *Deprecated v0.9* Use image property instead. 
 */
-- (id)initWithImage:(UIImage *)image;
+@property (nonatomic, retain) UIImage *icon; //MK_DEPRECATED_0_9;
 
-///----------------------------------------
-/// @name Type
-///----------------------------------------
+/** 
+ @warning *Deprecated v0.9* Use image property instead. 
+*/
+@property (nonatomic, retain) UIImage *iconMask; //MK_DEPRECATED_0_9;
 
-/** Reference to the MKTableCellAccessoryViewType */
-@property (nonatomic, assign) id viewType;
+/** 
+ @warning *Deprecated v0.9* Use image property instead.
+*/
+@property (nonatomic, retain) UIImage *accessoryIcon;// MK_DEPRECATED_0_9;
 
 @end
 
@@ -416,7 +414,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 ---------------------------------------------------------------------------*/
 
 @interface MKView (MKTableCell)
-    
+
 ///-----------------------------------
 /// @name Creating
 ///-----------------------------------
@@ -427,7 +425,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
  @param cell the cell the view will be placed on.
  
  @return MKView instance
-*/
+ */
 - (id)initWithCell:(MKTableCell *)cell;
 
 ///-----------------------------------
@@ -436,19 +434,19 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 
 /**
  Adjusts the elements of the cell to fit.
-*/
+ */
 - (void)layoutCell;
 
 /**
  Yes if the primary element should not atomically adjust its size. 
  Default is `NO`.
-*/
+ */
 @property (nonatomic, assign) BOOL pinnedPrimaryElement;
 
 /** 
  Yes if the secondary element should not atomically adjust its size. 
  Default is `NO`.
-*/
+ */
 @property (nonatomic, assign) BOOL pinnedSecondaryElement;
 
 ///-----------------------------------
@@ -460,7 +458,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
  appears on the left side of the cell.
  
  @param element the view that will be added to the cell.
-*/
+ */
 - (void)addPrimaryElement:(UIView *)element;
 
 /**
@@ -471,7 +469,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
  @param element the view to add to the cell
  
  @param rect the rect of the view
-*/
+ */
 - (void)addPrimaryElement:(UIView *)element inRect:(CGRect)rect;
 
 /**
@@ -490,7 +488,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
  @param element the view to add to the cell.
  
  @param rect the rect of the view.
-*/ 
+ */ 
 - (void)addSecondaryElement:(UIView *)element inRect:(CGRect)rect;
 
 /**
@@ -507,51 +505,44 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
  the detail element is moved to right to fit the icon.
  
  @param element the view that will be added to the cell.
-*/
+ */
 - (void)addDetailElement:(UIView *)element;
 
 @end
 
-/**----------------------------------------------------------------------------
- This catagory of MKPopOutView provides methods for displaying a pop out view from
- a MKTableCell.
------------------------------------------------------------------------------*/
+/**--------------------------------------------------------------------------
+ This catagory of MKControl provides the control for table cell accessories.
+ ---------------------------------------------------------------------------*/
+@interface MKControl (MKTableCell)
 
-@interface MKPopOutView (MKTableCell)
-
-///------------------------------------------------------
-/// @name Identifing
-///------------------------------------------------------
-
-/** The index path of the cell showing the pop out view */
-@property (nonatomic, retain, readonly) NSIndexPath *aIndexPath;
-
-///-------------------------------------------------------
-/// @name Displaying
-///-------------------------------------------------------
+///------------------------------------------
+/// @name Creating
+///------------------------------------------
 
 /**
- Shows the view on the screen.
+ Retuns an istance for the specified type.
  
- @param cell the cell to display the view from
+ @param type the type of accessory to create
  
- @param tableView the table view to disaply on
+ @return MKControl instance
  */
-- (void)showFromCell:(MKTableCell *)cell onView:(UITableView *)tableView;
-
-///-------------------------------------------------------
-/// @name Elements
-///-------------------------------------------------------
+- (id)initWithType:(MKTableCellAccessoryViewType)type;
 
 /**
- Adds a MKButtonTypeDisloserButton on the right side of the popout view
+ Returns an instance that displays the specified image.
  
- @param taget the object that handles actions from the button
+ @param image the image to display as the cells accessory
  
- @param selector the selector to preform when the button is tapped. The 
- expected format of the selector is `-(void)mySelector:(NSIndexPath *)indexPath`.
+ @return MKControl instance
  */
-- (void)setDisclosureButtonWithTarget:(id)target selector:(SEL)selector;
+- (id)initWithImage:(UIImage *)image;
+
+///----------------------------------------
+/// @name Type
+///----------------------------------------
+
+/** Reference to the MKTableCellAccessoryViewType */
+@property (nonatomic, assign) id viewType;
 
 @end
 

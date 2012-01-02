@@ -11,7 +11,6 @@
 typedef enum {
     MKButtonTypeHelp,
     MKButtonTypeDisclosure,
-    MKButtonTypeDropDownIndicator,
     MKButtonTypeIAP,
     MKButtonTypePlastic,
     MKButtonTypeRoundedRect,
@@ -23,18 +22,53 @@ static const float kHelpButtonFontSize          = 18.0;
 static const float kIAPButtonFontSize           = 14.0;
 static const float kPlasticButtonFontSize       = 30.0;
 static const float kRoundRectButtonFontSize     = 14.0;
+static const float kButtonTextPadding           = 10.0;
 
 /**-----------------------------------------------------------------------------
+ *Overview*
+ 
  MKButton provides specalty buttons for various use. There are currently four
  types of buttons:
  
  * `MKButtonTypeHelp` : a small round button with a question mark
  * `MKButtonTypeDisclosure` : a blue and white button that resembles iOS discloser button
- * `MKButtonTypeDropDownIndicator : a small button with down arrow on it.
- * `MKButtonTypeIAP` : a InApp Purchase button, mimics the purchase buttons from the
+ * `MKButtonTypeIAP` : a InApp Purchase button, mimics the purchase buttons from the appstore.
  * `MKButtonTypePlastic` : a button with a rounded shine, giving it a plasic look. Default tint is black.
  * `MKButtonTypeRoundedRect` : a rounded rect button that can be assigned a color. Default tint is blue.
- appStore
+ 
+ *Graphic Display*
+ 
+ Some MKButton types support graphics from the MKGraphicStructures class. Diffent types look
+ for different parts of a graphic structure. If no graphics stucture is provide the buttons
+ will default to a standard graphics structure.
+ 
+ MKButtonTypePlastic looks for the following graphics properties:
+
+ * fill : `default is black`
+ * border : `default is black`
+ 
+ MKButtonTypeRoundedRect
+ 
+ * top : `default is blue with 0.5 alpha`
+ * bottom : `default is blue`
+ * touched : `default is blue`
+ * disabled : `default is blue with 0.25 alpha`
+ * border : `default is black`
+ * bordered : `default is YES`
+ * borderWidth : `default is 2.0`
+ 
+ MKButtonHelp, MKButtonDisclosure, and MKButtonIAP are drawn with a preset graphic structure, and do not
+ respond an assigned graphics structure.
+ 
+ *Required Frameworks*
+ 
+ * Foundation
+ * UIKit
+ * Quartz Core
+ 
+ *Required Classes*
+ 
+ * MKControl
 ------------------------------------------------------------------------------*/
 
 @interface MKButton : MKControl {
@@ -43,10 +77,11 @@ static const float kRoundRectButtonFontSize     = 14.0;
 
 @private
     UILabel *mButtonLabel;
+    
     struct {
-        bool isWorking;
-        bool isHighlighted;
-        CGColorRef tintColor;
+        //bool isWorking;
+        //bool isHighlighted;
+        //CGColorRef tintColor;
         CGFloat fontSize;
     } MKButtonFlags;
 }
@@ -61,6 +96,8 @@ static const float kRoundRectButtonFontSize     = 14.0;
  @param type the type of button to use
  
  @param title the text of the button
+ 
+ @return MKButton Instance
 */
 - (id)initWithType:(MKButtonType)type;
 
@@ -70,8 +107,15 @@ static const float kRoundRectButtonFontSize     = 14.0;
  @param type the type of button to use
  
  @param title the text of the button
+ 
+ @return MKButton Instance
 */
 - (id)initWithType:(MKButtonType)type title:(NSString *)title;
+
+/**
+ *METHOD DEPRECATED*
+*/
+- (id)initWithType:(MKButtonType)type title:(NSString *)title tint:(UIColor *)tint MK_DEPRECATED_0_9;
 
 /**
  Returns and instance of MKButton
@@ -80,9 +124,12 @@ static const float kRoundRectButtonFontSize     = 14.0;
  
  @param title the text of the button
  
- @param tint the tint color of the button
+ @param graphics the graphics structure to use when drawing this button or `nil` for the default
+ graphics set. 
+ 
+ @return MKButton Instance
 */
-- (id)initWithType:(MKButtonType)type title:(NSString *)title tint:(UIColor *)tint;
+- (id)initWithType:(MKButtonType)type title:(NSString *)title graphics:(MKGraphicsStructures *)graphics;
 
 
 ///---------------------------------------------------------
@@ -96,13 +143,16 @@ static const float kRoundRectButtonFontSize     = 14.0;
 /// @name Behaviors
 ///---------------------------------------------------------
 
-/** type the Button Type */
+/** Type the Button Type */
 @property (nonatomic, assign) MKButtonType type;
 
-/** the tint color of a MKButtonTypeRoundedRect */ 
-@property (nonatomic, retain) UIColor *tintColor;
+/** *DEPRECIATED* */ 
+@property (nonatomic, retain) UIColor *tintColor MK_DEPRECATED_0_9;
 
-/** the size of the font on the button */
+/** The size of the font on the button */
 @property (nonatomic, assign) CGFloat fontSize;
+
+/** The font color of the button text */
+@property (nonatomic, retain) UIColor *fontColor;
            
 @end

@@ -1,0 +1,591 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>MKHTMLExtractor Class Reference</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<meta name="generator" content="appledoc 2.0b3" />
+	</head>
+	<body>
+		<article>
+			<div class="main-navigation navigation-top">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="header">
+				<div class="section-header">
+					<h1 class="title title-header">MKHTMLExtractor Class Reference</h1>
+				</div>		
+			</div>
+			<div id="container">	
+				
+				<div class="section section-specification"><table cellspacing="0"><tbody>
+					<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MKHTMLExtractor.h</td>
+</tr>
+					</tbody></table></div>
+				
+				
+				
+				<div class="section section-overview">
+					<h2 class="subtitle subtitle-overview">Overview</h2>
+					
+<p> <strong> Overview </strong></p>
+
+<p> <a href="MKHTMLExtractor.html">MKHTMLExtractor</a> looks at given web pages and pulls out specific data. For example the article from a web page containing a news story. <a href="MKHTMLExtractor.html">MKHTMLExtractor</a> has preset types of extraction types that can be used. <ul><li> <code>MKHTMLExtactorMainBodyTextRequest</code>: Finds the main text of a web page and extacts it as a NSString that is in an HTML format. </li></ul></p>
+
+<p> <strong> Request Handlers </strong></p>
+
+<p> <a href="MKHTMLExtractor.html">MKHTMLExtractor</a> supports the use of code blocks to handle responces from an extraction request. Call the <a href="#//api/name/requestType:withHandler:">requestType:withHandler:</a> method to make use of the handler block. The handle block will pass an NSDictionay object with the extraction results. The <a href="#//api/name/results">results</a> can be accesed with the following keys: <ul><li> Each page that is found has the key for page number. For example page one&apos;s key is <code>1</code>. </li></ul></p>
+
+				</div>
+				
+				
+				
+				
+				<div class="section section-tasks">
+					<h2 class="subtitle subtitle-tasks">Tasks</h2>
+					
+					<h3 class="subsubtitle task-title">Creating Instance</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithURL:">- initWithURL:</a></code>
+		<span class="tooltip"> Creates an instance of <a href="MKHTMLExtractor.html">MKHTMLExtractor</a></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithHTMLString:">- initWithHTMLString:</a></code>
+		<span class="tooltip"> Creates an instance of <a href="MKHTMLExtractor.html">MKHTMLExtractor</a></span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Customize Output</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/optimizeOutputForiPhone"> optimizeOutputForiPhone</a></code>
+		<span class="tooltip"> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be added inserted into the output to assist with display. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/articleTitle"> articleTitle</a></code>
+		<span class="tooltip"> Set a NSString to this property for the title of an article. If the property is set the extractor will not look for the title of an article, but use the this property instead. <p class="warning"> <strong> Note </strong> Setting this property does nothing if the <a href="#//api/name/requestType">requestType</a> is not <code>MKHTMLExtractorMainBodyHTMLRequest</code>. </p></span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Preforming Requests</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestType:withHandler:">- requestType:withHandler:</a></code>
+		<span class="tooltip"> Makes a request from the supplied URL, preforms an extraction, and passes the <a href="#//api/name/results">results</a> through the handler block. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestType"> requestType</a></code>
+		<span class="tooltip"> The request that is currently being used. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Using Data</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/results"> results</a></code>
+		<span class="tooltip"> An NSDictionary containing the <a href="#//api/name/results">results</a> of an extraction. Keys for the dictionary are the corisponding page number. use the <a href="#//api/name/numberOfPages">numberOfPages</a> property to find how many pages were found. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/numberOfPages"> numberOfPages</a></code>
+		<span class="tooltip"> The number of pages found during an extraction. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Delegate</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/delegate"> delegate</a></code>
+		<span class="tooltip"> The <a href="../Protocols/MKHTMLExtractorDelegate.html">MKHTMLExtractorDelegate</a></span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Handeler Blocks</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestHandler"> requestHandler</a></code>
+		<span class="tooltip"> The request code block handler, called when a request is completed using the <a href="#//api/name/requestType:withHandler:">requestType:withHandler:</a> method. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/initWithHTMLString:" title="initWithHTMLString:"></a>
+	<h3 class="subsubtitle method-title">initWithHTMLString:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates an instance of <a href="MKHTMLExtractor.html">MKHTMLExtractor</a></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithHTMLString:(NSString *)<em>htmlString</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>htmlString</em></dt>
+			<dd> an NSString representation of an HTML file </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKHTMLExtractor.html">MKHTMLExtractor</a> instance </p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection arguments-section exceptions">
+		<h4 class="method-subtitle exception-title">Exceptions</h4>
+		
+		<dl class="argument-def exception-def">
+			<dt><em>MKHTMLExtractorNILHTMLException</em></dt>
+			<dd> : exception is raised if the the htmlString is nil </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/initWithURL:" title="initWithURL:"></a>
+	<h3 class="subsubtitle method-title">initWithURL:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates an instance of <a href="MKHTMLExtractor.html">MKHTMLExtractor</a></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithURL:(NSString *)<em>aURL</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>aURL</em></dt>
+			<dd> the address of the website that data will be extracted from. Cannot be nil. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKHTMLExtractor.html">MKHTMLExtractor</a> instance </p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection arguments-section exceptions">
+		<h4 class="method-subtitle exception-title">Exceptions</h4>
+		
+		<dl class="argument-def exception-def">
+			<dt><em>MKHTMLExtractorNILURLException</em></dt>
+			<dd> : exeption is raised if the aURL parameter is nil. Execption is catchable. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/requestType:withHandler:" title="requestType:withHandler:"></a>
+	<h3 class="subsubtitle method-title">requestType:withHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Makes a request from the supplied URL, preforms an extraction, and passes the <a href="#//api/name/results">results</a> through the handler block. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)requestType:(MKHTMLExtractorRequestType)<em>type</em> withHandler:(MKHTMLExtractorRequestHandler)<em>handler</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>type</em></dt>
+			<dd> The type of extraction to preform. Optional types are: <ul><li> MKHTMLExtractorMainBodyText : Extracts the main text of the web site. This most suttable for getting a news article out of a page. </li></ul></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>handler</em></dt>
+			<dd> The code block to preform when the request is complete. The block will pass to parameters (NSDictionary <strong> results, NSError </strong> error). The <a href="#//api/name/results">results</a> can accessed from the dictionary by using the following keys: <ul><li> MKHTMLExtractorMainBodyText : key to the main text of the web site -- NSString. </li></ul></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Properties</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/articleTitle" title="articleTitle"></a>
+	<h3 class="subsubtitle method-title">articleTitle</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Set a NSString to this property for the title of an article. If the property is set the extractor will not look for the title of an article, but use the this property instead. <p class="warning"> <strong> Note </strong> Setting this property does nothing if the <a href="#//api/name/requestType">requestType</a> is not <code>MKHTMLExtractorMainBodyHTMLRequest</code>. </p></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *articleTitle</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="subsubtitle method-title">delegate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The <a href="../Protocols/MKHTMLExtractorDelegate.html">MKHTMLExtractorDelegate</a></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (assign) id&lt;MKHTMLExtractorDelegate&gt; delegate</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/numberOfPages" title="numberOfPages"></a>
+	<h3 class="subsubtitle method-title">numberOfPages</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The number of pages found during an extraction. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSInteger numberOfPages</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/optimizeOutputForiPhone" title="optimizeOutputForiPhone"></a>
+	<h3 class="subsubtitle method-title">optimizeOutputForiPhone</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be added inserted into the output to assist with display. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL optimizeOutputForiPhone</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		
+		<p> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be added inserted into the output to assist with display. </p>
+		
+		<p> When set to <code>YES</code> the <a href="#//api/name/delegate">delegate</a> method extactorHTMLHeaderPath: method is called. If this method is not used or returns <code>nil</code>, generic HTML code will be added. </p>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><a href="../Protocols/MKHTMLExtractorDelegate.html">MKHTMLExtractorDelegate</a></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/requestHandler" title="requestHandler"></a>
+	<h3 class="subsubtitle method-title">requestHandler</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The request code block handler, called when a request is completed using the <a href="#//api/name/requestType:withHandler:">requestType:withHandler:</a> method. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) MKHTMLExtractorRequestHandler requestHandler</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/requestType" title="requestType"></a>
+	<h3 class="subsubtitle method-title">requestType</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The request that is currently being used. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) MKHTMLExtractorRequestType requestType</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/results" title="results"></a>
+	<h3 class="subsubtitle method-title">results</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> An NSDictionary containing the <a href="#//api/name/results">results</a> of an extraction. Keys for the dictionary are the corisponding page number. use the <a href="#//api/name/numberOfPages">numberOfPages</a> property to find how many pages were found. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSDictionary *results</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+			</div>
+			<div class="main-navigation navigation-bottom">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="footer">
+				<hr />
+				<div class="footer-copyright">
+					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-17)</span><br />
+					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>

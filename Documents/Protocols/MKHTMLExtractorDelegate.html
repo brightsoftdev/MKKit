@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>MKHTMLExtractorDelegate Protocol Reference</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<meta name="generator" content="appledoc 2.0b3" />
+	</head>
+	<body>
+		<article>
+			<div class="main-navigation navigation-top">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="header">
+				<div class="section-header">
+					<h1 class="title title-header">MKHTMLExtractorDelegate Protocol Reference</h1>
+				</div>		
+			</div>
+			<div id="container">	
+				
+				<div class="section section-specification"><table cellspacing="0"><tbody>
+					<tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MKHTMLExtractorDelegate.h</td>
+</tr>
+					</tbody></table></div>
+				
+				
+				
+				<div class="section section-overview">
+					<h2 class="subtitle subtitle-overview">Overview</h2>
+					
+<p> The <a href="MKHTMLExtractorDelegate.html">MKHTMLExtractorDelegate</a> send messages from the the <a href="../Classes/MKHTMLExtractor.html">MKHTMLExtractor</a> class. </p>
+
+				</div>
+				
+				
+				
+				
+				<div class="section section-tasks">
+					<h2 class="subtitle subtitle-tasks">Tasks</h2>
+					
+					
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/extractor:didFindPage:content:">- extractor:didFindPage:content:</a></code>
+		<span class="tooltip"> Called when a page of contents is found by an extractor. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/extractorHTMLHeaderPath:">- extractorHTMLHeaderPath:</a></code>
+		<span class="tooltip"> Called when the optimizedOutputForiPhone property is set to <code>YES</code>. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/extractor:didError:">- extractor:didError:</a></code>
+		<span class="tooltip"> Called if an extractor errors </span>
+	</span>
+	
+</li>
+					</ul>
+					
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/extractor:didError:" title="extractor:didError:"></a>
+	<h3 class="subsubtitle method-title">extractor:didError:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Called if an extractor errors </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)extractor:(MKHTMLExtractor *)<em>extractor</em> didError:(NSError *)<em>error</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>extractor</em></dt>
+			<dd> the extractor instance that encountered an error. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd> the error that was encountered. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractorDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/extractor:didFindPage:content:" title="extractor:didFindPage:content:"></a>
+	<h3 class="subsubtitle method-title">extractor:didFindPage:content:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Called when a page of contents is found by an extractor. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)extractor:(MKHTMLExtractor *)<em>extactor</em> didFindPage:(NSInteger)<em>page</em> content:(NSString *)<em>htmlString</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>page</em></dt>
+			<dd> the page number that was found </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>the</em></dt>
+			<dd> extacted contents of the page </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>extractor</em></dt>
+			<dd> the <a href="../Classes/MKHTMLExtractor.html">MKHTMLExtractor</a> instance that found a page. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractorDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/extractorHTMLHeaderPath:" title="extractorHTMLHeaderPath:"></a>
+	<h3 class="subsubtitle method-title">extractorHTMLHeaderPath:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Called when the optimizedOutputForiPhone property is set to <code>YES</code>. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSString *)extractorHTMLHeaderPath:(MKHTMLExtractor *)<em>extractor</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>extractor</em></dt>
+			<dd> the instance of <a href="../Classes/MKHTMLExtractor.html">MKHTMLExtractor</a> that called this method </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> NSString The path to an HTML file containg &lt;head&gt; tag information. </p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		
+		<p> Called when the optimizedOutputForiPhone property is set to <code>YES</code>. </p>
+		
+		<p> This method should return the path to an HTML file containing information of the &lt;head&gt; tag. This can be used to style the output from MKHTMLExtractor. If the optimizedOutputForiPhone property of <a href="../Classes/MKHTMLExtractor.html">MKHTMLExtractor</a> is set <code>YES</code>, HTML code is added to the output to support styling of the page. <ul><li> Titles will be wraped in <code>&lt;div class=&quot;title&quot;&gt;&lt;/div&gt;</code> tags. </li><li> Paragaraphs will be wraped in <code>&lt;div class=&quot;article&quot;&gt;&lt;/di&gt;</code> tags. </li></ul></p>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractorDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				
+			</div>
+			<div class="main-navigation navigation-bottom">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="footer">
+				<hr />
+				<div class="footer-copyright">
+					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-17)</span><br />
+					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>

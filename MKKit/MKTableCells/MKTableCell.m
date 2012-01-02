@@ -17,6 +17,7 @@
 - (void)accessoryButton:(id)sender;
 - (void)onSwipe:(UISwipeGestureRecognizer *)sender;
 - (void)onLongPress:(UILongPressGestureRecognizer *)sender;
+- (void)resetLongPressRecognizer;
 
 @end
 
@@ -40,17 +41,15 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     return iAccent;
 }
 
-#pragma mark -
-
 @implementation MKTableCell
 
 @synthesize delegate, type, theLabel=mTheLabel, smallLabel=mSmallLabel, key=mKey, accessoryViewType, 
             validationType=mValidationType, validating=mValidating, validator, icon,
             iconMask, validatorTestStringLength=mValidatorTestStringLength, accessoryIcon, 
             recognizeLeftToRightSwipe, recognizeRightToLeftSwipe, recognizeLongPress, indexPath,
-            primaryViewTrim, badge, accent, cellView=mCellView;
+            primaryViewTrim, badge, accent, cellView=mCellView, stroryboardPrototype, image, accessoryImage;
 
-#pragma mark - Initalizer
+#pragma mark - Creating
 
 - (id)initWithType:(MKTableCellType)cellType reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
@@ -102,6 +101,19 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     }
 	return self;
 }
+
+#pragma mark - Memory Management
+
+- (void)dealloc {
+    self.accessoryImage = nil;
+    self.indexPath = nil;
+    self.cellView = nil;
+    //self.theLabel = nil;
+    self.smallLabel = nil;
+    self.image = nil;
+    
+    [super dealloc];
+}
 	
 #pragma mark - Accessor Methods
 #pragma mark Accessories
@@ -142,8 +154,8 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     }
 }
 
-- (void)setAccessoryIcon:(UIImage *)lIcon {
-    MKControl *iconView = [[MKControl alloc] initWithImage:lIcon];
+- (void)setAccessoryImage:(MKImage *)img {
+    MKControl *iconView = [[MKControl alloc] initWithImage:(UIImage *)img];
     [iconView addTarget:self selector:@selector(accessoryButton:) action:MKActionTouchDown];
     self.accessoryView = iconView;
     [iconView release];
@@ -174,28 +186,14 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 
 #pragma mark Icons
 
-- (void)setIcon:(UIImage *)anImage {
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    imageView.image = anImage;
-    
-    [mCellView addIconElement:imageView];
-    [imageView release];
-}
-
-- (void)setIconMask:(UIImage *)lIconMask {
-    UIView *view = [mCellView viewWithTag:kIconViewTag];
-    
-    if (view) {
-        [view removeFromSuperview];
+- (void)setImage:(MKImage *)img {
+    if (!stroryboardPrototype) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        imageView.image = (UIImage *)img;
+        
+        [mCellView addIconElement:imageView];
+        [imageView release];
     }
-    
-    UIColor *topColor =  MK_COLOR_HSB(345.0, 0.0, 86.0, 1.0);
-    UIColor *bottomColor = MK_COLOR_HSB(345.0, 0.0, 56.0, 1.0);
-
-    MKView *iconView = [[MKView alloc] initWithImage:lIconMask 
-                                            gradient:[MKGraphicsStructures linearGradientWithTopColor:topColor bottomColor:bottomColor]];
-    [mCellView addIconElement:iconView];
-    [iconView release];
 }
 
 #pragma mark Accents
@@ -300,17 +298,9 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     }
 }
 
-#pragma mark - Cell behavior
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    if (selected) {
-        if ([delegate respondsToSelector:@selector(didSelectCell:forKey:indexPath:)]) {
-            [delegate didSelectCell:self forKey:self.key indexPath:self.indexPath];
-        }
-    }
-	
+- (void)storyboardPrototypeWithType:(MKTableCellType)celltype {
+    self.type = celltype;
+    self = [self initWithType:celltype reuseIdentifier:self.reuseIdentifier];
 }
 
 #pragma mark - Elements
@@ -366,10 +356,6 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 
 #pragma mark - Validation Methods
 
-- (void)validateWithType:(MKValidationType)aType {
-    //Deprecated Method//
-}
-
 - (BOOL)validatedWithType:(MKValidationType)aType {
 	return YES;
 }
@@ -402,20 +388,196 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 }
 
 - (void)onLongPress:(UILongPressGestureRecognizer *)sender {
+    self.recognizeLongPress = NO;
+    
     if ([delegate respondsToSelector:@selector(didLongPressForKey:indexPath:)]) {
         [delegate didLongPressForKey:self.key indexPath:self.indexPath];
     }
+    
+    [self performSelector:@selector(resetLongPressRecognizer) withObject:nil afterDelay:1.5];
 }
 
-#pragma mark - Memory Management
+- (void)resetLongPressRecognizer {
+    self.recognizeLongPress = YES;
+}
 
-- (void)dealloc {
-    [super dealloc];
+#pragma mark - Deprecated
+
+- (void)validateWithType:(MKValidationType)aType {
+    //Deprecated Method//
+}
+
+- (void)setIconMask:(UIImage *)lIconMask {
+    //Deprecated Method//
+}
+
+- (void)setIcon:(UIImage *)anImage {
+    //Deprecated Method//
+}
+
+- (void)setAccessoryIcon:(UIImage *)lIcon {
+    //Deprecated Method//
 }
 
 @end
 
 #pragma mark -
+
+@implementation MKView (MKTableCell)
+
+@dynamic pinnedSecondaryElement, pinnedPrimaryElement;
+
+static const char *PinnedPrimary = "PinnedPrimary";
+static const char *PinnedSecondary = "PinnedSecondary";
+
+#pragma mark - Initalizer
+
+- (id)initWithCell:(MKTableCell *)cell {
+    self = [super initWithFrame:cell.contentView.frame];
+    if (self) {
+        self.backgroundColor = CLEAR;
+        self.opaque = NO;
+        self.autoresizesSubviews = YES;
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
+        self.pinnedSecondaryElement = NO;
+        self.pinnedPrimaryElement = NO;
+        
+        mShouldRemoveView = NO;
+    }
+    return self;
+}
+
+#pragma mark - Layout
+
+- (void)layoutCell {
+    UIView *primaryElement = [self viewWithTag:kPrimaryViewTag];
+    UIView *secondaryElement = [self viewWithTag:kSecondaryViewTag];
+    UIView *iconElement = [self viewWithTag:kIconViewTag];
+    UIView *detailElement = [self viewWithTag:kDetailViewTag];
+    
+    if (primaryElement) {
+        if (!self.pinnedPrimaryElement) {
+            primaryElement.frame = CGRectMake(kCellPrimaryElementX, kCellPrimaryElementY, kCellPrimaryElementyWidth, kCellSecondaryElementHeight);
+        }
+    }
+    
+    if (secondaryElement) {
+        if (!self.pinnedSecondaryElement) {
+            secondaryElement.frame = CGRectMake(kCellSecondaryElementX, kCellSecondaryElementY, kCellSecondaryElementWidth, kCellSecondaryElementHeight);
+        }
+        
+        if (primaryElement && !self.pinnedPrimaryElement) {
+            primaryElement.frame = CGRectMake(primaryElement.frame.origin.x, primaryElement.frame.origin.y, (CGRectGetMinX(secondaryElement.frame) - CGRectGetMinX(primaryElement.frame) - 5.0), primaryElement.frame.size.height);
+        }
+    }
+    
+    if (detailElement) {
+        detailElement.frame = CGRectMake(kCellDetailElementX, kCellDetailElementY, kCellDetailElementWidth, kCellDetailElementHeight);
+        
+        if (primaryElement) {
+            primaryElement.frame = CGRectMake(primaryElement.frame.origin.x, (primaryElement.frame.origin.y - 5.0), primaryElement.frame.size.width, (primaryElement.frame.size.height - 5.0));
+        }
+        if (secondaryElement) {
+            secondaryElement.frame = CGRectMake(secondaryElement.frame.origin.x, (secondaryElement.frame.origin.y - 5.0), secondaryElement.frame.size.width, (secondaryElement.frame.size.height - 5.0));
+        }
+    }
+    
+    if (iconElement) {
+        iconElement.frame = CGRectMake(kCellIconRectX, kCellIconRectY, kCellIconRectWidth, kCellIconRectHeight);
+        
+        if (primaryElement && !self.pinnedPrimaryElement) {
+            primaryElement.frame = CGRectMake((primaryElement.frame.origin.x + 44.0), primaryElement.frame.origin.y, (primaryElement.frame.size.width - 44.0), primaryElement.frame.size.height);
+        }
+        if (detailElement) {
+            detailElement.frame = CGRectMake((detailElement.frame.origin.x + 44.0), detailElement.frame.origin.y, (detailElement.frame.size.width - 44.0), detailElement.frame.size.height);
+        }
+    }
+}
+
+#pragma mark - Accessory Methods
+#pragma mark Setters
+
+- (void)setPinnedSecondaryElement:(BOOL)pinned {
+    NSNumber *pinnedObj = [NSNumber numberWithBool:pinned];
+    objc_setAssociatedObject(self, PinnedSecondary, pinnedObj, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (void)setPinnedPrimaryElement:(BOOL)pinned {
+    NSNumber *pinnedObj = [NSNumber numberWithBool:pinned];
+    objc_setAssociatedObject(self, PinnedPrimary, pinnedObj, OBJC_ASSOCIATION_RETAIN);
+}
+
+#pragma mark Getters
+
+- (BOOL)pinnedSecondaryElement {
+    return [objc_getAssociatedObject(self, PinnedSecondary) boolValue];
+}
+
+- (BOOL)pinnedPrimaryElement {
+    return [objc_getAssociatedObject(self, PinnedPrimary) boolValue];
+}
+
+#pragma mark - Adding Elements
+
+- (void)addPrimaryElement:(UIView *)element {
+    element.tag = kPrimaryViewTag;
+    element.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+    
+    [self addSubview:element];
+    [self layoutCell];
+}
+
+- (void)addPrimaryElement:(UIView *)element inRect:(CGRect)rect {
+    self.pinnedPrimaryElement = YES;
+    
+    element.tag = kPrimaryViewTag;
+    element.autoresizingMask = UIViewAutoresizingNone;
+    
+    [self addSubview:element];
+    [self layoutCell];
+}
+
+- (void)addSecondaryElement:(UIView *)element {
+    element.tag = kSecondaryViewTag;
+    element.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
+    
+    [self addSubview:element];
+    [self layoutCell];
+}
+
+- (void)addSecondaryElement:(UIView *)element inRect:(CGRect)rect {
+    self.pinnedSecondaryElement = YES;
+    
+    element.tag = kSecondaryViewTag;
+    element.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
+    
+    [self addSubview:element];
+    [self layoutCell];
+}
+
+- (void)addIconElement:(UIView *)element {
+    element.tag = kIconViewTag;
+    element.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+    
+    [self addSubview:element];
+    [self layoutCell];
+}
+
+- (void)addDetailElement:(UIView *)element {
+    element.tag = kDetailViewTag;
+    element.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
+    
+    [self addSubview:element];
+    [self layoutCell];
+}
+
+- (void)didRelease {
+    objc_removeAssociatedObjects(self);
+}
+
+@end
+
+#pragma mark - 
 
 static const char *TypeTagKey = "TypeTag";
 
@@ -614,248 +776,3 @@ void drawSubtractIcon(CGContextRef context, CGRect rect) {
 }
 
 @end
-
-#pragma mark - 
-
-@implementation MKView (MKTableCell)
-
-@dynamic pinnedSecondaryElement, pinnedPrimaryElement;
-
-static const char *PinnedPrimary = "PinnedPrimary";
-static const char *PinnedSecondary = "PinnedSecondary";
-
-#pragma mark - Initalizer
-
-- (id)initWithCell:(MKTableCell *)cell {
-    self = [super initWithFrame:cell.contentView.frame];
-    if (self) {
-        self.backgroundColor = CLEAR;
-        self.opaque = NO;
-        self.autoresizesSubviews = YES;
-        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
-        self.pinnedSecondaryElement = NO;
-        self.pinnedPrimaryElement = NO;
-        
-        mShouldRemoveView = NO;
-    }
-    return self;
-}
-
-#pragma mark - Layout
-
-- (void)layoutCell {
-    UIView *primaryElement = [self viewWithTag:kPrimaryViewTag];
-    UIView *secondaryElement = [self viewWithTag:kSecondaryViewTag];
-    UIView *iconElement = [self viewWithTag:kIconViewTag];
-    UIView *detailElement = [self viewWithTag:kDetailViewTag];
-    
-    if (primaryElement) {
-        if (!self.pinnedPrimaryElement) {
-            primaryElement.frame = CGRectMake(kCellPrimaryElementX, kCellPrimaryElementY, kCellPrimaryElementyWidth, kCellSecondaryElementHeight);
-        }
-    }
-    
-    if (secondaryElement) {
-        if (!self.pinnedSecondaryElement) {
-            secondaryElement.frame = CGRectMake(kCellSecondaryElementX, kCellSecondaryElementY, kCellSecondaryElementWidth, kCellSecondaryElementHeight);
-        }
-        
-        if (primaryElement && !self.pinnedPrimaryElement) {
-            primaryElement.frame = CGRectMake(primaryElement.frame.origin.x, primaryElement.frame.origin.y, (CGRectGetMinX(secondaryElement.frame) - CGRectGetMinX(primaryElement.frame) - 5.0), primaryElement.frame.size.height);
-        }
-    }
-    
-    if (detailElement) {
-        detailElement.frame = CGRectMake(kCellDetailElementX, kCellDetailElementY, kCellDetailElementWidth, kCellDetailElementHeight);
-        
-        if (primaryElement) {
-            primaryElement.frame = CGRectMake(primaryElement.frame.origin.x, (primaryElement.frame.origin.y - 5.0), primaryElement.frame.size.width, (primaryElement.frame.size.height - 5.0));
-        }
-        if (secondaryElement) {
-            secondaryElement.frame = CGRectMake(secondaryElement.frame.origin.x, (secondaryElement.frame.origin.y - 5.0), secondaryElement.frame.size.width, (secondaryElement.frame.size.height - 5.0));
-        }
-    }
-
-    if (iconElement) {
-        iconElement.frame = CGRectMake(kCellIconRectX, kCellIconRectY, kCellIconRectWidth, kCellIconRectHeight);
-        
-        if (primaryElement && !self.pinnedPrimaryElement) {
-            primaryElement.frame = CGRectMake((primaryElement.frame.origin.x + 44.0), primaryElement.frame.origin.y, (primaryElement.frame.size.width - 44.0), primaryElement.frame.size.height);
-        }
-        if (detailElement) {
-            detailElement.frame = CGRectMake((detailElement.frame.origin.x + 44.0), detailElement.frame.origin.y, (detailElement.frame.size.width - 44.0), detailElement.frame.size.height);
-        }
-    }
-}
-
-#pragma mark - Accessory Methods
-#pragma mark Setters
-
-- (void)setPinnedSecondaryElement:(BOOL)pinned {
-    NSNumber *pinnedObj = [NSNumber numberWithBool:pinned];
-    objc_setAssociatedObject(self, PinnedSecondary, pinnedObj, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (void)setPinnedPrimaryElement:(BOOL)pinned {
-    NSNumber *pinnedObj = [NSNumber numberWithBool:pinned];
-    objc_setAssociatedObject(self, PinnedPrimary, pinnedObj, OBJC_ASSOCIATION_RETAIN);
-}
-
-#pragma mark Getters
-
-- (BOOL)pinnedSecondaryElement {
-    return [objc_getAssociatedObject(self, PinnedSecondary) boolValue];
-}
-
-- (BOOL)pinnedPrimaryElement {
-    return [objc_getAssociatedObject(self, PinnedPrimary) boolValue];
-}
-
-#pragma mark - Adding Elements
-
-- (void)addPrimaryElement:(UIView *)element {
-    element.tag = kPrimaryViewTag;
-    element.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
-    
-    [self addSubview:element];
-    [self layoutCell];
-}
-
-- (void)addPrimaryElement:(UIView *)element inRect:(CGRect)rect {
-    self.pinnedPrimaryElement = YES;
-    
-    element.tag = kPrimaryViewTag;
-    element.autoresizingMask = UIViewAutoresizingNone;
-    
-    [self addSubview:element];
-    [self layoutCell];
-}
-
-- (void)addSecondaryElement:(UIView *)element {
-    element.tag = kSecondaryViewTag;
-    element.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
-    
-    [self addSubview:element];
-    [self layoutCell];
-}
-
-- (void)addSecondaryElement:(UIView *)element inRect:(CGRect)rect {
-    self.pinnedSecondaryElement = YES;
-    
-    element.tag = kSecondaryViewTag;
-    element.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
-    
-    [self addSubview:element];
-    [self layoutCell];
-}
-
-- (void)addIconElement:(UIView *)element {
-    element.tag = kIconViewTag;
-    element.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
-    
-    [self addSubview:element];
-    [self layoutCell];
-}
-
-- (void)addDetailElement:(UIView *)element {
-    element.tag = kDetailViewTag;
-    element.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
-    
-    [self addSubview:element];
-    [self layoutCell];
-}
-
-- (void)didRelease {
-    objc_removeAssociatedObjects(self);
-}
-
-@end
-
-#pragma mark -
-
-@implementation MKPopOutView (MKTableCell)
-
-@dynamic aIndexPath;
-
-NSIndexPath *mIndexPath = nil;
-
-#pragma mark - Accessor Methods
-
-- (void)setAIndexPath:(NSIndexPath *)path {
-    mIndexPath = [path retain];
-}
-
-- (NSIndexPath *)aIndexPath {
-    return mIndexPath;
-}
-
-#pragma mark - Displaying
-
-- (void)showFromCell:(MKTableCell *)cell onView:(UITableView *)tableView {
-    CGRect cellRect = [tableView rectForRowAtIndexPath:cell.indexPath];
-    mAnimationType = MKViewAnimationTypeFadeIn;
-    self.aIndexPath = cell.indexPath;
-    
-    if (mType != MKPopOutAuto) {
-        mAutoType = mType;
-    }
-    else {
-        if (CGRectGetMaxY(cellRect) < (tableView.bounds.size.height - (mView.frame.size.height + 50.0))) {
-            mAutoType = MKPopOutBelow;
-        }
-        else {
-            mAutoType = MKPopOutAbove;
-        }
-    }
-    
-    if (mAutoType == MKPopOutBelow) {
-        self.frame = CGRectMake(cellRect.origin.x, (cellRect.origin.y + cellRect.size.height), self.width, self.height);
-        mView.frame = CGRectMake(10.0, 10.0, kPopOutViewWidth, mView.frame.size.height);
-    }
-    else if (mAutoType == MKPopOutAbove) {
-        self.frame = CGRectMake(cellRect.origin.x, (cellRect.origin.y - self.frame.size.height), self.width, self.height);
-        mView.frame = CGRectMake(0.0, 0.0, kPopOutViewWidth, mView.frame.size.height);
-        
-        [tableView scrollRectToVisible:self.frame animated:YES];
-    }
-    
-    [self setNeedsDisplay];
-    
-    [tableView addSubview:self];
-    [tableView scrollRectToVisible:self.frame animated:YES];
-    
-    [UIView animateWithDuration:0.25 
-                     animations: ^ { self.alpha = 1.0; } ];
-}
-
-#pragma mark - Elements
-
-- (void)setDisclosureButtonWithTarget:(id)target selector:(SEL)selector {
-    mView.frame = CGRectMake(mView.frame.origin.x, mView.frame.origin.y, (mView.frame.size.width - 33.0), mView.frame.size.height);
-    
-    MKButton *button = [[MKButton alloc] initWithType:MKButtonTypeDisclosure];
-    button.center = CGPointMake((CGRectGetMaxX(self.frame) - 25.0), CGRectGetMidY(mView.frame));
-    
-    [button completedAction: ^ (MKAction action) {
-        if (action == MKActionTouchUp) {
-            [target performSelector:selector withObject:self.aIndexPath];
-        }
-    }];
-    
-    [self addSubview:button];
-    [button release];
-}
-
-#pragma mark - Memory Management
-
-- (void)dealloc {
-    [mIndexPath release];
-    mIndexPath = nil;
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MKPopOutViewShouldRemoveNotification object:nil];
-    
-    [super dealloc];
-}
-
-@end
-

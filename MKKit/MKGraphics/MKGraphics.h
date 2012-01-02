@@ -13,15 +13,20 @@
 
 #import "MKGraphicsStructures.h"
 
-void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, CGColorRef endColor);
-void drawGlossAndLinearGradient(CGContextRef conext, CGRect rect, CGColorRef startColor, CGColorRef endColor);
+CGContextRef createBitmapContext(int pixelsWide, int pixelsHigh);
 
 CGRect rectFor1pxStroke(CGRect rect); 
 
 CGMutablePathRef createRoundedRectForRect(CGRect rect, CGFloat radius);
+CGMutablePathRef createRighSideRoundedRectForRect(CGRect rect, CGFloat radius);
+CGMutablePathRef createLeftSideRoundedRectForRect(CGRect rect, CGFloat radius);
+
 CGMutablePathRef createCircularPathForRect(CGRect rect);
+
 CGMutablePathRef createPathForUpPointer(CGRect rect);
 CGMutablePathRef createPathForDownPointer(CGRect rect);
+CGMutablePathRef createPathForLeftArrow(CGRect rect);
+CGMutablePathRef createPathForRightArrow(CGRect rect);
 
 void drawText(CGContextRef context, CGRect rect, CFStringRef text, CGColorRef color, CGColorRef shadowColor, CGFloat size);
 
@@ -29,3 +34,8 @@ void drawOutlinePath(CGContextRef context, CGPathRef path, CGFloat width, CGColo
 
 void drawCurvedGloss(CGContextRef context, CGRect rect, CGFloat radius);
 void drawLinearGloss(CGContextRef context, CGRect rect);
+
+void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, CGColorRef endColor);
+void drawGlossAndLinearGradient(CGContextRef conext, CGRect rect, CGColorRef startColor, CGColorRef endColor);
+
+void drawWithGraphicsStructure(CGContextRef context, CGRect rect, MKGraphicsStructures *graphics);

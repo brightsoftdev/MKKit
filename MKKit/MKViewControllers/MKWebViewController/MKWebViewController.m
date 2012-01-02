@@ -67,8 +67,6 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    
-    NSLog(@"Unload");
 }
 
 #pragma mark - actions
@@ -140,17 +138,19 @@
         [self addSubview:topBar];
         [topBar release];
         
-        MKBarButtonItem *backItem = [[MKBarButtonItem alloc] initWithType:MKBarButtonItemBackArrow];
+        backItem = [[MKBarButtonItem alloc] initWithType:MKBarButtonItemBackArrow graphics:nil];
+        backItem.controlState = MKControlStateDisabled;
         [backItem completedAction: ^ (MKAction action) {
             if (action == MKActionTouchUp) {
-                [mWebView goBack];
+                [self back:backItem];
             }
         }];
         
-        MKBarButtonItem *forwardItem = [[MKBarButtonItem alloc] initWithType:MKBarButtonItemForwardArrow];
+        forwardItem = [[MKBarButtonItem alloc] initWithType:MKBarButtonItemForwardArrow graphics:nil];
+        forwardItem.controlState = MKControlStateDisabled;
         [forwardItem completedAction: ^ (MKAction action) {
             if (action == MKActionTouchUp) {
-                [mWebView goForward];
+                [self forward:forwardItem];
             }
         }];
         
@@ -194,10 +194,36 @@
 
 - (void)back:(id)sender {
     [mWebView goBack];
+    
+    MKWebViewFlags.pageCount = (MKWebViewFlags.pageCount - 1);
+    MKWebViewFlags.backPageCount = (MKWebViewFlags.backPageCount + 1);
+    
+    if (MKWebViewFlags.pageCount == 0) {
+        backItem.controlState = MKControlStateDisabled;
+    }
+    if (MKWebViewFlags.backPageCount > 0) {
+        forwardItem.controlState = MKControlStateNormal;
+    }
 }
 
 - (void)forward:(id)sender {
     [mWebView goForward];
+    
+    MKWebViewFlags.pageCount = (MKWebViewFlags.pageCount + 1);
+    MKWebViewFlags.backPageCount = (MKWebViewFlags.backPageCount - 1);
+    
+    if (MKWebViewFlags.pageCount == 0) {
+        backItem.controlState = MKControlStateDisabled;
+    }
+    if (MKWebViewFlags.pageCount > 0) {
+        backItem.controlState = MKControlStateNormal;
+    }
+    if (MKWebViewFlags.backPageCount > 0) {
+        forwardItem.controlState = MKControlStateNormal;
+    }
+    if (MKWebViewFlags.backPageCount == 0) {
+        forwardItem.controlState = MKControlStateDisabled;
+    }
 }
 
 - (void)reload:(id)sender {
@@ -214,10 +240,16 @@
     [mLoadingBar.activityView stopAnimating];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    if (navigationType == UIWebViewNavigationTypeLinkClicked || navigationType == UIWebViewNavigationTypeFormSubmitted) {
+        MKWebViewFlags.pageCount = (MKWebViewFlags.pageCount + 1);
+    }
+    
+    if (MKWebViewFlags.pageCount > 0) {
+        backItem.controlState = MKControlStateNormal;
+    }
+    
+    return YES;
 }
 
 #pragma mark - Memory Managment

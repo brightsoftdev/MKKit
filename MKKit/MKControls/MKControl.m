@@ -7,10 +7,118 @@
 //
 
 #import "MKControl.h"
+#import "MKControl+Internal.h"
+
+#pragma mark - Drawing Helpers
+
+CGColorRef topColorForControlState(MKControlState state, MKGraphicsStructures *graphics) {
+    CGColorRef color = nil;
+    
+    if (state == MKControlStateDisabled) {
+        color = graphics.disabledColor.CGColor;
+    }
+    else if (state == MKControlStateHighlighted) {
+        color = graphics.touchedColor.CGColor;
+    }
+    else if (state == MKControlStateNormal) {
+        if (graphics.fillColor) {
+            color = graphics.fillColor.CGColor;
+        }
+        else {
+            color = graphics.topColor.CGColor;
+        }
+    }
+    
+    return color;
+}
+
+CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures *graphics) {
+    CGColorRef color = nil;
+    
+    if (state == MKControlStateDisabled) {
+        color = graphics.disabledColor.CGColor;
+    }
+    else if (state == MKControlStateHighlighted) {
+        color = graphics.touchedColor.CGColor;
+    }
+    else if (state == MKControlStateNormal) {
+        if (graphics.fillColor) {
+            color = graphics.fillColor.CGColor;
+        }
+        else {
+            color = graphics.bottomColor.CGColor;
+        }
+    }
+    
+    return color;
+}
 
 @implementation MKControl
 
 @synthesize delegate=mDelegate, working=mWorking, action;
+
+@dynamic location, controlState, graphicsStructure;
+
+#pragma mark - Creation 
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        MKControlFlags.isEnabled = YES;
+    }
+    return self;
+}
+
+- (id)initWithGraphics:(MKGraphicsStructures *)_graphicsStructure {
+    self = [super init];
+    if (self) {
+        if (_graphicsStructure) {
+            self.graphicsStructure = [_graphicsStructure retain];
+        }
+    }
+    return self;
+}
+
+#pragma mark - Accessor Methods
+#pragma makr Setters
+
+- (void)setLocation:(CGPoint)location {
+    self.frame = CGRectMake(location.x, location.y, self.frame.size.width, self.frame.size.height);
+}
+
+- (void)setControlState:(MKControlState)_controlState {
+    mControlState = _controlState;
+    [self setNeedsDisplay];
+}
+
+- (void)setEnabled:(BOOL)enabled {
+    MKControlFlags.isEnabled = enabled;
+    [self setNeedsDisplay];
+}
+
+- (void)setHighlighted:(BOOL)_highlighted {
+    MKControlFlags.isHighlighted = _highlighted;
+    [self setNeedsDisplay];
+}
+
+- (void)setGraphicsStructure:(MKGraphicsStructures *)_graphicsStructure {
+    mGraphics = [_graphicsStructure retain];
+    [self setNeedsDisplay];
+}
+
+#pragma mark Getters
+
+- (CGPoint)location {
+    return CGPointMake(self.frame.origin.x, self.frame.origin.y);
+}
+
+- (MKControlState)controlState {
+    return mControlState;
+}
+
+- (MKGraphicsStructures *)graphicsStructure {
+    return mGraphics;
+}
 
 #pragma mark - Action Responders
 
@@ -58,11 +166,17 @@
 #pragma mark - Touches
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self processAction:MKActionTouchDown];
+    if (self.controlState != MKControlStateDisabled || self.controlState != MKControlStateWorking) {
+        self.controlState = MKControlStateHighlighted;
+        [self processAction:MKActionTouchDown];
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self processAction:MKActionTouchUp];
+    if (self.controlState != MKControlStateDisabled) {
+        self.controlState = MKControlStateNormal;
+        [self processAction:MKActionTouchUp];
+    }
 }
 
 #pragma mark - Memory Management
@@ -74,10 +188,9 @@
 - (void)dealloc { 
     [self didRelease];
     
-    if (MKControlFlags.blockUsage) {
-        [action release];
-    }
-    
+    self.action = nil;
+    self.graphicsStructure = nil;
+        
     if (MKControlFlags.targetUsage) {
         [mTargets release];
     }
