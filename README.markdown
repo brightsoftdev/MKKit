@@ -6,7 +6,7 @@ several specialty view controllers, views, controls, table cells, and specialty 
 The goal of MKKit is to provide a framework that makes creating apps a faster process. MKKit focuses on custom contols, custom views 
 and commom controllers. 
 
-For updates about MKKit follow on Twitter <https://twitter.com/#!/MKKit1>, or to get added to the mailing list send a messgae to 
+For updates about MKKit follow on Twitter @MKKit1 <https://twitter.com/#!/MKKit1>, or to get added to the mailing list send a messgae to 
 matt62king@gmail.com
 
 ### v0.9 Notes ###
