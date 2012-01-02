@@ -14,6 +14,10 @@ typedef enum {
     MKPopOutBelow,
 } MKPopOutViewType;
 
+CGRect rectForType(MKPopOutViewType type, CGRect rect); 
+void drawPointerForType(CGContextRef context, MKPopOutViewType type, CGColorRef fill, CGFloat position, CGRect drawRect);
+void drawBackgroundForRect(CGContextRef context, CGRect drawRect, CGRect innerRect, MKGraphicsStructures *graphics);
+
 /**----------------------------------------------------------------------------------
  *Overview*
  

@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>MKSegmentedPopOutView Class Reference</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<meta name="generator" content="appledoc 2.0b3" />
+	</head>
+	<body>
+		<article>
+			<div class="main-navigation navigation-top">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="header">
+				<div class="section-header">
+					<h1 class="title title-header">MKSegmentedPopOutView Class Reference</h1>
+				</div>		
+			</div>
+			<div id="container">	
+				
+				<div class="section section-specification"><table cellspacing="0"><tbody>
+					<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value"><a href="MKPopOutView.html">MKPopOutView</a> : <a href="MKView.html">MKView</a> : UIView</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MKSegmentedPopOutView.h</td>
+</tr>
+					</tbody></table></div>
+				
+				
+				
+				<div class="section section-overview">
+					<h2 class="subtitle subtitle-overview">Overview</h2>
+					
+<p> <strong> Overview </strong></p>
+
+<p> MKSegementedPouOutView is a special subclass of MKPopOutView. Instance create a popout bubble that mimics Apples UIMenuView except for you can control the colors and button titles. </p>
+
+<p> <strong> Usage </strong></p>
+
+<p> When creating an instance of MKSegementedPopOutView you need to provide a Array of button titles, and an instance of <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> to provide the colors. The MKSegementedPopOutView will automatically adjust its segements to fit the number of titles provided. <p class="warning"> <strong> Note </strong> There is no limit on the number of titles instances will accept. You should limit it to two or three titles to make sure there is room for all the titles to be displayed. </p></p>
+
+<p> <strong> Observing Touches </strong></p>
+
+<p> Use the addTarget:selector instance method to add listeners to MKSegementedPopOutView instances. When a touch occours on one of the buttons the selector passed for each target is called. Instance will also send its instance as an obeject of the selector. The selector should use the format: <ul><li> (void)mySelector:(id)sender </li></ul></p>
+
+<p> <strong> Graphics </strong></p>
+
+<p> Instance support the use of MKGraphicsStructures. The following graphic properties are looked for: <ul><li> fillColor : <code>defalut black</code></li><li> touchedColor : <code>default blue</code></li><li> useLinerShine : <code>default YES</code></li></ul></p>
+
+<p> <strong> Listeners </strong></p>
+
+<p> Instance listen for the <code>MKPopOverViewShouldRemoveNotification</code> to remove itself from the superview. </p>
+
+				</div>
+				
+				
+				
+				
+				<div class="section section-tasks">
+					<h2 class="subtitle subtitle-tasks">Tasks</h2>
+					
+					<h3 class="subsubtitle task-title">Creating</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithItems:type:graphics:">- initWithItems:type:graphics:</a></code>
+		<span class="tooltip"> Creates an instance of MKSegmentedPopOverView </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Observing Actions</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addTarget:selector:">- addTarget:selector:</a></code>
+		<span class="tooltip"> Addeds an class instance to as a target to send messages to when a segment is touched. Selectors should be in the format <ul><li> (void)mySelector:(id)sender </li></ul></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/selectedIndex"> selectedIndex</a></code>
+		<span class="tooltip"> The index of the segment that was selected. Defaut is <code>-1</code>, no selection </span>
+	</span>
+	
+</li>
+					</ul>
+					
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/addTarget:selector:" title="addTarget:selector:"></a>
+	<h3 class="subsubtitle method-title">addTarget:selector:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Addeds an class instance to as a target to send messages to when a segment is touched. Selectors should be in the format <ul><li> (void)mySelector:(id)sender </li></ul></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)addTarget:(id)<em>target</em> selector:(SEL)<em>selector</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>target</em></dt>
+			<dd> the class that will receive messages </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>selector</em></dt>
+			<dd> the selector to call when a segment is touched. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKSegmentedPopOutView.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/initWithItems:type:graphics:" title="initWithItems:type:graphics:"></a>
+	<h3 class="subsubtitle method-title">initWithItems:type:graphics:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates an instance of MKSegmentedPopOverView </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithItems:(NSArray *)<em>items</em> type:(MKPopOutViewType)<em>type</em> graphics:(MKGraphicsStructures *)<em>graphics</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>items</em></dt>
+			<dd> an array of NSString that will be used for segment titles </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>graphics</em></dt>
+			<dd> an instance of <a href="MKGraphicsStructures.html">MKGraphicsStructures</a> that should be used when drawing the view. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> MKSegmentedPopOverView instance. </p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKSegmentedPopOutView.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Properties</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/selectedIndex" title="selectedIndex"></a>
+	<h3 class="subsubtitle method-title">selectedIndex</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The index of the segment that was selected. Defaut is <code>-1</code>, no selection </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSInteger selectedIndex</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKSegmentedPopOutView.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+			</div>
+			<div class="main-navigation navigation-bottom">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="footer">
+				<hr />
+				<div class="footer-copyright">
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-01-02)</span><br />
+					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>

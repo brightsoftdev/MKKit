@@ -68,12 +68,29 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetAllowsAntialiasing(context, YES);
     
-    CGRect drawRect = CGRectZero;
     CGColorRef fillColor = self.graphicsStructure.fillColor.CGColor;
     
-    switch (mAutoType) {
+    CGRect drawRect = rectForType(mAutoType, rect);
+    CGRect innerRect = CGRectInset(drawRect, 1.0, 1.0);
+    
+    mView.frame = CGRectInset(innerRect, 3.0, 3.0);
+    
+    CGContextSetShadow(context, CGSizeMake(0.0, 3.0), 3.0);
+    
+    CGContextBeginTransparencyLayer(context, NULL);
+    drawPointerForType(context, mAutoType, fillColor, self.arrowPosition, drawRect);
+    drawBackgroundForRect(context, drawRect, innerRect, self.graphicsStructure);
+    CGContextEndTransparencyLayer(context);
+}
+
+#pragma mark Helpers
+
+CGRect rectForType(MKPopOutViewType type, CGRect rect) {
+    CGRect drawRect = CGRectZero;
+    
+    switch (type) {
         case MKPopOutBelow:
-            drawRect = CGRectInset(rect, 5.0, 20.0);
+            drawRect = CGRectMake(5.0, 20.0, (rect.size.width - 5.0), (rect.size.height - 30.0));
             break;
         case MKPopOutAbove:
             drawRect = CGRectMake(5.0, 5.0, (rect.size.width - 5.0), (rect.size.height - 30.0));
@@ -81,34 +98,15 @@
             break;
     }
     
-    CGRect innerRect = CGRectInset(drawRect, 1.0, 1.0);
-    
-    CGMutablePathRef path = createRoundedRectForRect(drawRect, 20.0);
-    CGMutablePathRef innerPath = createRoundedRectForRect(innerRect, 20.0);
-    
-    CGContextSaveGState(context);
-    CGContextSetShadowWithColor(context, CGSizeMake(0.0, 3.0), 3.0, MK_SHADOW_COLOR);
-    CGContextSetFillColorWithColor(context, fillColor);
-    CGContextAddPath(context, path);
-    CGContextFillPath(context);
-    CGContextSaveGState(context);
-    
-    CGContextSaveGState(context);
-    CGContextAddPath(context, innerPath);
-    CGContextClip(context);
-    if (self.graphicsStructure.useLinerShine) {
-        drawGlossAndLinearGradient(context, innerRect, fillColor, fillColor);
-    }
-    else {
-        drawLinearGradient(context, innerRect, fillColor, fillColor);
-    }
-    CGContextRestoreGState(context);
-    
-    if (mAutoType == MKPopOutBelow) {
+    return drawRect;
+}
+
+void drawPointerForType(CGContextRef context, MKPopOutViewType type, CGColorRef fill, CGFloat position, CGRect drawRect) {
+    if (type == MKPopOutBelow) {
         CGRect pointerRect = CGRectZero;
         
-        if (mArrowPosition != 0.0) {
-            pointerRect = CGRectMake((self.arrowPosition - 30.0), (CGRectGetMinY(drawRect) - 20.0), 35.0, 20.0);
+        if (position != 0.0) {
+            pointerRect = CGRectMake((position - 30.0), (CGRectGetMinY(drawRect) - 20.0), 35.0, 20.0);
         }
         else {
             pointerRect = CGRectMake((CGRectGetMaxX(drawRect) - 70.0), (CGRectGetMinY(drawRect) - 20.0), 35.0, 20.0);
@@ -116,26 +114,52 @@
         
         CGMutablePathRef pointerPath = createPathForUpPointer(pointerRect);
         
-        CGContextSaveGState(context);
-        CGContextSetFillColorWithColor(context, fillColor);
+        CGContextSetFillColorWithColor(context, fill);
         CGContextAddPath(context, pointerPath);
         CGContextFillPath(context);
-        CGContextSaveGState(context);
         
         CFRelease(pointerPath);
     }
-    else if (mAutoType == MKPopOutAbove) {
-        CGRect pointerRect = CGRectMake((CGRectGetMaxX(drawRect) - 70.0), CGRectGetMaxY(drawRect), 35.0, 20.0);
+    else if (type == MKPopOutAbove) {
+        CGRect pointerRect = CGRectZero;
+        
+        if (position != 0.0) {
+            pointerRect = CGRectMake((position - 30.0), CGRectGetMaxY(drawRect), 35.0, 20.0);
+        }
+        else {
+            pointerRect = CGRectMake((CGRectGetMaxX(drawRect) - 70.0), CGRectGetMaxY(drawRect), 35.0, 20.0);
+        }
+        
         CGMutablePathRef pointerPath = createPathForDownPointer(pointerRect);
         
-        CGContextSaveGState(context);
-        CGContextSetFillColorWithColor(context, fillColor);
+        CGContextSetFillColorWithColor(context, fill);
         CGContextAddPath(context, pointerPath);
         CGContextFillPath(context);
-        CGContextSaveGState(context);
         
         CFRelease(pointerPath);
     }
+}
+
+void drawBackgroundForRect(CGContextRef context, CGRect drawRect, CGRect innerRect, MKGraphicsStructures *graphics) {
+    CGColorRef fillColor = graphics.fillColor.CGColor;
+    
+    CGMutablePathRef path = createRoundedRectForRect(drawRect, 10.0);
+    CGMutablePathRef innerPath = createRoundedRectForRect(innerRect, 10.0);
+    
+    CGContextSetFillColorWithColor(context, fillColor);
+    CGContextAddPath(context, path);
+    CGContextFillPath(context);
+    
+    CGContextSaveGState(context);
+    CGContextAddPath(context, innerPath);
+    CGContextClip(context);
+    if (graphics.useLinerShine) {
+        drawGlossAndLinearGradient(context, innerRect, fillColor, fillColor);
+    }
+    else {
+        drawLinearGradient(context, innerRect, fillColor, fillColor);
+    }
+    CGContextRestoreGState(context);
     
     CFRelease(path);
     CFRelease(innerPath);

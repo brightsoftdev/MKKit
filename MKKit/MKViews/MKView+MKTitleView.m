@@ -45,13 +45,6 @@ static const char *TitleLabelKey = "TitleLabelKey";
     return self;
 }
 
-#pragma mark - Memory
-
-- (void)didRelease {
-    self.titleLabel = nil;
-    objc_removeAssociatedObjects(self);
-}
-
 #pragma mark - Helpers
 
 - (void)titleViewLabelWithText:(NSString *)text {

@@ -9,6 +9,7 @@
 #import "MKView+Internal.h"
 
 #import "MKPopOutView.h"
+#import "MKLoadingView.h"
 
 @implementation MKView (Internal)
 
@@ -22,6 +23,9 @@
     if ([self isMemberOfClass:[MKPopOutView class]]) {
         graphics.fillColor = BLACK;
         graphics.useLinerShine = YES;
+    }
+    if ([self isMemberOfClass:[MKLoadingView class]]) {
+        graphics.fillColor = BLACK;
     }
     
     return graphics;

@@ -9,6 +9,8 @@
 #import "MKView.h"
 #import "MKPopOverView.h"
 
+#import "MKView+Internal.h"
+
 @interface MKView ()
 
 - (void)setUpView;
@@ -17,7 +19,7 @@
 
 @implementation MKView
 
-@synthesize x, y, width, height, gradient, controller=mController, delegate=mDelegate;
+@synthesize x, y, width, height, gradient, controller, delegate=mDelegate;
 
 @dynamic graphicsStructure;
 
@@ -38,7 +40,12 @@
     if (self) {
         [self setUpView];
         
-        self.graphicsStructure = [_graphicsStructure retain];
+        if (_graphicsStructure) {
+            self.graphicsStructure = [_graphicsStructure retain];
+        }
+        else {
+            self.graphicsStructure = [self defaultGraphics];
+        }
     }
     return self;
 }
@@ -57,17 +64,11 @@
 
 #pragma mark - Memory Management
 
-- (void)didRelease {
-    //For use by catagories
-}
-
 - (void)dealloc {
-    [self didRelease];
-    
-    mController = nil;
-    
     self.controller = nil;
     self.graphicsStructure = nil;
+    
+    objc_removeAssociatedObjects(self);
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MKViewShouldRemoveNotification object:nil];
     
@@ -203,17 +204,17 @@
 }
 
 
-- (void)showOnViewController:(UIViewController *)controller animationType:(MKViewAnimationType)type {
-    [controller.view addSubview:self];
+- (void)showOnViewController:(UIViewController *)_controller animationType:(MKViewAnimationType)type {
+    [_controller.view addSubview:self];
     
     CGFloat lheight = 460.0;
     CGFloat lwidth = 320.0; 
     
-    if (controller.interfaceOrientation == UIInterfaceOrientationPortrait || controller.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+    if (_controller.interfaceOrientation == UIInterfaceOrientationPortrait || _controller.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
         lheight = 460.0;
         lwidth = 320.0;
     }
-    if (controller.interfaceOrientation == UIInterfaceOrientationLandscapeRight || controller.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+    if (_controller.interfaceOrientation == UIInterfaceOrientationLandscapeRight || _controller.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
         lheight = 300.0;
         lwidth = 480.0;
     }

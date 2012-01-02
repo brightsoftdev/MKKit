@@ -546,49 +546,6 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 
 @end
 
-/**----------------------------------------------------------------------------
- This catagory of MKPopOutView provides methods for displaying a pop out view from
- a MKTableCell.
- -----------------------------------------------------------------------------*/
-
-@interface MKPopOutView (MKTableCell)
-
-///------------------------------------------------------
-/// @name Identifing
-///------------------------------------------------------
-
-/** The index path of the cell showing the pop out view */
-@property (nonatomic, retain, readonly) NSIndexPath *aIndexPath;
-
-///-------------------------------------------------------
-/// @name Displaying
-///-------------------------------------------------------
-
-/**
- Shows the view on the screen.
- 
- @param cell the cell to display the view from
- 
- @param tableView the table view to disaply on
- */
-- (void)showFromCell:(MKTableCell *)cell onView:(UITableView *)tableView;
-
-///-------------------------------------------------------
-/// @name Elements
-///-------------------------------------------------------
-
-/**
- Adds a MKButtonTypeDisloserButton on the right side of the popout view
- 
- @param taget the object that handles actions from the button
- 
- @param selector the selector to preform when the button is tapped. The 
- expected format of the selector is `-(void)mySelector:(NSIndexPath *)indexPath`.
- */
-- (void)setDisclosureButtonWithTarget:(id)target selector:(SEL)selector;
-
-@end
-
 static const int kPrimaryViewTag                    = 1;
 static const int kSecondaryViewTag                  = 2;
 static const int kIconViewTag                       = 3;

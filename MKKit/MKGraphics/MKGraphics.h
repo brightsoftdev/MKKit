@@ -18,7 +18,11 @@ CGContextRef createBitmapContext(int pixelsWide, int pixelsHigh);
 CGRect rectFor1pxStroke(CGRect rect); 
 
 CGMutablePathRef createRoundedRectForRect(CGRect rect, CGFloat radius);
+CGMutablePathRef createRighSideRoundedRectForRect(CGRect rect, CGFloat radius);
+CGMutablePathRef createLeftSideRoundedRectForRect(CGRect rect, CGFloat radius);
+
 CGMutablePathRef createCircularPathForRect(CGRect rect);
+
 CGMutablePathRef createPathForUpPointer(CGRect rect);
 CGMutablePathRef createPathForDownPointer(CGRect rect);
 CGMutablePathRef createPathForLeftArrow(CGRect rect);

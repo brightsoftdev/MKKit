@@ -17,6 +17,7 @@
 - (void)accessoryButton:(id)sender;
 - (void)onSwipe:(UISwipeGestureRecognizer *)sender;
 - (void)onLongPress:(UILongPressGestureRecognizer *)sender;
+- (void)resetLongPressRecognizer;
 
 @end
 
@@ -387,9 +388,17 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 }
 
 - (void)onLongPress:(UILongPressGestureRecognizer *)sender {
+    self.recognizeLongPress = NO;
+    
     if ([delegate respondsToSelector:@selector(didLongPressForKey:indexPath:)]) {
         [delegate didLongPressForKey:self.key indexPath:self.indexPath];
     }
+    
+    [self performSelector:@selector(resetLongPressRecognizer) withObject:nil afterDelay:1.5];
+}
+
+- (void)resetLongPressRecognizer {
+    self.recognizeLongPress = YES;
 }
 
 #pragma mark - Deprecated
@@ -764,94 +773,6 @@ void drawSubtractIcon(CGContextRef context, CGRect rect) {
     if (self.viewType) {
         objc_removeAssociatedObjects(self.viewType);
     }
-}
-
-@end
-
-#pragma mark -
-
-@implementation MKPopOutView (MKTableCell)
-
-@dynamic aIndexPath;
-
-NSIndexPath *mIndexPath = nil;
-
-#pragma mark - Accessor Methods
-
-- (void)setAIndexPath:(NSIndexPath *)path {
-    mIndexPath = [path retain];
-}
-
-- (NSIndexPath *)aIndexPath {
-    return mIndexPath;
-}
-
-#pragma mark - Displaying
-
-- (void)showFromCell:(MKTableCell *)cell onView:(UITableView *)tableView {
-    CGRect cellRect = [tableView rectForRowAtIndexPath:cell.indexPath];
-    mAnimationType = MKViewAnimationTypeFadeIn;
-    self.aIndexPath = cell.indexPath;
-    
-    if (mType != MKPopOutAuto) {
-        mAutoType = mType;
-    }
-    else {
-        if (CGRectGetMaxY(cellRect) < (tableView.bounds.size.height - (mView.frame.size.height + 50.0))) {
-            mAutoType = MKPopOutBelow;
-        }
-        else {
-            mAutoType = MKPopOutAbove;
-        }
-    }
-    
-    if (mAutoType == MKPopOutBelow) {
-        self.frame = CGRectMake(cellRect.origin.x, (cellRect.origin.y + cellRect.size.height), self.width, self.height);
-        mView.frame = CGRectMake(10.0, 10.0, kPopOutViewWidth, mView.frame.size.height);
-    }
-    else if (mAutoType == MKPopOutAbove) {
-        self.frame = CGRectMake(cellRect.origin.x, (cellRect.origin.y - self.frame.size.height), self.width, self.height);
-        mView.frame = CGRectMake(0.0, 0.0, kPopOutViewWidth, mView.frame.size.height);
-        
-        [tableView scrollRectToVisible:self.frame animated:YES];
-    }
-    
-    [self setNeedsDisplay];
-    
-    [tableView addSubview:self];
-    [tableView scrollRectToVisible:self.frame animated:YES];
-    
-    [UIView animateWithDuration:0.25 
-                     animations: ^ { self.alpha = 1.0; } ];
-}
-
-#pragma mark - Elements
-
-- (void)setDisclosureButtonWithTarget:(id)target selector:(SEL)selector {
-    mView.frame = CGRectMake(mView.frame.origin.x, mView.frame.origin.y, (mView.frame.size.width - 33.0), mView.frame.size.height);
-    
-    MKButton *button = [[MKButton alloc] initWithType:MKButtonTypeDisclosure];
-    button.center = CGPointMake((CGRectGetMaxX(self.frame) - 25.0), CGRectGetMidY(mView.frame));
-    
-    [button completedAction: ^ (MKAction action) {
-        if (action == MKActionTouchUp) {
-            [target performSelector:selector withObject:self.aIndexPath];
-        }
-    }];
-    
-    [self addSubview:button];
-    [button release];
-}
-
-#pragma mark - Memory Management
-
-- (void)dealloc {
-    [mIndexPath release];
-    mIndexPath = nil;
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MKPopOutViewShouldRemoveNotification object:nil];
-    
-    [super dealloc];
 }
 
 @end

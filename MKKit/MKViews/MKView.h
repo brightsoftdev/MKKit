@@ -8,6 +8,7 @@
 
 #import <MKKit/MKKit/MKDeffinitions.h>
 #import <MKKit/MKKit/MKMacros.h>
+#import <objc/runtime.h>
 #import <UIKit/UIKit.h>
 
 #import <MKKit/MKKit/MKGraphics/MKGraphics.h>
@@ -77,7 +78,7 @@ typedef enum {
 
 @interface MKView : UIView <MKGraphicFactory> {
     id mDelegate;
-    UIViewController *mController;
+    //UIViewController *mController;
     BOOL mShouldRemoveView;
     MKViewAnimationType mAnimationType;
     MKGraphicsStructures *mGraphics;

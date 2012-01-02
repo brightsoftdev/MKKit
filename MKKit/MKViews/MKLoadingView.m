@@ -10,22 +10,29 @@
 
 @implementation MKLoadingView
 
-@synthesize statusText=mStatusText, type=mType, progress;
+@synthesize statusText=mStatusText, type=mType, progress=mProgress;
 
-void drawProgressBar(CGContextRef context, CGRect rect);
+void drawProgressBar(CGContextRef context, CGRect rect, CGFloat progress);
 
-CGFloat lProgress = 0.0;
+#pragma mark - Creation
 
-#pragma mark - Initalizer
-
-- (id)initWithType:(MKLoadingViewType)type status:(NSString *)status {
+- (id)initWithType:(MKLoadingViewType)_type status:(NSString *)status {
     self = [super initWithFrame:CGRectMake(0.0, 0.0, 150.0, 150.0)];
     if (self) {
+        self = [self initWithType:_type status:status graphics:nil];
+    }
+    return self;
+}
+
+- (id)initWithType:(MKLoadingViewType)_type status:(NSString *)status graphics:(MKGraphicsStructures *)graphics {
+    self = [super initWithGraphics:graphics];
+    if (self) {
+        self.frame = CGRectMake(0.0, 0.0, 150.0, 150.0);
         self.backgroundColor = CLEAR;
         self.opaque = NO;
         self.alpha = 0.0;
         
-        mType = type;
+        mType = _type;
         
         mStatusLabel= [[UILabel alloc] initWithFrame:CGRectMake(0.0, 100.0, 150.0, 22.0)];
 		mStatusLabel.font = VERDANA_BOLD(17.0); 
@@ -57,6 +64,16 @@ CGFloat lProgress = 0.0;
     return self;
 }
 
+#pragma mark - Memory
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MKLoadingViewShouldRemoveNotification object:nil];
+    self.statusText = nil;
+    
+    [super dealloc];
+}
+
+
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect {
@@ -64,11 +81,12 @@ CGFloat lProgress = 0.0;
     CGContextSetAllowsAntialiasing(context, YES);
     
     CGRect viewRect = self.bounds;
+    CGRect shineRect = CGRectOffset(viewRect, 0.0, -(viewRect.size.height / 4));
     
     CGMutablePathRef rrect = createRoundedRectForRect(viewRect, 20.0);
     
     CGContextSaveGState(context);
-    CGContextSetFillColorWithColor(context, BLACK.CGColor);
+    CGContextSetFillColorWithColor(context, self.graphicsStructure.fillColor.CGColor);
     CGContextAddPath(context, rrect);
     CGContextFillPath(context);
     CGContextRestoreGState(context);
@@ -76,21 +94,23 @@ CGFloat lProgress = 0.0;
     CGContextSaveGState(context);
     CGContextAddPath(context, rrect);
     CGContextClip(context);
-    drawCurvedGloss(context, viewRect, 150.0);
+    drawCurvedGloss(context, shineRect, 150.0);
     CGContextSaveGState(context);
+    
+    drawOutlinePath(context, rrect, 2.0, BLACK.CGColor);
     
     CFRelease(rrect);
     
     if (mType == MKLoadingViewTypeProgressBar) {
         CGRect barRect = CGRectMake(10.0, 47.0, 130.0, 20.0);
-        drawProgressBar(context, barRect);
+        drawProgressBar(context, barRect, mProgress);
     }
 }
 
-void drawProgressBar(CGContextRef context, CGRect rect) {
+void drawProgressBar(CGContextRef context, CGRect rect, CGFloat progress) {
     CGFloat margin = 2.0;
     CGRect innerRect = CGRectInset(rect, margin, margin);
-    CGFloat width = (innerRect.size.width * lProgress);
+    CGFloat width = (innerRect.size.width * progress);
     CGRect barRect = CGRectMake(innerRect.origin.x, innerRect.origin.y, width, innerRect.size.height);
     
     CGMutablePathRef outerPath = createRoundedRectForRect(rect, 10.0);
@@ -111,7 +131,7 @@ void drawProgressBar(CGContextRef context, CGRect rect) {
 #pragma mark - Accessor Methods
 
 - (void)setProgress:(CGFloat)prog {
-    lProgress = prog;
+    mProgress = prog;
     [self setNeedsDisplay];
 }
 
@@ -119,11 +139,5 @@ void drawProgressBar(CGContextRef context, CGRect rect) {
     mStatusLabel.text = text;
 } 
  
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MKLoadingViewShouldRemoveNotification object:nil];
-    
-    [super dealloc];
-}
-
 
 @end
