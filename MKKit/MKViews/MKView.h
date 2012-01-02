@@ -136,7 +136,7 @@ typedef enum {
 ///----------------------------------------------------
 
 /** *DEPRECATED v0.9* use graphicStructure instead.*/
-@property (nonatomic, retain) MKGraphicsStructures *gradient;// MK_DEPRECATED_0_9;
+@property (nonatomic, retain) MKGraphicsStructures *gradient MK_DEPRECATED_0_9;
 
 ///-----------------------------------------------------
 /// @name Ownership
