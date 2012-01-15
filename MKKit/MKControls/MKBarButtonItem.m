@@ -47,11 +47,7 @@ void drawButtonWithGraphics(CGContextRef context, CGRect rect, MKGraphicsStructu
     self = [super initWithGraphics:graphics]; 
     if (self) {
         [self setUpControl];
-        
         mType = type;
-        if (!graphics) {
-            self.graphicsStructure = [self defaultGraphics];
-        }
         
         MKBarButtonItemFlags.requiresDrawing = YES;
         
@@ -65,6 +61,7 @@ void drawButtonWithGraphics(CGContextRef context, CGRect rect, MKGraphicsStructu
 - (void)setUpControl {
     self.opaque = NO;
     self.backgroundColor = CLEAR;
+    self.controlState = MKControlStateNormal;
 }
 
 #pragma mark - Memory

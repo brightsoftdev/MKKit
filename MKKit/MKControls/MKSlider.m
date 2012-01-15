@@ -95,7 +95,7 @@
 		if (puckLocation.x > 180) {
 			[[UIDevice currentDevice] playInputClick];
 			if ([delegate respondsToSelector:@selector(didCompleteAction:)]) {
-				[delegate didCompleteAction:self];
+				//[delegate didCompleteAction:self];
 			}
 		}
 		else {

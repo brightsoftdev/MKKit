@@ -7,6 +7,7 @@
 //
 
 #import "MKControl.h"
+#import "MKControl+Internal.h"
 
 typedef enum {
     MKButtonTypeHelp,

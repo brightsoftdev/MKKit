@@ -12,6 +12,7 @@
 #import <MKKit/MKKit/MKControls/MKContolHeaders.h>
 #import <MKKit/MKKit/MKErrorContol/MKInputValidation.h>
 #import <MKKit/MKKit/MKErrorContol/MKValidator.h>
+#import <MKKit/MKKit/MKGraphics/MKGraphicsStructures.h>
 
 #import <MKKit/MKKit/MKDeffinitions.h>
 #import <MKKit/MKKit/MKMacros.h>
@@ -388,11 +389,6 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 ///------------------------------------------------------------------------------------------
 
 /** 
- @warning *Deprecated Method v0.8* Use validtedWithType: instead. 
-*/
-- (void)validateWithType:(MKValidationType)aType MK_DEPRECATED_0_8;
-
-/** 
  @warning *Deprecated v0.9* Use image property instead. 
 */
 @property (nonatomic, retain) UIImage *icon; //MK_DEPRECATED_0_9;
@@ -546,13 +542,13 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 
 @end
 
-static const int kPrimaryViewTag                    = 1;
-static const int kSecondaryViewTag                  = 2;
-static const int kIconViewTag                       = 3;
-static const int kAccentViewTag                     = 4;
-static const int kBadgeViewTag                      = 5;
-static const int kDetailViewTag                     = 6;
-static const int kSwipeViewTag                      = 7;
+static const int kPrimaryViewTag                    = 1001;
+static const int kSecondaryViewTag                  = 1002;
+static const int kIconViewTag                       = 1003;
+static const int kAccentViewTag                     = 1004;
+static const int kBadgeViewTag                      = 1005;
+static const int kDetailViewTag                     = 1006;
+static const int kSwipeViewTag                      = 1007;
 
 static const CGFloat kBadgeTextPadding              = 20.0;
 static const CGFloat kBadgeTextFontSize             = 12.0;

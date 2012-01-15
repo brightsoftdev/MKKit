@@ -215,10 +215,10 @@
     
     switch (section) {
         case 0:
-            view = [MKView headerViewWithTitle:@"Change PIN" type:MKTableHeaderTypeGrouped];
+            view = [MKView headerViewWithTitle:@"Change PIN" type:MKTableHeaderTypeGrouped graphics:nil];
             break;
         case 1:
-            view = [MKView headerViewWithTitle:@"Challenge Question" type:MKTableHeaderTypeGrouped];
+            view = [MKView headerViewWithTitle:@"Challenge Question" type:MKTableHeaderTypeGrouped graphics:nil];
         default:
             break;
     }

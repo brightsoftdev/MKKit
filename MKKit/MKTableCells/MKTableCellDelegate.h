@@ -67,11 +67,6 @@
 - (void)didSelectCell:(MKTableCell *)cell forKey:(NSString *)aKey indexPath:(NSIndexPath *)indexPath;
 
 /** 
- @warning *Deprecated. Use didTapAccessoryForKey:indexPath: instead.*
-*/
-- (void)didTapAccessoryForKey:(NSString *)aKey MK_DEPRECATED_0_8;
-
-/** 
  Called when the cells Accessory View is touched. 
  
  @warning *Note* This method is called when using one of the MKTableCellAccessoryTypes. If your 
@@ -155,11 +150,6 @@
 ///---------------------------------------------------------------------------------------
 /// @name Validation Methods
 ///---------------------------------------------------------------------------------------
-
-/**
- @warning *This method has been deprecated. Use cellDidValidate:forKey:indexPath: instead.*
- */
-- (void)cellDidValidate:(NSError *)error forKey:(NSString *)aKey MK_DEPRECATED_0_8;
 
 /**
  Called when a cell validates its input. If there is a validation error, the error will be

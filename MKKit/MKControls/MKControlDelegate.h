@@ -31,15 +31,6 @@ typedef enum {
 
 /** Called whenever an action has been completed.
  
- @param sender The MKControl subclass that has completed an action.
- 
- @warning *Warning* This method is depreciated. Use didCompleteAction:sender: 
- instead.
-*/
-- (void)didCompleteAction:(id)sender MK_DEPRECATED_0_8;
-
-/** Called whenever an action has been completed.
- 
  @param action The MKAction that was completed.
  @param sender The control that completed the action.
 */

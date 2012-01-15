@@ -25,12 +25,6 @@ MKGraphicsShadow MKGraphicShadowMake(CGSize offset, CGFloat blur, UIColor *color
     return shadow;
 }
 
-@interface MKGraphicsStructures ()
-
-//- (id)initWithLinearGradientTopColor:(UIColor *)topColor bottomColor:(UIColor *)bottomColor;
-
-@end
-
 @implementation MKGraphicsStructures
 
 @synthesize fillColor, useLinerShine, topColor, bottomColor, disabledColor, touchedColor;
@@ -43,20 +37,12 @@ MKGraphicsShadow MKGraphicShadowMake(CGSize offset, CGFloat blur, UIColor *color
     return [[[[self class] alloc] init] autorelease];
 }
 
-+ (id)linearGradientWithTopColor:(UIColor *)topColor bottomColor:(UIColor *)bottomColor {
-    return nil;//[[[[self class] alloc] initWithLinearGradientTopColor:topColor bottomColor:bottomColor] autorelease];
-}
-
 - (id)init {
     self = [super init];
     if (self) {
-        [self setObjectKeys];
+        
     }
     return self;
-}
-
-- (id)initWithLinearGradientTopColor:(UIColor *)_topColor bottomColor:(UIColor *)_bottomColor {
-    return nil;
 }
 
 #pragma mark - Memory Managment
@@ -102,10 +88,18 @@ MKGraphicsShadow MKGraphicShadowMake(CGSize offset, CGFloat blur, UIColor *color
     return mShadow;
 }
 
-#pragma mark - Adding Structures
+
+#pragma mark Deprecated v0.9
 
 - (void)assignGradientTopColor:(UIColor *)_topColor bottomColor:(UIColor *)_bottomColor {
-   
+    
 }
 
+- (id)initWithLinearGradientTopColor:(UIColor *)_topColor bottomColor:(UIColor *)_bottomColor {
+    return nil;
+}
+
++ (id)linearGradientWithTopColor:(UIColor *)topColor bottomColor:(UIColor *)bottomColor {
+    return nil;
+}
 @end

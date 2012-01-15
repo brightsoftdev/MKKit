@@ -58,8 +58,6 @@
     
     MKViewShouldRemoveNotification = @"MKViewShouldRemoveNotification";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeView) name:MKViewShouldRemoveNotification object:nil];
-    
-    MKViewFlags.isHeaderView = NO;
 }
 
 #pragma mark - Memory Management
@@ -133,34 +131,6 @@
     if (MKViewFlags.usesBackGroundFill) {
         drawWithGraphicsStructure(context, rect, self.graphicsStructure);
     }
-
-    if (MKViewFlags.isHeaderView && MKViewFlags.isHeaderPlain) {
-        CGColorRef topColor = MK_COLOR_HSB(345.0, 2.0, 99.0, 1.0).CGColor;
-        CGColorRef bottomColor = MK_COLOR_HSB(345.0, 2.0, 86.0, 1.0).CGColor;
-        
-        CGContextSaveGState(context);
-        drawGlossAndLinearGradient(context, rect, topColor, bottomColor);
-        CGContextSaveGState(context);
-    }
-    /*
-    //DEPRECATIED V_0_9 /////////////////////////////////////////////////////
-    if (MKViewFlags.isIconMask) {
-        CGColorRef bottomColor = MK_COLOR_HSB(354.0, 1.0, 99.0, 1.0).CGColor;
-        CGColorRef topColor = MK_COLOR_HSB(354.0, 1.0, 99.0, 1.0).CGColor;
-        
-        if (MKViewFlags.usesGradient) {
-            bottomColor = self.gradient.bottom.CGColor;
-            topColor = self.gradient.top.CGColor;
-        }
-        
-        CGContextSaveGState(context);
-        CGContextTranslateCTM(context, 0.0, rect.size.height);
-        CGContextScaleCTM(context, 1.0, -1.0);
-        CGContextClipToMask(context, rect, self.image.CGImage);
-        drawLinearGradient(context, rect, topColor, bottomColor);
-        CGContextRestoreGState(context);
-    }
-    */
 }
 
 #pragma mark - Showing the View
@@ -280,72 +250,6 @@
                              completion: ^ (BOOL finished) { [self removeFromSuperview]; }];
         }
     }
-}
-
-@end
-
-@implementation MKView (MKTableHeader)
-
-@dynamic titleLabel;
-
-UILabel *mTitleLabel;
-
-#pragma mark - Initalizers
-
-- (id)initWithTitle:(NSString *)title type:(MKTableHeaderType)type {
-    self = [super initWithFrame:CGRectMake(0.0, 0.0, 303.0, 40.0)];
-    if (self) {
-        self.backgroundColor = CLEAR;
-        self.autoresizesSubviews = YES;
-        self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        
-        mTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.0, 5.0, 303.0, 30.0)];
-        mTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
-        mTitleLabel.backgroundColor = CLEAR;
-        mTitleLabel.font = VERDANA_BOLD(16.0);
-        mTitleLabel.textColor = DARK_GRAY;
-        mTitleLabel.adjustsFontSizeToFitWidth = YES;
-        mTitleLabel.minimumFontSize = 12.0;
-        mTitleLabel.shadowColor = MK_COLOR_HSB(345.0, 2.0, 86.0, 1.0);
-        mTitleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-        mTitleLabel.text = title;
-        
-        [self addSubview:mTitleLabel];
-        [mTitleLabel release];
-        
-        MKViewFlags.isHeaderView = YES;
-        
-        if (type == MKTableHeaderTypePlain) {
-            MKViewFlags.isHeaderPlain = YES;
-            mTitleLabel.textAlignment = UITextAlignmentCenter;
-            mTitleLabel.frame = CGRectMake(0.0, 5.0, 315.0, 30.0);
-            mTitleLabel.font = VERDANA_BOLD(20.0);
-        }
-    }
-    return self;
-}
-
-+ (id)headerViewWithTitle:(NSString *)title type:(MKTableHeaderType)type {
-    [self release];
-    
-    MKView *view = [[MKView alloc] initWithTitle:title type:type];
-    [view autorelease];
-    
-    return view;
-}
-
-#pragma mark - Accessor Methods
-
-#pragma mark Setters
-
-- (void)setTitleLabel:(UILabel *)label {
-    mTitleLabel = [label retain];
-}
-
-#pragma mark Getters
-
-- (UILabel *)titleLabel {
-    return mTitleLabel;
 }
 
 @end

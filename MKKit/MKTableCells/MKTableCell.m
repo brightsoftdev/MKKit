@@ -107,14 +107,24 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 - (void)dealloc {
     self.accessoryImage = nil;
     self.indexPath = nil;
-    self.cellView = nil;
-    //self.theLabel = nil;
     self.smallLabel = nil;
     self.image = nil;
     
     [super dealloc];
 }
-	
+
+#pragma mark - Selection
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    if (selected) {
+        if ([delegate respondsToSelector:@selector(didSelectCell:forKey:indexPath:)]) {
+            [delegate didSelectCell:self forKey:self.key indexPath:self.indexPath];
+        }
+    }
+}
+
 #pragma mark - Accessor Methods
 #pragma mark Accessories
 
@@ -298,6 +308,8 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     }
 }
 
+#pragma mark - Storyboard
+
 - (void)storyboardPrototypeWithType:(MKTableCellType)celltype {
     self.type = celltype;
     self = [self initWithType:celltype reuseIdentifier:self.reuseIdentifier];
@@ -402,10 +414,6 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 }
 
 #pragma mark - Deprecated
-
-- (void)validateWithType:(MKValidationType)aType {
-    //Deprecated Method//
-}
 
 - (void)setIconMask:(UIImage *)lIconMask {
     //Deprecated Method//
@@ -571,9 +579,9 @@ static const char *PinnedSecondary = "PinnedSecondary";
     [self layoutCell];
 }
 
-- (void)didRelease {
-    objc_removeAssociatedObjects(self);
-}
+//- (void)didRelease {
+//    objc_removeAssociatedObjects(self);
+//}
 
 @end
 

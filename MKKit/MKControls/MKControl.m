@@ -73,7 +73,10 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
     self = [super init];
     if (self) {
         if (_graphicsStructure) {
-            self.graphicsStructure = [_graphicsStructure retain];
+            self.graphicsStructure = _graphicsStructure;
+        }
+        else {
+            self.graphicsStructure = [self defaultGraphics];
         }
     }
     return self;
@@ -166,14 +169,20 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
 #pragma mark - Touches
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (self.controlState != MKControlStateDisabled || self.controlState != MKControlStateWorking) {
+    if (self.controlState == MKControlStateDisabled) {
+        return;
+    }
+    else if (self.controlState != MKControlStateDisabled || self.controlState != MKControlStateWorking) {
         self.controlState = MKControlStateHighlighted;
         [self processAction:MKActionTouchDown];
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (self.controlState != MKControlStateDisabled) {
+    if (self.controlState == MKControlStateDisabled) {
+        return;
+    }
+    else if (self.controlState != MKControlStateDisabled) {
         self.controlState = MKControlStateNormal;
         [self processAction:MKActionTouchUp];
     }

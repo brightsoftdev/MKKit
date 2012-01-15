@@ -374,7 +374,7 @@ void drawRoundRectButton(CGContextRef context, CGRect rect, MKGraphicsStructures
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    self.highlighted = NO;
+    //self.highlighted = NO;
     
     if (mType == MKButtonTypeIAP) {
         self.buttonText = @"Installing";

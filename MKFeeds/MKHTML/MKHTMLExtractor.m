@@ -25,6 +25,7 @@
 - (NSString *)styledTitleFromNode:(MKHTMLNode *)node;
 - (NSString *)styledParagraphFromNode:(MKHTMLNode *)node;
 - (NSString *)styledEmbedFromNode:(MKHTMLNode *)node;
+- (NSString *)styledBlockquoteNode:(MKHTMLNode *)node;
 
 @end
 
@@ -187,8 +188,6 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NSLog(@"%@", [error localizedDescription]);
-    //[aConnection release];
-    //[request release];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -342,7 +341,7 @@
                         } break;
                             
                         case MKHTMLNodeBlockquote: {
-                            [article appendString:[child htmlString]];
+                            [article appendString:[self styledBlockquoteNode:child]];
                         } break;
                         default: break;
                     }
@@ -406,6 +405,18 @@
     
     return rtn;
 }
+
+- (NSString *)styledBlockquoteNode:(MKHTMLNode *)node {
+    NSMutableString *rtn = [NSMutableString string];
+    
+    [rtn appendString:@"<div class=\"article\">"];
+    [rtn appendString:[node htmlString]];
+    [rtn appendString:@"</div>"];
+    
+    return rtn;
+}
+
+#pragma mark Linked Pages
 
 - (void)findNextPageFromParsedData:(MKHTMLParser *)parsedData {
     NSString *nextPageNumber = [NSString stringWithFormat:@"%i", (MKHTMLExtractorFlags.currentPage + 1)];
