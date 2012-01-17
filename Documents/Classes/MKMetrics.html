@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>MKMetrics Class Reference</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<meta name="generator" content="appledoc 2.0b3" />
+	</head>
+	<body>
+		<article>
+			<div class="main-navigation navigation-top">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="header">
+				<div class="section-header">
+					<h1 class="title title-header">MKMetrics Class Reference</h1>
+				</div>		
+			</div>
+			<div id="container">	
+				
+				<div class="section section-specification"><table cellspacing="0"><tbody>
+					<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value"><a href="MKObject.html">MKObject</a> : NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MKMetrics.h</td>
+</tr>
+					</tbody></table></div>
+				
+				
+				
+				<div class="section section-overview">
+					<h2 class="subtitle subtitle-overview">Overview</h2>
+					
+<p> <strong> Overview </strong></p>
+
+<p> <a href="MKMetrics.html">MKMetrics</a> provides a methods for the persion layout of subviews during changes in orientation or screen size. </p>
+
+<p> <strong> Usage </strong></p>
+
+<p> Before calling any of the layout methods make sure a superview is assigned you can do this by using the <a href="#//api/name/metricsForView:">metricsForView:</a> method for creating your instance, or assign a superview to the <a href="#//api/name/view">view</a> property. </p>
+
+<p> All calls the <a href="#//api/name/layoutSubview:forMetrics:">layoutSubview:forMetrics:</a> need to enclosed in <a href="#//api/name/beginLayout">beginLayout</a> and <a href="#//api/name/endLayout">endLayout</a> methods. </p>
+
+<p> <a href="MKMetrics.html">MKMetrics</a> works in conjunction with the UIView+MKMetrics catagory use the methods in this catagory to set up how subview should be layed out. </p>
+
+				</div>
+				
+				
+				
+				
+				<div class="section section-tasks">
+					<h2 class="subtitle subtitle-tasks">Tasks</h2>
+					
+					<h3 class="subsubtitle task-title">Create Instance</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/metricsForView:">+ metricsForView:</a></code>
+		<span class="tooltip"> Creates an instance of <a href="MKMetrics.html">MKMetrics</a> and assigns the passed UIView to the <a href="#//api/name/view">view</a> property. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Layout</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/beginLayout">- beginLayout</a></code>
+		<span class="tooltip"> Prepares to layout subviews </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/layoutSubview:forMetrics:">- layoutSubview:forMetrics:</a></code>
+		<span class="tooltip"> Will layout the given subview using the location/size set with UIView+MKMetrics catagory methods. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/endLayout">- endLayout</a></code>
+		<span class="tooltip"> Cleans up after a subview layout. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Referencing</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/view"> view</a></code>
+		<span class="tooltip"> The suberview that contains the subviews to layout. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+				</div>
+				
+				
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Class Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/metricsForView:" title="metricsForView:"></a>
+	<h3 class="subsubtitle method-title">metricsForView:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates an instance of <a href="MKMetrics.html">MKMetrics</a> and assigns the passed UIView to the <a href="#//api/name/view">view</a> property. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)metricsForView:(UIView *)<em>view</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>view</em></dt>
+			<dd> the <a href="#//api/name/view">view</a> that has subvies to layout </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKMetrics.html">MKMetrics</a> instance </p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKMetrics.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/beginLayout" title="beginLayout"></a>
+	<h3 class="subsubtitle method-title">beginLayout</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Prepares to layout subviews </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)beginLayout</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKMetrics.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/endLayout" title="endLayout"></a>
+	<h3 class="subsubtitle method-title">endLayout</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Cleans up after a subview layout. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)endLayout</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKMetrics.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/layoutSubview:forMetrics:" title="layoutSubview:forMetrics:"></a>
+	<h3 class="subsubtitle method-title">layoutSubview:forMetrics:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Will layout the given subview using the location/size set with UIView+MKMetrics catagory methods. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)layoutSubview:(UIView *)<em>subview</em> forMetrics:(MKViewMetrics)<em>metrics</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>subview</em></dt>
+			<dd> the subview to layout </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>metrics</em></dt>
+			<dd> the metrics to use to layout the subview. You can use the following fuctions to find the witch MKViewMetrics to pass: <ul><li> MKViewMetrics metricsForCurrentOrientation(void) </li><li> MKViewMetrics metricsForOrientation(UIInterfaceOrientation orientation) </li></ul></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKMetrics.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Properties</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/view" title="view"></a>
+	<h3 class="subsubtitle method-title">view</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The suberview that contains the subviews to layout. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIView *view</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKMetrics.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+			</div>
+			<div class="main-navigation navigation-bottom">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="footer">
+				<hr />
+				<div class="footer-copyright">
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-01-16)</span><br />
+					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>UIView(MKMetrics) Category Reference</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<meta name="generator" content="appledoc 2.0b3" />
+	</head>
+	<body>
+		<article>
+			<div class="main-navigation navigation-top">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="header">
+				<div class="section-header">
+					<h1 class="title title-header">UIView(MKMetrics) Category Reference</h1>
+				</div>		
+			</div>
+			<div id="container">	
+				
+				<div class="section section-specification"><table cellspacing="0"><tbody>
+					<tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">UIView+MKMetrics.h</td>
+</tr>
+					</tbody></table></div>
+				
+				
+				
+				<div class="section section-overview">
+					<h2 class="subtitle subtitle-overview">Overview</h2>
+					
+<p> <strong> Overview </strong></p>
+
+<p> The UIView+MKMethrics catagory adds methods to the UIView class to support the use of <a href="../Classes/MKMetrics.html">MKMetrics</a> when laying out subviews. </p>
+
+				</div>
+				
+				
+				
+				
+				<div class="section section-tasks">
+					<h2 class="subtitle subtitle-tasks">Tasks</h2>
+					
+					<h3 class="subsubtitle task-title">Layout</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/layoutForMetrics:">- layoutForMetrics:</a></code>
+		<span class="tooltip"> A specific layout call for UIView instances to use. <p class="warning"> <strong> Note </strong> This method will not be automatically called. When using you should call it when the interface orientation changes. </p></span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Layout Settings</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setSize:forMetrics:">- setSize:forMetrics:</a></code>
+		<span class="tooltip"> Sets a size for the given metrics. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setLocation:forMetrics:">- setLocation:forMetrics:</a></code>
+		<span class="tooltip"> Sets a location for the given metrics. The location point corisponds the top left corner of the view. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setRect:forMetrics:">- setRect:forMetrics:</a></code>
+		<span class="tooltip"> Sets a rect for the given metrics. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Reference</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/portraitRect"> portraitRect</a></code>
+		<span class="tooltip"> Used by <a href="../Classes/MKMetrics.html">MKMetrics</a> when the layoutSubview:forMetrics: is called </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/landscapeRect"> landscapeRect</a></code>
+		<span class="tooltip"> Used by <a href="../Classes/MKMetrics.html">MKMetrics</a> when the layoutSubview:forMetrics: is called </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Memory</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/clearMetrics">- clearMetrics</a></code>
+		<span class="tooltip"> Cleans up after the a subview is layed out. You do not need to call this method directly. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/clearMetrics" title="clearMetrics"></a>
+	<h3 class="subsubtitle method-title">clearMetrics</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Cleans up after the a subview is layed out. You do not need to call this method directly. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)clearMetrics</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">UIView+MKMetrics.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/layoutForMetrics:" title="layoutForMetrics:"></a>
+	<h3 class="subsubtitle method-title">layoutForMetrics:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> A specific layout call for UIView instances to use. <p class="warning"> <strong> Note </strong> This method will not be automatically called. When using you should call it when the interface orientation changes. </p></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)layoutForMetrics:(MKViewMetrics)<em>metrics</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>metrics</em></dt>
+			<dd> the MKViewMetrics to layout subviews for. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">UIView+MKMetrics.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/setLocation:forMetrics:" title="setLocation:forMetrics:"></a>
+	<h3 class="subsubtitle method-title">setLocation:forMetrics:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Sets a location for the given metrics. The location point corisponds the top left corner of the view. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setLocation:(CGPoint)<em>location</em> forMetrics:(MKViewMetrics)<em>metrics</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>location</em></dt>
+			<dd> the location of the view. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>metrics</em></dt>
+			<dd> the MKViewMetrics that corisponds to the given location. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">UIView+MKMetrics.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/setRect:forMetrics:" title="setRect:forMetrics:"></a>
+	<h3 class="subsubtitle method-title">setRect:forMetrics:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Sets a rect for the given metrics. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setRect:(CGRect)<em>rect</em> forMetrics:(MKViewMetrics)<em>metrics</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>rect</em></dt>
+			<dd> the rect of the view. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>metrics</em></dt>
+			<dd> the MKViewMetrics that corisponds to the given metrics. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">UIView+MKMetrics.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/setSize:forMetrics:" title="setSize:forMetrics:"></a>
+	<h3 class="subsubtitle method-title">setSize:forMetrics:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Sets a size for the given metrics. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setSize:(CGSize)<em>size</em> forMetrics:(MKViewMetrics)<em>metrics</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>size</em></dt>
+			<dd> the size of the view. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>metrics</em></dt>
+			<dd> the MKViewMetrics that corrisponds to the given size. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">UIView+MKMetrics.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Properties</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/landscapeRect" title="landscapeRect"></a>
+	<h3 class="subsubtitle method-title">landscapeRect</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Used by <a href="../Classes/MKMetrics.html">MKMetrics</a> when the layoutSubview:forMetrics: is called </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) CGRect landscapeRect</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">UIView+MKMetrics.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/portraitRect" title="portraitRect"></a>
+	<h3 class="subsubtitle method-title">portraitRect</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Used by <a href="../Classes/MKMetrics.html">MKMetrics</a> when the layoutSubview:forMetrics: is called </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) CGRect portraitRect</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">UIView+MKMetrics.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+			</div>
+			<div class="main-navigation navigation-bottom">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="footer">
+				<hr />
+				<div class="footer-copyright">
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-01-16)</span><br />
+					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>

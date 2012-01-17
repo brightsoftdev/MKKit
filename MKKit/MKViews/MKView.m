@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 10/9/10.
-//  Copyright 2010-2010 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import "MKView.h"
@@ -71,6 +71,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MKViewShouldRemoveNotification object:nil];
     
 	[super dealloc];
+}
+
+#pragma mark - Layout
+
+- (void)layoutSubviews {
+    [self layoutForMetrics:metricsForCurrentOrientation()];
 }
 
 #pragma mark - Accessor methods

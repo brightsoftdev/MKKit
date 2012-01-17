@@ -81,12 +81,6 @@
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/MK_DEPRECATED_0_9"> MK_DEPRECATED_0_9</a></code>
-		<span class="tooltip"> The tint color of the popout view. Default is black. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/arrowPosition"> arrowPosition</a></code>
 		<span class="tooltip"> The tip of the arrow position on the x-axis. </span>
 	</span>
@@ -106,25 +100,13 @@
 </li>
 					</ul>
 					
-					<h3 class="subsubtitle task-title">MKTableCell Methods</h3>
+					<h3 class="subsubtitle task-title">Deprecations</h3>
 
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/aIndexPath"> aIndexPath</a></code>
-		<span class="tooltip"> The index path of the cell showing the pop out view </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/showFromCell:onView:">- showFromCell:onView:</a></code>
-		<span class="tooltip"> Shows the view on the screen. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/setDisclosureButtonWithTarget:selector:">- setDisclosureButtonWithTarget:selector:</a></code>
-		<span class="tooltip"> Adds a MKButtonTypeDisloserButton on the right side of the popout view </span>
+		<code><a href="#//api/name/MK_DEPRECATED_0_9"> MK_DEPRECATED_0_9</a></code>
+		<span class="tooltip"> The tint color of the popout view. Default is black. </span>
 	</span>
 	
 </li>
@@ -136,7 +118,43 @@
 						<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/showFromButton:onView:">- showFromButton:onView:</a></code>
-		<span class="tooltip"> Shows an <a href="MKPopOverView.html">MKPopOverView</a> with the arrow pointing at a MKBarButtonItem. </span>
+		<span class="tooltip"> Shows an MKPopOverView with the arrow pointing at a MKBarButtonItem. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">MKTableCell Methods</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/aIndexPath"> aIndexPath</a></code>
+		<span class="tooltip"> The index path of the cell showing the pop out view </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/tableView"> tableView</a></code>
+		<span class="tooltip"> The table view that the pop out view will be displayed on. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/showFromCell:onView:">- showFromCell:onView:</a></code>
+		<span class="tooltip"> Shows the view on the screen. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/adjustToCell">- adjustToCell</a></code>
+		<span class="tooltip"> Adjust the the pop out view in relation to the table cell. This method only needs called if the cell changes height. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setDisclosureButtonWithTarget:selector:">- setDisclosureButtonWithTarget:selector:</a></code>
+		<span class="tooltip"> Adds a MKButtonTypeDisloserButton on the right side of the popout view </span>
 	</span>
 	
 </li>
@@ -152,6 +170,38 @@
 				
 				<div class="section section-methods">
 					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/adjustToCell" title="adjustToCell"></a>
+	<h3 class="subsubtitle method-title">adjustToCell</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Adjust the the pop out view in relation to the table cell. This method only needs called if the cell changes height. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)adjustToCell</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKPopoutView+MKTableCell.h</code><br />
+	</div>				
+	
+	
+</div>
 					
 					<div class="section-method">
 	<a name="//api/name/initWithView:type:" title="initWithView:type:"></a>
@@ -316,7 +366,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Shows an <a href="MKPopOverView.html">MKPopOverView</a> with the arrow pointing at a MKBarButtonItem. </p>
+		<p> Shows an MKPopOverView with the arrow pointing at a MKBarButtonItem. </p>
 	</div>		
 	
 	
@@ -333,7 +383,7 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>view</em></dt>
-			<dd> the superview of the <a href="MKPopOverView.html">MKPopOverView</a> instance. </dd>
+			<dd> the superview of the MKPopOverView instance. </dd>
 		</dl>
 		
 	</div>
@@ -507,6 +557,38 @@
 </div>
 					
 					<div class="section-method">
+	<a name="//api/name/tableView" title="tableView"></a>
+	<h3 class="subsubtitle method-title">tableView</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The table view that the pop out view will be displayed on. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain, readonly) UITableView *tableView</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKPopoutView+MKTableCell.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
 	<a name="//api/name/type" title="type"></a>
 	<h3 class="subsubtitle method-title">type</h3>
 	
@@ -551,7 +633,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-01-02)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-01-16)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

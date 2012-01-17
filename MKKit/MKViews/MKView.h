@@ -3,15 +3,13 @@
 //  MKKit
 //
 //  Created by Matthew King on 10/9/10.
-//  Copyright 2010-2011 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
-#import <MKKit/MKKit/MKDeffinitions.h>
-#import <MKKit/MKKit/MKMacros.h>
 #import <objc/runtime.h>
 #import <UIKit/UIKit.h>
 
-#import <MKKit/MKKit/MKGraphics/MKGraphics.h>
+#import <MKKit/MKKit/MKInternalHeaderPack.h>
 
 #import "MKViewDelegate.h"
 
@@ -127,13 +125,6 @@ typedef enum {
 /** The height of the view */
 @property (nonatomic, assign) CGFloat height;
 
-///----------------------------------------------------
-/// @name Graphics Settings
-///----------------------------------------------------
-
-/** *DEPRECATED v0.9* use graphicStructure instead.*/
-@property (nonatomic, retain) MKGraphicsStructures *gradient;// MK_DEPRECATED_0_9;
-
 ///-----------------------------------------------------
 /// @name Ownership
 ///-----------------------------------------------------
@@ -148,6 +139,13 @@ typedef enum {
 /** The MKViewDelegate */
 @property (nonatomic, assign) id<MKViewDelegate> delegate;
 
+///-------------------------------------------------------
+/// @name Deprecations
+///-------------------------------------------------------
+
+/** *DEPRECATED v0.9* use graphicStructure instead.*/
+@property (nonatomic, retain) MKGraphicsStructures *gradient;// MK_DEPRECATED_0_9;
+
 @end
 
 /**-----------------------------------------------------------------------
@@ -156,7 +154,7 @@ typedef enum {
 @interface MKView (IconMask)
 
 ///---------------------------------------------
-/// @name Depreciations
+/// @name Deprecations
 ///---------------------------------------------
 
 /**

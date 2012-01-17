@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 8/2/11.
-//  Copyright 2010-2011 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import "MKView.h"
@@ -13,6 +13,11 @@ typedef enum {
     MKPopOutAbove,
     MKPopOutBelow,
 } MKPopOutViewType;
+
+typedef enum {
+    MKPopOutTableCell,
+    MKPopOutBarButton,
+} MKPopOutType;
 
 CGRect rectForType(MKPopOutViewType type, CGRect rect); 
 void drawPointerForType(CGContextRef context, MKPopOutViewType type, CGColorRef fill, CGFloat position, CGRect drawRect);
@@ -48,6 +53,7 @@ void drawBackgroundForRect(CGContextRef context, CGRect drawRect, CGRect innerRe
 @interface MKPopOutView : MKView {
     MKPopOutViewType mType;
     MKPopOutViewType mAutoType;
+    MKPopOutType mPopOutType;
     UIView *mView;
     
     CGFloat mArrowPosition;
@@ -85,9 +91,6 @@ void drawBackgroundForRect(CGContextRef context, CGRect drawRect, CGRect innerRe
 /// @name Appearance
 ///-------------------------------------------------------
 
-/** The tint color of the popout view. Default is black. */
-@property (nonatomic, assign) CGColorRef tintColor MK_DEPRECATED_0_9;
-
 /** The tip of the arrow position on the x-axis. */
 @property (nonatomic, assign) CGFloat arrowPosition;
 
@@ -97,6 +100,13 @@ void drawBackgroundForRect(CGContextRef context, CGRect drawRect, CGRect innerRe
 
 /** The type of popout view used */
 @property (nonatomic, assign, readonly) MKPopOutViewType type;
+
+///--------------------------------------------------------
+/// @name Deprecations
+///--------------------------------------------------------
+
+/** The tint color of the popout view. Default is black. */
+@property (nonatomic, assign) CGColorRef tintColor MK_DEPRECATED_0_9;
 
 @end
 

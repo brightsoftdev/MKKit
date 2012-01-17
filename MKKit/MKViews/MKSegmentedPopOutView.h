@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 12/31/11.
-//  Copyright (c) 2011 Matt King. All rights reserved.
+//  Copyright (c) 2011-2012 Matt King. All rights reserved.
 //
 
 #import "MKPopOutView.h"

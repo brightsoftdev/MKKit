@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 10/23/11.
-//  Copyright (c) 2011 Matt King. All rights reserved.
+//  Copyright (c) 2011-2012 Matt King. All rights reserved.
 //
 
 #import "MKHTMLExtractor.h"
@@ -147,6 +147,9 @@
 #pragma mark - Request Methods
 
 - (void)request {
+    [[NSURLCache sharedURLCache] setMemoryCapacity:0];
+    [[NSURLCache sharedURLCache] setDiskCapacity:0];
+    
 	request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:URL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
 	aConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 	
@@ -187,7 +190,11 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"%@", [error localizedDescription]);
+    //NSLog(@"%@", [error localizedDescription]);
+    
+    [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
+    [request release];
+    [aConnection release];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {

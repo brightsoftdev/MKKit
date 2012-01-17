@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 1/14/10.
-//  Copyright 2010 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import <MKKit/MKKit/MKDeffinitions.h>
@@ -12,10 +12,12 @@
 #import <MKKit/MKKit/MKAlerts.h>
 #import <MKKit/MKKit/MKAnimations.h>
 #import <MKKit/MKKit/MKClock.h>
+#import <MKKit/MKKit/MKConsolidatedViewTags.h>
 #import <MKKit/MKKit/MKCoreData.h>
 #import <MKKit/MKKit/MKImage.h>
-#import <MKKit/MKKit/MKNotificationController.h>
 #import <MKKit/MKKit/MKMath.h>
+#import <MKKit/MKKit/MKNotificationController.h>
+#import <MKKit/MKKit/MKMetrics.h>
 #import <MKKit/MKKit/MKObject.h>
 #import <MKKit/MKKit/MKPageControl.h>
 #import <MKKit/MKKit/MKRandoms.h>
@@ -28,6 +30,8 @@
 #import <MKKit/MKKit/MKTableCells/MKTableCellHeaders.h>
 #import <MKKit/MKKit/MKViewControllers/MKViewContorllerHeaders.h>
 #import <MKKit/MKKit/MKViews/MKViewHeader.h>
+
+#import <MKKit/MKKit/UIView+MKMetrics.h>
 
 
 #if MK_FEEDS_ALLOWED

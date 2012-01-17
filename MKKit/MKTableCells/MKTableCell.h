@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 3/19/10.
-//  Copyright 2010-2011 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -12,10 +12,8 @@
 #import <MKKit/MKKit/MKControls/MKContolHeaders.h>
 #import <MKKit/MKKit/MKErrorContol/MKInputValidation.h>
 #import <MKKit/MKKit/MKErrorContol/MKValidator.h>
-#import <MKKit/MKKit/MKGraphics/MKGraphicsStructures.h>
+#import <MKKit/MKKit/MKInternalHeaderPack.h>
 
-#import <MKKit/MKKit/MKDeffinitions.h>
-#import <MKKit/MKKit/MKMacros.h>
 #import <MKKit/MKKit/MKStrings.h>
 
 #import "MKTableElements/MKElementAccentView.h"
@@ -541,14 +539,6 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 @property (nonatomic, assign) id viewType;
 
 @end
-
-static const int kPrimaryViewTag                    = 1001;
-static const int kSecondaryViewTag                  = 1002;
-static const int kIconViewTag                       = 1003;
-static const int kAccentViewTag                     = 1004;
-static const int kBadgeViewTag                      = 1005;
-static const int kDetailViewTag                     = 1006;
-static const int kSwipeViewTag                      = 1007;
 
 static const CGFloat kBadgeTextPadding              = 20.0;
 static const CGFloat kBadgeTextFontSize             = 12.0;

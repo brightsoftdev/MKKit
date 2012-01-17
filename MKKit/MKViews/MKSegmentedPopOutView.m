@@ -3,13 +3,14 @@
 //  MKKit
 //
 //  Created by Matthew King on 12/31/11.
-//  Copyright (c) 2011 Matt King. All rights reserved.
+//  Copyright (c) 2011-2012 Matt King. All rights reserved.
 //
 
 #import "MKSegmentedPopOutView.h"
 #import <MKKit/MKKit/MKControls/MKControl.h>
 
 #import "MKView+Internal.h"
+#import "MKPopoutView+MKTableCell.h"
 
 MKSegment MKSegmentMake(MKSegmentPosition pos, CFStringRef text, CGRect rect, int idnumber);
 MKSegment MKSegmentMake(MKSegmentPosition pos, CFStringRef text, CGRect rect, int idnumber) {
@@ -42,7 +43,7 @@ void drawSegmentText(CGContextRef context, CGRect rect, MKSegment segment) {
     
     CGContextSaveGState(context);
     CGContextSetFillColorWithColor(context, WHITE.CGColor);
-    [(NSString *)segment.text drawInRect:rect withFont:font lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+    [(NSString *)segment.text drawInRect:rect withFont:font lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
     CGContextRestoreGState(context);
 }
 
@@ -97,6 +98,28 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment);
     [super dealloc];
 }
 
+#pragma mark - Layout
+
+- (void)layoutSubviews {
+    [self layoutForMetrics:metricsForCurrentOrientation()];
+}
+
+- (void)layoutForMetrics:(MKViewMetrics)_metrics {
+    [self setSize:CGSizeMake(300.0, self.frame.size.height) forMetrics:MKMetricsPortrait];
+    [self setSize:CGSizeMake(460.0, self.frame.size.height) forMetrics:MKMetricsLandscape];
+    
+    MKMetrics *metrics = [MKMetrics metricsForView:self];
+    [metrics beginLayout];
+    [metrics layoutSubview:self forMetrics:_metrics];
+    [metrics endLayout];
+    
+    [self setNeedsDisplayInRect:self.frame];
+    
+    if (mPopOutType == MKPopOutTableCell) {
+        [self adjustToCell];
+    }
+}
+
 #pragma mark - Accessor Methods
 #pragma mark Getters
 
@@ -137,9 +160,18 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment);
         drawSegmentSeperator(context, segment);
         CGContextEndTransparencyLayer(context);
         
-        MKSegmentView *segmentView = [[MKSegmentView alloc] initWithSegment:segment parent:self];
-        [self addSubview:segmentView];
-        [segmentView release];
+        UIView *view = [self viewWithTag:i];
+        
+        if (view) {
+            view.frame = segmentRect;
+            [view setNeedsDisplayInRect:segmentRect];
+        }
+        else {
+            MKSegmentView *segmentView = [[MKSegmentView alloc] initWithSegment:segment parent:self];
+            segmentView.tag = i;
+            [self addSubview:segmentView];
+            [segmentView release];
+        }
     }
 }
 

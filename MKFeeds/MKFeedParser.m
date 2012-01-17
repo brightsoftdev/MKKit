@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 8/13/10.
-//  Copyright 2010-2011 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import "MKFeedParser.h"
@@ -89,6 +89,8 @@
 #pragma mark - request
 
 - (void)request {
+    [[NSURLCache sharedURLCache] setDiskCapacity:0];
+    [[NSURLCache sharedURLCache] setMemoryCapacity:0];
 	request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:mUrl] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
     
 	theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];

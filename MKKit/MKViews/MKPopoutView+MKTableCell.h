@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 12/31/11.
-//  Copyright (c) 2011 Matt King. All rights reserved.
+//  Copyright (c) 2011-2012 Matt King. All rights reserved.
 //
 
 #import "MKPopOutView.h"
@@ -19,6 +19,9 @@
 /** The index path of the cell showing the pop out view */
 @property (nonatomic, retain, readonly) NSIndexPath *aIndexPath;
 
+/** The table view that the pop out view will be displayed on. */
+@property (nonatomic, retain, readonly) UITableView *tableView;
+
 ///-------------------------------------------------------
 /// @name Displaying
 ///-------------------------------------------------------
@@ -31,6 +34,12 @@
  @param tableView the table view to disaply on
  */
 - (void)showFromCell:(MKTableCell *)cell onView:(UITableView *)tableView;
+
+/** 
+ Adjust the the pop out view in relation to the table cell. This method
+ only needs called if the cell changes height.
+*/
+- (void)adjustToCell;
 
 ///-------------------------------------------------------
 /// @name Elements
