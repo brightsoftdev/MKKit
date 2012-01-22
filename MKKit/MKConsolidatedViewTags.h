@@ -19,3 +19,8 @@ static const int kSwipeViewTag                      = 1007;
 #pragma mark - MKPopOutView
 
 static const int kMKPopOutViewTableCellTag          = 2001;
+static const int kMKPopOutViewTag                   = 2002;
+
+#pragma matk - MKView+MKTitleView
+
+static const int kMKTtileViewImageViewTag           = 2005;

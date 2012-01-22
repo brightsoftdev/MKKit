@@ -121,6 +121,10 @@
 		AA3FF65A14A542F9000E2263 /* MKPullTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3FF65814A542F9000E2263 /* MKPullTableViewController.h */; };
 		AA3FF65B14A542F9000E2263 /* MKPullTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3FF65914A542F9000E2263 /* MKPullTableViewController.m */; };
 		AA56A535128EDF0300E5DD5C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA56A534128EDF0300E5DD5C /* MessageUI.framework */; };
+		AA59145714CA3CE6002736EF /* MKDisclosureViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AA59145514CA3CE6002736EF /* MKDisclosureViewController.h */; };
+		AA59145814CA3CE6002736EF /* MKDisclosureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA59145614CA3CE6002736EF /* MKDisclosureViewController.m */; };
+		AA59145B14CA4FB4002736EF /* UIViewController+MKVIewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AA59145914CA4FB4002736EF /* UIViewController+MKVIewController.h */; };
+		AA59145C14CA4FB4002736EF /* UIViewController+MKVIewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA59145A14CA4FB4002736EF /* UIViewController+MKVIewController.m */; };
 		AA61791B141BCF12001859E7 /* MKSwipeCellItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AA617919141BCF11001859E7 /* MKSwipeCellItem.h */; };
 		AA61791C141BCF12001859E7 /* MKSwipeCellItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA61791A141BCF12001859E7 /* MKSwipeCellItem.m */; };
 		AA6330DC134415B900886CE3 /* MKViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AA6330D9134415B900886CE3 /* MKViewController.h */; };
@@ -340,6 +344,10 @@
 		AA3FF65814A542F9000E2263 /* MKPullTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPullTableViewController.h; sourceTree = "<group>"; };
 		AA3FF65914A542F9000E2263 /* MKPullTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPullTableViewController.m; sourceTree = "<group>"; };
 		AA56A534128EDF0300E5DD5C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		AA59145514CA3CE6002736EF /* MKDisclosureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDisclosureViewController.h; sourceTree = "<group>"; };
+		AA59145614CA3CE6002736EF /* MKDisclosureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDisclosureViewController.m; sourceTree = "<group>"; };
+		AA59145914CA4FB4002736EF /* UIViewController+MKVIewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MKVIewController.h"; sourceTree = "<group>"; };
+		AA59145A14CA4FB4002736EF /* UIViewController+MKVIewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MKVIewController.m"; sourceTree = "<group>"; };
 		AA617919141BCF11001859E7 /* MKSwipeCellItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSwipeCellItem.h; sourceTree = "<group>"; };
 		AA61791A141BCF12001859E7 /* MKSwipeCellItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSwipeCellItem.m; sourceTree = "<group>"; };
 		AA6330D9134415B900886CE3 /* MKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKViewController.h; sourceTree = "<group>"; };
@@ -646,11 +654,14 @@
 				AA6330DE1344163F00886CE3 /* MKViewControllerDelegate.h */,
 				AA6330D9134415B900886CE3 /* MKViewController.h */,
 				AA6330DA134415B900886CE3 /* MKViewController.m */,
+				AA59145414CA3BEF002736EF /* MKContainerControllers */,
 				AABF4D89139219F9001B547A /* MKIAPViewController */,
 				AABE3D541376CFB800ECC539 /* MKLoginViewController */,
 				AAA3BE8313EB92F400594F55 /* MKTabbedViewController */,
 				AA3FF65714A5426A000E2263 /* MKTableViewController */,
 				AA6330D81344155700886CE3 /* MKWebViewController */,
+				AA59145914CA4FB4002736EF /* UIViewController+MKVIewController.h */,
+				AA59145A14CA4FB4002736EF /* UIViewController+MKVIewController.m */,
 			);
 			path = MKViewControllers;
 			sourceTree = "<group>";
@@ -819,6 +830,15 @@
 				AA7D517A14AFC936007F3E66 /* MKPopoutView+MKTableCell.m */,
 			);
 			name = MKPopOutView;
+			sourceTree = "<group>";
+		};
+		AA59145414CA3BEF002736EF /* MKContainerControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AA59145514CA3CE6002736EF /* MKDisclosureViewController.h */,
+				AA59145614CA3CE6002736EF /* MKDisclosureViewController.m */,
+			);
+			path = MKContainerControllers;
 			sourceTree = "<group>";
 		};
 		AA61791D141BCFB4001859E7 /* MKSwipeCellView */ = {
@@ -1131,6 +1151,8 @@
 				AA0D1A6D14C3683B00F0D778 /* UIView+MKMetrics.h in Headers */,
 				AA0D1A7014C3AB4200F0D778 /* MKConsolidatedViewTags.h in Headers */,
 				AA0D1A7214C3AB8400F0D778 /* MKInternalHeaderPack.h in Headers */,
+				AA59145714CA3CE6002736EF /* MKDisclosureViewController.h in Headers */,
+				AA59145B14CA4FB4002736EF /* UIViewController+MKVIewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1329,6 +1351,8 @@
 				AAE6D6A314B252C600C3FD31 /* MKView+MKTableHeader.m in Sources */,
 				AA0D1A6A14C352F100F0D778 /* MKMetrics.m in Sources */,
 				AA0D1A6E14C3683B00F0D778 /* UIView+MKMetrics.m in Sources */,
+				AA59145814CA3CE6002736EF /* MKDisclosureViewController.m in Sources */,
+				AA59145C14CA4FB4002736EF /* UIViewController+MKVIewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

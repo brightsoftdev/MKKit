@@ -144,14 +144,7 @@
 }
 
 - (void)setContentText:(NSString *)contentText {
-    CGFloat width = 320.0;
-    
-    if (DEVICE_ORIENTATION_IS_LANDSCAPED) {
-        width = DYNAMIC_CELL_CONTENT_WIDTH_LANDSCAPE;
-    }
-    if (DEVICE_ORIENTATION_IS_PORTRAIT) {
-        width = DYNAMIC_CELL_CONTENT_WIDTH_PORTRAIT;
-    }
+    CGFloat width = self.contentView.frame.size.width; //widthForMetrics(metricsForCurrentOrientation());
     
     CGSize constraint = CGSizeMake(width - (DYNAMIC_CELL_CONTENT_MARGIN * 2), 20000.0f);
     

@@ -23,6 +23,8 @@ CGRect rectForType(MKPopOutViewType type, CGRect rect);
 void drawPointerForType(CGContextRef context, MKPopOutViewType type, CGColorRef fill, CGFloat position, CGRect drawRect);
 void drawBackgroundForRect(CGContextRef context, CGRect drawRect, CGRect innerRect, MKGraphicsStructures *graphics);
 
+@class MKBarButtonItem;
+
 /**----------------------------------------------------------------------------------
  *Overview*
  
@@ -94,12 +96,24 @@ void drawBackgroundForRect(CGContextRef context, CGRect drawRect, CGRect innerRe
 /** The tip of the arrow position on the x-axis. */
 @property (nonatomic, assign) CGFloat arrowPosition;
 
+/** 
+ Set `YES` to allow the pop over view to resize itself during a rotation. 
+ Default is `NO`.
+*/
+@property (nonatomic, assign) BOOL autoResizeOnRotation;
+
 ///--------------------------------------------------------
 /// @name Types
 ///--------------------------------------------------------
 
 /** The type of popout view used */
 @property (nonatomic, assign, readonly) MKPopOutViewType type;
+
+/** 
+ Reference to an MKBarButton that the pop over view will appear from.
+ This property should not need to be set directly.
+*/
+@property (nonatomic, retain) MKBarButtonItem *button;
 
 ///--------------------------------------------------------
 /// @name Deprecations

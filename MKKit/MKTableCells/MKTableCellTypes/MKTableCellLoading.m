@@ -24,7 +24,6 @@
         mTheLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         mTheLabel.backgroundColor = CLEAR;
         mTheLabel.textAlignment = UITextAlignmentCenter;
-        mTheLabel.text = @"Loading";
         
         [mCellView addPrimaryElement:mTheLabel];
         [mTheLabel release];

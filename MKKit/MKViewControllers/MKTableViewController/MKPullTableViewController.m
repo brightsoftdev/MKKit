@@ -11,7 +11,9 @@
 
 @implementation MKPullTableViewController
 
-@dynamic pullDownView, working;
+@synthesize pullDownView=mPullDownView;
+
+@dynamic working;
 
 #pragma mark - Creation
 
@@ -49,8 +51,6 @@
 }
 
 - (void)dealloc {
-    self.pullDownView = nil;
-    
     [super dealloc];
 }
 

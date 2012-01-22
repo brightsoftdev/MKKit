@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "MKObject.h"
+#import "MKMacros.h"
 
 typedef enum {
     MKMetricsPortrait,
     MKMetricsLandscape,
+    MKMetricsPortraitIPad,
+    MKMetricsLandscapeIPad,
 } MKViewMetrics;
 
 /**-------------------------------------------------------------------------

@@ -9,12 +9,14 @@
 #import "MKPopOutView.h"
 
 #import "MKView+Internal.h"
+#import "MKPopoutView+MKTableCell.m"
+#import "MKPopOutView+MKBarButtonItem.h"
 
 @implementation MKPopOutView
 
 #pragma mark - Creation
 
-@synthesize type=mType, arrowPosition=mArrowPosition, tintColor;
+@synthesize type=mType, arrowPosition=mArrowPosition, tintColor, button, autoResizeOnRotation;
 
 - (id)initWithView:(UIView *)view type:(MKPopOutViewType)type {
     self = [super initWithFrame:CGRectMake(0.0, 0.0, (kPopOutViewWidth + 5.0), (view.frame.size.height + 30.0))];
@@ -33,6 +35,7 @@
         self.alpha = 0.0;
         self.backgroundColor = CLEAR;
         self.opaque = YES;
+        self.tag = kMKPopOutViewTag;
         
         if (!graphics) {
             self.graphicsStructure = [self defaultGraphics];
@@ -60,6 +63,28 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MKPopOutViewShouldRemoveNotification object:nil];
     
     [super dealloc];
+}
+
+#pragma mark - Layout
+
+- (void)layoutForMetrics:(MKViewMetrics)_metrics {
+    if (autoResizeOnRotation) {
+        if (MK_DEVICE_IS_IPHONE) {
+            [self setSize:CGSizeMake(300.0, self.frame.size.height) forMetrics:MKMetricsPortrait];
+            [self setSize:CGSizeMake(460.0, self.frame.size.height) forMetrics:MKMetricsLandscape];
+        }
+        if (MK_DEVICE_IS_IPAD) {
+            [self setSize:CGSizeMake(300.0, self.frame.size.height) forMetrics:MKMetricsPortraitIPad];
+            [self setSize:CGSizeMake(460.0, self.frame.size.height) forMetrics:MKMetricsLandscapeIPad];
+        }
+        
+        MKMetrics *metrics = [MKMetrics metricsForView:self];
+        [metrics beginLayout];
+        [metrics layoutSubview:self forMetrics:_metrics];
+        [metrics endLayout];
+        
+        [self setNeedsDisplayInRect:self.frame];
+    }
 }
 
 #pragma mark - Drawing
@@ -106,7 +131,7 @@ void drawPointerForType(CGContextRef context, MKPopOutViewType type, CGColorRef 
         CGRect pointerRect = CGRectZero;
         
         if (position != 0.0) {
-            pointerRect = CGRectMake((position - 30.0), (CGRectGetMinY(drawRect) - 20.0), 35.0, 20.0);
+            pointerRect = CGRectMake((position - 17.5), (CGRectGetMinY(drawRect) - 20.0), 35.0, 20.0);
         }
         else {
             pointerRect = CGRectMake((CGRectGetMaxX(drawRect) - 70.0), (CGRectGetMinY(drawRect) - 20.0), 35.0, 20.0);

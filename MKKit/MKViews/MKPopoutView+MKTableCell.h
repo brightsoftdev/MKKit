@@ -17,10 +17,10 @@
 ///------------------------------------------------------
 
 /** The index path of the cell showing the pop out view */
-@property (nonatomic, retain, readonly) NSIndexPath *aIndexPath;
+@property (nonatomic, retain, readonly) NSIndexPath *aIndexPath MK_DEPRECATED_1_0;
 
 /** The table view that the pop out view will be displayed on. */
-@property (nonatomic, retain, readonly) UITableView *tableView;
+//@property (nonatomic, retain, readonly) UITableView *tableView;
 
 ///-------------------------------------------------------
 /// @name Displaying

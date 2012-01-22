@@ -60,6 +60,8 @@
     switch (metrics) {
         case MKMetricsPortrait: rect = subview.portraitRect; break;
         case MKMetricsLandscape: rect = subview.landscapeRect; break;
+        case MKMetricsPortraitIPad: rect = subview.portraitRect; break;
+        case MKMetricsLandscapeIPad: rect = subview.landscapeRect; break;
         default: break;
     }
     
@@ -75,9 +77,15 @@ CGFloat widthForOrientation(UIInterfaceOrientation orientation) {
     
     if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown) {
         width = 320.0;
+        if (MK_DEVICE_IS_IPAD) {
+            width = 768.0;
+        }
     }
     if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
         width = 480.0;
+        if (MK_DEVICE_IS_IPAD) {
+            width = 1024.0;
+        }
     }
     
     return width;
@@ -89,6 +97,8 @@ CGFloat widthForMetrics(MKViewMetrics metrics) {
     switch (metrics) {
         case MKMetricsPortrait: width = 320.0; break;
         case MKMetricsLandscape: width = 480.0; break;
+        case MKMetricsPortraitIPad: width = 768.0; break;
+        case MKMetricsLandscapeIPad:width = 1024.0; break;
         default: break;
     }
     
@@ -107,6 +117,15 @@ MKViewMetrics metricsForCurrentOrientation() {
         default: break;
     }
     
+    if (MK_DEVICE_IS_IPAD) {
+        if (viewMetrics == MKMetricsPortrait) {
+            viewMetrics = MKMetricsPortraitIPad;
+        }
+        if (viewMetrics == MKMetricsLandscape) {
+            viewMetrics = MKMetricsLandscapeIPad;
+        }
+    }
+    
     return viewMetrics;
 }
 
@@ -120,5 +139,15 @@ MKViewMetrics metricsForOrientation(UIInterfaceOrientation orientation) {
         case UIInterfaceOrientationLandscapeRight: viewMetrics = MKMetricsLandscape; break;
         default: break;
     }
+    
+    if (MK_DEVICE_IS_IPAD) {
+        if (viewMetrics == MKMetricsPortrait) {
+            viewMetrics = MKMetricsPortraitIPad;
+        }
+        if (viewMetrics == MKMetricsLandscape) {
+            viewMetrics = MKMetricsLandscapeIPad;
+        }
+    }
+
     return viewMetrics;
 }

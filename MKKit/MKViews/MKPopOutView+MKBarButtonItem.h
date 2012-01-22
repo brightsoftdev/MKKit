@@ -25,4 +25,9 @@
 */
 - (void)showFromButton:(MKBarButtonItem *)button onView:(UIView *)view;
 
+/**
+ Adjusts the location of the pointer/view to match the button instance.
+*/
+- (void)adjustToButton;
+
 @end

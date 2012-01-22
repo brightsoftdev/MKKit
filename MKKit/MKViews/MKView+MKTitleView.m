@@ -27,7 +27,7 @@ static const char *TitleLabelKey = "TitleLabelKey";
 }
 
 - (id)initWithTitle:(NSString *)title image:(MKImage *)icon {
-    self = [super initWithFrame:CGRectMake(0.0, 0.0, (MK_TEXT_WIDTH(title, VERDANA_BOLD(20.0)) + 32.0), 35.0)];
+    self = [super initWithFrame:CGRectMake(0.0, 0.0, (MK_TEXT_WIDTH(title, VERDANA_BOLD(20.0)) + 32.0), 32.0)];
     if (self) {
         self.backgroundColor = CLEAR;
         self.autoresizesSubviews = YES;
@@ -36,6 +36,7 @@ static const char *TitleLabelKey = "TitleLabelKey";
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:(UIImage *)icon];
         imageView.frame = CGRectMake(0.0, 2.0, 25.0, 25.0);
+        imageView.tag = kMKTtileViewImageViewTag;
         [self addSubview:imageView];
         [imageView release];
         

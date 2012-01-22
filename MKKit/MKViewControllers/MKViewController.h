@@ -3,14 +3,13 @@
 //  MKKit
 //
 //  Created by Matthew King on 3/30/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011-2012 Matt King. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <MKKit/MKKit/MKViews/MKViewHeader.h>
-#import <MKKit/MKKit/MKDeffinitions.h>
-#import <MKKit/MKKit/MKGraphics/MKGraphics.h>
-#import <MKKit/MKKit/MKMacros.h>
+
+#import <MKKit/MKKit/MKInternalHeaderPack.h>
 
 #import "MKViewControllerDelegate.h"
 

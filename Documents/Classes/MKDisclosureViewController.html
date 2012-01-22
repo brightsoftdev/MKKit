@@ -1,0 +1,402 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>MKDisclosureViewController Class Reference</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<meta name="generator" content="appledoc 2.0b3" />
+	</head>
+	<body>
+		<article>
+			<div class="main-navigation navigation-top">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="header">
+				<div class="section-header">
+					<h1 class="title title-header">MKDisclosureViewController Class Reference</h1>
+				</div>		
+			</div>
+			<div id="container">	
+				
+				<div class="section section-specification"><table cellspacing="0"><tbody>
+					<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value"><a href="MKViewController.html">MKViewController</a> : UIViewController</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MKDisclosureViewController.h</td>
+</tr>
+					</tbody></table></div>
+				
+				
+				
+				<div class="section section-overview">
+					<h2 class="subtitle subtitle-overview">Overview</h2>
+					
+<p> <strong> Overview </strong></p>
+
+<p> <a href="MKDisclosureViewController.html">MKDisclosureViewController</a> is container view controller that uses two view controllers. The <a href="#//api/name/mainViewController">mainViewController</a> is the first to be displayed and the diclosureViewController will slide in and out from the right of the screen when directed. <p class="warning"> <strong> Note </strong> This class is still under development and not fully functional. </p></p>
+
+				</div>
+				
+				
+				
+				
+				<div class="section section-tasks">
+					<h2 class="subtitle subtitle-tasks">Tasks</h2>
+					
+					<h3 class="subsubtitle task-title">Creating</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithMainController:disclosureController:">- initWithMainController:disclosureController:</a></code>
+		<span class="tooltip"> Creates a new instance of <a href="MKDisclosureViewController.html">MKDisclosureViewController</a> with the given view controllers. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">View Controllers</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/mainViewController"> mainViewController</a></code>
+		<span class="tooltip"> The asigned main view controller </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/disclosureViewController"> disclosureViewController</a></code>
+		<span class="tooltip"> The disclosure view controller </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Transition Control</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/uncoverByDistance:">- uncoverByDistance:</a></code>
+		<span class="tooltip"> Moves the disclosures view controllers&apos;s view in from the right to the given distance. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fullyUncover">- fullyUncover</a></code>
+		<span class="tooltip"> Moves the disclosure view controller&apos;s view to cover the entire area. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/recover">- recover</a></code>
+		<span class="tooltip"> Moves the disclosure view controller&apos;s view off of the screen. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/disclosureViewIsVisiable"> disclosureViewIsVisiable</a></code>
+		<span class="tooltip"> <code>YES</code> if the disclosure view is visiable. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/fullyUncover" title="fullyUncover"></a>
+	<h3 class="subsubtitle method-title">fullyUncover</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Moves the disclosure view controller&apos;s view to cover the entire area. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)fullyUncover</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKDisclosureViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/initWithMainController:disclosureController:" title="initWithMainController:disclosureController:"></a>
+	<h3 class="subsubtitle method-title">initWithMainController:disclosureController:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates a new instance of <a href="MKDisclosureViewController.html">MKDisclosureViewController</a> with the given view controllers. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithMainController:(UIViewController *)<em>mainController</em> disclosureController:(UIViewController *)<em>disclosureController</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>mainViewController</em></dt>
+			<dd> the view controller that will be first displayed. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>disclosureViewController</em></dt>
+			<dd> the view controller that moves in and out from the right of the screen </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKDisclosureViewController.html">MKDisclosureViewController</a> instance </p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKDisclosureViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/recover" title="recover"></a>
+	<h3 class="subsubtitle method-title">recover</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Moves the disclosure view controller&apos;s view off of the screen. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)recover</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKDisclosureViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/uncoverByDistance:" title="uncoverByDistance:"></a>
+	<h3 class="subsubtitle method-title">uncoverByDistance:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Moves the disclosures view controllers&apos;s view in from the right to the given distance. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)uncoverByDistance:(float)<em>distance</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>distance</em></dt>
+			<dd> the distance to move the view to mesured from the left side of the srceen. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKDisclosureViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Properties</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/disclosureViewController" title="disclosureViewController"></a>
+	<h3 class="subsubtitle method-title">disclosureViewController</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The disclosure view controller </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain, readonly) UIViewController *disclosureViewController</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKDisclosureViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/disclosureViewIsVisiable" title="disclosureViewIsVisiable"></a>
+	<h3 class="subsubtitle method-title">disclosureViewIsVisiable</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> <code>YES</code> if the disclosure view is visiable. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, readonly) BOOL disclosureViewIsVisiable</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKDisclosureViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/mainViewController" title="mainViewController"></a>
+	<h3 class="subsubtitle method-title">mainViewController</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The asigned main view controller </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain, readonly) UIViewController *mainViewController</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKDisclosureViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+			</div>
+			<div class="main-navigation navigation-bottom">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="footer">
+				<hr />
+				<div class="footer-copyright">
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-01-22)</span><br />
+					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>
