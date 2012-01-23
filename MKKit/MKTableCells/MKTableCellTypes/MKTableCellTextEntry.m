@@ -38,7 +38,6 @@
 		mTheTextField.delegate = self;
 		mTheTextField.returnKeyType = UIReturnKeyDone;
 		mTheTextField.keyboardAppearance = UIKeyboardAppearanceAlert;
-		mTheTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
 		
 		[mTheTextField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         

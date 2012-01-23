@@ -13,6 +13,7 @@
 #import <MKKit/MKKit/MKErrorContol/MKInputValidation.h>
 #import <MKKit/MKKit/MKErrorContol/MKValidator.h>
 #import <MKKit/MKKit/MKInternalHeaderPack.h>
+#import <MKKit/MKKit/MKViews/MKViewHeader.h>
 
 #import <MKKit/MKKit/MKStrings.h>
 
@@ -389,118 +390,17 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 /** 
  @warning *Deprecated v0.9* Use image property instead. 
 */
-@property (nonatomic, retain) UIImage *icon; //MK_DEPRECATED_0_9;
+@property (nonatomic, retain) UIImage *icon MK_DEPRECATED_0_9;
 
 /** 
  @warning *Deprecated v0.9* Use image property instead. 
 */
-@property (nonatomic, retain) UIImage *iconMask; //MK_DEPRECATED_0_9;
+@property (nonatomic, retain) UIImage *iconMask MK_DEPRECATED_0_9;
 
 /** 
- @warning *Deprecated v0.9* Use image property instead.
+ @warning *Deprecated v0.9* Use accessoryImage property instead.
 */
-@property (nonatomic, retain) UIImage *accessoryIcon;// MK_DEPRECATED_0_9;
-
-@end
-
-/**--------------------------------------------------------------------------
- This catagory of MKView provides a standard layout for MKTableCell objects.
----------------------------------------------------------------------------*/
-
-@interface MKView (MKTableCell)
-
-///-----------------------------------
-/// @name Creating
-///-----------------------------------
-
-/**
- Creates an instace of MKView for the given table cell.
- 
- @param cell the cell the view will be placed on.
- 
- @return MKView instance
- */
-- (id)initWithCell:(MKTableCell *)cell;
-
-///-----------------------------------
-/// @name Layout Control
-///-----------------------------------
-
-/**
- Adjusts the elements of the cell to fit.
- */
-- (void)layoutCell;
-
-/**
- Yes if the primary element should not atomically adjust its size. 
- Default is `NO`.
- */
-@property (nonatomic, assign) BOOL pinnedPrimaryElement;
-
-/** 
- Yes if the secondary element should not atomically adjust its size. 
- Default is `NO`.
- */
-@property (nonatomic, assign) BOOL pinnedSecondaryElement;
-
-///-----------------------------------
-/// @name Adding Elements
-///-----------------------------------
-
-/**
- Adds a Primary Element to the cell. The primary element 
- appears on the left side of the cell.
- 
- @param element the view that will be added to the cell.
- */
-- (void)addPrimaryElement:(UIView *)element;
-
-/**
- Adds a Primary Element to the cell that is placed in the given
- rect. Using this method will set the pinnedPrimaryElement 
- property to `YES`.
- 
- @param element the view to add to the cell
- 
- @param rect the rect of the view
- */
-- (void)addPrimaryElement:(UIView *)element inRect:(CGRect)rect;
-
-/**
- Adds a Secondary Element to the cell. The secondary element 
- appears on the right side of the cell.
- 
- @param element the view that will be added to the cell.
- */
-- (void)addSecondaryElement:(UIView *)element;
-
-/**
- Adds a secondary element to the cell is that fills the desired rect.
- Using this method will set the pinnedSecondary element Property to 
- `YES`.
- 
- @param element the view to add to the cell.
- 
- @param rect the rect of the view.
- */ 
-- (void)addSecondaryElement:(UIView *)element inRect:(CGRect)rect;
-
-/**
- Adds a Icon Element to the cell. The icon element 
- appears on the left side of the cell.
- 
- @param element the view that will be added to the cell.
- */
-- (void)addIconElement:(UIView *)element;
-
-/**
- Adds a view under the primary and seconday views. The primay and secondary
- views adjust to fit the new element. If the cell has an icon view assigned, 
- the detail element is moved to right to fit the icon.
- 
- @param element the view that will be added to the cell.
- */
-- (void)addDetailElement:(UIView *)element;
+@property (nonatomic, retain) UIImage *accessoryIcon MK_DEPRECATED_0_9;
 
 @end
 
@@ -546,20 +446,3 @@ static const CGFloat kBadgeHeight                   = 22.0;
 static const CGFloat kBadgeY                        = 10.0;
 static const CGFloat kBadgeX                        = 280.0;
 static const CGFloat kBadgeXWidthAdjustment         = 30.0;
-
-static const CGFloat kCellIconRectX                 = 10.0;
-static const CGFloat kCellIconRectY                 = 7.0;
-static const CGFloat kCellIconRectWidth             = 30.0;
-static const CGFloat kCellIconRectHeight            = 30.0;
-static const CGFloat kCellPrimaryElementX           = 7.0;
-static const CGFloat kCellPrimaryElementY           = 7.0;
-static const CGFloat kCellPrimaryElementyWidth      = 294.0;
-static const CGFloat kCellPrimaryElementHeight      = 30.0;
-static const CGFloat kCellSecondaryElementX         = 115.0;
-static const CGFloat kCellSecondaryElementY         = 7.0;
-static const CGFloat kCellSecondaryElementWidth     = 191.0;
-static const CGFloat kCellSecondaryElementHeight    = 30.0;
-static const CGFloat kCellDetailElementX            = 7.0;
-static const CGFloat kCellDetailElementY            = 29.0;
-static const CGFloat kCellDetailElementWidth        = 294.0;
-static const CGFloat kCellDetailElementHeight       = 12.0;

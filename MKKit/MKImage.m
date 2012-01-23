@@ -20,7 +20,7 @@
 
 #pragma mark - Creation
 
-+ (id)imagedNamed:(NSString *)imageName graphicStruct:(MKGraphicsStructures *)graphicStruct {
++ (id)imageNamed:(NSString *)imageName graphicStruct:(MKGraphicsStructures *)graphicStruct {
     return [[[self alloc] initWithName:imageName graphicStruct:graphicStruct] autorelease];
 }
 

@@ -16,16 +16,14 @@
 
 @implementation MKTableCellSwitch
 
-@synthesize theSwitch=_theSwitch;
+@synthesize theSwitch=mTheSwitch;
 
-#pragma mark -
-#pragma mark Initalizer
+#pragma mark - Creation
 
 - (id)initWithType:(MKTableCellType)cellType reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithType:MKTableCellTypeNone reuseIdentifier:reuseIdentifier];
     if (self) {
         CGRect switchFrame = CGRectMake(198.3, 10.0, 172.0, 21.0);
-		//CGRect labelFrame = CGRectMake(10.0, 11.0, 150.0, 21.0);
 		
         mCellView = [[MKView alloc] initWithCell:self];
         
@@ -33,19 +31,23 @@
 		mTheLabel.textAlignment = UITextAlignmentLeft;
 		mTheLabel.adjustsFontSizeToFitWidth = YES;
 		mTheLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-		mTheLabel.backgroundColor = [UIColor clearColor];
-		mTheLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
+		mTheLabel.backgroundColor = CLEAR;
 		
         [mCellView addPrimaryElement:mTheLabel];
 		[mTheLabel release];
 		
-		_theSwitch = [[UISwitch alloc] initWithFrame:switchFrame];
-		_theSwitch.on = NO;
-		_theSwitch.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-		[_theSwitch addTarget:self action:@selector(switchFlipped:) forControlEvents:UIControlEventValueChanged];
-		
-        [mCellView addSecondaryElement:_theSwitch inRect:switchFrame];
-		[_theSwitch release];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+        view.tag = kSecondaryViewTag;
+        
+		mTheSwitch = [[UISwitch alloc] initWithFrame:switchFrame];
+		[mTheSwitch addTarget:self action:@selector(switchFlipped:) forControlEvents:UIControlEventValueChanged];
+        mTheSwitch.on = NO;
+        
+        [view addSubview:mTheSwitch];
+        [mTheSwitch release];
+        
+        [mCellView addSecondaryElement:view];
+		[view release];
         
         [self.contentView addSubview:mCellView];
         [mCellView release];
@@ -53,8 +55,21 @@
     return self;
 }
 
-#pragma mark -
-#pragma mark Cell Behaivor
+#pragma mark - Layout
+
+- (void)layoutForMetrics:(MKViewMetrics)metrics {
+    UIView *switchView = [self.cellView viewWithTag:kSecondaryViewTag];
+    
+    MKMetrics *viewMetrics = [MKMetrics metricsForView:switchView];
+    
+    mTheSwitch.frame = CGRectMake((switchView.frame.size.width - 79.0), 0.0, 79.0, 27.0);
+    
+    [viewMetrics beginLayout];
+    [viewMetrics horizontallyCenterView:mTheSwitch];
+    [viewMetrics endLayout];
+}
+
+#pragma mark - Cell Behaivor
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
 	
@@ -63,8 +78,7 @@
     // Configure the view for the selected state
 }
 
-#pragma mark -
-#pragma mark SwitchCell Methods
+#pragma mark - SwitchCell Methods
 
 - (void)switchFlipped:(id)sender {
 	if ([delegate respondsToSelector:@selector(valueDidChange:forKey:)]) {

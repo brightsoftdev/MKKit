@@ -109,6 +109,10 @@ void drawBackgroundForRect(CGContextRef context, CGRect drawRect, CGRect innerRe
 /** The type of popout view used */
 @property (nonatomic, assign, readonly) MKPopOutViewType type;
 
+///---------------------------------------------------------
+/// @name Related Views
+///---------------------------------------------------------
+
 /** 
  Reference to an MKBarButton that the pop over view will appear from.
  This property should not need to be set directly.

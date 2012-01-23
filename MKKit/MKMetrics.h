@@ -84,6 +84,12 @@ typedef enum {
 - (void)endLayout;
 
 ///---------------------------------
+/// @name Layout Options
+///---------------------------------
+
+- (void)horizontallyCenterView:(UIView *)subview;
+
+///---------------------------------
 /// @name Referencing
 ///---------------------------------
 

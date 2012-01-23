@@ -61,7 +61,7 @@
  
  @return MKImage instance
 */
-+ (id)imagedNamed:(NSString *)imageName graphicStruct:(MKGraphicsStructures *)graphicStruct;
++ (id)imageNamed:(NSString *)imageName graphicStruct:(MKGraphicsStructures *)graphicStruct;
 
 /**
  Creates an Instance of MKImage.

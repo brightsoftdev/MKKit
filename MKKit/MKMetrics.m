@@ -68,6 +68,15 @@
     subview.frame = rect;
 }
 
+#pragma mark Layout Options
+
+- (void)horizontallyCenterView:(UIView *)subview {
+    float remainingHeight = (self.view.frame.size.height - subview.frame.size.height);
+    float topSpace = (remainingHeight / 2.0);
+    
+    subview.frame = CGRectMake(subview.frame.origin.x, topSpace, subview.frame.size.width, subview.frame.size.height);
+}
+
 @end
 
 #pragma mark - Helper Functions

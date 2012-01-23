@@ -18,7 +18,7 @@
 ----------------------------------------------------------------------------------------------------*/
 
 @interface MKTableCellSwitch : MKTableCell {
-	UISwitch *_theSwitch;
+	UISwitch *mTheSwitch;
 }
 ///-----------------------------------------------
 /// @name Table Elements

@@ -16,6 +16,9 @@ static const int kBadgeViewTag                      = 1005;
 static const int kDetailViewTag                     = 1006;
 static const int kSwipeViewTag                      = 1007;
 
+#pragma mark MKTableCellSwitch
+static const int kSwitchCellSuperview               = 1010;
+
 #pragma mark - MKPopOutView
 
 static const int kMKPopOutViewTableCellTag          = 2001;

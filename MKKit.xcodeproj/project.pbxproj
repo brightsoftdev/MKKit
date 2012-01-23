@@ -210,6 +210,8 @@
 		AABF4D9113921DA0001B547A /* MKIAPController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABF4D8F13921DA0001B547A /* MKIAPController.m */; };
 		AABF4D9413921E1A001B547A /* MKTableCellIAP.h in Headers */ = {isa = PBXBuildFile; fileRef = AABF4D9213921E1A001B547A /* MKTableCellIAP.h */; };
 		AABF4D9513921E1A001B547A /* MKTableCellIAP.m in Sources */ = {isa = PBXBuildFile; fileRef = AABF4D9313921E1A001B547A /* MKTableCellIAP.m */; };
+		AAC828EF14CC898E00521470 /* MKView+MKTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC828ED14CC898D00521470 /* MKView+MKTableCell.h */; };
+		AAC828F014CC898E00521470 /* MKView+MKTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC828EE14CC898D00521470 /* MKView+MKTableCell.m */; };
 		AAD0024214131FAE0088D5F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		AAD0026A141323300088D5F9 /* MKGraphs.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD00269141323300088D5F9 /* MKGraphs.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAE6D6A214B252C600C3FD31 /* MKView+MKTableHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6D6A014B252C600C3FD31 /* MKView+MKTableHeader.h */; };
@@ -439,6 +441,8 @@
 		AABF4D8F13921DA0001B547A /* MKIAPController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKIAPController.m; sourceTree = "<group>"; };
 		AABF4D9213921E1A001B547A /* MKTableCellIAP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKTableCellIAP.h; sourceTree = "<group>"; };
 		AABF4D9313921E1A001B547A /* MKTableCellIAP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKTableCellIAP.m; sourceTree = "<group>"; };
+		AAC828ED14CC898D00521470 /* MKView+MKTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKView+MKTableCell.h"; sourceTree = "<group>"; };
+		AAC828EE14CC898D00521470 /* MKView+MKTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKView+MKTableCell.m"; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AAD0024114131FAE0088D5F9 /* libMKGraphs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMKGraphs.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD0024514131FAE0088D5F9 /* MKGraphs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MKGraphs-Prefix.pch"; sourceTree = "<group>"; };
@@ -980,6 +984,8 @@
 				AAE6D6A114B252C600C3FD31 /* MKView+MKTableHeader.m */,
 				AA7E1FF9148DA30E00F029EA /* MKView+MKTitleView.h */,
 				AA7E1FFA148DA30E00F029EA /* MKView+MKTitleView.m */,
+				AAC828ED14CC898D00521470 /* MKView+MKTableCell.h */,
+				AAC828EE14CC898D00521470 /* MKView+MKTableCell.m */,
 			);
 			name = "View Categories";
 			sourceTree = "<group>";
@@ -1153,6 +1159,7 @@
 				AA0D1A7214C3AB8400F0D778 /* MKInternalHeaderPack.h in Headers */,
 				AA59145714CA3CE6002736EF /* MKDisclosureViewController.h in Headers */,
 				AA59145B14CA4FB4002736EF /* UIViewController+MKVIewController.h in Headers */,
+				AAC828EF14CC898E00521470 /* MKView+MKTableCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1353,6 +1360,7 @@
 				AA0D1A6E14C3683B00F0D778 /* UIView+MKMetrics.m in Sources */,
 				AA59145814CA3CE6002736EF /* MKDisclosureViewController.m in Sources */,
 				AA59145C14CA4FB4002736EF /* UIViewController+MKVIewController.m in Sources */,
+				AAC828F014CC898E00521470 /* MKView+MKTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,7 +27,7 @@ typedef enum {
 
 @protocol MKViewDelegate;
 
-@class MKImage;
+@class MKImage, MKTableCell;
 
 /**-------------------------------------------------------------------------------------------------------
  *Overview*
@@ -75,10 +75,13 @@ typedef enum {
 -------------------------------------------------------------------------------------------------------*/
 
 @interface MKView : UIView <MKGraphicFactory> {
+@public
     id mDelegate;
     BOOL mShouldRemoveView;
     MKViewAnimationType mAnimationType;
     MKGraphicsStructures *mGraphics;
+    
+    MKTableCell *mTableCell;
     
 @private
     struct {
@@ -131,6 +134,16 @@ typedef enum {
 
 /** The view controller that owns the view. */
 @property (nonatomic, retain) IBOutlet UIViewController *controller;
+
+///------------------------------------------------------
+/// @name Related Views
+///------------------------------------------------------
+
+/** 
+ Reference to an instance of MKTableCell when a cell is the superview.
+ This property does not need to be set directly.
+ */
+@property (nonatomic, retain) MKTableCell *cell;
 
 ///------------------------------------------------------
 /// @name Delegate

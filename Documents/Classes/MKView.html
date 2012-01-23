@@ -129,6 +129,18 @@
 </li>
 					</ul>
 					
+					<h3 class="subsubtitle task-title">Related Views</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/cell"> cell</a></code>
+		<span class="tooltip"> Reference to an instance of <a href="MKTableCell.html">MKTableCell</a> when a <a href="#//api/name/cell">cell</a> is the superview. This property does not need to be set directly. </span>
+	</span>
+	
+</li>
+					</ul>
+					
 					<h3 class="subsubtitle task-title">Delegate</h3>
 
 					<ul class="task-list">
@@ -153,6 +165,72 @@
 </li>
 					</ul>
 					
+					<h3 class="subsubtitle task-title">MKTableCell Methods</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithCell:">- initWithCell:</a></code>
+		<span class="tooltip"> Creates an instace of <a href="MKView.html">MKView</a> for the given table cell. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addPrimaryElement:">- addPrimaryElement:</a></code>
+		<span class="tooltip"> Adds a Primary Element to the cell. The primary element appears on the left side of the cell. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addSecondaryElement:">- addSecondaryElement:</a></code>
+		<span class="tooltip"> Adds a Secondary Element to the cell. The secondary element appears on the right side of the cell. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addIconElement:">- addIconElement:</a></code>
+		<span class="tooltip"> Adds a Icon Element to the cell. The icon element appears on the left side of the cell. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addDetailElement:">- addDetailElement:</a></code>
+		<span class="tooltip"> Adds a view under the primary and seconday views. The primay and secondary views adjust to fit the new element. If the <a href="#//api/name/cell">cell</a> has an icon view assigned, the detail element is moved to right to fit the icon. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/layoutCell:MK_DEPRECATED_1_0:">- layoutCell:MK_DEPRECATED_1_0:</a></code>
+		<span class="tooltip"> <strong> DEPRECATED METHOD </strong> use - [(void) UIView (MKMetrics) layoutForMetrics:] instead. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addPrimaryElement:inRect:MK_DEPRECATED_1_0:">- addPrimaryElement:inRect:MK_DEPRECATED_1_0:</a></code>
+		<span class="tooltip"> <strong> DEPRECATED METHOD </strong></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addSecondaryElement:inRect:MK_DEPRECATED_1_0:">- addSecondaryElement:inRect:MK_DEPRECATED_1_0:</a></code>
+		<span class="tooltip"> <strong> DEPRECATED METHOD </strong></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pinnedPrimaryElement"> pinnedPrimaryElement</a></code>
+		<span class="tooltip"> <strong> DEPRECATED PROPERTY </strong></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pinnedSecondaryElement"> pinnedSecondaryElement</a></code>
+		<span class="tooltip"> <strong> DEPRECATED PROPERTY </strong></span>
+	</span>
+	
+</li>
+					</ul>
+					
 					<h3 class="subsubtitle task-title">Internal Methods</h3>
 
 					<ul class="task-list">
@@ -171,25 +249,19 @@
 </li>
 					</ul>
 					
-					<h3 class="subsubtitle task-title">MKTitleView Methods</h3>
+					<h3 class="subsubtitle task-title">IconMask Methods</h3>
 
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/titleViewWithTitle:image:">+ titleViewWithTitle:image:</a></code>
-		<span class="tooltip"> Creates an autoreleased instance of <a href="MKView.html">MKView</a> Suited for display on a navigation bar. </span>
+		<code><a href="#//api/name/initWithImage:gradient:MK_DEPRECATED_0_9:">- initWithImage:gradient:MK_DEPRECATED_0_9:</a></code>
+		<span class="tooltip"> <p class="warning"> <strong> Deprecated Method v0.9 </strong> Use <a href="MKImage.html">MKImage</a> methods instead. </p></span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithTitle:image:">- initWithTitle:image:</a></code>
-		<span class="tooltip"> Creates an instance of <a href="MKView.html">MKView</a> Suited for display on a navigation bar. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/titleLabel"> titleLabel</a></code>
-		<span class="tooltip"> Reference to the label that display the title text. </span>
+		<code><a href="#//api/name/MK_DEPRECATED_0_9"> MK_DEPRECATED_0_9</a></code>
+		<span class="tooltip"> <p class="warning"> <strong> Deprecated Property v0.9 </strong></p></span>
 	</span>
 	
 </li>
@@ -222,88 +294,28 @@
 		<span class="tooltip"> Returns an instace of <a href="MKView.html">MKView</a> sized for a table header. The view is a basic replication of of the standard headers, except you have access to the UILabel instance. </span>
 	</span>
 	
-</li>
-					</ul>
-					
-					<h3 class="subsubtitle task-title">MKTableCell Methods</h3>
-
-					<ul class="task-list">
-						<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initWithCell:">- initWithCell:</a></code>
-		<span class="tooltip"> Creates an instace of <a href="MKView.html">MKView</a> for the given table cell. </span>
-	</span>
-	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/layoutCell">- layoutCell</a></code>
-		<span class="tooltip"> Adjusts the elements of the cell to fit. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/pinnedPrimaryElement"> pinnedPrimaryElement</a></code>
-		<span class="tooltip"> Yes if the primary element should not atomically adjust its size. Default is <code>NO</code>. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/pinnedSecondaryElement"> pinnedSecondaryElement</a></code>
-		<span class="tooltip"> Yes if the secondary element should not atomically adjust its size. Default is <code>NO</code>. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addPrimaryElement:">- addPrimaryElement:</a></code>
-		<span class="tooltip"> Adds a Primary Element to the cell. The primary element appears on the left side of the cell. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addPrimaryElement:inRect:">- addPrimaryElement:inRect:</a></code>
-		<span class="tooltip"> Adds a Primary Element to the cell that is placed in the given rect. Using this method will set the <a href="#//api/name/pinnedPrimaryElement">pinnedPrimaryElement</a> property to <code>YES</code>. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addSecondaryElement:">- addSecondaryElement:</a></code>
-		<span class="tooltip"> Adds a Secondary Element to the cell. The secondary element appears on the right side of the cell. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addSecondaryElement:inRect:">- addSecondaryElement:inRect:</a></code>
-		<span class="tooltip"> Adds a secondary element to the cell is that fills the desired rect. Using this method will set the pinnedSecondary element Property to <code>YES</code>. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addIconElement:">- addIconElement:</a></code>
-		<span class="tooltip"> Adds a Icon Element to the cell. The icon element appears on the left side of the cell. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addDetailElement:">- addDetailElement:</a></code>
-		<span class="tooltip"> Adds a view under the primary and seconday views. The primay and secondary views adjust to fit the new element. If the cell has an icon view assigned, the detail element is moved to right to fit the icon. </span>
+		<code><a href="#//api/name/titleLabel"> titleLabel</a></code>
+		<span class="tooltip"> The UILabel instance that is displayed on the view </span>
 	</span>
 	
 </li>
 					</ul>
 					
-					<h3 class="subsubtitle task-title">IconMask Methods</h3>
+					<h3 class="subsubtitle task-title">MKTitleView Methods</h3>
 
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithImage:gradient:MK_DEPRECATED_0_9:">- initWithImage:gradient:MK_DEPRECATED_0_9:</a></code>
-		<span class="tooltip"> <p class="warning"> <strong> Deprecated Method v0.9 </strong> Use <a href="MKImage.html">MKImage</a> methods instead. </p></span>
+		<code><a href="#//api/name/titleViewWithTitle:image:">+ titleViewWithTitle:image:</a></code>
+		<span class="tooltip"> Creates an autoreleased instance of <a href="MKView.html">MKView</a> Suited for display on a navigation bar. </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/MK_DEPRECATED_0_9"> MK_DEPRECATED_0_9</a></code>
-		<span class="tooltip"> <p class="warning"> <strong> Deprecated Property v0.9 </strong></p></span>
+		<code><a href="#//api/name/initWithTitle:image:">- initWithTitle:image:</a></code>
+		<span class="tooltip"> Creates an instance of <a href="MKView.html">MKView</a> Suited for display on a navigation bar. </span>
 	</span>
 	
 </li>
@@ -473,7 +485,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Adds a view under the primary and seconday views. The primay and secondary views adjust to fit the new element. If the cell has an icon view assigned, the detail element is moved to right to fit the icon. </p>
+		<p> Adds a view under the primary and seconday views. The primay and secondary views adjust to fit the new element. If the <a href="#//api/name/cell">cell</a> has an icon view assigned, the detail element is moved to right to fit the icon. </p>
 	</div>		
 	
 	
@@ -502,7 +514,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKTableCell.h</code><br />
+		<code class="declared-in-ref">MKView+MKTableCell.h</code><br />
 	</div>				
 	
 	
@@ -544,7 +556,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKTableCell.h</code><br />
+		<code class="declared-in-ref">MKView+MKTableCell.h</code><br />
 	</div>				
 	
 	
@@ -586,40 +598,25 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKTableCell.h</code><br />
+		<code class="declared-in-ref">MKView+MKTableCell.h</code><br />
 	</div>				
 	
 	
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/addPrimaryElement:inRect:" title="addPrimaryElement:inRect:"></a>
-	<h3 class="subsubtitle method-title">addPrimaryElement:inRect:</h3>
+	<a name="//api/name/addPrimaryElement:inRect:MK_DEPRECATED_1_0:" title="addPrimaryElement:inRect:MK_DEPRECATED_1_0:"></a>
+	<h3 class="subsubtitle method-title">addPrimaryElement:inRect:MK_DEPRECATED_1_0:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Adds a Primary Element to the cell that is placed in the given rect. Using this method will set the <a href="#//api/name/pinnedPrimaryElement">pinnedPrimaryElement</a> property to <code>YES</code>. </p>
+		<p> <strong> DEPRECATED METHOD </strong></p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)addPrimaryElement:(UIView *)<em>element</em> inRect:(CGRect)<em>rect</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)addPrimaryElement:(UIView *)<em>element</em> inRect:(CGRect)<em>rect</em> MK_DEPRECATED_1_0</code></div>
 	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>element</em></dt>
-			<dd> the view to add to the cell </dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>rect</em></dt>
-			<dd> the rect of the view </dd>
-		</dl>
-		
-	</div>
 	
 	
 	
@@ -633,7 +630,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKTableCell.h</code><br />
+		<code class="declared-in-ref">MKView+MKTableCell.h</code><br />
 	</div>				
 	
 	
@@ -675,40 +672,25 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKTableCell.h</code><br />
+		<code class="declared-in-ref">MKView+MKTableCell.h</code><br />
 	</div>				
 	
 	
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/addSecondaryElement:inRect:" title="addSecondaryElement:inRect:"></a>
-	<h3 class="subsubtitle method-title">addSecondaryElement:inRect:</h3>
+	<a name="//api/name/addSecondaryElement:inRect:MK_DEPRECATED_1_0:" title="addSecondaryElement:inRect:MK_DEPRECATED_1_0:"></a>
+	<h3 class="subsubtitle method-title">addSecondaryElement:inRect:MK_DEPRECATED_1_0:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Adds a secondary element to the cell is that fills the desired rect. Using this method will set the pinnedSecondary element Property to <code>YES</code>. </p>
+		<p> <strong> DEPRECATED METHOD </strong></p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)addSecondaryElement:(UIView *)<em>element</em> inRect:(CGRect)<em>rect</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)addSecondaryElement:(UIView *)<em>element</em> inRect:(CGRect)<em>rect</em> MK_DEPRECATED_1_0</code></div>
 	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>element</em></dt>
-			<dd> the view to add to the cell. </dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>rect</em></dt>
-			<dd> the rect of the view. </dd>
-		</dl>
-		
-	</div>
 	
 	
 	
@@ -722,7 +704,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKTableCell.h</code><br />
+		<code class="declared-in-ref">MKView+MKTableCell.h</code><br />
 	</div>				
 	
 	
@@ -811,7 +793,7 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>cell</em></dt>
-			<dd> the cell the view will be placed on. </dd>
+			<dd> the <a href="#//api/name/cell">cell</a> the view will be placed on. </dd>
 		</dl>
 		
 	</div>
@@ -833,7 +815,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKTableCell.h</code><br />
+		<code class="declared-in-ref">MKView+MKTableCell.h</code><br />
 	</div>				
 	
 	
@@ -1013,17 +995,17 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/layoutCell" title="layoutCell"></a>
-	<h3 class="subsubtitle method-title">layoutCell</h3>
+	<a name="//api/name/layoutCell:MK_DEPRECATED_1_0:" title="layoutCell:MK_DEPRECATED_1_0:"></a>
+	<h3 class="subsubtitle method-title">layoutCell:MK_DEPRECATED_1_0:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Adjusts the elements of the cell to fit. </p>
+		<p> <strong> DEPRECATED METHOD </strong> use - [(void) UIView (MKMetrics) layoutForMetrics:] instead. </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)layoutCell</code></div>
+	<div class="method-subsection method-declaration"><code>- (void)layoutCell MK_DEPRECATED_1_0</code></div>
 	
 	
 	
@@ -1038,7 +1020,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKTableCell.h</code><br />
+		<code class="declared-in-ref">MKView+MKTableCell.h</code><br />
 	</div>				
 	
 	
@@ -1205,6 +1187,38 @@
 </div>
 					
 					<div class="section-method">
+	<a name="//api/name/cell" title="cell"></a>
+	<h3 class="subsubtitle method-title">cell</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Reference to an instance of <a href="MKTableCell.html">MKTableCell</a> when a <a href="#//api/name/cell">cell</a> is the superview. This property does not need to be set directly. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) MKTableCell *cell</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKView.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
 	<a name="//api/name/controller" title="controller"></a>
 	<h3 class="subsubtitle method-title">controller</h3>
 	
@@ -1339,7 +1353,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Yes if the primary element should not atomically adjust its size. Default is <code>NO</code>. </p>
+		<p> <strong> DEPRECATED PROPERTY </strong></p>
 	</div>		
 	
 	
@@ -1358,7 +1372,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKTableCell.h</code><br />
+		<code class="declared-in-ref">MKView+MKTableCell.h</code><br />
 	</div>				
 	
 	
@@ -1371,7 +1385,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Yes if the secondary element should not atomically adjust its size. Default is <code>NO</code>. </p>
+		<p> <strong> DEPRECATED PROPERTY </strong></p>
 	</div>		
 	
 	
@@ -1390,7 +1404,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKTableCell.h</code><br />
+		<code class="declared-in-ref">MKView+MKTableCell.h</code><br />
 	</div>				
 	
 	
@@ -1403,7 +1417,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Reference to the label that display the title text. </p>
+		<p> The UILabel instance that is displayed on the view </p>
 	</div>		
 	
 	
@@ -1422,7 +1436,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKView+MKTitleView.h</code><br />
+		<code class="declared-in-ref">MKView+MKTableHeader.h</code><br />
 	</div>				
 	
 	
@@ -1537,7 +1551,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-01-16)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-01-22)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

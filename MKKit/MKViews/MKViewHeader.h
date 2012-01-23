@@ -22,3 +22,4 @@
 #import "MKPopOutView+MKBarButtonItem.h"
 #import "MKView+MKTitleView.h"
 #import "MKView+MKTableHeader.h"
+#import "MKView+MKTableCell.h"

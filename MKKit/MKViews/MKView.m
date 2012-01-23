@@ -19,7 +19,7 @@
 
 @implementation MKView
 
-@synthesize x, y, width, height, gradient, controller, delegate=mDelegate;
+@synthesize x, y, width, height, gradient, controller, delegate=mDelegate, cell;
 
 @dynamic graphicsStructure;
 
@@ -65,6 +65,7 @@
 - (void)dealloc {
     self.controller = nil;
     self.graphicsStructure = nil;
+    self.cell = nil;
     
     objc_removeAssociatedObjects(self);
     
