@@ -191,7 +191,7 @@
 	[theConnection release];
 	[requestData release];
     
-    [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
+    //[[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
 	[request release];
 }
 

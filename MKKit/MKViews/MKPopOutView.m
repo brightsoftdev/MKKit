@@ -74,8 +74,8 @@
             [self setSize:CGSizeMake(460.0, self.frame.size.height) forMetrics:MKMetricsLandscape];
         }
         if (MK_DEVICE_IS_IPAD) {
-            [self setSize:CGSizeMake(300.0, self.frame.size.height) forMetrics:MKMetricsPortraitIPad];
-            [self setSize:CGSizeMake(460.0, self.frame.size.height) forMetrics:MKMetricsLandscapeIPad];
+            [self setSize:CGSizeMake(300.0, self.frame.size.height) forMetrics:MKMetricsPortrait];
+            [self setSize:CGSizeMake(460.0, self.frame.size.height) forMetrics:MKMetricsLandscape];
         }
         
         MKMetrics *metrics = [MKMetrics metricsForView:self];

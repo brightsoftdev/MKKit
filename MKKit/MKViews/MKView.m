@@ -19,7 +19,7 @@
 
 @implementation MKView
 
-@synthesize x, y, width, height, gradient, controller, delegate=mDelegate, cell;
+@synthesize x, y, width, height, gradient, controller, delegate=mDelegate, cell, shouldLayoutSubviews;
 
 @dynamic graphicsStructure;
 
@@ -53,6 +53,7 @@
 - (void)setUpView {
     self.userInteractionEnabled = YES;
     self.autoresizesSubviews = YES;
+    self.shouldLayoutSubviews = YES;
     
     mShouldRemoveView = YES;
     
@@ -77,7 +78,9 @@
 #pragma mark - Layout
 
 - (void)layoutSubviews {
-    [self layoutForMetrics:metricsForCurrentOrientation()];
+    if (shouldLayoutSubviews) {
+        [self layoutForMetrics:metricsForCurrentOrientation()];
+    }
 }
 
 #pragma mark - Accessor methods

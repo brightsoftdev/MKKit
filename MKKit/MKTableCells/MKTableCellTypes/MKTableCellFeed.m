@@ -100,6 +100,11 @@
 
 - (void)setFeedType:(MKTableCellFeedType)aType {
     mFeedType = aType;
+    
+    if (mFeedType == MKTableCellFeedTypeDynamic) {
+        self.dynamicHeight = YES;
+    }
+    
 	CGRect feedRect = CGRectMake(2.0, 32.0, 299.0, 103.0);
     
     if (aType == MKTableCellFeedTypeDynamic) {

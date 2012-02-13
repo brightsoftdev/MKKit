@@ -117,6 +117,18 @@
 </li>
 					</ul>
 					
+					<h3 class="subsubtitle task-title">Layout</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/shouldLayoutSubviews"> shouldLayoutSubviews</a></code>
+		<span class="tooltip"> Set to <code>NO</code> to prevent <code>layoutWithMetrics:</code> calls. Default is <code>YES</code>. </span>
+	</span>
+	
+</li>
+					</ul>
+					
 					<h3 class="subsubtitle task-title">Ownership</h3>
 
 					<ul class="task-list">
@@ -158,110 +170,8 @@
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/gradient"> gradient</a></code>
-		<span class="tooltip"> <strong> DEPRECATED v0.9 </strong> use graphicStructure instead. </span>
-	</span>
-	
-</li>
-					</ul>
-					
-					<h3 class="subsubtitle task-title">MKTableCell Methods</h3>
-
-					<ul class="task-list">
-						<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initWithCell:">- initWithCell:</a></code>
-		<span class="tooltip"> Creates an instace of <a href="MKView.html">MKView</a> for the given table cell. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addPrimaryElement:">- addPrimaryElement:</a></code>
-		<span class="tooltip"> Adds a Primary Element to the cell. The primary element appears on the left side of the cell. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addSecondaryElement:">- addSecondaryElement:</a></code>
-		<span class="tooltip"> Adds a Secondary Element to the cell. The secondary element appears on the right side of the cell. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addIconElement:">- addIconElement:</a></code>
-		<span class="tooltip"> Adds a Icon Element to the cell. The icon element appears on the left side of the cell. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addDetailElement:">- addDetailElement:</a></code>
-		<span class="tooltip"> Adds a view under the primary and seconday views. The primay and secondary views adjust to fit the new element. If the <a href="#//api/name/cell">cell</a> has an icon view assigned, the detail element is moved to right to fit the icon. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/layoutCell:MK_DEPRECATED_1_0:">- layoutCell:MK_DEPRECATED_1_0:</a></code>
-		<span class="tooltip"> <strong> DEPRECATED METHOD </strong> use - [(void) UIView (MKMetrics) layoutForMetrics:] instead. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addPrimaryElement:inRect:MK_DEPRECATED_1_0:">- addPrimaryElement:inRect:MK_DEPRECATED_1_0:</a></code>
-		<span class="tooltip"> <strong> DEPRECATED METHOD </strong></span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addSecondaryElement:inRect:MK_DEPRECATED_1_0:">- addSecondaryElement:inRect:MK_DEPRECATED_1_0:</a></code>
-		<span class="tooltip"> <strong> DEPRECATED METHOD </strong></span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/pinnedPrimaryElement"> pinnedPrimaryElement</a></code>
-		<span class="tooltip"> <strong> DEPRECATED PROPERTY </strong></span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/pinnedSecondaryElement"> pinnedSecondaryElement</a></code>
-		<span class="tooltip"> <strong> DEPRECATED PROPERTY </strong></span>
-	</span>
-	
-</li>
-					</ul>
-					
-					<h3 class="subsubtitle task-title">Internal Methods</h3>
-
-					<ul class="task-list">
-						<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/didRelease">- didRelease</a></code>
-		<span class="tooltip"> For use by Catagories, notification of a dealloc call. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/defaultGraphics">- defaultGraphics</a></code>
-		<span class="tooltip"> Creates the default graphics for instances that support MKGraphicsStructures. </span>
-	</span>
-	
-</li>
-					</ul>
-					
-					<h3 class="subsubtitle task-title">IconMask Methods</h3>
-
-					<ul class="task-list">
-						<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initWithImage:gradient:MK_DEPRECATED_0_9:">- initWithImage:gradient:MK_DEPRECATED_0_9:</a></code>
-		<span class="tooltip"> <p class="warning"> <strong> Deprecated Method v0.9 </strong> Use <a href="MKImage.html">MKImage</a> methods instead. </p></span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/MK_DEPRECATED_0_9"> MK_DEPRECATED_0_9</a></code>
-		<span class="tooltip"> <p class="warning"> <strong> Deprecated Property v0.9 </strong></p></span>
+		<span class="tooltip"> <strong> DEPRECATED v0.9 </strong> use graphicStructure instead. </span>
 	</span>
 	
 </li>
@@ -316,6 +226,108 @@
 	<span class="tooltip">
 		<code><a href="#//api/name/initWithTitle:image:">- initWithTitle:image:</a></code>
 		<span class="tooltip"> Creates an instance of <a href="MKView.html">MKView</a> Suited for display on a navigation bar. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">IconMask Methods</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithImage:gradient:MK_DEPRECATED_0_9:">- initWithImage:gradient:MK_DEPRECATED_0_9:</a></code>
+		<span class="tooltip"> <p class="warning"> <strong> Deprecated Method v0.9 </strong> Use <a href="MKImage.html">MKImage</a> methods instead. </p></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/image"> image</a></code>
+		<span class="tooltip"> <p class="warning"> <strong> Deprecated Property v0.9 </strong></p></span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">MKTableCell Methods</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithCell:">- initWithCell:</a></code>
+		<span class="tooltip"> Creates an instace of <a href="MKView.html">MKView</a> for the given table cell. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addPrimaryElement:">- addPrimaryElement:</a></code>
+		<span class="tooltip"> Adds a Primary Element to the cell. The primary element appears on the left side of the cell. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addSecondaryElement:">- addSecondaryElement:</a></code>
+		<span class="tooltip"> Adds a Secondary Element to the cell. The secondary element appears on the right side of the cell. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addIconElement:">- addIconElement:</a></code>
+		<span class="tooltip"> Adds a Icon Element to the cell. The icon element appears on the left side of the cell. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addDetailElement:">- addDetailElement:</a></code>
+		<span class="tooltip"> Adds a view under the primary and seconday views. The primay and secondary views adjust to fit the new element. If the <a href="#//api/name/cell">cell</a> has an icon view assigned, the detail element is moved to right to fit the icon. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/layoutCell:MK_DEPRECATED_1_0:">- layoutCell:MK_DEPRECATED_1_0:</a></code>
+		<span class="tooltip"> <p class="warning"> <strong> DEPRECATED METHOD </strong> use - [(void) UIView (MKMetrics) layoutForMetrics:] instead. </p></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addPrimaryElement:inRect:MK_DEPRECATED_1_0:">- addPrimaryElement:inRect:MK_DEPRECATED_1_0:</a></code>
+		<span class="tooltip"> <p class="warning"> <strong> DEPRECATED METHOD </strong></p></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addSecondaryElement:inRect:MK_DEPRECATED_1_0:">- addSecondaryElement:inRect:MK_DEPRECATED_1_0:</a></code>
+		<span class="tooltip"> <p class="warning"> <strong> DEPRECATED METHOD </strong></p></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pinnedPrimaryElement"> pinnedPrimaryElement</a></code>
+		<span class="tooltip"> <p class="warning"> <strong> DEPRECATED PROPERTY </strong></p></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pinnedSecondaryElement"> pinnedSecondaryElement</a></code>
+		<span class="tooltip"> <p class="warning"> <strong> DEPRECATED PROPERTY </strong></p></span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Internal Methods</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/didRelease">- didRelease</a></code>
+		<span class="tooltip"> For use by Catagories, notification of a dealloc call. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/defaultGraphics">- defaultGraphics</a></code>
+		<span class="tooltip"> Creates the default graphics for instances that support MKGraphicsStructures. </span>
 	</span>
 	
 </li>
@@ -443,7 +455,7 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>image</em></dt>
-			<dd> the image that will be drawn onto the navigtaion bar. See MKImgae for options of creating images. </dd>
+			<dd> the <a href="#//api/name/image">image</a> that will be drawn onto the navigtaion bar. See MKImgae for options of creating images. </dd>
 		</dl>
 		
 	</div>
@@ -611,7 +623,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> <strong> DEPRECATED METHOD </strong></p>
+		<p> <p class="warning"> <strong> DEPRECATED METHOD </strong></p></p>
 	</div>		
 	
 	
@@ -685,7 +697,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> <strong> DEPRECATED METHOD </strong></p>
+		<p> <p class="warning"> <strong> DEPRECATED METHOD </strong></p></p>
 	</div>		
 	
 	
@@ -877,7 +889,7 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>image</em></dt>
-			<dd> the image that will be drawn onto the navigtaion bar. See MKImgae for options of creating images. </dd>
+			<dd> the <a href="#//api/name/image">image</a> that will be drawn onto the navigtaion bar. See MKImgae for options of creating images. </dd>
 		</dl>
 		
 	</div>
@@ -1001,7 +1013,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> <strong> DEPRECATED METHOD </strong> use - [(void) UIView (MKMetrics) layoutForMetrics:] instead. </p>
+		<p> <p class="warning"> <strong> DEPRECATED METHOD </strong> use - [(void) UIView (MKMetrics) layoutForMetrics:] instead. </p></p>
 	</div>		
 	
 	
@@ -1161,11 +1173,11 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> <p class="warning"> <strong> Deprecated Property v0.9 </strong></p></p>
+		<p> <strong> DEPRECATED v0.9 </strong> use graphicStructure instead. </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIImage *image MK_DEPRECATED_0_9</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) MKGraphicsStructures *gradient MK_DEPRECATED_0_9</code></div>
 	
 	
 	
@@ -1283,38 +1295,6 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/gradient" title="gradient"></a>
-	<h3 class="subsubtitle method-title">gradient</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p> <strong> DEPRECATED v0.9 </strong> use graphicStructure instead. </p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) MKGraphicsStructures *gradient</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKView.h</code><br />
-	</div>				
-	
-	
-</div>
-					
-					<div class="section-method">
 	<a name="//api/name/height" title="height"></a>
 	<h3 class="subsubtitle method-title">height</h3>
 	
@@ -1347,13 +1327,45 @@
 </div>
 					
 					<div class="section-method">
+	<a name="//api/name/image" title="image"></a>
+	<h3 class="subsubtitle method-title">image</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> <p class="warning"> <strong> Deprecated Property v0.9 </strong></p></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) UIImage *image</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKView.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
 	<a name="//api/name/pinnedPrimaryElement" title="pinnedPrimaryElement"></a>
 	<h3 class="subsubtitle method-title">pinnedPrimaryElement</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> <strong> DEPRECATED PROPERTY </strong></p>
+		<p> <p class="warning"> <strong> DEPRECATED PROPERTY </strong></p></p>
 	</div>		
 	
 	
@@ -1385,7 +1397,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> <strong> DEPRECATED PROPERTY </strong></p>
+		<p> <p class="warning"> <strong> DEPRECATED PROPERTY </strong></p></p>
 	</div>		
 	
 	
@@ -1405,6 +1417,38 @@
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
 		<code class="declared-in-ref">MKView+MKTableCell.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/shouldLayoutSubviews" title="shouldLayoutSubviews"></a>
+	<h3 class="subsubtitle method-title">shouldLayoutSubviews</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Set to <code>NO</code> to prevent <code>layoutWithMetrics:</code> calls. Default is <code>YES</code>. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL shouldLayoutSubviews</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKView.h</code><br />
 	</div>				
 	
 	
@@ -1551,7 +1595,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-01-22)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-13)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

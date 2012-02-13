@@ -60,8 +60,6 @@
     switch (metrics) {
         case MKMetricsPortrait: rect = subview.portraitRect; break;
         case MKMetricsLandscape: rect = subview.landscapeRect; break;
-        case MKMetricsPortraitIPad: rect = subview.portraitRect; break;
-        case MKMetricsLandscapeIPad: rect = subview.landscapeRect; break;
         default: break;
     }
     
@@ -80,60 +78,77 @@
 @end
 
 #pragma mark - Helper Functions
+#pragma mark Widths
 
 CGFloat widthForOrientation(UIInterfaceOrientation orientation) {
-    CGFloat width = 320.0;
-    
-    if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown) {
-        width = 320.0;
-        if (MK_DEVICE_IS_IPAD) {
-            width = 768.0;
-        }
-    }
-    if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
-        width = 480.0;
-        if (MK_DEVICE_IS_IPAD) {
-            width = 1024.0;
-        }
-    }
-    
-    return width;
+    return widthForMetrics(metricsForOrientation(orientation));
 }
 
 CGFloat widthForMetrics(MKViewMetrics metrics) {
     CGFloat width = 320.0;
     
     switch (metrics) {
-        case MKMetricsPortrait: width = 320.0; break;
-        case MKMetricsLandscape: width = 480.0; break;
-        case MKMetricsPortraitIPad: width = 768.0; break;
-        case MKMetricsLandscapeIPad:width = 1024.0; break;
+        case MKMetricsPortrait: {
+            if (MK_DEVICE_IS_IPHONE) {
+                width = 320.0;
+            }
+            else {
+                width = 768.0;
+            }
+        } break;
+            
+        case MKMetricsLandscape: {
+            if (MK_DEVICE_IS_IPHONE) {
+                width = 480.0;
+            }
+            else {
+                width = 1024.0;
+            }
+        } break;
         default: break;
     }
     
     return width;
 }
 
+#pragma mark Heights
+
+CGFloat heightForMetric(MKViewMetrics metrics) {
+    BOOL hiddenStatusBar = [[UIApplication sharedApplication] isStatusBarHidden];
+    CGFloat height = 460.0;
+    
+    switch (metrics) {
+        case MKMetricsPortrait: {
+            if (MK_DEVICE_IS_IPHONE) {
+                height = 460.0;
+            }
+            else {
+                height = 1004.0;
+            }
+        } break;
+        case MKMetricsLandscape: {
+            if (MK_DEVICE_IS_IPHONE) {
+                height = 300.0;
+            }
+            else {
+                height = 748.0;
+            }
+        } break;
+        default:
+            break;
+    }
+    
+    if (hiddenStatusBar) {
+        height = (height + 20.0);
+    }
+    return height;
+}
+
+#pragma mark Metrics
+
 MKViewMetrics metricsForCurrentOrientation() {
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-    MKViewMetrics viewMetrics;
-    
-    switch (orientation) {
-        case UIInterfaceOrientationPortrait: viewMetrics = MKMetricsPortrait; break;
-        case UIInterfaceOrientationPortraitUpsideDown: viewMetrics = MKMetricsPortrait; break;
-        case UIInterfaceOrientationLandscapeLeft: viewMetrics = MKMetricsLandscape; break;
-        case UIInterfaceOrientationLandscapeRight: viewMetrics = MKMetricsLandscape; break;
-        default: break;
-    }
-    
-    if (MK_DEVICE_IS_IPAD) {
-        if (viewMetrics == MKMetricsPortrait) {
-            viewMetrics = MKMetricsPortraitIPad;
-        }
-        if (viewMetrics == MKMetricsLandscape) {
-            viewMetrics = MKMetricsLandscapeIPad;
-        }
-    }
+    MKViewMetrics viewMetrics = metricsForOrientation(orientation);
     
     return viewMetrics;
 }
@@ -149,14 +164,5 @@ MKViewMetrics metricsForOrientation(UIInterfaceOrientation orientation) {
         default: break;
     }
     
-    if (MK_DEVICE_IS_IPAD) {
-        if (viewMetrics == MKMetricsPortrait) {
-            viewMetrics = MKMetricsPortraitIPad;
-        }
-        if (viewMetrics == MKMetricsLandscape) {
-            viewMetrics = MKMetricsLandscapeIPad;
-        }
-    }
-
     return viewMetrics;
 }

@@ -66,20 +66,20 @@
 /// @name Deprecations
 ///-----------------------------------
 
-/** *DEPRECATED METHOD* use - [(void) UIView (MKMetrics) layoutForMetrics:] instead. */
+/** @warning *DEPRECATED METHOD* use - [(void) UIView (MKMetrics) layoutForMetrics:] instead. */
 - (void)layoutCell MK_DEPRECATED_1_0;
 
-/** *DEPRECATED METHOD* */
+/** @warning *DEPRECATED METHOD* */
 - (void)addPrimaryElement:(UIView *)element inRect:(CGRect)rect MK_DEPRECATED_1_0;
 
-/** *DEPRECATED METHOD* */ 
+/** @warning *DEPRECATED METHOD* */ 
 - (void)addSecondaryElement:(UIView *)element inRect:(CGRect)rect MK_DEPRECATED_1_0;
 
-/** *DEPRECATED PROPERTY* */
-@property (nonatomic, assign) BOOL pinnedPrimaryElement MK_DEPRECATED_1_0;
+/** @warning *DEPRECATED PROPERTY* */
+@property (nonatomic, assign) BOOL pinnedPrimaryElement;// MK_DEPRECATED_1_0;
 
-/** *DEPRECATED PROPERTY* */
-@property (nonatomic, assign) BOOL pinnedSecondaryElement MK_DEPRECATED_1_0;
+/** @warning *DEPRECATED PROPERTY* */
+@property (nonatomic, assign) BOOL pinnedSecondaryElement;// MK_DEPRECATED_1_0;
 
 
 
@@ -87,19 +87,13 @@
 
 static const CGFloat kCellIconRectX                 = 10.0;
 static const CGFloat kCellIconRectWidth             = 30.0;
-
 static const CGFloat kCellPrimaryElementX           = 7.0;
 static const CGFloat kCellPrimaryElementWidth       = 294.0;
-
 static const CGFloat kCellSecondaryElementX         = 115.0;
-//static const CGFloat kCellSecondaryElementY         = 7.0;
 static const CGFloat kCellSecondaryElementWidth     = 191.0;
-
-static const CGFloat kCellDetailElementX            = 7.0;
 static const CGFloat kCellDetailElementY            = 29.0;
 static const CGFloat kCellDetailElementWidth        = 294.0;
 static const CGFloat kCellDetailElementHeight       = 12.0;
-
 static const CGFloat kCellLeftMarginPadding         = 7.0;
 static const CGFloat kCellRightMarginPadding        = 10.0;
 static const CGFloat kCellElementStandardTopPadding = 7.0;

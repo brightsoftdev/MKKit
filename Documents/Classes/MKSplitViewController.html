@@ -1,0 +1,450 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>MKSplitViewController Class Reference</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<meta name="generator" content="appledoc 2.0b3" />
+	</head>
+	<body>
+		<article>
+			<div class="main-navigation navigation-top">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="header">
+				<div class="section-header">
+					<h1 class="title title-header">MKSplitViewController Class Reference</h1>
+				</div>		
+			</div>
+			<div id="container">	
+				
+				<div class="section section-specification"><table cellspacing="0"><tbody>
+					<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value"><a href="MKViewController.html">MKViewController</a> : UIViewController</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MKSplitViewController.h</td>
+</tr>
+					</tbody></table></div>
+				
+				
+				
+				<div class="section section-overview">
+					<h2 class="subtitle subtitle-overview">Overview</h2>
+					
+<p> <strong> Overview </strong></p>
+
+<p> <a href="MKSplitViewController.html">MKSplitViewController</a> is moch of UISplitViewController that can added to a navigation controller, tab bar controller or presented as a model view controller. When in landscape view both views are displayed, while in portrait only the detail view controller is displayed. </p>
+
+<p> While in portrait view a back and list view button is added to the detail views navigation bar. The list button will display the title of the list view controller. The list button will cause the detail view to slide in from the left of the screen. The list view can be presented or dismissed at any time by calling the <code><a href="#//api/name/presentListController">presentListController</a></code> or <code><a href="#//api/name/dismissListController">dismissListController</a></code> methods. </p>
+
+<p> <a href="MKSplitViewController.html">MKSplitViewController</a> is for use on iPad only. </p>
+
+<p> <strong> Usage Notes </strong></p>
+
+<p> <a href="MKSplitViewController.html">MKSplitViewController</a> creates its own navigation bars, if it is pushed onto a navaigation stack it will hide the navigation controllers navigation bar and replace it with its own. </p>
+
+<p> To set navigation items use <code><a href="#//api/name/listViewNavigationItem">listViewNavigationItem</a></code> and <code><a href="#//api/name/detailViewNavigationItem">detailViewNavigationItem</a></code> properties. </p>
+
+<p> <strong> Reqiured Classes </strong> <ul><li> <a href="MKViewController.html">MKViewController</a></li><li> <a href="MKView.html">MKView</a></li><li> <a href="MKMetrics.html">MKMetrics</a></li></ul></p>
+
+<p> <strong> Required Catagories </strong> <ul><li> UIViewController+MKViewController </li><li> UIView+MKMetrics </li></ul></p>
+
+				</div>
+				
+				
+				
+				
+				<div class="section section-tasks">
+					<h2 class="subtitle subtitle-tasks">Tasks</h2>
+					
+					<h3 class="subsubtitle task-title">Creation</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithListViewController:detailViewController:">- initWithListViewController:detailViewController:</a></code>
+		<span class="tooltip"> Creates a new instance of MKSplitviewController using the given view controllers. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Child View Controllers</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/listViewController"> listViewController</a></code>
+		<span class="tooltip"> Reference to the <a href="#//api/name/listViewController">listViewController</a></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/detailViewController"> detailViewController</a></code>
+		<span class="tooltip"> Refernce to the <a href="#//api/name/detailViewController">detailViewController</a></span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Navigation Item</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/listViewNavigationItem"> listViewNavigationItem</a></code>
+		<span class="tooltip"> Reference to the navigation items for the list view controller. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/detailViewNavigationItem"> detailViewNavigationItem</a></code>
+		<span class="tooltip"> Reference to the navigation items for the detail view controller. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Display Controll</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/presentListController">- presentListController</a></code>
+		<span class="tooltip"> Presents the List View when in portrait mode. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/dismissListController">- dismissListController</a></code>
+		<span class="tooltip"> Dismisses the List View when in portrait mode. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/listViewIsVisable"> listViewIsVisable</a></code>
+		<span class="tooltip"> <code>YES</code> if the list view is presented. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/dismissListController" title="dismissListController"></a>
+	<h3 class="subsubtitle method-title">dismissListController</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Dismisses the List View when in portrait mode. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)dismissListController</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKSplitViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/initWithListViewController:detailViewController:" title="initWithListViewController:detailViewController:"></a>
+	<h3 class="subsubtitle method-title">initWithListViewController:detailViewController:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates a new instance of MKSplitviewController using the given view controllers. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithListViewController:(UIViewController *)<em>listViewController</em> detailViewController:(UIViewController *)<em>detailViewController</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>listViewController</em></dt>
+			<dd> the view controller of the list view. This is typically a UITableViewController. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>detailViewController</em></dt>
+			<dd> the view controller of the detail view </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKSplitViewController.html">MKSplitViewController</a> instance </p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKSplitViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/presentListController" title="presentListController"></a>
+	<h3 class="subsubtitle method-title">presentListController</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Presents the List View when in portrait mode. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)presentListController</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKSplitViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Properties</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/detailViewController" title="detailViewController"></a>
+	<h3 class="subsubtitle method-title">detailViewController</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Refernce to the <a href="#//api/name/detailViewController">detailViewController</a></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain, readonly) UIViewController *detailViewController</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKSplitViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/detailViewNavigationItem" title="detailViewNavigationItem"></a>
+	<h3 class="subsubtitle method-title">detailViewNavigationItem</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Reference to the navigation items for the detail view controller. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain, readonly) UINavigationItem *detailViewNavigationItem</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKSplitViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/listViewController" title="listViewController"></a>
+	<h3 class="subsubtitle method-title">listViewController</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Reference to the <a href="#//api/name/listViewController">listViewController</a></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain, readonly) UIViewController *listViewController</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKSplitViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/listViewIsVisable" title="listViewIsVisable"></a>
+	<h3 class="subsubtitle method-title">listViewIsVisable</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> <code>YES</code> if the list view is presented. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) BOOL listViewIsVisable</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKSplitViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/listViewNavigationItem" title="listViewNavigationItem"></a>
+	<h3 class="subsubtitle method-title">listViewNavigationItem</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Reference to the navigation items for the list view controller. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain, readonly) UINavigationItem *listViewNavigationItem</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKSplitViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+			</div>
+			<div class="main-navigation navigation-bottom">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="footer">
+				<hr />
+				<div class="footer-copyright">
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-13)</span><br />
+					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>

@@ -75,9 +75,6 @@ typedef enum {
 /// @name Creating
 ///-----------------------------------------
 
-/** *DEPRECATED v0.9* */
-- (id)initWithType:(MKBarButtonItemType)type MK_DEPRECATED_0_9;
-
 /**
  Returns an intialized instance of MKBarButtonItem, sets the MKBarButtonItemType,
  and creates the required MKGraphicsStructures instance.
@@ -95,6 +92,7 @@ typedef enum {
  @return MKBarButtonItem instance
 */
 - (id)initWithType:(MKBarButtonItemType)type graphics:(MKGraphicsStructures *)graphics;
+
 /**
  Creates an instace of MKBarButtonItem from an image.
  
@@ -110,5 +108,12 @@ typedef enum {
 
 /** The type of button that is assigned */
 @property (nonatomic, assign) MKBarButtonItemType type;
+
+///------------------------------------------
+/// @name Deprecated
+///------------------------------------------
+
+/** *DEPRECATED v0.9* */
+- (id)initWithType:(MKBarButtonItemType)type MK_DEPRECATED_0_9;
 
 @end

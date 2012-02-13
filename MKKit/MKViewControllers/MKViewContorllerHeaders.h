@@ -7,7 +7,7 @@
 //
 
 #import "MKViewController.h"
-#import "MKContainerControllers/MKDisclosureViewController.h"
+#import "MKContainerControllers/MKSplitViewController.h"
 #import "MKCredits/MKCreditsViewContoller.h"
 #import "MKIAPViewController/MKIAPViewController.h"
 #import "MKLoginViewController/MKLoginViewController.h"

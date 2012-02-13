@@ -8,22 +8,15 @@
 
 #import "UIViewController+MKVIewController.h"
 
-#import "MKContainerControllers/MKDisclosureViewController.h"
+#import "MKContainerControllers/MKSplitViewController.h"
 
 @implementation UIViewController (MKVIewController)
 
-#pragma mark - Accessor Methods
-#pragma mark Getters
-
-- (MKDisclosureViewController *)disclosureController {
-    if ([[self parentViewController] isKindOfClass:[MKDisclosureViewController class]]) {
-        return (MKDisclosureViewController *)self.parentViewController;
+- (MKSplitViewController *)dynamicSplitViewController {
+    if ([[self parentViewController] isKindOfClass:[MKSplitViewController class]]) {
+        return (MKSplitViewController *)self.parentViewController;
     }
     return nil;
-}
-
-- (void)didDiscloseView {
-    //For use by subclasses
 }
 
 @end

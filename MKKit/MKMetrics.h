@@ -14,8 +14,6 @@
 typedef enum {
     MKMetricsPortrait,
     MKMetricsLandscape,
-    MKMetricsPortraitIPad,
-    MKMetricsLandscapeIPad,
 } MKViewMetrics;
 
 /**-------------------------------------------------------------------------
@@ -100,6 +98,7 @@ typedef enum {
 
 CGFloat widthForOrientation(UIInterfaceOrientation orientation);
 CGFloat widthForMetrics(MKViewMetrics metrics);
+CGFloat heightForMetric(MKViewMetrics metrics);
 
 MKViewMetrics metricsForCurrentOrientation(void);
 MKViewMetrics metricsForOrientation(UIInterfaceOrientation orientation);

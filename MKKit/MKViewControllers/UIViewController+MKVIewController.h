@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class MKDisclosureViewController;
+@class MKDisclosureViewController, MKSplitViewController;
 
 /**-------------------------------------------------------------------------------
  *Overview*
@@ -23,19 +23,10 @@
 ///----------------------------------
 
 /** 
- The MKDisclosureViewController instance if the parent is an instance of 
- MKDisclosureViewController.
+ Reference to an instance of MKSplitViewController. Returns `nil` is the caller
+ is not a child of controller of an MKSplitViewController instance.
 */
-@property (nonatomic, readonly) MKDisclosureViewController *disclosureController;
+@property (nonatomic, readonly) MKSplitViewController *dynamicSplitViewController;
 
-///-------------------------------------
-/// @name Disclosure View Observations 
-///------------------------------------
-
-/**
- Called when a disclosure veiw moved onto the srceen. Override this
- method to preform any nessaray actions.
-*/
-- (void)didDiscloseView;
 
 @end

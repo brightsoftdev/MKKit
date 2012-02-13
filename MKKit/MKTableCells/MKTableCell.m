@@ -47,7 +47,8 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
             validationType=mValidationType, validating=mValidating, validator, icon,
             iconMask, validatorTestStringLength=mValidatorTestStringLength, accessoryIcon, 
             recognizeLeftToRightSwipe, recognizeRightToLeftSwipe, recognizeLongPress, indexPath,
-            primaryViewTrim, badge, accent, cellView=mCellView, stroryboardPrototype, image, accessoryImage;
+            primaryViewTrim, badge, accent, cellView=mCellView, stroryboardPrototype, image, accessoryImage,
+            dynamicHeight;
 
 #pragma mark - Creating
 

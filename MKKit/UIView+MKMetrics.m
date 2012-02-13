@@ -59,19 +59,7 @@ static const char *LandscapeHeightTag   = "LandscapeHeightTag";
             objc_setAssociatedObject(self, LandscapeWidthTag, width, OBJC_ASSOCIATION_RETAIN);
             objc_setAssociatedObject(self, LandscapeHeightTag, height, OBJC_ASSOCIATION_RETAIN);
         } break;
-        case MKMetricsPortraitIPad: {
-            objc_setAssociatedObject(self, PortraitXTag, x, OBJC_ASSOCIATION_RETAIN);
-            objc_setAssociatedObject(self, PortraitYTag, y, OBJC_ASSOCIATION_RETAIN);
-            objc_setAssociatedObject(self, PortraitWidthTag, width, OBJC_ASSOCIATION_RETAIN);
-            objc_setAssociatedObject(self, PortraitHeightTag, height, OBJC_ASSOCIATION_RETAIN);
-        } break;
-        case MKMetricsLandscapeIPad: {
-            objc_setAssociatedObject(self, LandscapeXTag, x, OBJC_ASSOCIATION_RETAIN);
-            objc_setAssociatedObject(self, LandscapeYTag, y, OBJC_ASSOCIATION_RETAIN);
-            objc_setAssociatedObject(self, LandscapeWidthTag, width, OBJC_ASSOCIATION_RETAIN);
-            objc_setAssociatedObject(self, LandscapeHeightTag, height, OBJC_ASSOCIATION_RETAIN);
-        } break;
-        default: break;
+    default: break;
     }
 }
 

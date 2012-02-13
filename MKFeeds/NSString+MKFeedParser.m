@@ -76,7 +76,15 @@
             [result appendString:@"&"];
         else if ([scanner scanString:@"&apos;" intoString:NULL])
             [result appendString:@"'"];
+        else if ([scanner scanString:@"&rsquo;" intoString:NULL])
+            [result appendString:@"'"];
         else if ([scanner scanString:@"&quot;" intoString:NULL])
+            [result appendString:@"\""];
+        else if ([scanner scanString:@"&ldquo;" intoString:NULL])
+            [result appendString:@"\""];
+        else if ([scanner scanString:@"&lsquo;" intoString:NULL])
+            [result appendString:@"\""];
+        else if ([scanner scanString:@"&rdquo;" intoString:NULL])
             [result appendString:@"\""];
         else if ([scanner scanString:@"&lt;" intoString:NULL])
             [result appendString:@"<"];

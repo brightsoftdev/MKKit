@@ -93,13 +93,15 @@ typedef enum {
 /// @name Displaying
 ///------------------------------------------------------
 
-/** Displayes the View on the applications key window. View can be animated onto the screen using a MKViewAnimationType.
+/** 
+ Displayes the View on the applications key window. View can be animated onto the screen using a MKViewAnimationType.
  
  @param type the type of animations used to display the view.
 */
 - (void)showWithAnimationType:(MKViewAnimationType)type;
 
-/** Displays the View on the specified view Controller. Views can be animated onto the screen using a MKViewAnimationType.
+/**
+ Displays the View on the specified view Controller. Views can be animated onto the screen using a MKViewAnimationType.
  
  @param controller the view controller to display the view on
  
@@ -107,7 +109,8 @@ typedef enum {
 */
 - (void)showOnViewController:(UIViewController *)controller animationType:(MKViewAnimationType)type;
 
-/** Removes the view from the Screen. The view is removed by reversing the MKViewAnimationType that was used to 
+/** 
+ Removes the view from the Screen. The view is removed by reversing the MKViewAnimationType that was used to 
  display it.
 */
 - (void)removeView;
@@ -127,6 +130,13 @@ typedef enum {
 
 /** The height of the view */
 @property (nonatomic, assign) CGFloat height;
+
+///-----------------------------------------------------
+/// @name Layout
+///-----------------------------------------------------
+
+/** Set to `NO` to prevent `layoutWithMetrics:` calls. Default is `YES`. */
+@property (nonatomic, assign) BOOL shouldLayoutSubviews;
 
 ///-----------------------------------------------------
 /// @name Ownership
@@ -157,7 +167,7 @@ typedef enum {
 ///-------------------------------------------------------
 
 /** *DEPRECATED v0.9* use graphicStructure instead.*/
-@property (nonatomic, retain) MKGraphicsStructures *gradient;// MK_DEPRECATED_0_9;
+@property (nonatomic, retain) MKGraphicsStructures *gradient MK_DEPRECATED_0_9;
 
 @end
 
@@ -178,7 +188,7 @@ typedef enum {
 /** 
  @warning *Deprecated Property v0.9* 
 */
-@property (nonatomic, retain) UIImage *image MK_DEPRECATED_0_9;
+@property (nonatomic, retain) UIImage *image; //MK_DEPRECATED_0_9;
 
 @end
 

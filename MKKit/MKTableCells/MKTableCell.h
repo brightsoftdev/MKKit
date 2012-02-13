@@ -297,6 +297,9 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 /** The width of the accent view. */
 @property (nonatomic, assign) CGFloat primaryViewTrim;
 
+/** `YES` is the cell should change its height dynamicly. Default is `NO`. */
+@property (nonatomic, assign) BOOL dynamicHeight;
+
 ///---------------------------------------------------------------------------------------
 /// @name Input Validation
 ///---------------------------------------------------------------------------------------
@@ -390,17 +393,17 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 /** 
  @warning *Deprecated v0.9* Use image property instead. 
 */
-@property (nonatomic, retain) UIImage *icon MK_DEPRECATED_0_9;
+@property (nonatomic, retain) UIImage *icon;// MK_DEPRECATED_0_9;
 
 /** 
  @warning *Deprecated v0.9* Use image property instead. 
 */
-@property (nonatomic, retain) UIImage *iconMask MK_DEPRECATED_0_9;
+@property (nonatomic, retain) UIImage *iconMask;// MK_DEPRECATED_0_9;
 
 /** 
  @warning *Deprecated v0.9* Use accessoryImage property instead.
 */
-@property (nonatomic, retain) UIImage *accessoryIcon MK_DEPRECATED_0_9;
+@property (nonatomic, retain) UIImage *accessoryIcon;// MK_DEPRECATED_0_9;
 
 @end
 

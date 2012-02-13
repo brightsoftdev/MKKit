@@ -75,6 +75,7 @@ typedef enum {
 	NSMutableArray *items;
 	NSMutableString *currentString;
     NSString *currentElement;
+    NSURLCache *requestCache;
     
     MKFeedContentType mContentType;
     MKFeedSourceType mSourceType;

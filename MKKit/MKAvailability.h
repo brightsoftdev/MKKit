@@ -21,5 +21,5 @@
 /// ADDTIONAL LIBRARIES AVAILABLE TO MKKIT TOGGLE THE MACROS TO MAKE LIBRARIES AVAILABLE OR NOT.  // 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define MK_FEEDS_ALLOWED                0 // 1=AVAILABLE 0=NONAVAILABLE ////////////////////////////
+#define MK_FEEDS_ALLOWED                1 // 1=AVAILABLE 0=NONAVAILABLE ////////////////////////////
 #define MK_GRAPHS_ALLOWED               0 // 1=AVAILABLE 0=NONAVAILABLE ////////////////////////////

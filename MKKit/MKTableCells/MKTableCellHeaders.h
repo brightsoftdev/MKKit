@@ -12,6 +12,7 @@
 #import "MKTableCellTypes/MKTableCellLoading.h"
 #import "MKTableCellTypes/MKTableCellPickerControlled.h"
 #import "MKTableCellTypes/MKTableCellSegmented.h"
+#import "MKTableCellTypes/MKTableCellSlider.h"
 #import "MKTableCellTypes/MKTableCellStats.h"
 #import "MKTableCellTypes/MKTableCellSwitch.h"
 #import "MKTableCellTypes/MKTableCellTextEntry.h"

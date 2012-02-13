@@ -15,6 +15,7 @@
 - (CGRect)iconRect;
 - (CGRect)primaryRect;
 - (CGRect)secondaryRect;
+- (CGRect)detailRect;
 
 @end
 
@@ -59,8 +60,8 @@
             [iconElement setRect:[self iconRect] forMetrics:MKMetricsLandscape];
         }
         else if (MK_DEVICE_IS_IPAD) {
-            [iconElement setRect:[self iconRect] forMetrics:MKMetricsPortraitIPad];
-            [iconElement setRect:[self iconRect] forMetrics:MKMetricsLandscapeIPad];
+            [iconElement setRect:[self iconRect] forMetrics:MKMetricsPortrait];
+            [iconElement setRect:[self iconRect] forMetrics:MKMetricsLandscape];
         }
         
         [cellMetrics layoutSubview:iconElement forMetrics:metrics];
@@ -77,8 +78,8 @@
             [secondaryElement setRect:[self secondaryRect] forMetrics:MKMetricsLandscape];
         }
         else if (MK_DEVICE_IS_IPAD) {
-            [secondaryElement setRect:[self secondaryRect] forMetrics:MKMetricsPortraitIPad];
-            [secondaryElement setRect:[self secondaryRect] forMetrics:MKMetricsLandscapeIPad];
+            [secondaryElement setRect:[self secondaryRect] forMetrics:MKMetricsPortrait];
+            [secondaryElement setRect:[self secondaryRect] forMetrics:MKMetricsLandscape];
         }
         [cellMetrics layoutSubview:secondaryElement forMetrics:metrics];
     }
@@ -89,8 +90,8 @@
             [primaryElement setRect:[self primaryRect] forMetrics:MKMetricsLandscape];
         }
         else if (MK_DEVICE_IS_IPAD) {
-            [primaryElement setRect:[self primaryRect] forMetrics:MKMetricsPortraitIPad];
-            [primaryElement setRect:[self primaryRect] forMetrics:MKMetricsLandscapeIPad];
+            [primaryElement setRect:[self primaryRect] forMetrics:MKMetricsPortrait];
+            [primaryElement setRect:[self primaryRect] forMetrics:MKMetricsLandscape];
         }
         
         [cellMetrics layoutSubview:primaryElement forMetrics:metrics];
@@ -161,6 +162,16 @@
     float secondayWidth = (cellWidth - kCellSecondaryElementX - kCellRightMarginPadding);
     
     return CGRectMake(kCellSecondaryElementX, kCellElementStandardTopPadding, secondayWidth, kCellElementStandardHeight);
+}
+
+- (CGRect)detailRect {
+    //UIView *iconElement = [self viewWithTag:kIconViewTag];
+    //UIView *primaryElement = [self viewWithTag:kPrimaryViewTag];
+    //UIView *secondaryElement = [self viewWithTag:kSecondaryViewTag];
+    
+    //float x = kCellLeftMarginPadding;
+    
+    return CGRectZero;
 }
 
 #pragma mark - Deprecations

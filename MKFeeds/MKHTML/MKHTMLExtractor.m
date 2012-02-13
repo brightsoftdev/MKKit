@@ -76,8 +76,8 @@
     if (self) {
         if (htmlString == nil) {
             MKHTMLExtractorNILHTMLStringException = @"MKHTMLExtractorNILHTMLStringExeption";
-            //NSException *exception = [NSException exceptionWithName:MKHTMLExtractorNILHTMLStringException reason:@"htmlString cannot be a nil value" userInfo:nil];
-            //@throw exception;
+            NSException *exception = [NSException exceptionWithName:MKHTMLExtractorNILHTMLStringException reason:@"htmlString cannot be a nil value" userInfo:nil];
+            @throw exception;
         }
         mHTMLString = [htmlString copy];
         MKHTMLExtractorFlags.requestFromURL = NO;
@@ -93,8 +93,6 @@
     self.articleTitle = nil;
     self.requestHandler = nil;
     self.delegate = nil;
-    
-    [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
     
     [mResultsDict release];
     [aConnection release];

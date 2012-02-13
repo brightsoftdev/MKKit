@@ -76,10 +76,11 @@ void drawButtonWithGraphics(CGContextRef context, CGRect rect, MKGraphicsStructu
     if (MKBarButtonItemFlags.requiresDrawing) {
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetAllowsAntialiasing(context, YES);
-    
+        
         drawButtonWithGraphics(context, self.bounds, mGraphics, self.type, self.controlState);
     }
 }
+
 
 void drawButtonWithGraphics(CGContextRef context, CGRect rect, MKGraphicsStructures *graphics, MKBarButtonItemType buttonType, MKControlState state) {
     CGColorRef top = topColorForControlState(state, graphics);
@@ -102,6 +103,7 @@ void drawButtonWithGraphics(CGContextRef context, CGRect rect, MKGraphicsStructu
     }
     
     CGContextSaveGState(context);
+    CGContextSetShadowWithColor(context, CGSizeMake(0.0, -1.0), 0.0, shadowColor);
     CGContextAddPath(context, buttonPath);
     CGContextClip(context);
     
@@ -118,25 +120,9 @@ void drawButtonWithGraphics(CGContextRef context, CGRect rect, MKGraphicsStructu
     CGContextAddPath(context, buttonPath);
     CGContextEOClip(context);
     CGContextAddPath(context, buttonPath);
-    CGContextSetShadowWithColor(context, CGSizeMake(0.0, -1.0), 0.0, shadowColor);
     CGContextFillPath(context);
     
     CFRelease(buttonPath);
-    
-    if (graphics.bordered) {
-        CGColorRef borderColor = graphics.border.color;
-        CGFloat borderWidth = graphics.border.width;
-        CGMutablePathRef roundedRect = createRoundedRectForRect(rect, 5.0);
-        
-        CGContextSaveGState(context);
-        CGContextSetLineWidth(context, borderWidth);
-        CGContextSetStrokeColorWithColor(context, borderColor);
-        CGContextAddPath(context, roundedRect);
-        CGContextStrokePath(context);
-        CGContextRestoreGState(context);
-        
-        CFRelease(roundedRect);
-    }
 }
 
 #pragma mark - Accessors

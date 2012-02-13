@@ -233,7 +233,6 @@ MKIAPController *mSharedStore = nil;
 }
  
 - (void)dealloc {
-    NSLog(@"release");
     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
         
     [productResponse release];
