@@ -114,10 +114,16 @@ void drawBackgroundForRect(CGContextRef context, CGRect drawRect, CGRect innerRe
 ///---------------------------------------------------------
 
 /** 
- Reference to an MKBarButton that the pop over view will appear from.
+ Reference to a MKBarButton that the pop over view will appear from.
  This property should not need to be set directly.
 */
 @property (nonatomic, retain) MKBarButtonItem *button;
+
+/** 
+ Refernce to an UITableView instance that the pop over will appear on. 
+ This property should not be set directly.
+*/
+@property (nonatomic, retain) UITableView *tableView;
 
 ///--------------------------------------------------------
 /// @name Deprecations

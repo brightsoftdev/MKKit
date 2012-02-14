@@ -138,6 +138,12 @@ typedef enum {
 /** Set to `NO` to prevent `layoutWithMetrics:` calls. Default is `YES`. */
 @property (nonatomic, assign) BOOL shouldLayoutSubviews;
 
+/** 
+ Sets the maximum width a view can be. Default is the width of the device 
+ at its current orrientation.
+*/
+@property (nonatomic, assign) CGFloat maxWidth;
+
 ///-----------------------------------------------------
 /// @name Ownership
 ///-----------------------------------------------------

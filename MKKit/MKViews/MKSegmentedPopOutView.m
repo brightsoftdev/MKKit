@@ -100,20 +100,8 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment);
 
 #pragma mark - Layout
 
-- (void)layoutSubviews {
-    [self layoutForMetrics:metricsForCurrentOrientation()];
-}
-
 - (void)layoutForMetrics:(MKViewMetrics)_metrics {
-    [self setSize:CGSizeMake(300.0, self.frame.size.height) forMetrics:MKMetricsPortrait];
-    [self setSize:CGSizeMake(460.0, self.frame.size.height) forMetrics:MKMetricsLandscape];
-    
-    MKMetrics *metrics = [MKMetrics metricsForView:self];
-    [metrics beginLayout];
-    [metrics layoutSubview:self forMetrics:_metrics];
-    [metrics endLayout];
-    
-    [self setNeedsDisplayInRect:self.frame];
+    [super layoutForMetrics:_metrics];
     
     if (mPopOutType == MKPopOutTableCell) {
         [self adjustToCell];

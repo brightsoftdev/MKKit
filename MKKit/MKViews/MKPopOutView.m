@@ -16,7 +16,7 @@
 
 #pragma mark - Creation
 
-@synthesize type=mType, arrowPosition=mArrowPosition, tintColor, button, autoResizeOnRotation;
+@synthesize type=mType, arrowPosition=mArrowPosition, tintColor, button, autoResizeOnRotation, tableView;
 
 - (id)initWithView:(UIView *)view type:(MKPopOutViewType)type {
     self = [super initWithFrame:CGRectMake(0.0, 0.0, (kPopOutViewWidth + 5.0), (view.frame.size.height + 30.0))];
@@ -62,6 +62,9 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MKPopOutViewShouldRemoveNotification object:nil];
     
+    self.button = nil;
+    self.tableView = nil;
+    
     [super dealloc];
 }
 
@@ -69,13 +72,18 @@
 
 - (void)layoutForMetrics:(MKViewMetrics)_metrics {
     if (autoResizeOnRotation) {
+        
+        if (self.maxWidth == 0.0) {
+            self.maxWidth = GetMaxWidth(kMKSegmentedPopOutViewClassTag);
+        }
+        
         if (MK_DEVICE_IS_IPHONE) {
-            [self setSize:CGSizeMake(300.0, self.frame.size.height) forMetrics:MKMetricsPortrait];
-            [self setSize:CGSizeMake(460.0, self.frame.size.height) forMetrics:MKMetricsLandscape];
+            [self setSize:CGSizeMake(self.maxWidth, self.frame.size.height) forMetrics:MKMetricsPortrait];
+            [self setSize:CGSizeMake(self.maxWidth, self.frame.size.height) forMetrics:MKMetricsLandscape];
         }
         if (MK_DEVICE_IS_IPAD) {
-            [self setSize:CGSizeMake(300.0, self.frame.size.height) forMetrics:MKMetricsPortrait];
-            [self setSize:CGSizeMake(460.0, self.frame.size.height) forMetrics:MKMetricsLandscape];
+            [self setSize:CGSizeMake(self.maxWidth, self.frame.size.height) forMetrics:MKMetricsPortrait];
+            [self setSize:CGSizeMake(self.maxWidth, self.frame.size.height) forMetrics:MKMetricsLandscape];
         }
         
         MKMetrics *metrics = [MKMetrics metricsForView:self];

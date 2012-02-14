@@ -111,6 +111,17 @@ CGFloat widthForMetrics(MKViewMetrics metrics) {
     return width;
 }
 
+CGFloat GetMaxWidth(int classTag) {
+    CGFloat maxWidth = widthForMetrics(metricsForCurrentOrientation());
+    
+    switch (classTag) {
+        case kMKSegmentedPopOutViewClassTag: maxWidth = (maxWidth - 20.0); break;
+        default: break;
+    }
+    
+    return maxWidth;
+}
+
 #pragma mark Heights
 
 CGFloat heightForMetric(MKViewMetrics metrics) {

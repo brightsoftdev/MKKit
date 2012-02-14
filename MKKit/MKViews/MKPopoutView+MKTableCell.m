@@ -11,9 +11,6 @@
 #import <MKKit/MKKit/MKTableCells/MKTableCell.h>
 #import <MKKit/MKKit/MKControls/MKButton.h>
 
-static const char *IndexPathTag = "IndexPathTag";
-static const char *TableViewTag = "TableViewTag";
-
 @implementation MKPopOutView (MKTableCell)
 
 @dynamic aIndexPath;
@@ -27,14 +24,15 @@ static const char *TableViewTag = "TableViewTag";
 #pragma mark - Displaying
 
 - (void)showFromCell:(MKTableCell *)cell onView:(UITableView *)tableView {
-    objc_setAssociatedObject(self, TableViewTag, tableView, OBJC_ASSOCIATION_RETAIN);
-    objc_setAssociatedObject(self, IndexPathTag, cell.indexPath, OBJC_ASSOCIATION_RETAIN);
+    self.tableView = tableView;
+    self.cell = cell;
     
     CGRect cellRect = [tableView rectForRowAtIndexPath:cell.indexPath];
     
     mAnimationType = MKViewAnimationTypeFadeIn;
     mPopOutType = MKPopOutTableCell;
-        
+    
+    self.maxWidth = (CGRectGetWidth(cellRect) - 20.0);
     self.tag = kMKPopOutViewTableCellTag;
     
     if (mType != MKPopOutAuto) {
@@ -72,12 +70,9 @@ static const char *TableViewTag = "TableViewTag";
 }
 
 - (void)adjustToCell {
-    UITableView *tableView = (UITableView *)objc_getAssociatedObject(self, TableViewTag);
-    NSIndexPath *indexPath = (NSIndexPath *)objc_getAssociatedObject(self, IndexPathTag);
-   
-    CGRect cellRect = [tableView rectForRowAtIndexPath:indexPath];
+    CGRect cellRect = [self.tableView rectForRowAtIndexPath:self.cell.indexPath];
     
-    MKTableCell *cell = (MKTableCell *)[tableView cellForRowAtIndexPath:indexPath];
+    MKTableCell *cell = (MKTableCell *)[self.tableView cellForRowAtIndexPath:self.cell.indexPath];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         mArrowPosition = self.center.x;
@@ -91,7 +86,7 @@ static const char *TableViewTag = "TableViewTag";
         mAutoType = mType;
     }
     else {
-        if (CGRectGetMaxY(cellRect) < (tableView.bounds.size.height - (mView.frame.size.height + 50.0))) {
+        if (CGRectGetMaxY(cellRect) < (self.tableView.bounds.size.height - (mView.frame.size.height + 50.0))) {
             mAutoType = MKPopOutBelow;
         }
         else {
@@ -107,18 +102,16 @@ static const char *TableViewTag = "TableViewTag";
         self.frame = CGRectMake(cellRect.origin.x, (cellRect.origin.y - self.frame.size.height), self.width, self.height);
         mView.frame = CGRectMake(0.0, 0.0, kPopOutViewWidth, mView.frame.size.height);
         
-        [tableView scrollRectToVisible:self.frame animated:YES];
+        [self.tableView scrollRectToVisible:self.frame animated:YES];
     }
     
     [self setNeedsDisplay];
-    [tableView scrollRectToVisible:self.frame animated:YES];
+    [self.tableView scrollRectToVisible:self.frame animated:YES];
 }
 
 #pragma mark - Elements
 
 - (void)setDisclosureButtonWithTarget:(id)target selector:(SEL)selector {
-    NSIndexPath *indexPath = (NSIndexPath *)objc_getAssociatedObject(self, IndexPathTag);
-    
     mView.frame = CGRectMake(mView.frame.origin.x, mView.frame.origin.y, (mView.frame.size.width - 33.0), mView.frame.size.height);
     
     MKButton *button = [[MKButton alloc] initWithType:MKButtonTypeDisclosure];
@@ -126,7 +119,7 @@ static const char *TableViewTag = "TableViewTag";
     
     [button completedAction: ^ (MKAction action) {
         if (action == MKActionTouchUp) {
-            [target performSelector:selector withObject:indexPath];
+            [target performSelector:selector withObject:self.cell.indexPath];
         }
     }];
     

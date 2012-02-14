@@ -19,7 +19,7 @@
 
 @implementation MKView
 
-@synthesize x, y, width, height, gradient, controller, delegate=mDelegate, cell, shouldLayoutSubviews;
+@synthesize x, y, width, height, gradient, controller, delegate=mDelegate, cell, shouldLayoutSubviews, maxWidth;
 
 @dynamic graphicsStructure;
 
@@ -54,6 +54,7 @@
     self.userInteractionEnabled = YES;
     self.autoresizesSubviews = YES;
     self.shouldLayoutSubviews = YES;
+    self.maxWidth = 0.0;
     
     mShouldRemoveView = YES;
     

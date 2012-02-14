@@ -100,5 +100,10 @@ CGFloat widthForOrientation(UIInterfaceOrientation orientation);
 CGFloat widthForMetrics(MKViewMetrics metrics);
 CGFloat heightForMetric(MKViewMetrics metrics);
 
+/// NEW
+CGFloat GetMaxWidth(int classTag);
+
 MKViewMetrics metricsForCurrentOrientation(void);
 MKViewMetrics metricsForOrientation(UIInterfaceOrientation orientation);
+
+static const int kMKSegmentedPopOutViewClassTag      = 1;

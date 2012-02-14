@@ -183,9 +183,6 @@ typedef enum {
     
     [mListViewController.view removeFromSuperview];
     [mDetailViewController.view removeFromSuperview];
-    
-    [[(MKSplitView *)self.view viewWithTag:kMKDetailViewNavigaionBarTag] removeFromSuperview];
-    [[(MKSplitView *)self.view viewWithTag:kMKListViewNavigationBarTag] removeFromSuperview];
 }
 
 #pragma mark - Rotataion
@@ -199,7 +196,15 @@ typedef enum {
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [self viewsForMetrics:metricsForOrientation(toInterfaceOrientation) inital:NO];
+    MKViewMetrics toMetrics = metricsForOrientation(toInterfaceOrientation);
+    mListViewNavigationItem = nil;
+    
+    [self viewsForMetrics:toMetrics inital:NO];
+    
+    if (toMetrics == MKMetricsLandscape) {
+        [mListViewController viewWillAppear:YES];
+        [mListViewController performSelector:@selector(viewDidAppear:) withObject:nil afterDelay:duration];
+    }
 }
 
 #pragma mark - Accessor Methods
@@ -273,13 +278,19 @@ typedef enum {
             [self.detailViewNavigationItem setLeftBarButtonItems:nil animated:NO];
         }
         
+        MKDividerView *divider = (MKDividerView *)[self.view viewWithTag:kMKDividerViewTag];
+        
+        if (divider) {
+            [divider removeFromSuperview];
+        }
+        
         float x = (320.0 - 8.0);
         float y = 0.0;
         float width = 12.0;
         float height = heightForMetric(metrics);
         
         MKDividerView *shadowView = [[MKDividerView alloc] initWithFrame:CGRectMake(x, y, width, height) type:MKDividerViewSplit];
-        shadowView.tag = kMKDisclosureShadowViewTag;
+        shadowView.tag = kMKDividerViewTag;
         [self.view addSubview:shadowView];
         [self.view bringSubviewToFront:shadowView];
         [shadowView release];
@@ -296,7 +307,7 @@ typedef enum {
             [(MKSplitView *)self.view addDetailNavigationBar];
         }
         else {
-            MKDividerView *divider = (MKDividerView *)[self.view viewWithTag:kMKDisclosureShadowViewTag];
+            MKDividerView *divider = (MKDividerView *)[self.view viewWithTag:kMKDividerViewTag];
             UINavigationBar *listBar = (UINavigationBar *)[self.view viewWithTag:kMKListViewNavigationBarTag];
             
             [divider removeFromSuperview];
@@ -361,24 +372,27 @@ typedef enum {
 }
 
 - (void)dismissListController {
-    BOOL tabBar = NO;
-    
-    if (self.tabBarController) {
-        tabBar = YES;
+    if (metricsForCurrentOrientation() == MKMetricsPortrait) {
+        BOOL tabBar = NO;
+        
+        if (self.tabBarController) {
+            tabBar = YES;
+        }
+        
+        MKDividerView *divider = (MKDividerView *)[self.view viewWithTag:kMKDividerViewTag];
+        
+        [UIView animateWithDuration:0.25
+                         animations:^ {
+                             mListViewController.view.frame = startRectForListTransition(MKMetricsPortrait, tabBar);
+                         }
+                         completion:^ (BOOL finished) {
+                             [mListViewController.view removeFromSuperview];
+                             [divider removeFromSuperview];
+                             mListViewIsVisable = NO;
+                             mListViewNavigationItem = nil;
+                         }];
+        
     }
-    
-    MKDividerView *divider = (MKDividerView *)[self.view viewWithTag:kMKDisclosureShadowViewTag];
-    
-    [UIView animateWithDuration:0.25
-                     animations:^ {
-                         mListViewController.view.frame = startRectForListTransition(MKMetricsPortrait, tabBar);
-                     }
-                     completion:^ (BOOL finished) {
-                         [mListViewController.view removeFromSuperview];
-                         [divider removeFromSuperview];
-                         mListViewIsVisable = NO;
-                     }];
-
 }
 
 - (void)addListShaddow {
@@ -392,7 +406,7 @@ typedef enum {
     }
     
     MKDividerView *shadowView = [[MKDividerView alloc] initWithFrame:CGRectMake(x, y, width, height) type:MKDividerViewOverlap];
-    shadowView.tag = kMKDisclosureShadowViewTag;
+    shadowView.tag = kMKDividerViewTag;
     [self.view addSubview:shadowView];
     [self.view bringSubviewToFront:shadowView];
     [shadowView release];
