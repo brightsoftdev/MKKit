@@ -42,7 +42,7 @@
 #pragma mark - Layout
 
 - (void)layoutSubviews {
-    [self layoutForMetrics:metricsForCurrentOrientation()];
+    [self layoutForMetrics:MKMetricsCurrentOrientationMetrics()];
 }
 
 - (void)layoutForMetrics:(MKViewMetrics)metrics {

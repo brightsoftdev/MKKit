@@ -21,7 +21,7 @@ CGRect startRectForListNavigationBarTransition(void);
 #pragma mark List View
 
 CGRect rectForListView(MKViewMetrics metrics, BOOL hasTabBar) {
-    CGFloat height = heightForMetric(metrics) - 44.0;
+    CGFloat height = MKMetricsHeightForMetrics(metrics) - 44.0;
     
     if (hasTabBar) {
         height = height - 49.0;
@@ -45,7 +45,7 @@ CGRect rectForDetailNavigationBar(MKViewMetrics metrics) {
         x = 320.0;
     }
     else {
-        width = widthForMetrics(MKMetricsPortrait);
+        width = MKMetricsWidthForMetrics(MKMetricsPortrait);
     }
     
     return CGRectMake(x, 0.0, width, 44.0);
@@ -54,14 +54,14 @@ CGRect rectForDetailNavigationBar(MKViewMetrics metrics) {
 CGRect rectForDetailView(MKViewMetrics metrics, BOOL hasTabBar) {
     CGFloat width = 0.0;
     CGFloat x = 0.0;
-    CGFloat height = heightForMetric(metrics) - 44.0;
+    CGFloat height = MKMetricsHeightForMetrics(metrics) - 44.0;
     
     if (metrics == MKMetricsLandscape) {
         width = 704.0;
         x = 320.0;
     }
     else {
-        width = widthForMetrics(MKMetricsPortrait);
+        width = MKMetricsWidthForMetrics(MKMetricsPortrait);
     }
     
     if (hasTabBar) {
@@ -74,7 +74,7 @@ CGRect rectForDetailView(MKViewMetrics metrics, BOOL hasTabBar) {
 #pragma mark Transitions
 
 CGRect startRectForListTransition(MKViewMetrics metrics, BOOL hasTabBar) {
-    CGFloat height = heightForMetric(metrics) - 44.0;
+    CGFloat height = MKMetricsHeightForMetrics(metrics) - 44.0;
     
     if (hasTabBar) {
         height = height - 49.0;
@@ -169,7 +169,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self viewsForMetrics:metricsForCurrentOrientation() inital:YES];
+    [self viewsForMetrics:MKMetricsCurrentOrientationMetrics() inital:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -196,7 +196,7 @@ typedef enum {
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    MKViewMetrics toMetrics = metricsForOrientation(toInterfaceOrientation);
+    MKViewMetrics toMetrics = MKMetricsOrientationMetrics(toInterfaceOrientation);
     mListViewNavigationItem = nil;
     
     [self viewsForMetrics:toMetrics inital:NO];
@@ -287,7 +287,7 @@ typedef enum {
         float x = (320.0 - 8.0);
         float y = 0.0;
         float width = 12.0;
-        float height = heightForMetric(metrics);
+        float height = MKMetricsHeightForMetrics(metrics);
         
         MKDividerView *shadowView = [[MKDividerView alloc] initWithFrame:CGRectMake(x, y, width, height) type:MKDividerViewSplit];
         shadowView.tag = kMKDividerViewTag;
@@ -372,7 +372,7 @@ typedef enum {
 }
 
 - (void)dismissListController {
-    if (metricsForCurrentOrientation() == MKMetricsPortrait) {
+    if (MKMetricsCurrentOrientationMetrics() == MKMetricsPortrait) {
         BOOL tabBar = NO;
         
         if (self.tabBarController) {
@@ -399,7 +399,7 @@ typedef enum {
     float x = 320.0;
     float y = 44.0;
     float width = 12.0;
-    float height = (heightForMetric(metricsForCurrentOrientation()) - 44.0);
+    float height = (MKMetricsHeightForMetrics(MKMetricsCurrentOrientationMetrics()) - 44.0);
     
     if (self.tabBarController) {
         height = (height - 49.0);
@@ -431,7 +431,7 @@ typedef enum {
 #pragma mark - Layout
 
 - (void)layoutForMetrics:(MKViewMetrics)metrics {
-    self.width = widthForMetrics(metrics);
+    self.width = MKMetricsWidthForMetrics(metrics);
     
     MKMetrics *viewMetrics = [MKMetrics metricsForView:self];
     
@@ -471,7 +471,7 @@ typedef enum {
 #pragma mark - Navigation Bars
 
 - (void)addDetailNavigationBar {
-    UINavigationBar *detailNavBar = [[UINavigationBar alloc] initWithFrame:rectForDetailNavigationBar(metricsForCurrentOrientation())];
+    UINavigationBar *detailNavBar = [[UINavigationBar alloc] initWithFrame:rectForDetailNavigationBar(MKMetricsCurrentOrientationMetrics())];
     detailNavBar.tag = kMKDetailViewNavigaionBarTag;
     
     [self addSubview:detailNavBar];

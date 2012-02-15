@@ -80,11 +80,11 @@
 #pragma mark - Helper Functions
 #pragma mark Widths
 
-CGFloat widthForOrientation(UIInterfaceOrientation orientation) {
-    return widthForMetrics(metricsForOrientation(orientation));
+CGFloat MKMetricsWidthForOrientation(UIInterfaceOrientation orientation) {
+    return MKMetricsWidthForMetrics(MKMetricsOrientationMetrics(orientation));
 }
 
-CGFloat widthForMetrics(MKViewMetrics metrics) {
+CGFloat MKMetricsWidthForMetrics(MKViewMetrics metrics) {
     CGFloat width = 320.0;
     
     switch (metrics) {
@@ -111,8 +111,8 @@ CGFloat widthForMetrics(MKViewMetrics metrics) {
     return width;
 }
 
-CGFloat GetMaxWidth(int classTag) {
-    CGFloat maxWidth = widthForMetrics(metricsForCurrentOrientation());
+CGFloat MKMetricsGetMaxWidth(int classTag, MKViewMetrics metrics) {
+    CGFloat maxWidth = MKMetricsWidthForMetrics(metrics);
     
     switch (classTag) {
         case kMKSegmentedPopOutViewClassTag: maxWidth = (maxWidth - 20.0); break;
@@ -124,7 +124,7 @@ CGFloat GetMaxWidth(int classTag) {
 
 #pragma mark Heights
 
-CGFloat heightForMetric(MKViewMetrics metrics) {
+CGFloat MKMetricsHeightForMetrics(MKViewMetrics metrics) {
     BOOL hiddenStatusBar = [[UIApplication sharedApplication] isStatusBarHidden];
     CGFloat height = 460.0;
     
@@ -157,14 +157,14 @@ CGFloat heightForMetric(MKViewMetrics metrics) {
 
 #pragma mark Metrics
 
-MKViewMetrics metricsForCurrentOrientation() {
+MKViewMetrics MKMetricsCurrentOrientationMetrics() {
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-    MKViewMetrics viewMetrics = metricsForOrientation(orientation);
+    MKViewMetrics viewMetrics = MKMetricsOrientationMetrics(orientation);
     
     return viewMetrics;
 }
 
-MKViewMetrics metricsForOrientation(UIInterfaceOrientation orientation) {
+MKViewMetrics MKMetricsOrientationMetrics(UIInterfaceOrientation orientation) {
     MKViewMetrics viewMetrics;
     
     switch (orientation) {

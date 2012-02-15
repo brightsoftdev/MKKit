@@ -50,6 +50,8 @@
     return self;
 }
 
+#pragma mark Helper
+
 - (void)setUpView {
     self.userInteractionEnabled = YES;
     self.autoresizesSubviews = YES;
@@ -79,8 +81,8 @@
 #pragma mark - Layout
 
 - (void)layoutSubviews {
-    if (shouldLayoutSubviews) {
-        [self layoutForMetrics:metricsForCurrentOrientation()];
+    if (self.shouldLayoutSubviews) {
+        [self layoutForMetrics:MKMetricsCurrentOrientationMetrics()];
     }
 }
 

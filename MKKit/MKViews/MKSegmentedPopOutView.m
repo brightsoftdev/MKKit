@@ -49,6 +49,20 @@ void drawSegmentText(CGContextRef context, CGRect rect, MKSegment segment) {
 
 void drawSegmentSeperator(CGContextRef context, MKSegment segment);
 
+#pragma mark - Segments
+
+@interface MKSegmentView : MKView {
+    MKSegmentedPopOutView *mParent;
+    MKSegment mSegment;
+    BOOL mSelected;
+}
+
+- (id)initWithSegment:(MKSegment)segment parent:(MKSegmentedPopOutView *)parent;
+
+@end
+
+#pragma mark - Segment View
+
 @interface MKSegmentedPopOutView ()
 
 - (void)selectedSegment:(NSInteger)index;
@@ -73,6 +87,7 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment);
         self.alpha = 0.0;
         self.backgroundColor = CLEAR;
         self.opaque = YES;
+        self.shouldLayoutSubviews = YES;
         
         if (!graphics) {
             self.graphicsStructure = [self defaultGraphics];
@@ -96,16 +111,6 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment);
     [mTargets release];
     
     [super dealloc];
-}
-
-#pragma mark - Layout
-
-- (void)layoutForMetrics:(MKViewMetrics)_metrics {
-    [super layoutForMetrics:_metrics];
-    
-    if (mPopOutType == MKPopOutTableCell) {
-        [self adjustToCell];
-    }
 }
 
 #pragma mark - Accessor Methods

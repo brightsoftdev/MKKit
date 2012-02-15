@@ -24,15 +24,14 @@
 #pragma mark - Displaying
 
 - (void)showFromCell:(MKTableCell *)cell onView:(UITableView *)tableView {
-    self.tableView = tableView;
-    self.cell = cell;
-    
     CGRect cellRect = [tableView rectForRowAtIndexPath:cell.indexPath];
     
     mAnimationType = MKViewAnimationTypeFadeIn;
     mPopOutType = MKPopOutTableCell;
     
     self.maxWidth = (CGRectGetWidth(cellRect) - 20.0);
+    self.tableView = tableView;
+    self.cell = cell;
     self.tag = kMKPopOutViewTableCellTag;
     
     if (mType != MKPopOutAuto) {

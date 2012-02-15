@@ -72,27 +72,23 @@
 
 - (void)layoutForMetrics:(MKViewMetrics)_metrics {
     if (autoResizeOnRotation) {
-        
-        if (self.maxWidth == 0.0) {
-            self.maxWidth = GetMaxWidth(kMKSegmentedPopOutViewClassTag);
-        }
-        
-        if (MK_DEVICE_IS_IPHONE) {
-            [self setSize:CGSizeMake(self.maxWidth, self.frame.size.height) forMetrics:MKMetricsPortrait];
-            [self setSize:CGSizeMake(self.maxWidth, self.frame.size.height) forMetrics:MKMetricsLandscape];
-        }
-        if (MK_DEVICE_IS_IPAD) {
-            [self setSize:CGSizeMake(self.maxWidth, self.frame.size.height) forMetrics:MKMetricsPortrait];
-            [self setSize:CGSizeMake(self.maxWidth, self.frame.size.height) forMetrics:MKMetricsLandscape];
-        }
-        
+        self.maxWidth = MKMetricsGetMaxWidth(kMKSegmentedPopOutViewClassTag, _metrics);
+    
+        [self setSize:CGSizeMake(self.maxWidth, self.frame.size.height) forMetrics:MKMetricsPortrait];
+        [self setSize:CGSizeMake(self.maxWidth, self.frame.size.height) forMetrics:MKMetricsLandscape];
+    
         MKMetrics *metrics = [MKMetrics metricsForView:self];
         [metrics beginLayout];
         [metrics layoutSubview:self forMetrics:_metrics];
         [metrics endLayout];
-        
+    
         [self setNeedsDisplayInRect:self.frame];
+    
+        if (mPopOutType == MKPopOutTableCell) {
+            [self adjustToCell];
+        }
     }
+
 }
 
 #pragma mark - Drawing

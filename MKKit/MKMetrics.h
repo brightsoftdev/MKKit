@@ -71,8 +71,8 @@ typedef enum {
  @param metrics the metrics to use to layout the subview. You can use the following
  fuctions to find the witch MKViewMetrics to pass:
  
- * MKViewMetrics metricsForCurrentOrientation(void)
- * MKViewMetrics metricsForOrientation(UIInterfaceOrientation orientation)
+ * MKViewMetrics MKMetricsCurrentOrientationMetrics(void)
+ * MKViewMetrics MKMetricsOrientationMetrics(UIInterfaceOrientation orientation)
 */
 - (void)layoutSubview:(UIView *)subview forMetrics:(MKViewMetrics)metrics;
 
@@ -96,14 +96,14 @@ typedef enum {
 
 @end
 
-CGFloat widthForOrientation(UIInterfaceOrientation orientation);
-CGFloat widthForMetrics(MKViewMetrics metrics);
-CGFloat heightForMetric(MKViewMetrics metrics);
+CGFloat MKMetricsWidthForOrientation(UIInterfaceOrientation orientation);
+CGFloat MKMetricsWidthForMetrics(MKViewMetrics metrics);
+CGFloat MKMetricsHeightForMetrics(MKViewMetrics metrics);
 
 /// NEW
-CGFloat GetMaxWidth(int classTag);
+CGFloat MKMetricsGetMaxWidth(int classTag, MKViewMetrics metrics);
 
-MKViewMetrics metricsForCurrentOrientation(void);
-MKViewMetrics metricsForOrientation(UIInterfaceOrientation orientation);
+MKViewMetrics MKMetricsCurrentOrientationMetrics(void);
+MKViewMetrics MKMetricsOrientationMetrics(UIInterfaceOrientation orientation);
 
 static const int kMKSegmentedPopOutViewClassTag      = 1;

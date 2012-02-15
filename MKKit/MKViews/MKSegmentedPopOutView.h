@@ -103,32 +103,3 @@ typedef struct {
 @property (nonatomic, readonly) NSInteger selectedIndex;
 
 @end
-
-/**---------------------------------------------------------------------
- MKSegmentView provides the view for an MKSegmentedPopOutView. This Class
- should not be used directly.
-----------------------------------------------------------------------*/
-
-@interface MKSegmentView : MKView {
-    MKSegmentedPopOutView *mParent;
-    MKSegment mSegment;
-    BOOL mSelected;
-}
-
-///-----------------------------------
-/// @name Creating
-///-----------------------------------
-
-/**
- Creates an instance of MKSegmentView
- 
- @param segment the Segment to draw
- 
- @param parent the MKSegmentedPopOut view instance that the segement is being
- drawn for.
- 
- @return MKSegmentView instance
-*/
-- (id)initWithSegment:(MKSegment)segment parent:(MKSegmentedPopOutView *)parent;
-
-@end
