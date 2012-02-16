@@ -99,8 +99,6 @@ typedef enum {
 CGFloat MKMetricsWidthForOrientation(UIInterfaceOrientation orientation);
 CGFloat MKMetricsWidthForMetrics(MKViewMetrics metrics);
 CGFloat MKMetricsHeightForMetrics(MKViewMetrics metrics);
-
-/// NEW
 CGFloat MKMetricsGetMaxWidth(int classTag, MKViewMetrics metrics);
 
 MKViewMetrics MKMetricsCurrentOrientationMetrics(void);

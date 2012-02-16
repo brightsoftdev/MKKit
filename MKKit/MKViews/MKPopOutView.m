@@ -72,8 +72,11 @@
 
 - (void)layoutForMetrics:(MKViewMetrics)_metrics {
     if (autoResizeOnRotation) {
-        self.maxWidth = MKMetricsGetMaxWidth(kMKSegmentedPopOutViewClassTag, _metrics);
-    
+        if (mPopOutType == MKPopOutTableCell) {
+            CGRect cellRect = [self.tableView rectForRowAtIndexPath:self.cell.indexPath];
+            self.maxWidth = (CGRectGetWidth(cellRect) - 20.0);
+        }
+        
         [self setSize:CGSizeMake(self.maxWidth, self.frame.size.height) forMetrics:MKMetricsPortrait];
         [self setSize:CGSizeMake(self.maxWidth, self.frame.size.height) forMetrics:MKMetricsLandscape];
     
@@ -88,7 +91,6 @@
             [self adjustToCell];
         }
     }
-
 }
 
 #pragma mark - Drawing

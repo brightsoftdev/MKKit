@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "MKFeedsAvailability.h"
+#import "MKFeedsErrorControl.h"
 
 typedef void (^MKRequestComplete)(NSArray *feedInfo, NSError *error);
 
@@ -160,9 +161,6 @@ typedef enum {
 @property (nonatomic, copy) MKRequestComplete requestCompleteBlock;
 
 @end
-
-/// Exections
-NSString *MKFeedParserNILURLException MK_VISIBLE_ATTRIBUTE;
 
 /// Internal tags
 NSString *MKFeedRSSFeedStart MK_VISIBLE_ATTRIBUTE;

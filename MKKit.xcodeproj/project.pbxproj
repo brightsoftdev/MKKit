@@ -169,6 +169,7 @@
 		AA86F5641457B0BA00A7D4FC /* MKHTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86F55E1457B0BA00A7D4FC /* MKHTMLNode.m */; };
 		AA86F5651457B0BA00A7D4FC /* MKHTMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = AA86F55F1457B0BA00A7D4FC /* MKHTMLParser.h */; };
 		AA86F5661457B0BA00A7D4FC /* MKHTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86F5601457B0BA00A7D4FC /* MKHTMLParser.m */; };
+		AA98667214ECA0C500C2EF01 /* MKFeedsErrorControl.h in Headers */ = {isa = PBXBuildFile; fileRef = AA98667114ECA0C400C2EF01 /* MKFeedsErrorControl.h */; };
 		AA99D3161405B1BE00CFFD56 /* MKObjectDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AA99D3151405B1BE00CFFD56 /* MKObjectDelegate.h */; };
 		AA99D3191405B71E00CFFD56 /* MKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = AA99D3171405B71E00CFFD56 /* MKObject.h */; };
 		AA99D31A1405B71E00CFFD56 /* MKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AA99D3181405B71E00CFFD56 /* MKObject.m */; };
@@ -399,6 +400,7 @@
 		AA86F55E1457B0BA00A7D4FC /* MKHTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKHTMLNode.m; path = MKFeeds/MKHTML/MKHTMLNode.m; sourceTree = SOURCE_ROOT; };
 		AA86F55F1457B0BA00A7D4FC /* MKHTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKHTMLParser.h; path = MKFeeds/MKHTML/MKHTMLParser.h; sourceTree = SOURCE_ROOT; };
 		AA86F5601457B0BA00A7D4FC /* MKHTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKHTMLParser.m; path = MKFeeds/MKHTML/MKHTMLParser.m; sourceTree = SOURCE_ROOT; };
+		AA98667114ECA0C400C2EF01 /* MKFeedsErrorControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKFeedsErrorControl.h; sourceTree = "<group>"; };
 		AA99D3151405B1BE00CFFD56 /* MKObjectDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKObjectDelegate.h; sourceTree = "<group>"; };
 		AA99D3171405B71E00CFFD56 /* MKObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKObject.h; sourceTree = "<group>"; };
 		AA99D3181405B71E00CFFD56 /* MKObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKObject.m; sourceTree = "<group>"; };
@@ -784,6 +786,7 @@
 			children = (
 				AA3297BC144FD7CE00982DCE /* MKFeed.h */,
 				AA3297C7144FD9A300982DCE /* MKFeedsAvailability.h */,
+				AA98667114ECA0C400C2EF01 /* MKFeedsErrorControl.h */,
 				AA3BFC241481485D003C59A9 /* MKFeedItem.h */,
 				AA3BFC251481485E003C59A9 /* MKFeedItem.m */,
 				AA3297B2144FD0B600982DCE /* MKFeedParser.h */,
@@ -1059,6 +1062,7 @@
 				AABD97BF146E260D004F1AA1 /* MKHTMLExtractorDelegate.h in Headers */,
 				AAF37FE814703885001AE209 /* NSString+MKFeedParser.h in Headers */,
 				AA3BFC261481485E003C59A9 /* MKFeedItem.h in Headers */,
+				AA98667214ECA0C500C2EF01 /* MKFeedsErrorControl.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

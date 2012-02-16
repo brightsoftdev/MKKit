@@ -29,7 +29,6 @@
     mAnimationType = MKViewAnimationTypeFadeIn;
     mPopOutType = MKPopOutTableCell;
     
-    self.maxWidth = (CGRectGetWidth(cellRect) - 20.0);
     self.tableView = tableView;
     self.cell = cell;
     self.tag = kMKPopOutViewTableCellTag;
@@ -70,6 +69,7 @@
 
 - (void)adjustToCell {
     CGRect cellRect = [self.tableView rectForRowAtIndexPath:self.cell.indexPath];
+    //self.maxWidth = (CGRectGetWidth(cellRect) - 20.0);
     
     MKTableCell *cell = (MKTableCell *)[self.tableView cellForRowAtIndexPath:self.cell.indexPath];
     

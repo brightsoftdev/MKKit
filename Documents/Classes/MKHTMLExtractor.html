@@ -38,11 +38,11 @@
 					
 <p> <strong> Overview </strong></p>
 
-<p> <a href="MKHTMLExtractor.html">MKHTMLExtractor</a> looks at given web pages and pulls out specific data. For example the article from a web page containing a news story. <a href="MKHTMLExtractor.html">MKHTMLExtractor</a> has preset types of extraction types that can be used. <ul><li> <code>MKHTMLExtactorMainBodyTextRequest</code>: Finds the main text of a web page and extacts it as a NSString that is in an HTML format. </li></ul></p>
+<p> <a href="MKHTMLExtractor.html">MKHTMLExtractor</a> looks at given web pages and pulls out specific data. For example the article from a web page containing a news story. <a href="MKHTMLExtractor.html">MKHTMLExtractor</a> has preset types of extraction types that can be used. <ul><li> <code>MKHTMLExtactorMainBodyTextRequest</code>: Finds the main text of a web page and extacts it as a NSString that is in an HTML format. </li><li> <code>MKHTMLExtractorFirstParagraph</code>: Finds the first paragraph of the a web pages main body text and returns it as a NSString in an HTML format. </li></ul></p>
 
 <p> <strong> Request Handlers </strong></p>
 
-<p> <a href="MKHTMLExtractor.html">MKHTMLExtractor</a> supports the use of code blocks to handle responces from an extraction request. Call the <a href="#//api/name/requestType:withHandler:">requestType:withHandler:</a> method to make use of the handler block. The handle block will pass an NSDictionay object with the extraction results. The <a href="#//api/name/results">results</a> can be accesed with the following keys: <ul><li> Each page that is found has the key for page number. For example page one&apos;s key is <code>1</code>. </li></ul></p>
+<p> <a href="MKHTMLExtractor.html">MKHTMLExtractor</a> supports the use of code blocks to handle responces from an extraction request. Call the <a href="#//api/name/requestType:handler:">requestType:handler:</a> method to make use of the handler block. The handle block will pass an NSString object with the extraction results. </p>
 
 				</div>
 				
@@ -75,7 +75,7 @@
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/optimizeOutputForiPhone"> optimizeOutputForiPhone</a></code>
+		<code><a href="#//api/name/styledOutput"> styledOutput</a></code>
 		<span class="tooltip"> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be added inserted into the output to assist with display. </span>
 	</span>
 	
@@ -93,32 +93,20 @@
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/requestType:withHandler:">- requestType:withHandler:</a></code>
+		<code><a href="#//api/name/requestType:handler:">- requestType:handler:</a></code>
 		<span class="tooltip"> Makes a request from the supplied URL, preforms an extraction, and passes the <a href="#//api/name/results">results</a> through the handler block. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestPagesWithHandler:">- requestPagesWithHandler:</a></code>
+		<span class="tooltip"> Makes a request from the supplied URL, performs and extraction, and pass the <a href="#//api/name/results">results</a> through the handler block. </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/requestType"> requestType</a></code>
 		<span class="tooltip"> The request that is currently being used. </span>
-	</span>
-	
-</li>
-					</ul>
-					
-					<h3 class="subsubtitle task-title">Using Data</h3>
-
-					<ul class="task-list">
-						<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/results"> results</a></code>
-		<span class="tooltip"> An NSDictionary containing the <a href="#//api/name/results">results</a> of an extraction. Keys for the dictionary are the corisponding page number. use the <a href="#//api/name/numberOfPages">numberOfPages</a> property to find how many pages were found. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/numberOfPages"> numberOfPages</a></code>
-		<span class="tooltip"> The number of pages found during an extraction. </span>
 	</span>
 	
 </li>
@@ -141,8 +129,44 @@
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/requestHandler"> requestHandler</a></code>
-		<span class="tooltip"> The request code block handler, called when a request is completed using the <a href="#//api/name/requestType:withHandler:">requestType:withHandler:</a> method. </span>
+		<code><a href="#//api/name/pageTextHandler"> pageTextHandler</a></code>
+		<span class="tooltip"> Reference to the request handler block. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Deprecations</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestType:withHandler:MK_DEPRECATED_1_0:">- requestType:withHandler:MK_DEPRECATED_1_0:</a></code>
+		<span class="tooltip"> DEPRECATED v1.0 </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MK_DEPRECATED_1_0"> MK_DEPRECATED_1_0</a></code>
+		<span class="tooltip"> DEPRECATED v1.0 </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/optimizeOutputForiPhone"> optimizeOutputForiPhone</a></code>
+		<span class="tooltip"> DEPRECATED v1.0 </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/results"> results</a></code>
+		<span class="tooltip"> DEPRECATED v1.0 </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/numberOfPages"> numberOfPages</a></code>
+		<span class="tooltip"> DEPRECATED v1.0 </span>
 	</span>
 	
 </li>
@@ -274,8 +298,49 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/requestType:withHandler:" title="requestType:withHandler:"></a>
-	<h3 class="subsubtitle method-title">requestType:withHandler:</h3>
+	<a name="//api/name/requestPagesWithHandler:" title="requestPagesWithHandler:"></a>
+	<h3 class="subsubtitle method-title">requestPagesWithHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Makes a request from the supplied URL, performs and extraction, and pass the <a href="#//api/name/results">results</a> through the handler block. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)requestPagesWithHandler:(MKHTMLExtractorPageTextHandler)<em>handler</em></code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		
+		<p> Makes a request from the supplied URL, performs and extraction, and pass the <a href="#//api/name/results">results</a> through the handler block. </p>
+		
+		<p> This method sets the <a href="#//api/name/requestType">requestType</a> to MKHTMLExtractorMainBodyRequest, and automatically looks for follow on pages. The handler block is called each time a page is found. </p>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/requestType:handler:" title="requestType:handler:"></a>
+	<h3 class="subsubtitle method-title">requestType:handler:</h3>
 	
 	
 	
@@ -284,7 +349,7 @@
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)requestType:(MKHTMLExtractorRequestType)<em>type</em> withHandler:(MKHTMLExtractorRequestHandler)<em>handler</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)requestType:(MKHTMLExtractorRequestType)<em>type</em> handler:(MKHTMLExtractorPageTextHandler)<em>handler</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -292,15 +357,47 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>type</em></dt>
-			<dd> The type of extraction to preform. Optional types are: <ul><li> MKHTMLExtractorMainBodyText : Extracts the main text of the web site. This most suttable for getting a news article out of a page. </li></ul></dd>
+			<dd> The type of extraction to preform. Optional types are: <ul><li> MKHTMLExtractorMainBodyText : Extracts the main text of the web site. This most suttable for getting a news article out of a page. </li><li> <code>MKHTMLExtractorFirstParagraph</code>: Finds the first paragraph of the a web pages main body text and returns it as a NSString in an HTML format. </li></ul></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>handler</em></dt>
-			<dd> The code block to preform when the request is complete. The block will pass to parameters (NSDictionary <strong> results, NSError </strong> error). The <a href="#//api/name/results">results</a> can accessed from the dictionary by using the following keys: <ul><li> MKHTMLExtractorMainBodyText : key to the main text of the web site -- NSString. </li></ul></dd>
+			<dd> The code block to preform when the request is complete. The block will pass to parameters of and NSString, and NSError. The block is called each time a page is found. </dd>
 		</dl>
 		
 	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/requestType:withHandler:MK_DEPRECATED_1_0:" title="requestType:withHandler:MK_DEPRECATED_1_0:"></a>
+	<h3 class="subsubtitle method-title">requestType:withHandler:MK_DEPRECATED_1_0:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> DEPRECATED v1.0 </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)requestType:(MKHTMLExtractorRequestType)<em>type</em> withHandler:(MKHTMLExtractorRequestHandler)<em>handler</em> MK_DEPRECATED_1_0</code></div>
+	
 	
 	
 	
@@ -326,6 +423,38 @@
 				
 				<div class="section section-methods">
 					<h2 class="subtitle subtitle-methods">Properties</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/MK_DEPRECATED_1_0" title="MK_DEPRECATED_1_0"></a>
+	<h3 class="subsubtitle method-title">MK_DEPRECATED_1_0</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> DEPRECATED v1.0 </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) MKHTMLExtractorRequestHandler requestHandler MK_DEPRECATED_1_0</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
 					
 					<div class="section-method">
 	<a name="//api/name/articleTitle" title="articleTitle"></a>
@@ -398,7 +527,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> The number of pages found during an extraction. </p>
+		<p> DEPRECATED v1.0 </p>
 	</div>		
 	
 	
@@ -430,7 +559,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be added inserted into the output to assist with display. </p>
+		<p> DEPRECATED v1.0 </p>
 	</div>		
 	
 	
@@ -441,27 +570,9 @@
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		
-		<p> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be added inserted into the output to assist with display. </p>
-		
-		<p> When set to <code>YES</code> the <a href="#//api/name/delegate">delegate</a> method extactorHTMLHeaderPath: method is called. If this method is not used or returns <code>nil</code>, generic HTML code will be added. </p>
-		
-	</div>
 	
 	
 	
-	
-	
-	<div class="method-subsection see-also-section">
-		<h4 class="method-subtitle">See Also</h4>
-		<ul>
-			
-			<li><code><a href="../Protocols/MKHTMLExtractorDelegate.html">MKHTMLExtractorDelegate</a></code></li>
-			
-		</ul>
-	</div>
 	
 	
 	
@@ -474,17 +585,17 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/requestHandler" title="requestHandler"></a>
-	<h3 class="subsubtitle method-title">requestHandler</h3>
+	<a name="//api/name/pageTextHandler" title="pageTextHandler"></a>
+	<h3 class="subsubtitle method-title">pageTextHandler</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> The request code block handler, called when a request is completed using the <a href="#//api/name/requestType:withHandler:">requestType:withHandler:</a> method. </p>
+		<p> Reference to the request handler block. </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) MKHTMLExtractorRequestHandler requestHandler</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) MKHTMLExtractorPageTextHandler pageTextHandler</code></div>
 	
 	
 	
@@ -544,7 +655,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> An NSDictionary containing the <a href="#//api/name/results">results</a> of an extraction. Keys for the dictionary are the corisponding page number. use the <a href="#//api/name/numberOfPages">numberOfPages</a> property to find how many pages were found. </p>
+		<p> DEPRECATED v1.0 </p>
 	</div>		
 	
 	
@@ -569,6 +680,56 @@
 	
 </div>
 					
+					<div class="section-method">
+	<a name="//api/name/styledOutput" title="styledOutput"></a>
+	<h3 class="subsubtitle method-title">styledOutput</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be added inserted into the output to assist with display. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL styledOutput</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		
+		<p> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be added inserted into the output to assist with display. </p>
+		
+		<p> When set to <code>YES</code> the <a href="#//api/name/delegate">delegate</a> method extactorHTMLHeaderPath: method is called. If this method is not used or returns <code>nil</code>, generic HTML code will be added. </p>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><a href="../Protocols/MKHTMLExtractorDelegate.html">MKHTMLExtractorDelegate</a></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
 				</div>
 				
 				
@@ -582,7 +743,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-17)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-16)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

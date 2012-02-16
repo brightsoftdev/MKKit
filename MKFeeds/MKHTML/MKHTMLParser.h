@@ -13,6 +13,7 @@
 #import <libxml/HTMLparser.h>
 
 #import <MKKit/MKFeeds/MKFeedsAvailability.h>
+#import <MKKit/MKFeeds/MKFeedsErrorControl.h>
 
 @class MKHTMLNode;
 
@@ -46,6 +47,16 @@
 */
 - (id)initWithData:(NSData *)data;
 
+/**
+ Creates an instance of MKHTMLParser with the given string.
+ 
+ @param string An HTML formated string.
+ 
+ @exception MKHTMLExtractorNILHTMLStringException Exception is thrown if string is nil.
+ Exception is catchable.
+ 
+ @return MKHTMLParser instance
+*/
 - (id)initWithString:(NSString *)stirng;
 
 ///---------------------------------------------------------
@@ -75,5 +86,3 @@
 - (MKHTMLNode *)body;
 
 @end
-
-NSString *MKHTMLParserNILDataException MK_VISIBLE_ATTRIBUTE;

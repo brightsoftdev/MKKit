@@ -74,10 +74,10 @@
 ///--------------------------------------
 
 /** Reference to the listViewController */
-@property (nonatomic, retain, readonly) UIViewController *listViewController;
+@property (nonatomic, retain, readonly) IBOutlet UIViewController *listViewController;
 
 /** Refernce to the detailViewController */
-@property (nonatomic, retain, readonly) UIViewController *detailViewController;
+@property (nonatomic, retain, readonly) IBOutlet UIViewController *detailViewController;
 
 ///--------------------------------------
 /// @name Navigation Item

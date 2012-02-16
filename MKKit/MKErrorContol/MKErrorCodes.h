@@ -18,3 +18,5 @@
 
 #define ERROR_CODE_703                      703
 #define ERROR_DESCRIPTION_703(required)     [NSString stringWithFormat:@"Validation Error : This field must be %i characters long", (required)]
+
+#pragma mark - MKFeeds

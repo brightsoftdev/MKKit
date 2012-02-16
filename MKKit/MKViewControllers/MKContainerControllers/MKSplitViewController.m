@@ -169,6 +169,8 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    mListViewNavigationItem = nil;
+    mDetailViewNavigationItem = nil;
     [self viewsForMetrics:MKMetricsCurrentOrientationMetrics() inital:YES];
 }
 
@@ -205,6 +207,8 @@ typedef enum {
         [mListViewController viewWillAppear:YES];
         [mListViewController performSelector:@selector(viewDidAppear:) withObject:nil afterDelay:duration];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:MKPopOutViewShouldRemoveNotification object:nil];
 }
 
 #pragma mark - Accessor Methods
@@ -295,9 +299,11 @@ typedef enum {
         [self.view bringSubviewToFront:shadowView];
         [shadowView release];
         
-        UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backButton:)];
-        self.listViewNavigationItem.leftBarButtonItem = back;
-        [back release];
+        if (self.navigationController) {
+            UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backButton:)];
+            self.listViewNavigationItem.leftBarButtonItem = back;
+            [back release];
+        }
     }
     else {
         mDetailViewController.view.frame = CGRectZero;
@@ -317,13 +323,18 @@ typedef enum {
             mListViewNavigationItem = nil;
         }
         
-        UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backButton:)];
         UIBarButtonItem *list = [[UIBarButtonItem alloc] initWithTitle:self.listViewController.title style:UIBarButtonItemStyleBordered target:self action:@selector(listButton:)];
         
-        [self.detailViewNavigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:back, list, nil] animated:NO];
+        if (self.navigationController) {
+            UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backButton:)];
+            [self.detailViewNavigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:back, list, nil] animated:NO];
+            [back release];
+        }
+        else {
+            [self.detailViewNavigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:list, nil] animated:NO];
+        }
         
         [list release];
-        [back release];
         
         mListViewIsVisable = NO;
     }

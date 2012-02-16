@@ -7,8 +7,10 @@
 //
 
 #import <MKKit/MKFeeds/MKFeedsAvailability.h>
+#import <MKKit/MKFeeds/MKFeedsErrorControl.h>
 
 typedef void (^MKHTMLExtractorRequestHandler)(NSDictionary *results, NSError *error);
+typedef void (^MKHTMLExtractorPageTextHandler)(NSString *pageText, NSError *error);
 
 typedef enum {
     MKHTMLExtractorRequestNone,
@@ -29,15 +31,14 @@ typedef enum {
  
  * `MKHTMLExtactorMainBodyTextRequest` : Finds the main text of a web page and extacts it 
  as a NSString that is in an HTML format.
+ * `MKHTMLExtractorFirstParagraph` : Finds the first paragraph of the a web pages main body
+ text and returns it as a NSString in an HTML format.
  
  *Request Handlers*
  
  MKHTMLExtractor supports the use of code blocks to handle responces from an extraction
- request. Call the requestType:withHandler: method to make use of the handler block.
- The handle block will pass an NSDictionay object with the extraction results. The results
- can be accesed with the following keys:
- 
- * Each page that is found has the key for page number. For example page one's key is `1`.
+ request. Call the requestType:handler: method to make use of the handler block.
+ The handle block will pass an NSString object with the extraction results. 
 ------------------------------------------------------------------------------------*/
 
 @interface MKHTMLExtractor : NSObject {
@@ -45,20 +46,17 @@ typedef enum {
     NSMutableURLRequest *request;
     NSURLConnection *aConnection;
     NSMutableData *requestData;
-    NSMutableString *dataString;
-    NSMutableDictionary *mResultsDict;
-    NSArray *mAttributesArray;
     NSString *mHTMLHeaderString;
     NSString *mHTMLString;
     NSString *URL;
+    
     struct {
         BOOL requestComplete;
         BOOL requestFromURL;
         BOOL usesCustomStyle;
         BOOL articalTitleSet;
+        BOOL combinesPages;
         int currentPage;
-        int numberOfPages;
-        int attemptCount;
     } MKHTMLExtractorFlags;
 }
 
@@ -105,7 +103,9 @@ typedef enum {
  
  @see MKHTMLExtractorDelegate for more information.
 */
-@property (nonatomic, assign) BOOL optimizeOutputForiPhone;
+@property (nonatomic, assign) BOOL styledOutput;
+
+@property (nonatomic, assign) BOOL combinesPages;
 
 /**
  Set a NSString to this property for the title of an article. If the property
@@ -129,33 +129,27 @@ typedef enum {
  
  * MKHTMLExtractorMainBodyText : Extracts the main text of the web site.
  This most suttable for getting a news article out of a page.
+ * `MKHTMLExtractorFirstParagraph` : Finds the first paragraph of the a web pages main body
+ text and returns it as a NSString in an HTML format.
  
  @param handler The code block to preform when the request is complete.
- The block will pass to parameters (NSDictionary *results, NSError *error).
- The results can accessed from the dictionary by using the following keys:
- 
- * MKHTMLExtractorMainBodyText : key to the main text of the web site -- NSString.
+ The block will pass to parameters of and NSString, and NSError. The block
+ is called each time a page is found.
 */
-- (void)requestType:(MKHTMLExtractorRequestType)type withHandler:(MKHTMLExtractorRequestHandler)handler;
+- (void)requestType:(MKHTMLExtractorRequestType)type handler:(MKHTMLExtractorPageTextHandler)handler;
+
+/**
+ Makes a request from the supplied URL, performs and extraction, and pass
+ the results through the handler block.
+ 
+ This method sets the requestType to MKHTMLExtractorMainBodyRequest, and automatically
+ looks for follow on pages. The handler block is called each time a page is 
+ found.
+*/
+- (void)requestPagesWithHandler:(MKHTMLExtractorPageTextHandler)handler;
 
 /** The request that is currently being used. */
 @property (nonatomic, assign) MKHTMLExtractorRequestType requestType;
-
-///--------------------------------------------
-/// @name Using Data
-///--------------------------------------------
-
-/**
- An NSDictionary containing the results of an extraction. Keys for
- the dictionary are the corisponding page number. use the numberOfPages
- property to find how many pages were found.
-*/
-@property (nonatomic, readonly) NSDictionary *results;
-
-/**
- The number of pages found during an extraction.
-*/
-@property (nonatomic, readonly) NSInteger numberOfPages;
 
 ///--------------------------------------------
 /// @name Delegate
@@ -170,23 +164,27 @@ typedef enum {
 /// @name Handeler Blocks
 ///--------------------------------------------
 
-/** The request code block handler, called when a request is completed
- using the requestType:withHandler: method.
-*/
-@property (nonatomic, copy) MKHTMLExtractorRequestHandler requestHandler;
+/** Reference to the request handler block. */
+@property (nonatomic, copy) MKHTMLExtractorPageTextHandler pageTextHandler;
 
-@end
+///-------------------------------------------
+/// @name Deprecations
+///-------------------------------------------
 
-NSString *MKHTMLExtractorNILURLExecption MK_VISIBLE_ATTRIBUTE;
-NSString *MKHTMLExtractorNILHTMLStringException MK_VISIBLE_ATTRIBUTE;
+/** DEPRECATED v1.0 */
+- (void)requestType:(MKHTMLExtractorRequestType)type withHandler:(MKHTMLExtractorRequestHandler)handler MK_DEPRECATED_1_0;
 
-NSString *MKHTMLExtractorNoResultsFoundError MK_VISIBLE_ATTRIBUTE;
+/** DEPRECATED v1.0 */
+@property (nonatomic, copy) MKHTMLExtractorRequestHandler requestHandler MK_DEPRECATED_1_0;
 
-@interface MKHTMLAttribueValue : NSObject 
+/** DEPRECATED v1.0 */
+@property (nonatomic, assign) BOOL optimizeOutputForiPhone; //MK_DEPRECATED_1_0;
 
-- (id)initWithAttribute:(NSString *)attrib value:(NSString *)val;
+/** DEPRECATED v1.0 */
+@property (nonatomic, readonly) NSDictionary *results;// MK_DEPRECATED_1_0;
 
-@property (nonatomic, copy) NSString *attribute;
-@property (nonatomic, copy) NSString *value;
+/** DEPRECATED v1.0 */
+@property (nonatomic, readonly) NSInteger numberOfPages;// MK_DEPRECATED_1_0;
+
 
 @end
