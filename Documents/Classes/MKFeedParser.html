@@ -41,9 +41,7 @@
 					
 <p> <strong> Overview </strong></p>
 
-<p> <a href="MKFeedParser.html">MKFeedParser</a> requests RSS/ATOM feeds from the internet and pases them into an array for use by your app. <a href="MKFeedParser.html">MKFeedParser</a> will automaically detect what type of feed it is parsing, or you can set the type of feed if it is know. If <a href="MKFeedParser.html">MKFeedParser</a> detects that the feed type is set incorrectly, it will change it. You can access the type of feed using the <a href="#//api/name/sourceType">sourceType</a> property. This property will return one of two values: <ul><li> <code>MKFeedSourceRSS</code>: Used if the feed is in RSS format. </li><li> <code>MKFeedSourceAtom</code>: Used if the feed is in an Atom format. </li><li> <code>MKFeedSourceGoogleFeedAPIJSON</code>: Used if the feed is from the Google Feed API. </li></ul></p>
-
-<p> All feeds are parsed into an Array of <a href="MKFeedItem.html">MKFeedItem</a> objects. </p>
+<p> <a href="MKFeedParser.html">MKFeedParser</a> requests RSS/ATOM feeds from the internet and pases them into an array for use by your app. <a href="MKFeedParser.html">MKFeedParser</a> passes the provided URL through Google&apos;s feed API and than parses it into an array of <a href="MKFeedItem.html">MKFeedItem</a> objects. </p>
 
 <p> <strong> Using Returned Data </strong></p>
 
@@ -104,14 +102,8 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/contentType"> contentType</a></code>
-		<span class="tooltip"> The content type of the feed. This property will return one of the following: <ul><li> <code>MKContentTypePlainText</code>: The content of the feed is in a Text String. </li><li> <code>MKContentTypeHTML</code>: The content of the feed is in a HTML String. </li></ul></span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/sourceType"> sourceType</a></code>
-		<span class="tooltip"> The source type of the feed. This property will return one of the following: <ul><li> <code>MKSourceTypeRSS</code>: The feed source is in a RSS format. </li><li> <code>MKSourceTypeAtom</code>: The feed source is in an Atom format. </li></ul></span>
+		<code><a href="#//api/name/numberOfItems"> numberOfItems</a></code>
+		<span class="tooltip"> The number of items the <a href="#//api/name/request">request</a> should return. Default is 15. </span>
 	</span>
 	
 </li>
@@ -136,6 +128,24 @@
 	<span class="tooltip">
 		<code><a href="#//api/name/requestCompleteBlock"> requestCompleteBlock</a></code>
 		<span class="tooltip"> The <a href="#//api/name/request">request</a> complete block. This block is ran when a <a href="#//api/name/request">request</a> is finished. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Deprecated</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MK_DEPRECATED_1_0"> MK_DEPRECATED_1_0</a></code>
+		<span class="tooltip"> DEPRECATED v1.0 </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/sourceType"> sourceType</a></code>
+		<span class="tooltip"> DEPRECATED v1.0 </span>
 	</span>
 	
 </li>
@@ -296,17 +306,17 @@
 					<h2 class="subtitle subtitle-methods">Properties</h2>
 					
 					<div class="section-method">
-	<a name="//api/name/contentType" title="contentType"></a>
-	<h3 class="subsubtitle method-title">contentType</h3>
+	<a name="//api/name/MK_DEPRECATED_1_0" title="MK_DEPRECATED_1_0"></a>
+	<h3 class="subsubtitle method-title">MK_DEPRECATED_1_0</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> The content type of the feed. This property will return one of the following: <ul><li> <code>MKContentTypePlainText</code>: The content of the feed is in a Text String. </li><li> <code>MKContentTypeHTML</code>: The content of the feed is in a HTML String. </li></ul></p>
+		<p> DEPRECATED v1.0 </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MKFeedContentType contentType</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MKFeedContentType contentType MK_DEPRECATED_1_0</code></div>
 	
 	
 	
@@ -344,6 +354,47 @@
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedParser.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/numberOfItems" title="numberOfItems"></a>
+	<h3 class="subsubtitle method-title">numberOfItems</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The number of items the <a href="#//api/name/request">request</a> should return. Default is 15. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) NSInteger numberOfItems</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		
+		<p> The number of items the <a href="#//api/name/request">request</a> should return. Default is 15. </p>
+		
+		<p> This property must be set before a <a href="#//api/name/request">request</a> or <a href="#//api/name/requestWithCompletionBlock:">requestWithCompletionBlock:</a> method is called. </p>
+		
+	</div>
 	
 	
 	
@@ -398,7 +449,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> The source type of the feed. This property will return one of the following: <ul><li> <code>MKSourceTypeRSS</code>: The feed source is in a RSS format. </li><li> <code>MKSourceTypeAtom</code>: The feed source is in an Atom format. </li></ul></p>
+		<p> DEPRECATED v1.0 </p>
 	</div>		
 	
 	
@@ -468,7 +519,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-26)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-17)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

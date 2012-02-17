@@ -36,27 +36,8 @@
     NSString *mItemTitle;
     NSString *mItemContent;
     NSString *mItemLinkURL;
-    NSString *mItemOriginalLinkURL;
     NSString *mItemAuthor;
-    NSString *mItemPubDate;
-    NSString *mItemGUID;
 }
-
-///---------------------------------------------
-/// @name Creating Instances
-///---------------------------------------------
-
-/**
- Creates and instace of MKFeedItem with the given source
- type.
- 
- @param MKFeedSourceType the type of feed, options are:
- 
- * `MKFeedSourceTypeRSS` : a RSS feed
- * `MKFeedSourceTypeAtom` : an Atom feed
- * `MKFeedSourceTypeUnknown` : an unknown feed type
-*/
-- (id)initWithType:(MKFeedSourceType)type;
 
 ///---------------------------------------------
 /// @name Adding Content
@@ -76,16 +57,6 @@
 /// @name Accessing Content
 ///---------------------------------------------
 
-/**
- The type of feed that is being used. This will return one
- of three possibilities:
- 
- * `MKFeedSourceTypeRSS` : a RSS feed
- * `MKFeedSourceTypeAtom` : an Atom feed
- * `MKFeedSourceTypeUnknown` : an unknown feed type
-*/
-@property (nonatomic, readonly) MKFeedSourceType contentType;
-
 /** The tilte of the feed item. This property is KVC compatible. */
 @property (nonatomic, readonly) NSString *itemTitle;
 
@@ -95,16 +66,34 @@
 /** The URL link of the feed item. */
 @property (nonatomic, readonly) NSString *itemLinkURL;
 
-/** The original URL link of the feed item. */
-@property (nonatomic, readonly) NSString *itemOriginalLinkURL;
-
 /** The author of the feed item. This property is KVC compatible. */
 @property (nonatomic, readonly) NSString *itemAuthor;
 
-/** The GUID of the feed item. */
-@property (nonatomic, readonly) NSString *itemGUID;
+/** Identifies if the item has been read or not. Default is `NO`. */
+@property (nonatomic, assign) BOOL itemRead;
 
-/** The published date of the feed item. */
-@property (nonatomic, readonly) NSDate *itemPubDate;
+///----------------------------------------------
+/// @name Deprecated
+///----------------------------------------------
+
+/** DEPRECATED v1.0 */
+- (id)initWithType:(MKFeedSourceType)type MK_DEPRECATED_1_0;
+
+/** DEPRECATED v1.0 */
+@property (nonatomic, readonly) MKFeedSourceType contentType MK_DEPRECATED_1_0;
+
+/** DEPRECATED v1.0 */
+@property (nonatomic, readonly) NSString *itemGUID; //MK_DEPRECATED_1_0;
+
+/** DEPRECATED v1.0 */
+@property (nonatomic, readonly) NSDate *itemPubDate; //MK_DEPRECATED_1_0;
+
+/** DEPRECATED v1.0 */
+@property (nonatomic, readonly) NSString *itemOriginalLinkURL; //MK_DEPRECATED_1_0;
 
 @end
+
+NSString *MKFeedItemTitle MK_VISIBLE_ATTRIBUTE;
+NSString *MKFeedItemContent MK_VISIBLE_ATTRIBUTE;
+NSString *MKFeedItemLinkURL MK_VISIBLE_ATTRIBUTE;
+NSString *MKFeedItemAuthor MK_VISIBLE_ATTRIBUTE;

@@ -38,6 +38,11 @@ static const char *TitleLableKey = "TitleLabelKey";
         self.titleLabel.minimumFontSize = 12.0;
         self.titleLabel.text = title;
         
+        if (MK_DEVICE_IS_IPAD && type == MKTableHeaderTypeGrouped) {
+            self.titleLabel.frame = CGRectMake(57.0, self.frame.origin.x, self.frame.size.width, self.frame.size.height);
+            self.titleLabel.textColor = BLACK;
+        }
+        
         [self addSubview:self.titleLabel];
         
         MKViewFlags.usesBackGroundFill = YES;

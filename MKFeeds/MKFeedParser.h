@@ -33,16 +33,8 @@ typedef enum {
  *Overview*
  
  MKFeedParser requests RSS/ATOM feeds from the internet and pases them into an array for 
- use by your app. MKFeedParser will automaically detect what type of feed it is parsing, 
- or you can set the type of feed if it is know. If MKFeedParser detects that the feed type
- is set incorrectly, it will change it. You can access the type of feed using the sourceType 
- property. This property will return one of two values:
- 
- * `MKFeedSourceRSS` : Used if the feed is in RSS format.
- * `MKFeedSourceAtom` : Used if the feed is in an Atom format.
- * `MKFeedSourceGoogleFeedAPIJSON` : Used if the feed is from the Google Feed API. 
- 
- All feeds are parsed into an Array of MKFeedItem objects.
+ use by your app. MKFeedParser passes the provided URL through Google's feed API and than
+ parses it into an array of MKFeedItem objects. 
  
  *Using Returned Data*
  
@@ -72,17 +64,8 @@ typedef enum {
 	NSMutableURLRequest *request; 
 	NSMutableData *requestData;
     NSURLConnection *theConnection;
-	NSXMLParser *theParser;
-	NSMutableArray *items;
-	NSMutableString *currentString;
-    NSString *currentElement;
     NSURLCache *requestCache;
-    
-    MKFeedContentType mContentType;
-    MKFeedSourceType mSourceType;
-    
-    MKFeedItem *mFeedItem;
-    
+
     struct {
         BOOL usesCompletionBlock;
     } MKRSSFeedTags;
@@ -132,19 +115,13 @@ typedef enum {
 /** The URL address of the feed. */
 @property (nonatomic, readonly) NSString *url;
 
-/** The content type of the feed. This property will return one of the following:
+/** 
+ The number of items the request should return.  Default is 15.
  
- * `MKContentTypePlainText` : The content of the feed is in a Text String.
- * `MKContentTypeHTML` : The content of the feed is in a HTML String.
+ This property must be set before a request or requestWithCompletionBlock: method
+ is called.
 */
-@property (nonatomic, readonly) MKFeedContentType contentType;
-
-/** The source type of the feed. This property will return one of the following:
- 
- * `MKSourceTypeRSS` : The feed source is in a RSS format.
- * `MKSourceTypeAtom` : The feed source is in an Atom format.
-*/
-@property (nonatomic, assign) MKFeedSourceType sourceType;
+@property (nonatomic, assign) NSInteger numberOfItems;
 
 ///-----------------------------------------------
 /// @name Delegate
@@ -160,33 +137,24 @@ typedef enum {
 /** The request complete block. This block is ran when a request is finished. */
 @property (nonatomic, copy) MKRequestComplete requestCompleteBlock;
 
+///----------------------------------------------
+/// @name Deprecated
+///----------------------------------------------
+
+/** DEPRECATED v1.0 */
+@property (nonatomic, readonly) MKFeedContentType contentType MK_DEPRECATED_1_0;
+
+/** DEPRECATED v1.0 */
+@property (nonatomic, assign) MKFeedSourceType sourceType; //MK_DEPRECATED_1_0;
+
 @end
 
-/// Internal tags
-NSString *MKFeedRSSFeedStart MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedRSSFeedItem MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedAtomFeedStart MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedAtomFeedEntry MK_VISIBLE_ATTRIBUTE;
-
-/// RSS Feed Elements
-NSString *MKFeedRSSFeedTitle MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedRSSFeedDescription MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedRSSFeedDescriptionHTML MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedRSSFeedLink MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedRSSFeedOriginalLink MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedRSSFeedPublicationDate MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedRSSFeedGUID MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedRSSFeedCreator MK_VISIBLE_ATTRIBUTE;
-
-/// ATOM Feed Elements
-NSString *MKFeedAtomTitle MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedAtomLink MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedAtomID MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedAtomUpdated MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedAtomContent MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedAtomSummary MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedAtomSummaryHTML MK_VISIBLE_ATTRIBUTE;
-NSString *MKFeedAtomAuthorName MK_VISIBLE_ATTRIBUTE;
+/// Google Feed API JSON Elements 
+/// NEW
+NSString *MKGoogleJSONTitle MK_VISIBLE_ATTRIBUTE;
+NSString *MKGoogleJSONLink MK_VISIBLE_ATTRIBUTE;
+NSString *MKGoogleJSONContentSnippet MK_VISIBLE_ATTRIBUTE;
+NSString *MKGoogleJSONAuthor MK_VISIBLE_ATTRIBUTE;
 
 /**-----------------------------------------------------------------------------------
  *Overview*

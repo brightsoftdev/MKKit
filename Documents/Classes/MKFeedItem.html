@@ -59,18 +59,6 @@
 				<div class="section section-tasks">
 					<h2 class="subtitle subtitle-tasks">Tasks</h2>
 					
-					<h3 class="subsubtitle task-title">Creating Instances</h3>
-
-					<ul class="task-list">
-						<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initWithType:">- initWithType:</a></code>
-		<span class="tooltip"> Creates and instace of <a href="MKFeedItem.html">MKFeedItem</a> with the given source type. </span>
-	</span>
-	
-</li>
-					</ul>
-					
 					<h3 class="subsubtitle task-title">Adding Content</h3>
 
 					<ul class="task-list">
@@ -87,12 +75,6 @@
 
 					<ul class="task-list">
 						<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/contentType"> contentType</a></code>
-		<span class="tooltip"> The type of feed that is being used. This will return one of three possibilities: <ul><li> <code>MKFeedSourceTypeRSS</code>: a RSS feed </li><li> <code>MKFeedSourceTypeAtom</code>: an Atom feed </li><li> <code>MKFeedSourceTypeUnknown</code>: an unknown feed type </li></ul></span>
-	</span>
-	
-</li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/itemTitle"> itemTitle</a></code>
 		<span class="tooltip"> The tilte of the feed item. This property is KVC compatible. </span>
@@ -112,26 +94,50 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/itemOriginalLinkURL"> itemOriginalLinkURL</a></code>
-		<span class="tooltip"> The original URL link of the feed item. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/itemAuthor"> itemAuthor</a></code>
 		<span class="tooltip"> The author of the feed item. This property is KVC compatible. </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/itemRead"> itemRead</a></code>
+		<span class="tooltip"> Identifies if the item has been read or not. Default is <code>NO</code>. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Deprecated</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithType:MK_DEPRECATED_1_0:">- initWithType:MK_DEPRECATED_1_0:</a></code>
+		<span class="tooltip"> DEPRECATED v1.0 </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MK_DEPRECATED_1_0"> MK_DEPRECATED_1_0</a></code>
+		<span class="tooltip"> DEPRECATED v1.0 </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/itemGUID"> itemGUID</a></code>
-		<span class="tooltip"> The GUID of the feed item. </span>
+		<span class="tooltip"> DEPRECATED v1.0 </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/itemPubDate"> itemPubDate</a></code>
-		<span class="tooltip"> The published date of the feed item. </span>
+		<span class="tooltip"> DEPRECATED v1.0 </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/itemOriginalLinkURL"> itemOriginalLinkURL</a></code>
+		<span class="tooltip"> DEPRECATED v1.0 </span>
 	</span>
 	
 </li>
@@ -196,28 +202,18 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/initWithType:" title="initWithType:"></a>
-	<h3 class="subsubtitle method-title">initWithType:</h3>
+	<a name="//api/name/initWithType:MK_DEPRECATED_1_0:" title="initWithType:MK_DEPRECATED_1_0:"></a>
+	<h3 class="subsubtitle method-title">initWithType:MK_DEPRECATED_1_0:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Creates and instace of <a href="MKFeedItem.html">MKFeedItem</a> with the given source type. </p>
+		<p> DEPRECATED v1.0 </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)initWithType:(MKFeedSourceType)<em>type</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithType:(MKFeedSourceType)<em>type</em> MK_DEPRECATED_1_0</code></div>
 	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>MKFeedSourceType</em></dt>
-			<dd> the type of feed, options are: <ul><li> <code>MKFeedSourceTypeRSS</code>: a RSS feed </li><li> <code>MKFeedSourceTypeAtom</code>: an Atom feed </li><li> <code>MKFeedSourceTypeUnknown</code>: an unknown feed type </li></ul></dd>
-		</dl>
-		
-	</div>
 	
 	
 	
@@ -245,17 +241,17 @@
 					<h2 class="subtitle subtitle-methods">Properties</h2>
 					
 					<div class="section-method">
-	<a name="//api/name/contentType" title="contentType"></a>
-	<h3 class="subsubtitle method-title">contentType</h3>
+	<a name="//api/name/MK_DEPRECATED_1_0" title="MK_DEPRECATED_1_0"></a>
+	<h3 class="subsubtitle method-title">MK_DEPRECATED_1_0</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> The type of feed that is being used. This will return one of three possibilities: <ul><li> <code>MKFeedSourceTypeRSS</code>: a RSS feed </li><li> <code>MKFeedSourceTypeAtom</code>: an Atom feed </li><li> <code>MKFeedSourceTypeUnknown</code>: an unknown feed type </li></ul></p>
+		<p> DEPRECATED v1.0 </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MKFeedSourceType contentType</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MKFeedSourceType contentType MK_DEPRECATED_1_0</code></div>
 	
 	
 	
@@ -347,7 +343,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> The GUID of the feed item. </p>
+		<p> DEPRECATED v1.0 </p>
 	</div>		
 	
 	
@@ -411,7 +407,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> The original URL link of the feed item. </p>
+		<p> DEPRECATED v1.0 </p>
 	</div>		
 	
 	
@@ -443,11 +439,43 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> The published date of the feed item. </p>
+		<p> DEPRECATED v1.0 </p>
 	</div>		
 	
 	
 	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSDate *itemPubDate</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedItem.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/itemRead" title="itemRead"></a>
+	<h3 class="subsubtitle method-title">itemRead</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Identifies if the item has been read or not. Default is <code>NO</code>. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL itemRead</code></div>
 	
 	
 	
@@ -513,7 +541,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-26)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-17)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

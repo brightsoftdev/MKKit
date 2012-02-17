@@ -9,31 +9,27 @@
 #import "MKFeedItem.h"
 #import "NSString+MKFeedParser.h"
 
+@interface MKFeedItem ()
+
+- (void)setKeys;
+
+@end
+
 @implementation MKFeedItem
 
-@dynamic contentType, itemTitle, itemContent, itemLinkURL, itemOriginalLinkURL, itemAuthor, itemGUID, itemPubDate;
-
-static NSString *MKFeedItemTitle = @"MKFeedItemTitle";
-static NSString *MKFeedItemContent = @"MKFeedItemContent";
-static NSString *MKFeedItemLinkURL = @"MKFeedItemLinkURL";
-static NSString *MKFeedItemOriginalLinkURL = @"MKFeedItemLinkOriginalURL";
-static NSString *MKFeedItemAuthor = @"MKFeedItemAuthor";
-static NSString *MKFeedItemGUID = @"MKFeedItemGUID";
-static NSString *MKFeedItemPubDate = @"MKFeedItemPubDate";
+@dynamic contentType, itemTitle, itemContent, itemLinkURL, itemOriginalLinkURL, itemAuthor, itemGUID, itemPubDate, itemRead;
 
 #pragma mark - NSCoding
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
+        [self setKeys];
         
         mItemTitle = [[aDecoder decodeObjectForKey:MKFeedItemTitle] copy];
         mItemContent = [[aDecoder decodeObjectForKey:MKFeedItemContent] copy];
         mItemLinkURL = [[aDecoder decodeObjectForKey:MKFeedItemLinkURL] copy];
-        mItemOriginalLinkURL = [[aDecoder decodeObjectForKey:MKFeedItemOriginalLinkURL] copy];
         mItemAuthor = [[aDecoder decodeObjectForKey:MKFeedItemAuthor] copy];
-        mItemGUID = [[aDecoder decodeObjectForKey:MKFeedItemGUID] copy];
-        mItemPubDate = [[aDecoder decodeObjectForKey:MKFeedItemPubDate] copy];
     }
     return self;
 }
@@ -42,21 +38,28 @@ static NSString *MKFeedItemPubDate = @"MKFeedItemPubDate";
     [aCoder encodeObject:mItemTitle forKey:MKFeedItemTitle];
     [aCoder encodeObject:mItemContent forKey:MKFeedItemContent];
     [aCoder encodeObject:mItemLinkURL forKey:MKFeedItemLinkURL];
-    [aCoder encodeObject:mItemOriginalLinkURL forKey:MKFeedItemOriginalLinkURL];
     [aCoder encodeObject:mItemAuthor forKey:MKFeedItemAuthor];
-    [aCoder encodeObject:mItemGUID forKey:MKFeedItemGUID];
-    [aCoder encodeObject:mItemPubDate forKey:MKFeedItemPubDate];
 }
 
-#pragma mark - Creating Instances
+#pragma mark - Creatition
 
-- (id)initWithType:(MKFeedSourceType)type {
+- (id)init {
     self = [super init];
     if (self) {
-        mContentType = type;
-    
+        [self setKeys];
     }
     return self;
+}
+
+- (id)initWithType:(MKFeedSourceType)type {
+    return nil;
+}
+
+- (void)setKeys {
+    MKFeedItemTitle = @"MKFeedItemTitle";
+    MKFeedItemContent = @"MKFeedItemContent";
+    MKFeedItemLinkURL = @"MKFeedItemLinkURL";
+    MKFeedItemAuthor = @"MKFeedItemAuthor";
 }
 
 #pragma mark - Memory Managment
@@ -65,55 +68,36 @@ static NSString *MKFeedItemPubDate = @"MKFeedItemPubDate";
     [mItemTitle release];
     [mItemContent release];
     [mItemLinkURL release];
-    [mItemOriginalLinkURL release];
     [mItemAuthor release];
-    [mItemGUID release];
-    [mItemPubDate release];
-    
     [super dealloc];
 }
 
 #pragma mark - Setting Content
 
 - (void)addValue:(id)value forElement:(NSString *)element {
-    if ([element isEqualToString:MKFeedRSSFeedTitle] || [element isEqualToString:MKFeedAtomTitle]) {
-        mItemTitle = [(NSString *)value copy];
-    }
-    else if ([element isEqualToString:MKFeedRSSFeedDescription] || [element isEqualToString:MKFeedAtomSummary]) {
-        mItemContent = [(NSString *)value stringByStrippingHTML];
-        mItemContent = [mItemContent stringByDecodingHTMLEntities]; 
-        mItemContent = [mItemContent stringByRemovingNewLinesAndWhitespace];
+    if ([value isKindOfClass:[NSString class]] && ![element isEqualToString:MKFeedItemLinkURL]) {
+        NSString *stringValue = (NSString *)value;
+        stringValue = [stringValue stringByStrippingHTML];
+        stringValue = [stringValue stringByDecodingHTMLEntities];
+        stringValue = [stringValue stringByRemovingNewLinesAndWhitespace];
         
-        if ([mItemContent length] > 499) {
-            mItemContent = [mItemContent substringToIndex:500];
-            mItemContent = [mItemContent stringByAppendingString:@"..."];
+        if ([element isEqualToString:MKFeedItemTitle]) {
+            mItemTitle = [stringValue copy];
         }
-        
-        [mItemContent copy];
+        else if ([element isEqualToString:MKFeedItemContent]) {
+            mItemContent = [stringValue copy];
+        }
+        else if ([element isEqualToString:MKFeedItemAuthor]) {
+            mItemAuthor = [stringValue copy];
+        }
     }
-    else if ([element isEqualToString:MKFeedRSSFeedLink] || [element isEqualToString:MKFeedAtomLink]) {
+    else if ([element isEqualToString:MKFeedItemLinkURL]) {
         mItemLinkURL = [(NSString *)value copy];
-    }
-    else if ([element isEqualToString:MKFeedRSSFeedOriginalLink]) {
-        mItemOriginalLinkURL = [(NSString *)value copy];
-    }
-    else if ([element isEqualToString:MKFeedRSSFeedCreator] || [element isEqualToString:MKFeedAtomAuthorName]) {
-        mItemAuthor = [(NSString *)value copy];
-    }
-    else if ([element isEqualToString:MKFeedRSSFeedGUID] || [element isEqualToString:MKFeedAtomID]) {
-        mItemGUID = [(NSString *)value copy];
-    }
-    else if ([element isEqualToString:MKFeedRSSFeedPublicationDate] || [element isEqualToString:MKFeedAtomUpdated]) {
-        mItemPubDate = [(NSString *)value copy];
     }
 }
 
 #pragma mark - Accessor Methods
 #pragma mark Getters
-
-- (MKFeedSourceType)contentType {
-    return mContentType;
-}
 
 - (NSString *)itemTitle {
     return mItemTitle;
@@ -127,23 +111,8 @@ static NSString *MKFeedItemPubDate = @"MKFeedItemPubDate";
     return mItemLinkURL;
 }
 
-- (NSString *)itemOriginalLinkURL {
-    return mItemOriginalLinkURL;
-}
-
 - (NSString *)itemAuthor {
     return mItemAuthor;
-}
-
-- (NSString *)itemGUID {
-    return mItemGUID;
-}
-
-- (NSDate *)itemPubDate {
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-    NSDate *date = [formatter dateFromString:mItemPubDate];
-    
-    return date;
 }
 
 #pragma mark - KVC
@@ -173,6 +142,23 @@ static NSString *MKFeedItemPubDate = @"MKFeedItemPubDate";
     if ([key isEqualToString:@"itemAuthor"]) {
         return mItemAuthor;
     }
+    return nil;
+}
+
+#pragma mark - Deprecation
+
+- (MKFeedSourceType)contentType {
+    return -1;
+}
+- (NSString *)itemOriginalLinkURL {
+    return nil;
+}
+
+- (NSString *)itemGUID {
+    return nil;
+}
+
+- (NSDate *)itemPubDate {
     return nil;
 }
 

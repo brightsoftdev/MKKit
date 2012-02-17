@@ -116,11 +116,13 @@ void drawButtonWithGraphics(CGContextRef context, CGRect rect, MKGraphicsStructu
     
     CGContextRestoreGState(context);
     
+    CGContextSaveGState(context);
     CGContextAddRect(context, arrowButtonRect);
     CGContextAddPath(context, buttonPath);
     CGContextEOClip(context);
     CGContextAddPath(context, buttonPath);
     CGContextFillPath(context);
+    CGContextRestoreGState(context);
     
     CFRelease(buttonPath);
 }
