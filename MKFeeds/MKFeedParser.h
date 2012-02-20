@@ -12,6 +12,7 @@
 #import "MKFeedsErrorControl.h"
 
 typedef void (^MKRequestComplete)(NSArray *feedInfo, NSError *error);
+typedef void (^MKArchiveSuccessful)(BOOL successful);
 
 typedef enum {
     MKFeedContentPlainText,
@@ -42,26 +43,24 @@ typedef enum {
  Both methods pass an NSArray that holds the information from the feed. The array is an array
  of MKFeedItem instaces. 
  
- *Requied Framworks*
+ *Archiving Results*
  
- * Foundation
+ MKFeedParser instances can automatically archive the results of the request to disk by using
+ MKFeedItemArchiver. Set the archiveResults, and archivePath properties, or call the 
+ setArchiveResultsToPath:successful: method to create or sync to an archive file. 
  
- *Requred Classes*
- 
- * MKFeedItem
- 
- *Required Protocols*
- 
- * MKFeedParserDelegate
+ If you set the properties yourself the feed:didArchiveResults: delegate method will notify
+ you of an archives success or failure.  If you use the  setArchiveResultsToPath:successful:
+ the successful block is called upon completion.
 ----------------------------------------------------------------------------------*/
 
 @interface MKFeedParser : NSObject <NSXMLParserDelegate> {
 	NSString *mUrl;
 	id delegate;
     MKRequestComplete mRequestCompleteBlock;
-	
+    
 @private
-	NSMutableURLRequest *request; 
+	NSMutableURLRequest *urlRequest; 
 	NSMutableData *requestData;
     NSURLConnection *theConnection;
     NSURLCache *requestCache;
@@ -124,6 +123,26 @@ typedef enum {
 @property (nonatomic, assign) NSInteger numberOfItems;
 
 ///-----------------------------------------------
+/// @name Archiving
+///-----------------------------------------------
+
+/** Set to `YES` if you want the results to be archived to the disk. Default is `NO` */
+@property (nonatomic, assign) BOOL archiveResults;
+
+/** The path to write/sync the parsed results to. */
+@property (nonatomic, copy) NSString *archivePath;
+
+/** 
+ Tells the parser if it should archive the results and retuns the results throught the
+ successful block.
+ 
+ @param path the path to write/sync the parsed results to.
+ 
+ @param successfult the code block to call upon the archive completion.
+*/
+- (void)setArchiveResultsToPath:(NSString *)path successful:(MKArchiveSuccessful)successful;
+
+///-----------------------------------------------
 /// @name Delegate
 ///-----------------------------------------------
 
@@ -136,6 +155,9 @@ typedef enum {
 
 /** The request complete block. This block is ran when a request is finished. */
 @property (nonatomic, copy) MKRequestComplete requestCompleteBlock;
+
+/** The archive complete block. This block is ran when a archive is finished. */
+@property (nonatomic, copy) MKArchiveSuccessful archiveSuccessBlock;
 
 ///----------------------------------------------
 /// @name Deprecated
@@ -150,7 +172,6 @@ typedef enum {
 @end
 
 /// Google Feed API JSON Elements 
-/// NEW
 NSString *MKGoogleJSONTitle MK_VISIBLE_ATTRIBUTE;
 NSString *MKGoogleJSONLink MK_VISIBLE_ATTRIBUTE;
 NSString *MKGoogleJSONContentSnippet MK_VISIBLE_ATTRIBUTE;
@@ -175,6 +196,21 @@ NSString *MKGoogleJSONAuthor MK_VISIBLE_ATTRIBUTE;
  @param data the parsed RSS feed data.
 */
 - (void)feed:(MKFeedParser *)feed didReturnData:(NSArray *)data;
+
+@optional
+
+///-----------------------------------------------
+/// @name Optional Methods
+///-----------------------------------------------
+
+/**
+ Called when a archive is finished.
+ 
+ @param feed the instance of MKFeedParser making the call to the delegate
+ 
+ @param successful `YES` if the archive was successful, `NO` if not.
+*/
+- (void)feed:(MKFeedParser *)feed didArchiveResuslts:(BOOL)successful;
 
 @end
 

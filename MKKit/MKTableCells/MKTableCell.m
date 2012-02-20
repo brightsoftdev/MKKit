@@ -48,7 +48,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
             iconMask, validatorTestStringLength=mValidatorTestStringLength, accessoryIcon, 
             recognizeLeftToRightSwipe, recognizeRightToLeftSwipe, recognizeLongPress, indexPath,
             primaryViewTrim, badge, accent, cellView=mCellView, stroryboardPrototype, image, accessoryImage,
-            dynamicHeight;
+            dynamicHeight, secondaryElementWidth;
 
 #pragma mark - Creating
 
@@ -362,9 +362,9 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 
 - (void)accentPrimaryViewForCellAtPosition:(MKTableCellPosition)position trim:(CGFloat)trim {
     [self accentPrimaryViewForCellAtPosition:position];
-    if (self.primaryViewTrim == 0.0) {
-        self.primaryViewTrim = trim;
-    }
+    //if (self.primaryViewTrim == 0.0) {
+       // self.primaryViewTrim = trim;
+    //}
 }
 
 #pragma mark - Validation Methods

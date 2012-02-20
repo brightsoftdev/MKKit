@@ -6,6 +6,7 @@
 //  Copyright 2010 Matt King. All rights reserved.
 //
 
+#import <MKKit/MKKit/MKAvailability.h>
 
 #define ERROR_CODE_100                      100
 #define ERROR_DESCRIPTION_100               @"Error creating context"
@@ -19,4 +20,10 @@
 #define ERROR_CODE_703                      703
 #define ERROR_DESCRIPTION_703(required)     [NSString stringWithFormat:@"Validation Error : This field must be %i characters long", (required)]
 
-#pragma mark - MKFeeds
+/////////////////////// EXCEPTIONS ///////////////////////////////
+
+/// MKOperation
+
+NSString *MKOpertionIvalidTargetExecption   MK_VISIBLE_ATTRIBUTE;
+NSString *MKOpertionIvalidSelectorExcption  MK_VISIBLE_ATTRIBUTE;
+NSString *MKOpertionNilObjectExecption      MK_VISIBLE_ATTRIBUTE;

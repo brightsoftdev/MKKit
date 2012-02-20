@@ -294,8 +294,11 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 */
 - (void)accentPrimaryViewForCellAtPosition:(MKTableCellPosition)position trim:(CGFloat)trim;
 
-/** The width of the accent view. */
-@property (nonatomic, assign) CGFloat primaryViewTrim;
+/** 
+ Sets the width of the seconday view of a cell, if it has one. Default is the half of 
+ the cell's contentView width.
+*/
+@property (nonatomic, assign) CGFloat secondaryElementWidth;
 
 /** `YES` is the cell should change its height dynamicly. Default is `NO`. */
 @property (nonatomic, assign) BOOL dynamicHeight;
@@ -389,6 +392,11 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 ///------------------------------------------------------------------------------------------
 /// @name Deprecations
 ///------------------------------------------------------------------------------------------
+
+/** 
+ @warning *Deprecated v1.0* 
+*/
+@property (nonatomic, assign) CGFloat primaryViewTrim; //MK_DEPRECATED_1_0;
 
 /** 
  @warning *Deprecated v0.9* Use image property instead. 

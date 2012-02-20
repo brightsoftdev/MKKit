@@ -1,0 +1,336 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>MKOperation Class Reference</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<meta name="generator" content="appledoc 2.0b3" />
+	</head>
+	<body>
+		<article>
+			<div class="main-navigation navigation-top">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="header">
+				<div class="section-header">
+					<h1 class="title title-header">MKOperation Class Reference</h1>
+				</div>		
+			</div>
+			<div id="container">	
+				
+				<div class="section section-specification"><table cellspacing="0"><tbody>
+					<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSOperation</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MKOperation.h</td>
+</tr>
+					</tbody></table></div>
+				
+				
+				
+				<div class="section section-overview">
+					<h2 class="subtitle subtitle-overview">Overview</h2>
+					
+<p> <strong> Overview </strong></p>
+
+<p> <a href="MKOperation.html">MKOperation</a> provides a base for an operation designed to be added to a NSOperationQueue. <a href="MKOperation.html">MKOperation</a> is designed to be used as a superclass methods are provide to preform a process and send messges back to a target on the main thread. </p>
+
+<p> <strong> Usage </strong></p>
+
+<p> When you create an instance of <a href="MKOperation.html">MKOperation</a> you can pass an object, this should be the <a href="#//api/name/object">object</a> that you need to preform actions with. You also provide a target and selector that will be a called on the main thread when when the process is complete. </p>
+
+<p> Your subclass is required to overide one method: <ul><li> <code>- (void)processObject:(id)object result:(void (^)(id rtnObject))result</code></li></ul></p>
+
+<p> This method is called by the main method to preform your process. The <a href="#//api/name/object">object</a> parameter passes the <a href="#//api/name/object">object</a> you assigned at the creation of the instance. Preform the need function of in this method return the <a href="#//api/name/object">object</a> -- or nil if your main thread does not need the <a href="#//api/name/object">object</a> back -- though the result block. Calling the result block cause the <code>MKOperationDidFinish</code> event selector to be called on the main thread. </p>
+
+<p> <a href="MKOperation.html">MKOperation</a> also sends messages to the main thread during key phases of the operation. There are three events that trigger a message to be sent to the main thread: <ul><li> <code>MKOperationDidStart</code>: sent when an operation starts to preform its process. </li><li> <code>MKOperationDidCancel</code>: sent when an operation is canceled. </li><li> <code>MKOperationDidFinish</code>: sent when an operation is finished. </li></ul></p>
+
+<p> Use the addTarged:mainThreadCallBack:event: method to add targets and selectors to resopnd the needed event. </p>
+
+<p> The selector is expected to be in a <code>-(void)someSelector:(id)object</code> format. For start and cancel events the <a href="#//api/name/object">object</a> provide at creation is passed through the call back selector. For finish events the <a href="#//api/name/object">object</a> is the <a href="#//api/name/object">object</a> that is passed throught the result block of the <a href="#//api/name/processObject:result:">processObject:result:</a> method. <p class="warning"> <strong> Note </strong> The target and selector that is provide throught the <a href="#//api/name/initWithObject:target:mainThreadCallBack:">initWithObject:target:mainThreadCallBack:</a> method is assigned to the <code>MKOperationDidFinishEvent</code>. </p></p>
+
+<p> <strong> Responding to Cancel </strong></p>
+
+<p> <a href="MKOperation.html">MKOperation</a> instances to preform any canceling actions, other than sending the <code>MKOperationDidCancel</code> event selector to the main thread. Cancelations need to be handeled by subclasses. </p>
+
+				</div>
+				
+				
+				
+				
+				<div class="section section-tasks">
+					<h2 class="subtitle subtitle-tasks">Tasks</h2>
+					
+					<h3 class="subsubtitle task-title">Creating</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithObject:target:mainThreadCallBack:">- initWithObject:target:mainThreadCallBack:</a></code>
+		<span class="tooltip"> Creates a new instance of <a href="MKOperation.html">MKOperation</a> and assign a selector for the <code>MKOperationDidFinish</code> event. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Process Object</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/object"> object</a></code>
+		<span class="tooltip"> Reference to the <a href="#//api/name/object">object</a> that operation will use to preform its functions. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/processObject:result:">- processObject:result:</a></code>
+		<span class="tooltip"> Preforms the needed process of the operation. Override this method and place your code here to preform the needed operation. Subclasses must call the result block upon the completion of this method. If the result block is not called the <code>MKOperationDidFinish</code> event selector will not be called. <p class="warning"> <strong> Note </strong> Subclass must overide this method and call the result block. Default implemtaion does nothing. </p></span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Call Back</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addTarget:mainThreadCallBack:event:">- addTarget:mainThreadCallBack:event:</a></code>
+		<span class="tooltip"> Adds a selector to be called during a specified event. All targets and selectors passed need to be availible on the main thread. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/addTarget:mainThreadCallBack:event:" title="addTarget:mainThreadCallBack:event:"></a>
+	<h3 class="subsubtitle method-title">addTarget:mainThreadCallBack:event:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Adds a selector to be called during a specified event. All targets and selectors passed need to be availible on the main thread. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)addTarget:(id)<em>target</em> mainThreadCallBack:(SEL)<em>callBack</em> event:(MKOpertaionEvent)<em>event</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>target</em></dt>
+			<dd> the <a href="#//api/name/object">object</a> that will recive notice of an event. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>callBack</em></dt>
+			<dd> the selector to call when the event occurres. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>event</em></dt>
+			<dd> the event the trigers the call to the callBack selector. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKOperation.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/initWithObject:target:mainThreadCallBack:" title="initWithObject:target:mainThreadCallBack:"></a>
+	<h3 class="subsubtitle method-title">initWithObject:target:mainThreadCallBack:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates a new instance of <a href="MKOperation.html">MKOperation</a> and assign a selector for the <code>MKOperationDidFinish</code> event. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithObject:(id)<em>object</em> target:(id)<em>target</em> mainThreadCallBack:(SEL)<em>callBack</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>object</em></dt>
+			<dd> the <a href="#//api/name/object">object</a> to preform the operation on. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>target</em></dt>
+			<dd> a <a href="#//api/name/object">object</a> that will recive the <code>MKOperationDidFinish</code> call back. This <a href="#//api/name/object">object</a> must be on the main thread. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>callBack</em></dt>
+			<dd> the selector to call when the operation is finished. The expected format is void)someSelector:(id)someObject` </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKOperation.html">MKOperation</a> instance </p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKOperation.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/processObject:result:" title="processObject:result:"></a>
+	<h3 class="subsubtitle method-title">processObject:result:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Preforms the needed process of the operation. Override this method and place your code here to preform the needed operation. Subclasses must call the result block upon the completion of this method. If the result block is not called the <code>MKOperationDidFinish</code> event selector will not be called. <p class="warning"> <strong> Note </strong> Subclass must overide this method and call the result block. Default implemtaion does nothing. </p></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)processObject:(id)<em>object</em> result:(void ( ^ ) ( id rtnObject ))<em>result</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>object</em></dt>
+			<dd> the <a href="#//api/name/object">object</a> assigned during creation of the instance. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>result</em></dt>
+			<dd> a code block that informs the main method that your operations have been completed. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKOperation.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Properties</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/object" title="object"></a>
+	<h3 class="subsubtitle method-title">object</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Reference to the <a href="#//api/name/object">object</a> that operation will use to preform its functions. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (retain) id object</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKOperation.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+			</div>
+			<div class="main-navigation navigation-bottom">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="footer">
+				<hr />
+				<div class="footer-copyright">
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-19)</span><br />
+					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>

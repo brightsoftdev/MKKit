@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>MKFeedItemArchiver Class Reference</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<meta name="generator" content="appledoc 2.0b3" />
+	</head>
+	<body>
+		<article>
+			<div class="main-navigation navigation-top">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="header">
+				<div class="section-header">
+					<h1 class="title title-header">MKFeedItemArchiver Class Reference</h1>
+				</div>		
+			</div>
+			<div id="container">	
+				
+				<div class="section section-specification"><table cellspacing="0"><tbody>
+					<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MKFeedItemArchiver.h</td>
+</tr>
+					</tbody></table></div>
+				
+				
+				
+				<div class="section section-overview">
+					<h2 class="subtitle subtitle-overview">Overview</h2>
+					
+<p> <strong> Overview </strong></p>
+
+<p> MKFeedArchiver provides methods to save requests results from <a href="MKFeedParser.html">MKFeedParser</a> to the device disk. MKFeedArchiver creates and saves arrays of <a href="MKFeedItem.html">MKFeedItem</a> instances or syncs an array with an existing file. </p>
+
+<p> <strong> Usage </strong></p>
+
+<p> Call the setArchiveResults:path:successful: method of an <a href="MKFeedParser.html">MKFeedParser</a> instance to automatically sync the results to an archive. You can also use this class directly to archive feed items on your own. <p class="warning"> <strong> Note </strong> MKFeedArchiver contains heavy processing methods. Its is recomended that it used off of the main thread. </p></p>
+
+				</div>
+				
+				
+				
+				
+				<div class="section section-tasks">
+					<h2 class="subtitle subtitle-tasks">Tasks</h2>
+					
+					<h3 class="subsubtitle task-title">Creating</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithItems:">- initWithItems:</a></code>
+		<span class="tooltip"> Creates an instance of <a href="MKFeedItemArchiver.html">MKFeedItemArchiver</a> and prepears the given array for archiving. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Archiving</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/archiveToFileAtPath:completion:">- archiveToFileAtPath:completion:</a></code>
+		<span class="tooltip"> Archives the items from the array to the provided path. If a file already exists at the given path it will be overwritten. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/syncWithArchiveFileAtPath:completion:">- syncWithArchiveFileAtPath:completion:</a></code>
+		<span class="tooltip"> Syncs items from the array provided at creation and writes the new file to disk, or creates a file if one does not exist. New items are added to the top of the existing stack. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addAllItemsToPath:">- addAllItemsToPath:</a></code>
+		<span class="tooltip"> Adds the entire array given at creation to the end of the current stack. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/addAllItemsToPath:" title="addAllItemsToPath:"></a>
+	<h3 class="subsubtitle method-title">addAllItemsToPath:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Adds the entire array given at creation to the end of the current stack. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)addAllItemsToPath:(NSString *)<em>path</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>path</em></dt>
+			<dd> the path of file to add the array to. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> YES if the successful, NO if not. </p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedItemArchiver.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/archiveToFileAtPath:completion:" title="archiveToFileAtPath:completion:"></a>
+	<h3 class="subsubtitle method-title">archiveToFileAtPath:completion:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Archives the items from the array to the provided path. If a file already exists at the given path it will be overwritten. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)archiveToFileAtPath:(NSString *)<em>path</em> completion:(void ( ^ ) ( BOOL finished ))<em>completion</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>path</em></dt>
+			<dd> the path to write the archive file to. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completion</em></dt>
+			<dd> the block called upon the completion of the sync. Returns <code>YES</code> if the archive was successful, <code>NO</code> if it was not. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedItemArchiver.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/initWithItems:" title="initWithItems:"></a>
+	<h3 class="subsubtitle method-title">initWithItems:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates an instance of <a href="MKFeedItemArchiver.html">MKFeedItemArchiver</a> and prepears the given array for archiving. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithItems:(NSArray *)<em>items</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>items</em></dt>
+			<dd> and array of <a href="MKFeedItem.html">MKFeedItem</a> instances </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKFeedItemArchiver.html">MKFeedItemArchiver</a> instance. </p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedItemArchiver.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/syncWithArchiveFileAtPath:completion:" title="syncWithArchiveFileAtPath:completion:"></a>
+	<h3 class="subsubtitle method-title">syncWithArchiveFileAtPath:completion:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Syncs items from the array provided at creation and writes the new file to disk, or creates a file if one does not exist. New items are added to the top of the existing stack. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)syncWithArchiveFileAtPath:(NSString *)<em>path</em> completion:(void ( ^ ) ( BOOL finished ))<em>completion</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>path</em></dt>
+			<dd> the path of the file to sync with. This should be a file that was created by MKFeedItemArchiver. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completion</em></dt>
+			<dd> the block called upon the completion of the sync. Returns <code>YES</code> if the sync was successful, <code>NO</code> if it was not. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedItemArchiver.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				
+			</div>
+			<div class="main-navigation navigation-bottom">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="footer">
+				<hr />
+				<div class="footer-copyright">
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-19)</span><br />
+					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>

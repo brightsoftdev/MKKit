@@ -9,10 +9,13 @@
 #import "MKFeedsAvailability.h"
 
 /////////////////////// ERROR CODES //////////////////////////////////
-static const int kMKHMLExtractorNoResultsCode              = 2001;
+static const int kMKHMLExtractorNoResultsCode              = 3001;
+static const int kMKFeedItemArchiveErrorCode               = 3002;
 
 NSString *MKHTMLExtractorNoResultsFoundError MK_VISIBLE_ATTRIBUTE;
 NSString *MKHTMLExtractorErrorUserInfoURLKey MK_VISIBLE_ATTRIBUTE;
+
+NSString *MKFeedItemArchiveError MK_VISIBLE_ATTRIBUTE;
 
 ////////////////////// EXCEPTIONS ////////////////////////////////////
 

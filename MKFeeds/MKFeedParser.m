@@ -8,19 +8,34 @@
 
 #import "MKFeedParser.h"
 #import "MKFeedItem.h"
+#import "MKFeedItemArchiver.h"
 
 #define MK_FEED_BASE_URL        @"https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&scoring=h"
 
+typedef enum {
+    MKFeedParserOperation,
+    MKFeedArchiveOperation,
+} MKFeedOperationType;
+
 #pragma mark - JSON Parse Operation
 
-@interface MKJSONParseOperation : NSOperation {
+@interface MKFeedParseOperation : NSOperation {
 @private
     NSData *JSONData;
+    NSArray *items;
     id target;
     SEL mainThreadCallBack;
+    
+    MKFeedOperationType operationType;
 }
 
 - (id)initWithData:(NSData *)data target:(id)target mainThreadCallBack:(SEL)callBack;
+- (id)initWithItems:(NSArray *)items target:(id)target mainThreadCallBack:(SEL)callBack;
+
+- (void)JSONParseWithData:(NSData *)data result:(void (^)(id resultObject))result;
+
+@property (nonatomic, assign) BOOL archive;
+@property (nonatomic, copy) NSString *archivePath;
 
 @end
 
@@ -28,13 +43,14 @@
 
 @interface MKFeedParser () 
 
-- (void)parserResults:(NSMutableArray *)results;
+- (void)parserResults:(id)results;
+- (void)archiveComplete:(id)results;
 
 @end
 
 @implementation MKFeedParser
 
-@synthesize url=mUrl, delegate, requestCompleteBlock=mRequestCompleteBlock, numberOfItems;
+@synthesize url=mUrl, delegate, requestCompleteBlock=mRequestCompleteBlock, numberOfItems, archivePath, archiveResults, archiveSuccessBlock;
 
 @dynamic sourceType, contentType;
 
@@ -58,6 +74,7 @@
 -(void)dealloc {
     self.delegate = nil;
     self.requestCompleteBlock = nil;
+    self.archivePath = nil;
     
 	[super dealloc];
 }
@@ -72,9 +89,9 @@
     NSString *q = [NSString stringWithFormat:@"&q=%@", mUrl];
     NSString *requestURL = [NSString stringWithFormat:@"%@%@%@", MK_FEED_BASE_URL, num, q];
     
-	request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestURL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
+	urlRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestURL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
     
-	theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+	theConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
 	
 	if (theConnection) {
 		requestData = [[NSMutableData data] retain];
@@ -104,8 +121,8 @@
     [theConnection release];
 	[requestData release];
 	
-    [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
-	[request release];
+    [[NSURLCache sharedURLCache] removeCachedResponseForRequest:urlRequest];
+	[urlRequest release];
     
     if (MKRSSFeedTags.usesCompletionBlock) {
         self.requestCompleteBlock(nil, error);
@@ -123,25 +140,62 @@
     
     NSOperationQueue *parseQueue = [NSOperationQueue mainQueue];
 	
-    MKJSONParseOperation *parseOpperation = [[MKJSONParseOperation alloc] initWithData:requestData target:self mainThreadCallBack:@selector(parserResults:)];
+    MKFeedParseOperation *parseOpperation = [[MKFeedParseOperation alloc] initWithData:requestData target:self mainThreadCallBack:@selector(parserResults:)];
+    parseOpperation.archive = self.archiveResults;
+    parseOpperation.archivePath = self.archivePath;
+    
     [parseQueue addOperation:parseOpperation];
     [parseOpperation release];
     
 	[theConnection release];
 	[requestData release];
     
-    //[[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
-	[request release];
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+	[urlRequest release];
 }
 
 #pragma mark - Parse Results
 
-- (void)parserResults:(NSMutableArray *)results {
-    if (MKRSSFeedTags.usesCompletionBlock) {
-        self.requestCompleteBlock(results, nil);
+- (void)parserResults:(id)results {
+    if ([results isKindOfClass:[NSMutableArray class]]) {
+        if (MKRSSFeedTags.usesCompletionBlock) {
+            self.requestCompleteBlock(results, nil);
+        }
+        else {
+            [delegate feed:self didReturnData:results];
+        }
+        
+        if (self.archiveResults) {
+            MKFeedParseOperation *operation = [[MKFeedParseOperation alloc] initWithItems:results target:self mainThreadCallBack:@selector(archiveComplete:)];
+            operation.archivePath = self.archivePath;
+            
+            NSOperationQueue *operationQueue = [NSOperationQueue mainQueue];
+            [operationQueue addOperation:operation];
+            
+            [operation release];
+        }
     }
-    else {
-        [delegate feed:self didReturnData:results];
+}
+
+#pragma mark - Archiving
+
+- (void)setArchiveResultsToPath:(NSString *)path successful:(MKArchiveSuccessful)successful {
+    self.archiveResults = YES;
+    self.archivePath = [path copy];
+    self.archiveSuccessBlock = successful;
+}
+
+- (void)archiveComplete:(id)results {
+    BOOL successful = YES;
+    if ([results isKindOfClass:[NSError class]]) {
+        successful = NO;
+    }
+    
+    if (self.archiveSuccessBlock) {
+        self.archiveSuccessBlock(successful);
+    }
+    if ([self.delegate respondsToSelector:@selector(feed:didArchiveResuslts:)]) {
+        [self.delegate feed:self didArchiveResuslts:successful];
     }
 }
 
@@ -162,7 +216,9 @@
 
 #pragma mark - JSON Parse Operation
 
-@implementation MKJSONParseOperation
+@implementation MKFeedParseOperation
+
+@synthesize archive, archivePath;
 
 #pragma mark - Creation
 
@@ -173,6 +229,8 @@
         target = [_target retain];
         mainThreadCallBack = callBack;
         
+        operationType = MKFeedParserOperation;
+        
         MKGoogleJSONTitle = @"title";
         MKGoogleJSONLink = @"link";
         MKGoogleJSONContentSnippet = @"contentSnippet";
@@ -181,11 +239,26 @@
     return self;
 }
 
+- (id)initWithItems:(NSArray *)_items target:(id)_target mainThreadCallBack:(SEL)callBack {
+    self = [super init];
+    if (self) {
+        items = [_items retain];
+        target = [_target retain];
+        mainThreadCallBack = callBack;
+        
+        operationType = MKFeedArchiveOperation;
+    }
+    return self;
+}
+
 #pragma mark - Memory
 
 - (void)dealloc {
+    [items release];
     [JSONData release];
     [target release];
+    
+    mainThreadCallBack = nil;
     
     [super dealloc];
 }
@@ -193,8 +266,35 @@
 #pragma mark - Main
 
 - (void)main {
+    if (operationType == MKFeedParserOperation) {
+        [self JSONParseWithData:JSONData result: ^ (id resultObject) {
+            [target performSelectorOnMainThread:mainThreadCallBack withObject:resultObject waitUntilDone:YES];
+        }];
+    }
+    
+    else if (operationType == MKFeedArchiveOperation) {
+        MKFeedItemArchiver *archiver = [[MKFeedItemArchiver alloc] initWithItems:items];
+        [archiver syncWithArchiveFileAtPath:self.archivePath completion: ^ (BOOL finished) {
+            if (finished) {
+                [target performSelectorOnMainThread:mainThreadCallBack withObject:nil waitUntilDone:YES];
+            }
+            else {
+                MKFeedItemArchiveError = @"MKFeedItemArchiveError";
+                NSError *error = [NSError errorWithDomain:MKFeedItemArchiveError code:kMKFeedItemArchiveErrorCode userInfo:nil];
+                
+                [target performSelectorOnMainThread:mainThreadCallBack withObject:error waitUntilDone:YES];
+            }
+        }];
+        
+        [archiver release];
+    }
+}
+
+#pragma mark - Parse
+
+- (void)JSONParseWithData:(NSData *)data result:(void (^)(id resultObject))result {
     NSError *error;
-    NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:JSONData options:kNilOptions error:&error];
+    NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     
     NSDictionary *responseDict = [dataDict objectForKey:@"responseData"];
     NSDictionary *feedDict = [responseDict objectForKey:@"feed"];
@@ -214,9 +314,8 @@
         [feedItem release];
     }
     
-    [target performSelectorOnMainThread:mainThreadCallBack withObject:rtnItems waitUntilDone:YES];
+    result(rtnItems);
     
     [rtnItems release];
 }
-
 @end

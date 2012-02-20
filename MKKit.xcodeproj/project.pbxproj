@@ -231,6 +231,10 @@
 		AAFC9899141534F30071B91C /* MKGraphDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFC9897141534F30071B91C /* MKGraphDrawing.m */; };
 		AAFC989C141599E90071B91C /* MKGraphPlotting.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFC989A141599E90071B91C /* MKGraphPlotting.h */; };
 		AAFC989D141599E90071B91C /* MKGraphPlotting.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFC989B141599E90071B91C /* MKGraphPlotting.m */; };
+		AAFFB40C14EF688F0048B57F /* MKFeedItemArchiver.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFFB40A14EF688E0048B57F /* MKFeedItemArchiver.h */; };
+		AAFFB40D14EF688F0048B57F /* MKFeedItemArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFFB40B14EF688E0048B57F /* MKFeedItemArchiver.m */; };
+		AAFFB41414F0AF850048B57F /* MKOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFFB41214F0AF840048B57F /* MKOperation.h */; };
+		AAFFB41514F0AF850048B57F /* MKOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFFB41314F0AF850048B57F /* MKOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -467,6 +471,10 @@
 		AAFC9897141534F30071B91C /* MKGraphDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGraphDrawing.m; sourceTree = "<group>"; };
 		AAFC989A141599E90071B91C /* MKGraphPlotting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGraphPlotting.h; sourceTree = "<group>"; };
 		AAFC989B141599E90071B91C /* MKGraphPlotting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGraphPlotting.m; sourceTree = "<group>"; };
+		AAFFB40A14EF688E0048B57F /* MKFeedItemArchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKFeedItemArchiver.h; sourceTree = "<group>"; };
+		AAFFB40B14EF688E0048B57F /* MKFeedItemArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKFeedItemArchiver.m; sourceTree = "<group>"; };
+		AAFFB41214F0AF840048B57F /* MKOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKOperation.h; sourceTree = "<group>"; };
+		AAFFB41314F0AF850048B57F /* MKOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -752,6 +760,8 @@
 				AA99D3171405B71E00CFFD56 /* MKObject.h */,
 				AA99D3181405B71E00CFFD56 /* MKObject.m */,
 				AA99D3151405B1BE00CFFD56 /* MKObjectDelegate.h */,
+				AAFFB41214F0AF840048B57F /* MKOperation.h */,
+				AAFFB41314F0AF850048B57F /* MKOperation.m */,
 				AAFB412D148717260002D494 /* MKPageControl.h */,
 				AAFB412E148717260002D494 /* MKPageControl.m */,
 				AA02DDE912DAE2B7003B3560 /* MKRandoms.h */,
@@ -789,6 +799,8 @@
 				AA98667114ECA0C400C2EF01 /* MKFeedsErrorControl.h */,
 				AA3BFC241481485D003C59A9 /* MKFeedItem.h */,
 				AA3BFC251481485E003C59A9 /* MKFeedItem.m */,
+				AAFFB40A14EF688E0048B57F /* MKFeedItemArchiver.h */,
+				AAFFB40B14EF688E0048B57F /* MKFeedItemArchiver.m */,
 				AA3297B2144FD0B600982DCE /* MKFeedParser.h */,
 				AA3297B3144FD0B600982DCE /* MKFeedParser.m */,
 				AAF37FE614703885001AE209 /* NSString+MKFeedParser.h */,
@@ -1063,6 +1075,8 @@
 				AAF37FE814703885001AE209 /* NSString+MKFeedParser.h in Headers */,
 				AA3BFC261481485E003C59A9 /* MKFeedItem.h in Headers */,
 				AA98667214ECA0C500C2EF01 /* MKFeedsErrorControl.h in Headers */,
+				AAFFB40C14EF688F0048B57F /* MKFeedItemArchiver.h in Headers */,
+				AAFFB41414F0AF850048B57F /* MKOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1286,6 +1300,8 @@
 				AA86F5661457B0BA00A7D4FC /* MKHTMLParser.m in Sources */,
 				AAF37FE914703885001AE209 /* NSString+MKFeedParser.m in Sources */,
 				AA3BFC271481485E003C59A9 /* MKFeedItem.m in Sources */,
+				AAFFB40D14EF688F0048B57F /* MKFeedItemArchiver.m in Sources */,
+				AAFFB41514F0AF850048B57F /* MKOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

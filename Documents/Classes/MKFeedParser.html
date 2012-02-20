@@ -47,11 +47,11 @@
 
 <p> Data can returned through ethier the <a href="../Protocols/MKFeedParserDelegate.html">MKFeedParserDelegate</a> or the MKRequestComplete block. Both methods pass an NSArray that holds the information from the feed. The array is an array of <a href="MKFeedItem.html">MKFeedItem</a> instaces. </p>
 
-<p> <strong> Requied Framworks </strong> <ul><li> Foundation </li></ul></p>
+<p> <strong> Archiving Results </strong></p>
 
-<p> <strong> Requred Classes </strong> <ul><li> <a href="MKFeedItem.html">MKFeedItem</a></li></ul></p>
+<p> <a href="MKFeedParser.html">MKFeedParser</a> instances can automatically archive the results of the <a href="#//api/name/request">request</a> to disk by using MKFeedItemArchiver. Set the archiveResults, and <a href="#//api/name/archivePath">archivePath</a> properties, or call the <a href="#//api/name/setArchiveResultsToPath:successful:">setArchiveResultsToPath:successful:</a> method to create or sync to an archive file. </p>
 
-<p> <strong> Required Protocols </strong> <ul><li> <a href="../Protocols/MKFeedParserDelegate.html">MKFeedParserDelegate</a></li></ul></p>
+<p> If you set the properties yourself the feed:didArchiveResults: <a href="#//api/name/delegate">delegate</a> method will notify you of an archives success or failure. If you use the <a href="#//api/name/setArchiveResultsToPath:successful:">setArchiveResultsToPath:successful:</a> the successful block is called upon completion. </p>
 
 				</div>
 				
@@ -109,6 +109,30 @@
 </li>
 					</ul>
 					
+					<h3 class="subsubtitle task-title">Archiving</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/archiveResults"> archiveResults</a></code>
+		<span class="tooltip"> Set to <code>YES</code> if you want the results to be archived to the disk. Default is <code>NO</code></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/archivePath"> archivePath</a></code>
+		<span class="tooltip"> The path to write/sync the parsed results to. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setArchiveResultsToPath:successful:">- setArchiveResultsToPath:successful:</a></code>
+		<span class="tooltip"> Tells the parser if it should archive the results and retuns the results throught the successful block. </span>
+	</span>
+	
+</li>
+					</ul>
+					
 					<h3 class="subsubtitle task-title">Delegate</h3>
 
 					<ul class="task-list">
@@ -128,6 +152,12 @@
 	<span class="tooltip">
 		<code><a href="#//api/name/requestCompleteBlock"> requestCompleteBlock</a></code>
 		<span class="tooltip"> The <a href="#//api/name/request">request</a> complete block. This block is ran when a <a href="#//api/name/request">request</a> is finished. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/archiveSuccessBlock"> archiveSuccessBlock</a></code>
+		<span class="tooltip"> The archive complete block. This block is ran when a archive is finished. </span>
 	</span>
 	
 </li>
@@ -298,6 +328,53 @@
 	
 </div>
 					
+					<div class="section-method">
+	<a name="//api/name/setArchiveResultsToPath:successful:" title="setArchiveResultsToPath:successful:"></a>
+	<h3 class="subsubtitle method-title">setArchiveResultsToPath:successful:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Tells the parser if it should archive the results and retuns the results throught the successful block. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setArchiveResultsToPath:(NSString *)<em>path</em> successful:(MKArchiveSuccessful)<em>successful</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>path</em></dt>
+			<dd> the path to write/sync the parsed results to. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>successfult</em></dt>
+			<dd> the code block to call upon the archive completion. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedParser.h</code><br />
+	</div>				
+	
+	
+</div>
+					
 				</div>
 				
 				
@@ -317,6 +394,102 @@
 	
 	
 	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) MKFeedContentType contentType MK_DEPRECATED_1_0</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedParser.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/archivePath" title="archivePath"></a>
+	<h3 class="subsubtitle method-title">archivePath</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The path to write/sync the parsed results to. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *archivePath</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedParser.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/archiveResults" title="archiveResults"></a>
+	<h3 class="subsubtitle method-title">archiveResults</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Set to <code>YES</code> if you want the results to be archived to the disk. Default is <code>NO</code></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL archiveResults</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedParser.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/archiveSuccessBlock" title="archiveSuccessBlock"></a>
+	<h3 class="subsubtitle method-title">archiveSuccessBlock</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> The archive complete block. This block is ran when a archive is finished. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) MKArchiveSuccessful archiveSuccessBlock</code></div>
 	
 	
 	
@@ -519,7 +692,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-17)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-19)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

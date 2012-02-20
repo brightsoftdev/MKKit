@@ -26,6 +26,11 @@ continue to improve with more details on usage of classes. As reminder v0.8 depr
 The development of v1.0 will updated on the development branch. Remember the development branch is experimental so API's may change without
 warning. 
 
+## Demo Project ##
+
+A Demo project has been added to MKKit. It can be found in the **Demo** folder.  It is very small right now, but we are working to have
+all of the MKKit features included on it.  
+
 ## Installing ##
 
 Download or clone the MKKit source files. Open the project and build all the targets. Add the framework by dragging the project file
@@ -35,7 +40,7 @@ and than drag that file into your projects Frameworks folder. Repeat this proces
 Go into the build settings of your projects target. Find the **Header Search Paths** field and enter the full path to the MKKit folder. You also
 need to do this for each on the targets of the kit.
 
-In the build settings of your projects target find the **Other Linker Flags** and the -ObjC.
+In the build settings of your projects target find the **Other Linker Flags** and the tag -ObjC.
 
 You need to link your project to the required frameworks and libraries used in MKKit. See the Wiki for a list of required frameworks and libraies
 <https://github.com/matt62king/MKKit/wiki/Required-Binary-Library-Links>.

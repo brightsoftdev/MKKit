@@ -106,6 +106,7 @@
 
 - (void)addPrimaryElement:(UIView *)element {
     element.tag = kPrimaryViewTag;
+    
     [self addSubview:element];
 }
 
@@ -159,9 +160,15 @@
 
 - (CGRect)secondaryRect {
     float cellWidth = self.cell.contentView.frame.size.width;
-    float secondayWidth = (cellWidth - kCellSecondaryElementX - kCellRightMarginPadding);
     
-    return CGRectMake(kCellSecondaryElementX, kCellElementStandardTopPadding, secondayWidth, kCellElementStandardHeight);
+    if (self.cell.secondaryElementWidth == 0.0) {
+        self.cell.secondaryElementWidth = (cellWidth / 2.0);
+    }
+    
+    float elementX = (cellWidth - self.cell.secondaryElementWidth);
+    float secondayWidth = (cellWidth - elementX - kCellRightMarginPadding);
+    
+    return CGRectMake(elementX, kCellElementStandardTopPadding, secondayWidth, kCellElementStandardHeight);
 }
 
 - (CGRect)detailRect {

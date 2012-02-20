@@ -37,6 +37,7 @@
     NSString *mItemContent;
     NSString *mItemLinkURL;
     NSString *mItemAuthor;
+    BOOL mItemRead;
 }
 
 ///---------------------------------------------
@@ -97,3 +98,4 @@ NSString *MKFeedItemTitle MK_VISIBLE_ATTRIBUTE;
 NSString *MKFeedItemContent MK_VISIBLE_ATTRIBUTE;
 NSString *MKFeedItemLinkURL MK_VISIBLE_ATTRIBUTE;
 NSString *MKFeedItemAuthor MK_VISIBLE_ATTRIBUTE;
+NSString *MKFeedItemRead MK_VISIBLE_ATTRIBUTE;

@@ -24,6 +24,7 @@
     self = [super initWithType:MKTableCellTypeNone reuseIdentifier:reuseIdentifier];
     if (self) {
         CGRect switchFrame = CGRectMake(198.3, 10.0, 172.0, 21.0);
+        self.secondaryElementWidth = 100.0;
 		
         mCellView = [[MKView alloc] initWithCell:self];
         

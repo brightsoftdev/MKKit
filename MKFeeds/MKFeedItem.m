@@ -30,6 +30,7 @@
         mItemContent = [[aDecoder decodeObjectForKey:MKFeedItemContent] copy];
         mItemLinkURL = [[aDecoder decodeObjectForKey:MKFeedItemLinkURL] copy];
         mItemAuthor = [[aDecoder decodeObjectForKey:MKFeedItemAuthor] copy];
+        mItemRead = [(NSNumber *)[aDecoder decodeObjectForKey:MKFeedItemRead] boolValue];
     }
     return self;
 }
@@ -39,6 +40,7 @@
     [aCoder encodeObject:mItemContent forKey:MKFeedItemContent];
     [aCoder encodeObject:mItemLinkURL forKey:MKFeedItemLinkURL];
     [aCoder encodeObject:mItemAuthor forKey:MKFeedItemAuthor];
+    [aCoder encodeObject:[NSNumber numberWithBool:mItemRead] forKey:MKFeedItemRead];
 }
 
 #pragma mark - Creatition
@@ -60,6 +62,7 @@
     MKFeedItemContent = @"MKFeedItemContent";
     MKFeedItemLinkURL = @"MKFeedItemLinkURL";
     MKFeedItemAuthor = @"MKFeedItemAuthor";
+    MKFeedItemRead = @"MKFeedItemRead";
 }
 
 #pragma mark - Memory Managment
@@ -115,6 +118,16 @@
     return mItemAuthor;
 }
 
+- (BOOL)itemRead {
+    return mItemRead;
+}
+
+#pragma mark Setters
+
+- (void)setItemRead:(BOOL)_itemRead {
+    mItemRead = _itemRead;
+}
+
 #pragma mark - KVC
 #pragma mark Setters
 
@@ -127,6 +140,9 @@
     }
     if ([key isEqualToString:@"itemAuthor"]) {
         mItemAuthor = [(NSString *)value copy];
+    }
+    if ([key isEqualToString:@"itemLinkURL"]) {
+        mItemLinkURL = [(NSString *)value copy];
     }
 }
 
@@ -141,6 +157,9 @@
     }
     if ([key isEqualToString:@"itemAuthor"]) {
         return mItemAuthor;
+    }
+    if ([key isEqualToString:@"itemLinkURL"]) {
+        return mItemLinkURL;
     }
     return nil;
 }
