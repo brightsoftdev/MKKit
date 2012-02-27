@@ -1,0 +1,605 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>NSString(MKKit) Category Reference</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<meta name="generator" content="appledoc 2.0b3" />
+	</head>
+	<body>
+		<article>
+			<div class="main-navigation navigation-top">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="header">
+				<div class="section-header">
+					<h1 class="title title-header">NSString(MKKit) Category Reference</h1>
+				</div>		
+			</div>
+			<div id="container">	
+				
+				<div class="section section-specification"><table cellspacing="0"><tbody>
+					<tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">NSString+MKKit.h</td>
+</tr>
+					</tbody></table></div>
+				
+				
+				
+				<div class="section section-overview">
+					<h2 class="subtitle subtitle-overview">Overview</h2>
+					
+<p> <strong> Overview </strong></p>
+
+<p> The NSString Catagory class creates specaillty strings such as number and date formats, paths, and UUIDs. You have the choice to use instance methods or class methods for all strings. </p>
+
+				</div>
+				
+				
+				
+				
+				<div class="section section-tasks">
+					<h2 class="subtitle subtitle-tasks">Tasks</h2>
+					
+					<h3 class="subsubtitle task-title">Date Strings</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/date:withFormat:">- date:withFormat:</a></code>
+		<span class="tooltip"> Returns a string representation from a date and a specified format. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringWithDate:format:">+ stringWithDate:format:</a></code>
+		<span class="tooltip"> Returns a string representation from a date and a specified format. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Number Strings</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/localCurrencyFromNumber:">- localCurrencyFromNumber:</a></code>
+		<span class="tooltip"> Returns a string from a given number that is formatted into the local currency. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/localCurrencyWithNumber:">+ localCurrencyWithNumber:</a></code>
+		<span class="tooltip"> Returns a string from a given number that is formatted into the local currency. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringFromDecimalNumber:decimalPlaces:">- stringFromDecimalNumber:decimalPlaces:</a></code>
+		<span class="tooltip"> Returns a string representaion of a decimal number with a set number of decimal places. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringWithDecimalNumber:decimalPlaces:">+ stringWithDecimalNumber:decimalPlaces:</a></code>
+		<span class="tooltip"> Returns a string representaion of a decimal number with a set number of decimal places. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Path Strings</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/documentsDirectoryPath">- documentsDirectoryPath</a></code>
+		<span class="tooltip"> Returns the path to the applications document directory </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringWithDocumentsDirectoryPath">+ stringWithDocumentsDirectoryPath</a></code>
+		<span class="tooltip"> Returns the path to the applications documents directory </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">UUID</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/UUIDString">+ UUIDString</a></code>
+		<span class="tooltip"> Creates a new UUID and retruns it as a String </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringFromUUID">- stringFromUUID</a></code>
+		<span class="tooltip"> Creates a new UUID and returns it as a String </span>
+	</span>
+	
+</li>
+					</ul>
+					
+				</div>
+				
+				
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Class Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/UUIDString" title="UUIDString"></a>
+	<h3 class="subsubtitle method-title">UUIDString</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates a new UUID and retruns it as a String </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (NSString *)UUIDString</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+MKKit.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/localCurrencyWithNumber:" title="localCurrencyWithNumber:"></a>
+	<h3 class="subsubtitle method-title">localCurrencyWithNumber:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Returns a string from a given number that is formatted into the local currency. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (NSString *)localCurrencyWithNumber:(NSNumber *)<em>number</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>number</em></dt>
+			<dd> The number to format. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+MKKit.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/stringWithDate:format:" title="stringWithDate:format:"></a>
+	<h3 class="subsubtitle method-title">stringWithDate:format:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Returns a string representation from a date and a specified format. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (NSString *)stringWithDate:(NSDate *)<em>date</em> format:(NSString *)<em>format</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>date</em></dt>
+			<dd> The date to format. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>format</em></dt>
+			<dd> a string representation of the date format. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		
+		<p> Returns a string representation from a date and a specified format. </p>
+		
+		<p> Here are some examples </p>
+		
+		<p> Date Formats: <ul><li> <code>@&quot;MMM dd YYYY&quot;</code> will return Jan 01 2011. </li><li> <code>@&quot;MMMM dd YYYY&quot;</code> will return January 01 2011. </li><li> <code>@&quot;MM-dd-YYYY&quot;</code> will return 01-01-2011. </li></ul></p>
+		
+		<p> Time Formats: <ul><li> <code>@&quot;h:mm&quot;</code> will return 1:00. </li><li> <code>@&quot;hh:mm.ss&quot;</code> will return 01:00.00. </li><li> <code>@&quot;kk:mm&quot;</code> will return 13:00. </li></ul></p>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+MKKit.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/stringWithDecimalNumber:decimalPlaces:" title="stringWithDecimalNumber:decimalPlaces:"></a>
+	<h3 class="subsubtitle method-title">stringWithDecimalNumber:decimalPlaces:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Returns a string representaion of a decimal number with a set number of decimal places. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (NSString *)stringWithDecimalNumber:(NSNumber *)<em>number</em> decimalPlaces:(NSUInteger)<em>places</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>number</em></dt>
+			<dd> the NSNubmer instance to convert into a string. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>places</em></dt>
+			<dd> the number of decimal places the string should have. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> an NSString intances that represents the given number. </p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+MKKit.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/stringWithDocumentsDirectoryPath" title="stringWithDocumentsDirectoryPath"></a>
+	<h3 class="subsubtitle method-title">stringWithDocumentsDirectoryPath</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Returns the path to the applications documents directory </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (NSString *)stringWithDocumentsDirectoryPath</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+MKKit.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/date:withFormat:" title="date:withFormat:"></a>
+	<h3 class="subsubtitle method-title">date:withFormat:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Returns a string representation from a date and a specified format. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSString *)date:(NSDate *)<em>date</em> withFormat:(NSString *)<em>format</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>date</em></dt>
+			<dd> The date to format. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>format</em></dt>
+			<dd> a string representation of the date format. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		
+		<p> Returns a string representation from a date and a specified format. </p>
+		
+		<p> Here are some examples </p>
+		
+		<p> Date Formats: <ul><li> <code>@&quot;MMM dd YYYY&quot;</code> will return Jan 01 2011. </li><li> <code>@&quot;MMMM dd YYYY&quot;</code> will return January 01 2011. </li><li> <code>@&quot;MM-dd-YYYY&quot;</code> will return 01-01-2011. </li></ul></p>
+		
+		<p> Time Formats: <ul><li> <code>@&quot;h:mm&quot;</code> will return 1:00. </li><li> <code>@&quot;hh:mm.ss&quot;</code> will return 01:00.00. </li><li> <code>@&quot;kk:mm&quot;</code> will return 13:00. </li></ul></p>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+MKKit.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/documentsDirectoryPath" title="documentsDirectoryPath"></a>
+	<h3 class="subsubtitle method-title">documentsDirectoryPath</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Returns the path to the applications document directory </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSString *)documentsDirectoryPath</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+MKKit.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/localCurrencyFromNumber:" title="localCurrencyFromNumber:"></a>
+	<h3 class="subsubtitle method-title">localCurrencyFromNumber:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Returns a string from a given number that is formatted into the local currency. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSString *)localCurrencyFromNumber:(NSNumber *)<em>number</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>number</em></dt>
+			<dd> The number to format. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+MKKit.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/stringFromDecimalNumber:decimalPlaces:" title="stringFromDecimalNumber:decimalPlaces:"></a>
+	<h3 class="subsubtitle method-title">stringFromDecimalNumber:decimalPlaces:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Returns a string representaion of a decimal number with a set number of decimal places. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSString *)stringFromDecimalNumber:(NSNumber *)<em>number</em> decimalPlaces:(NSUInteger)<em>places</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>number</em></dt>
+			<dd> the NSNubmer instance to convert into a string. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>places</em></dt>
+			<dd> the number of decimal places the string should have. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> an NSString intances that represents the given number. </p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+MKKit.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/stringFromUUID" title="stringFromUUID"></a>
+	<h3 class="subsubtitle method-title">stringFromUUID</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates a new UUID and returns it as a String </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSString *)stringFromUUID</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+MKKit.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				
+			</div>
+			<div class="main-navigation navigation-bottom">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="footer">
+				<hr />
+				<div class="footer-copyright">
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-26)</span><br />
+					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>

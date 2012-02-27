@@ -198,12 +198,15 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 #pragma mark Icons
 
 - (void)setImage:(MKImage *)img {
-    if (!stroryboardPrototype) {
+    if (!stroryboardPrototype && img) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         imageView.image = (UIImage *)img;
         
         [mCellView addIconElement:imageView];
         [imageView release];
+    }
+    else {
+        [[mCellView viewWithTag:kIconViewTag] removeFromSuperview];
     }
 }
 

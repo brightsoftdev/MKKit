@@ -16,6 +16,14 @@
 
 #define PI                                              3.14159265359f
 
+//  time intervals
+
+#define MK_HOUR                                         3600.0
+#define MK_DAY                                          86200.0
+#define MK_WEEK                                         (MK_DAY * 7)
+#define MK_MONTH                                        (MK_DAY * 30)
+#define MK_YEAR                                         (MK_DAY * 365)
+
 //  iPhone view frames
 
 #define STATUS_BAR_HEIGHT                               20.0

@@ -9,9 +9,20 @@
 #import "MKFeedItemArchiver.h"
 #import "MKFeedItem.h"
 
+#pragma mark - Cloud Document
+
+@interface MKFeedItemDocument : UIDocument 
+
+@property (nonatomic, retain) NSMutableArray *fileData;
+    
+@end
+
+#pragma mark - Archiver
+
 @interface MKFeedItemArchiver () 
 
 - (NSMutableArray *)currentItemsFromPath:(NSString *)path;
+- (NSMutableArray *)cloudItemsFromURL:(NSURL *)URL;
 - (NSMutableArray *)decodedItemsFromArray:(NSArray *)array;
 - (NSData *)encodedItem:(MKFeedItem *)item;
 
@@ -59,13 +70,21 @@
     completion(complete);
 }
 
-- (void)syncWithArchiveFileAtPath:(NSString *)path completion:(void (^)(BOOL))completion {
+#pragma mark - Sync
+
+- (void)syncWithArchiveFileAtPath:(NSString *)path completion:(void (^)(MKArchiverSyncResults syncResults))completion {
     NSMutableArray *currentItems = [self currentItemsFromPath:path];
     
     if ([currentItems count] == 0) {
         BOOL complete = [self addAllItemsToPath:path];
-        completion(complete);
-        return;
+        if (complete) {
+            completion(MKArchiverSyncComplete);
+            return;
+        }
+        else {
+            completion(MKArchiverSyncFailed);
+            return;
+        }
     }
     
     else {
@@ -85,17 +104,86 @@
                 newItems = (newItems + 1);
             }
         }
+//#warning : sync Test Logs        
+        //NSLog(@"Request Items = %i", [mItems count]);
+        //NSLog(@"New Items = %i", newItems);
         
         if (newItems != 0) {
-            BOOL complete = [currentItems writeToFile:path atomically:YES];
-            completion(complete);
+            if (newItems == [mItems count]) {
+                NSLog(@"Max Fill");
+                completion(MKArchiverSyncIncomplete);
+            }
+            else {
+                BOOL complete = [currentItems writeToFile:path atomically:YES];
+                if (complete) {
+                    completion(MKArchiverSyncComplete);
+                    return;
+                }
+                else {
+                    completion(MKArchiverSyncFailed);
+                    return;
+                }
+            }
+        }
+    }
+}
+
+- (void)syncWithCloudFileAtURL:(NSURL *)URL completion:(void (^)(MKArchiverSyncResults))completion {
+    NSMutableArray *currentItems = [self cloudItemsFromURL:URL];
+    
+    if ([currentItems count] == 0) {
+        BOOL complete = [self addAllItemsToCloudURL:URL];
+        if (complete) {
+            completion(MKArchiverSyncComplete);
+            return;
+        }
+        else {
+            completion(MKArchiverSyncFailed);
             return;
         }
     }
-    completion(YES);
+    else {
+        NSString *attribute = [NSString stringWithString:@"itemLinkURL"];
+        
+        NSInteger newItems = 0;
+        
+        for (MKFeedItem *item in mItems) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K == %@)", attribute, item.itemLinkURL];
+            NSArray *filteredArray = [currentItems filteredArrayUsingPredicate:predicate];
+            
+            if ([filteredArray count] == 0) {
+                [currentItems insertObject:item atIndex:0];
+                
+                newItems = (newItems + 1);
+            }
+        }
+//#warning : sync Test Logs        
+        //NSLog(@"Request Items = %i", [mItems count]);
+        //NSLog(@"New Items = %i", newItems);
+        
+        if (newItems != 0) {
+            if (newItems == [mItems count]) {
+                NSLog(@"Max Fill");
+                completion(MKArchiverSyncIncomplete);
+            }
+            else {
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:currentItems];
+                BOOL complete = [data writeToURL:URL atomically:YES];
+                if (complete) {
+                    completion(MKArchiverSyncComplete);
+                    return;
+                }
+                else {
+                    completion(MKArchiverSyncFailed);
+                    return;
+                }
+            }
+        }
+    }
 }
 
-#pragma mark - Helper
+#pragma mark - Helpers
+#pragma mark Getting Data Files
 
 - (NSMutableArray *)currentItemsFromPath:(NSString *)path {
     NSMutableArray *currentItems = nil;
@@ -110,6 +198,15 @@
     return currentItems;
 }
 
+- (NSMutableArray *)cloudItemsFromURL:(NSURL *)URL {
+    NSData *data = [NSData dataWithContentsOfURL:URL];
+    NSMutableArray *rtnArray = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    return rtnArray;
+}
+
+#pragma mark Save Data Files
+
 - (BOOL)addAllItemsToPath:(NSString *)path {
     NSMutableArray *currentItems = [self currentItemsFromPath:path];
     
@@ -122,6 +219,22 @@
     
     BOOL complete = [currentItems writeToFile:path atomically:YES];
         
+    return complete;
+}
+
+- (BOOL)addAllItemsToCloudURL:(NSURL *)URL {
+    NSMutableArray *currentItems = [self cloudItemsFromURL:URL];
+    
+    mItems = [[[mItems reverseObjectEnumerator] allObjects] retain];
+    
+    for (MKFeedItem *item in mItems) {
+        [currentItems addObject:item];
+    }
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:mItems];
+    
+    BOOL complete = [data writeToURL:URL atomically:YES];
+    
     return complete;
 }
 
@@ -154,6 +267,25 @@
     }
     
     return rtnArray;
+}
+
+@end
+
+#pragma mark - Cloud Document
+
+@implementation MKFeedItemDocument
+
+@synthesize fileData;
+
+- (BOOL)loadFromContents:(id)contents ofType:(NSString *)typeName error:(NSError **)outError {
+    self.fileData = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:contents];
+    
+    return YES;
+}
+
+- (id)contentsForType:(NSString *)typeName error:(NSError **)outError {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.fileData];
+    return data;
 }
 
 @end

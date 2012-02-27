@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>MKCloud Class Reference</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<meta name="generator" content="appledoc 2.0b3" />
+	</head>
+	<body>
+		<article>
+			<div class="main-navigation navigation-top">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="header">
+				<div class="section-header">
+					<h1 class="title title-header">MKCloud Class Reference</h1>
+				</div>		
+			</div>
+			<div id="container">	
+				
+				<div class="section section-specification"><table cellspacing="0"><tbody>
+					<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value"><a href="MKObject.html">MKObject</a> : NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">MKCloud.h</td>
+</tr>
+					</tbody></table></div>
+				
+				
+				
+				<div class="section section-overview">
+					<h2 class="subtitle subtitle-overview">Overview</h2>
+					
+<p> <strong> Overview </strong></p>
+
+<p> <a href="MKCloud.html">MKCloud</a> provides some basic funtions for using iCloud data storage. </p>
+
+				</div>
+				
+				
+				
+				
+				<div class="section section-tasks">
+					<h2 class="subtitle subtitle-tasks">Tasks</h2>
+					
+					<h3 class="subsubtitle task-title">Creating Instances</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/cloudManager">+ cloudManager</a></code>
+		<span class="tooltip"> Creates an autoreleasing instance MKCloud. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Availability</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/iCloudIsAvailable">+ iCloudIsAvailable</a></code>
+		<span class="tooltip"> Checks if iCloud is available for the current device/user. returns <code>YES</code> if available, <code>NO</code> if not. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Load Files</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/urlForFileNamed:result:">- urlForFileNamed:result:</a></code>
+		<span class="tooltip"> Checks if the given file exists in the local cloud directory and retuns an NSURL instance if the file exists. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Blocks</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/loadFileHandler"> loadFileHandler</a></code>
+		<span class="tooltip"> Reference to the file query result handler </span>
+	</span>
+	
+</li>
+					</ul>
+					
+				</div>
+				
+				
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Class Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/cloudManager" title="cloudManager"></a>
+	<h3 class="subsubtitle method-title">cloudManager</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates an autoreleasing instance MKCloud. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)cloudManager</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKCloud.html">MKCloud</a> instance </p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		
+		<p> Creates an autoreleasing instance MKCloud. </p>
+		
+		<p> This should be the only method used to create an instance. </p>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/iCloudIsAvailable" title="iCloudIsAvailable"></a>
+	<h3 class="subsubtitle method-title">iCloudIsAvailable</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Checks if iCloud is available for the current device/user. returns <code>YES</code> if available, <code>NO</code> if not. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (BOOL)iCloudIsAvailable</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/urlForFileNamed:result:" title="urlForFileNamed:result:"></a>
+	<h3 class="subsubtitle method-title">urlForFileNamed:result:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Checks if the given file exists in the local cloud directory and retuns an NSURL instance if the file exists. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)urlForFileNamed:(NSString *)<em>name</em> result:(MKCloudLoadedFileHandler)<em>result</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd> the name of the file to search for </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>result</em></dt>
+			<dd> the block to excute when the file is found. </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Properties</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/loadFileHandler" title="loadFileHandler"></a>
+	<h3 class="subsubtitle method-title">loadFileHandler</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Reference to the file query result handler </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) MKCloudLoadedFileHandler loadFileHandler</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
+				
+			</div>
+			<div class="main-navigation navigation-bottom">
+				<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+			</div>
+			<div id="footer">
+				<hr />
+				<div class="footer-copyright">
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-26)</span><br />
+					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>

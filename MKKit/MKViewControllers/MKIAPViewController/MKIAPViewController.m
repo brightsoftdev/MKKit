@@ -8,6 +8,7 @@
 
 #import "MKIAPViewController.h"
 
+#import <MKKit/MKKit/NSString+MKKit.h>
 
 @interface MKIAPViewController ()
 
@@ -141,7 +142,7 @@
     
     if (mProductsSet) {
         SKProduct *product = (SKProduct *)[mItems objectAtIndex:indexPath.row];
-        MKStrings *string = [[MKStrings alloc] init];
+        NSString *string = [[NSString alloc] init];
         
         cell = (MKTableCell *)[tableView dequeueReusableCellWithIdentifier:PurchaseCell];
         if (cell == nil) {

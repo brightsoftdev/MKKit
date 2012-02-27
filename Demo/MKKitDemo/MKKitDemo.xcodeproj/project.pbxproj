@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AAD9CE4014F96401003A27FE /* MKDTextEntryCells.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD9CE3F14F96401003A27FE /* MKDTextEntryCells.m */; };
 		AAEADDEB14D6169900C234FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAEADDEA14D6169900C234FD /* UIKit.framework */; };
 		AAEADDED14D6169900C234FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAEADDEC14D6169900C234FD /* Foundation.framework */; };
 		AAEADDEF14D6169900C234FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAEADDEE14D6169900C234FD /* CoreGraphics.framework */; };
@@ -32,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AAD9CE3E14F96401003A27FE /* MKDTextEntryCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDTextEntryCells.h; sourceTree = "<group>"; };
+		AAD9CE3F14F96401003A27FE /* MKDTextEntryCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDTextEntryCells.m; sourceTree = "<group>"; };
 		AAEADDE614D6169900C234FD /* MKKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MKKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAEADDEA14D6169900C234FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AAEADDEC14D6169900C234FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -161,6 +164,8 @@
 			children = (
 				AAEADE2C14D61A1500C234FD /* MKDTableCellls.h */,
 				AAEADE2D14D61A1500C234FD /* MKDTableCellls.m */,
+				AAD9CE3E14F96401003A27FE /* MKDTextEntryCells.h */,
+				AAD9CE3F14F96401003A27FE /* MKDTextEntryCells.m */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 				AAEADDF714D6169900C234FD /* main.m in Sources */,
 				AAEADDFB14D6169900C234FD /* MKDAppDelegate.m in Sources */,
 				AAEADE2E14D61A1500C234FD /* MKDTableCellls.m in Sources */,
+				AAD9CE4014F96401003A27FE /* MKDTextEntryCells.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +364,7 @@
 				AAEADE1414D6169900C234FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

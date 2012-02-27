@@ -7,6 +7,7 @@
 //
 
 #import "MKTextField.h"
+#import <MKKit/MKKit/NSString+MKKit.h>
 
 #pragma mark -
 #pragma mark MKTextField
@@ -255,7 +256,7 @@
 - (void)creditButton:(id)sender {
     if ([self.textField.text floatValue] < 0.0) {
         float num = ([self.textField.text floatValue] * -1.0);
-        self.textField.text = [MKStrings stringWithDecimalNumber:[NSDecimalNumber numberWithFloat:num] decimalPlaces:2];
+        self.textField.text = [NSString stringWithDecimalNumber:[NSDecimalNumber numberWithFloat:num] decimalPlaces:2];
     }
     
     [self.textField resignFirstResponder];
@@ -264,7 +265,7 @@
 - (void)debitButton:(id)sender {
     if ([self.textField.text floatValue] > 0.0) {
         float num = ([self.textField.text floatValue] * -1.0);
-        self.textField.text = [MKStrings stringWithDecimalNumber:[NSDecimalNumber numberWithFloat:num] decimalPlaces:2];
+        self.textField.text = [NSString stringWithDecimalNumber:[NSDecimalNumber numberWithFloat:num] decimalPlaces:2];
     }
     [self.textField resignFirstResponder];
 }

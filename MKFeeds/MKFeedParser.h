@@ -27,6 +27,11 @@ typedef enum {
     MKFeedSourceTypeUnknown,
 } MKFeedSourceType;
 
+typedef enum {
+    MKFeedArchiveWithFile,
+    MKFeedArchiveWithCloud,
+} MKFeedArchiveType;
+
 @class MKFeedItem;
 @protocol MKFeedParserDelegate;
 
@@ -49,6 +54,13 @@ typedef enum {
  MKFeedItemArchiver. Set the archiveResults, and archivePath properties, or call the 
  setArchiveResultsToPath:successful: method to create or sync to an archive file. 
  
+ MKFeedParser can sync to iCloud documents as well use the setArchiveResultsToCloudURL:successful:
+ method to sync to the cloud.
+ 
+ @warning *Note* MKFeedParser assumes that all the require iCloud use checks have been done prior
+ to requesting data.  It does not check for iCloud avialbility or the existance of a file at the 
+ given file URL.
+ 
  If you set the properties yourself the feed:didArchiveResults: delegate method will notify
  you of an archives success or failure.  If you use the  setArchiveResultsToPath:successful:
  the successful block is called upon completion.
@@ -64,6 +76,8 @@ typedef enum {
 	NSMutableData *requestData;
     NSURLConnection *theConnection;
     NSURLCache *requestCache;
+    
+    MKFeedArchiveType mArchiveType;
 
     struct {
         BOOL usesCompletionBlock;
@@ -132,15 +146,41 @@ typedef enum {
 /** The path to write/sync the parsed results to. */
 @property (nonatomic, copy) NSString *archivePath;
 
+/** The iCloud file URL to sync the parsed results to. */
+@property (nonatomic, retain) NSURL *cloudURL;
+
 /** 
  Tells the parser if it should archive the results and retuns the results throught the
  successful block.
  
  @param path the path to write/sync the parsed results to.
  
- @param successfult the code block to call upon the archive completion.
+ @param sucessul the block to call when the sync is complete. Block will pass of three
+ `MKArchiverSyncResults`:
+ 
+ * `MKArchiverSyncIncomplete` : sync was successful, but there may be a gap in the items.
+ * `MKArchiverSyncComplete` : sync was successful.
+ * `MKArchiverSyncFailed` : sync was not successful.
 */
 - (void)setArchiveResultsToPath:(NSString *)path successful:(MKArchiveSuccessful)successful;
+
+/**
+ Tells the parser to sync the results with the given iCloud file URL.
+ 
+ @param URL an iCloud file URL to sync with
+ 
+ @param sucessul the block to call when the sync is complete. Block will pass of three
+ `MKArchiverSyncResults`:
+ 
+ * `MKArchiverSyncIncomplete` : sync was successful, but there may be a gap in the items.
+ * `MKArchiverSyncComplete` : sync was successful.
+ * `MKArchiverSyncFailed` : sync was not successful.
+ 
+ @warning *Note* MKFeedParser assumes that all the require iCloud use checks have been done prior
+ to requesting data.  It does not check for iCloud avialbility or the existance of a file at the 
+ given file URL.
+*/
+- (void)setArchiveResultsToCloudURL:(NSURL *)URL successful:(MKArchiveSuccessful)successful;
 
 ///-----------------------------------------------
 /// @name Delegate

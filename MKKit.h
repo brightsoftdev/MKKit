@@ -12,6 +12,7 @@
 #import <MKKit/MKKit/MKAlerts.h>
 #import <MKKit/MKKit/MKAnimations.h>
 #import <MKKit/MKKit/MKClock.h>
+#import <MKKit/MKKit/MKCloud.h>
 #import <MKKit/MKKit/MKConsolidatedViewTags.h>
 #import <MKKit/MKKit/MKCoreData.h>
 #import <MKKit/MKKit/MKImage.h>
@@ -33,7 +34,7 @@
 #import <MKKit/MKKit/MKViews/MKViewHeader.h>
 
 #import <MKKit/MKKit/UIView+MKMetrics.h>
-
+#import <MKKit/MKKit/NSString+MKKit.h>
 
 #if MK_FEEDS_ALLOWED
     #import <MKKit/MKFeed.h>

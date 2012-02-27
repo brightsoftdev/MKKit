@@ -35,7 +35,12 @@ typedef enum {
 - (void)JSONParseWithData:(NSData *)data result:(void (^)(id resultObject))result;
 
 @property (nonatomic, assign) BOOL archive;
+@property (nonatomic, assign) NSInteger fromIndex;
+
 @property (nonatomic, copy) NSString *archivePath;
+@property (nonatomic, retain) NSURL *archiveCloudURL;
+
+@property (nonatomic, assign) MKFeedArchiveType archiveType;
 
 @end
 
@@ -50,7 +55,8 @@ typedef enum {
 
 @implementation MKFeedParser
 
-@synthesize url=mUrl, delegate, requestCompleteBlock=mRequestCompleteBlock, numberOfItems, archivePath, archiveResults, archiveSuccessBlock;
+@synthesize url=mUrl, delegate, requestCompleteBlock=mRequestCompleteBlock, numberOfItems, archivePath, cloudURL, archiveResults, 
+archiveSuccessBlock;
 
 @dynamic sourceType, contentType;
 
@@ -76,6 +82,8 @@ typedef enum {
     self.requestCompleteBlock = nil;
     self.archivePath = nil;
     
+    [mUrl release];
+    
 	[super dealloc];
 }
 
@@ -96,8 +104,6 @@ typedef enum {
 	if (theConnection) {
 		requestData = [[NSMutableData data] retain];
 	} 
-    
-	[mUrl release];
 }
 
 - (void)requestWithCompletionBlock:(MKRequestComplete)block {
@@ -141,9 +147,6 @@ typedef enum {
     NSOperationQueue *parseQueue = [NSOperationQueue mainQueue];
 	
     MKFeedParseOperation *parseOpperation = [[MKFeedParseOperation alloc] initWithData:requestData target:self mainThreadCallBack:@selector(parserResults:)];
-    parseOpperation.archive = self.archiveResults;
-    parseOpperation.archivePath = self.archivePath;
-    
     [parseQueue addOperation:parseOpperation];
     [parseOpperation release];
     
@@ -167,7 +170,15 @@ typedef enum {
         
         if (self.archiveResults) {
             MKFeedParseOperation *operation = [[MKFeedParseOperation alloc] initWithItems:results target:self mainThreadCallBack:@selector(archiveComplete:)];
-            operation.archivePath = self.archivePath;
+            operation.archiveType = mArchiveType;
+
+            if (mArchiveType == MKFeedArchiveWithFile) {
+                operation.archivePath = self.archivePath;
+            }
+            else {
+                operation.archiveCloudURL = self.cloudURL;
+            }
+
             
             NSOperationQueue *operationQueue = [NSOperationQueue mainQueue];
             [operationQueue addOperation:operation];
@@ -180,22 +191,45 @@ typedef enum {
 #pragma mark - Archiving
 
 - (void)setArchiveResultsToPath:(NSString *)path successful:(MKArchiveSuccessful)successful {
+    mArchiveType = MKFeedArchiveWithFile;
+    
     self.archiveResults = YES;
     self.archivePath = [path copy];
     self.archiveSuccessBlock = successful;
 }
 
+- (void)setArchiveResultsToCloudURL:(NSURL *)URL successful:(MKArchiveSuccessful)successful {
+    mArchiveType = MKFeedArchiveWithCloud;
+    
+    self.archiveResults = YES;
+    self.cloudURL = URL;
+    self.archiveSuccessBlock = successful;
+}
+
 - (void)archiveComplete:(id)results {
     BOOL successful = YES;
+    BOOL complete = YES;
+    
     if ([results isKindOfClass:[NSError class]]) {
         successful = NO;
+        
+        NSError *archiveError = (NSError *)results;
+        
+        if ([archiveError code] == kMKFeedItemArchiveSyncIncompleteCode) {
+            self.numberOfItems = (self.numberOfItems + 5);
+            [self request];
+//#warning : sync Test Log
+            //NSLog(@"Request to Item %i", self.numberOfItems);
+        }
     }
     
-    if (self.archiveSuccessBlock) {
-        self.archiveSuccessBlock(successful);
-    }
-    if ([self.delegate respondsToSelector:@selector(feed:didArchiveResuslts:)]) {
-        [self.delegate feed:self didArchiveResuslts:successful];
+    if (complete) {
+        if (self.archiveSuccessBlock) {
+            self.archiveSuccessBlock(successful);
+        }
+        if ([self.delegate respondsToSelector:@selector(feed:didArchiveResuslts:)]) {
+            [self.delegate feed:self didArchiveResuslts:successful];
+        }
     }
 }
 
@@ -218,7 +252,7 @@ typedef enum {
 
 @implementation MKFeedParseOperation
 
-@synthesize archive, archivePath;
+@synthesize archive, fromIndex, archivePath, archiveCloudURL, archiveType;
 
 #pragma mark - Creation
 
@@ -259,6 +293,8 @@ typedef enum {
     [target release];
     
     mainThreadCallBack = nil;
+    self.archiveCloudURL = nil;
+    self.archivePath = nil;
     
     [super dealloc];
 }
@@ -274,18 +310,46 @@ typedef enum {
     
     else if (operationType == MKFeedArchiveOperation) {
         MKFeedItemArchiver *archiver = [[MKFeedItemArchiver alloc] initWithItems:items];
-        [archiver syncWithArchiveFileAtPath:self.archivePath completion: ^ (BOOL finished) {
-            if (finished) {
-                [target performSelectorOnMainThread:mainThreadCallBack withObject:nil waitUntilDone:YES];
-            }
-            else {
-                MKFeedItemArchiveError = @"MKFeedItemArchiveError";
-                NSError *error = [NSError errorWithDomain:MKFeedItemArchiveError code:kMKFeedItemArchiveErrorCode userInfo:nil];
-                
-                [target performSelectorOnMainThread:mainThreadCallBack withObject:error waitUntilDone:YES];
-            }
-        }];
-        
+
+        if (self.archiveType == MKFeedArchiveWithFile) {
+            [archiver syncWithArchiveFileAtPath:self.archivePath completion: ^ (MKArchiverSyncResults syncResults) {
+                if (syncResults == MKArchiverSyncComplete) {
+                    [target performSelectorOnMainThread:mainThreadCallBack withObject:nil waitUntilDone:YES];
+                }
+                else if (syncResults == MKArchiverSyncIncomplete) {
+                    MKFeedItemArchiveError = @"MKFeedItemArchiveError";
+                    NSError *error = [NSError errorWithDomain:MKFeedItemArchiveError code:kMKFeedItemArchiveErrorCode userInfo:nil];
+                    
+                    [target performSelectorOnMainThread:mainThreadCallBack withObject:error waitUntilDone:YES];
+                }
+                else if (syncResults == MKArchiverSyncIncomplete) {
+                    MKFeedItemArchiveSyncIncompleteError = @"MKFeedItemArchiveSyncIncompleteError";
+                    NSError *error = [NSError errorWithDomain:MKFeedItemArchiveSyncIncompleteError code:kMKFeedItemArchiveSyncIncompleteCode userInfo:nil];
+                    
+                    [target performSelectorOnMainThread:mainThreadCallBack withObject:error waitUntilDone:YES];
+                }
+            }];
+        }
+        else if (self.archiveType == MKFeedArchiveWithCloud) {
+            [archiver syncWithCloudFileAtURL:self.archiveCloudURL completion: ^ (MKArchiverSyncResults syncResults) {
+                if (syncResults == MKArchiverSyncComplete) {
+                    [target performSelectorOnMainThread:mainThreadCallBack withObject:nil waitUntilDone:YES];
+                }
+                else if (syncResults == MKArchiverSyncIncomplete) {
+                    MKFeedItemArchiveError = @"MKFeedItemArchiveError";
+                    NSError *error = [NSError errorWithDomain:MKFeedItemArchiveError code:kMKFeedItemArchiveErrorCode userInfo:nil];
+                    
+                    [target performSelectorOnMainThread:mainThreadCallBack withObject:error waitUntilDone:YES];
+                }
+                else if (syncResults == MKArchiverSyncIncomplete) {
+                    MKFeedItemArchiveSyncIncompleteError = @"MKFeedItemArchiveSyncIncompleteError";
+                    NSError *error = [NSError errorWithDomain:MKFeedItemArchiveSyncIncompleteError code:kMKFeedItemArchiveSyncIncompleteCode userInfo:nil];
+                    
+                    [target performSelectorOnMainThread:mainThreadCallBack withObject:error waitUntilDone:YES];
+                }
+            }];
+        }
+
         [archiver release];
     }
 }

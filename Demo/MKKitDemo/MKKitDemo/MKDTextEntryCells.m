@@ -1,15 +1,15 @@
 //
-//  MKDTableCellls.m
+//  MKDTextEntryCells.m
 //  MKKitDemo
 //
-//  Created by Matthew King on 1/29/12.
+//  Created by Matthew King on 2/25/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MKDTableCellls.h"
+#import "MKDTextEntryCells.h"
 
 
-@implementation MKDTableCellls
+@implementation MKDTextEntryCells
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -68,52 +68,38 @@
     [super viewDidDisappear:animated];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
-    // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    // Return the number of rows in the section.
-    return 3;
+    NSInteger rows = 0;
+    switch (section) {
+        case 0: rows = 2; break;
+        case 1: rows = 1; break;
+        default: break;
+    }
+    return rows;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *ActionCell = @"ActionCell";
+    static NSString *CellIdentifier = @"Cell";
     
-    MKTableCell *cell = (MKTableCell *)[tableView dequeueReusableCellWithIdentifier:ActionCell];
-    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[MKTableCell alloc] initWithType:MKTableCellTypeLabel reuseIdentifier:ActionCell] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    if (indexPath.row == 0) {
-        cell.theLabel.text = @"Text Entry Cells";
-        cell.image = [MKImage imageNamed:@"PenIconMask.png" graphicStruct:nil];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
-    if (indexPath.row == 1) {
-        cell.theLabel.text = @"Control Cells";
-        cell.image = [MKImage imageNamed:@"ControlIcon.png" graphicStruct:nil];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    if (indexPath.row == 2) {
-        cell.theLabel.text = @"Cell Accessories";
-        cell.image = [MKImage imageNamed:@"ControlIcon.png" graphicStruct:nil];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 
-    }   
-    
-    
-    
+    // Configure the cell...
     
     return cell;
 }

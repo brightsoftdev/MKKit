@@ -73,7 +73,13 @@
 		<span class="tooltip"> Archives the items from the array to the provided path. If a file already exists at the given path it will be overwritten. </span>
 	</span>
 	
-</li><li>
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Syncing</h3>
+
+					<ul class="task-list">
+						<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/syncWithArchiveFileAtPath:completion:">- syncWithArchiveFileAtPath:completion:</a></code>
 		<span class="tooltip"> Syncs items from the array provided at creation and writes the new file to disk, or creates a file if one does not exist. New items are added to the top of the existing stack. </span>
@@ -81,7 +87,25 @@
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/syncWithCloudFileAtURL:completion:">- syncWithCloudFileAtURL:completion:</a></code>
+		<span class="tooltip"> Syncs items from the array provided at creation and writes the new file to cloud. New items are added to the top of the existing stack. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Overwriting</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
 		<code><a href="#//api/name/addAllItemsToPath:">- addAllItemsToPath:</a></code>
+		<span class="tooltip"> Adds the entire array given at creation to the end of the current stack. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addAllItemsToCloudURL:">- addAllItemsToCloudURL:</a></code>
 		<span class="tooltip"> Adds the entire array given at creation to the end of the current stack. </span>
 	</span>
 	
@@ -98,6 +122,53 @@
 				
 				<div class="section section-methods">
 					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/addAllItemsToCloudURL:" title="addAllItemsToCloudURL:"></a>
+	<h3 class="subsubtitle method-title">addAllItemsToCloudURL:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Adds the entire array given at creation to the end of the current stack. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)addAllItemsToCloudURL:(NSURL *)<em>URL</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>URL</em></dt>
+			<dd> the URL location of the local cloud file </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> YES if the successful, NO if not. </p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedItemArchiver.h</code><br />
+	</div>				
+	
+	
+</div>
 					
 					<div class="section-method">
 	<a name="//api/name/addAllItemsToPath:" title="addAllItemsToPath:"></a>
@@ -170,7 +241,7 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>completion</em></dt>
-			<dd> the block called upon the completion of the sync. Returns <code>YES</code> if the archive was successful, <code>NO</code> if it was not. </dd>
+			<dd> the block called upon the completion of the sync. Returns <code>YES</code> if the sync was successful, <code>NO</code> if it was not. <ul><li> <code>MKArchiverSyncIncomplete</code>: sync was successful, but there may be a gap in the items. </li><li> <code>MKArchiverSyncComplete</code>: sync was successful. </li><li> <code>MKArchiverSyncFailed</code>: sync was not successful. </li></ul></dd>
 		</dl>
 		
 	</div>
@@ -251,7 +322,7 @@
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)syncWithArchiveFileAtPath:(NSString *)<em>path</em> completion:(void ( ^ ) ( BOOL finished ))<em>completion</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)syncWithArchiveFileAtPath:(NSString *)<em>path</em> completion:(void ( ^ ) ( MKArchiverSyncResults syncResults ))<em>completion</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -264,7 +335,54 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>completion</em></dt>
-			<dd> the block called upon the completion of the sync. Returns <code>YES</code> if the sync was successful, <code>NO</code> if it was not. </dd>
+			<dd> the block called upon the completion of the sync. Returns one of three <code>MKArchiverSyncResults</code>: <ul><li> <code>MKArchiverSyncIncomplete</code>: sync was successful, but there may be a gap in the items. </li><li> <code>MKArchiverSyncComplete</code>: sync was successful. </li><li> <code>MKArchiverSyncFailed</code>: sync was not successful. </li></ul></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedItemArchiver.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/syncWithCloudFileAtURL:completion:" title="syncWithCloudFileAtURL:completion:"></a>
+	<h3 class="subsubtitle method-title">syncWithCloudFileAtURL:completion:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Syncs items from the array provided at creation and writes the new file to cloud. New items are added to the top of the existing stack. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)syncWithCloudFileAtURL:(NSURL *)<em>URL</em> completion:(void ( ^ ) ( MKArchiverSyncResults syncResults ))<em>completion</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>URL</em></dt>
+			<dd> the url of the file to sync with. The archiver assumes that checks have been made to make sure the file is present. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completion</em></dt>
+			<dd> the block called upon the completion of the sync. Returns one of three <code>MKArchiverSyncResults</code>: <ul><li> <code>MKArchiverSyncIncomplete</code>: sync was successful, but there may be a gap in the items. </li><li> <code>MKArchiverSyncComplete</code>: sync was successful. </li><li> <code>MKArchiverSyncFailed</code>: sync was not successful. </li></ul></dd>
 		</dl>
 		
 	</div>
@@ -302,7 +420,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-19)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-26)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

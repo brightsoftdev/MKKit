@@ -7,6 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+typedef enum {
+    MKArchiverSyncIncomplete,
+    MKArchiverSyncComplete,
+    MKArchiverSyncFailed,
+} MKArchiverSyncResults;
+
+@class MKFeedParser;
 
 /**-----------------------------------------------------------------------------------
  *Overview*
@@ -53,9 +62,18 @@
  @param path the path to write the archive file to.
  
  @param completion the block called upon the completion of the sync. Returns `YES` if the 
- archive was successful, `NO` if it was not.
+ sync was successful, `NO` if it was not.
+ 
+ * `MKArchiverSyncIncomplete` : sync was successful, but there may be a gap in the items.
+ * `MKArchiverSyncComplete` : sync was successful.
+ * `MKArchiverSyncFailed` : sync was not successful.
+ 
 */
 - (void)archiveToFileAtPath:(NSString *)path completion:(void (^) (BOOL finished))completion;
+
+///--------------------------------------------------
+/// @name Syncing
+///--------------------------------------------------
 
 /**
  Syncs items from the array provided at creation and writes the new file to disk, or creates
@@ -64,10 +82,35 @@
  @param path the path of the file to sync with. This should be a file that was created by 
  MKFeedItemArchiver.
  
- @param completion the block called upon the completion of the sync. Returns `YES` if the 
- sync was successful, `NO` if it was not.
+ @param completion the block called upon the completion of the sync. Returns one of three
+ `MKArchiverSyncResults`:
+ 
+ * `MKArchiverSyncIncomplete` : sync was successful, but there may be a gap in the items.
+ * `MKArchiverSyncComplete` : sync was successful.
+ * `MKArchiverSyncFailed` : sync was not successful.
 */
-- (void)syncWithArchiveFileAtPath:(NSString *)path completion:(void (^) (BOOL finished))completion;
+- (void)syncWithArchiveFileAtPath:(NSString *)path completion:(void (^) (MKArchiverSyncResults syncResults))completion;
+
+/**
+ Syncs items from the array provided at creation and writes the new file to cloud. New items are added 
+ to the top of the existing stack.
+ 
+ @param URL the url of the file to sync with. The archiver assumes that checks have been
+ made to make sure the file is present.
+ 
+ @param completion the block called upon the completion of the sync. Returns one of three
+ `MKArchiverSyncResults`:
+ 
+ * `MKArchiverSyncIncomplete` : sync was successful, but there may be a gap in the items.
+ * `MKArchiverSyncComplete` : sync was successful.
+ * `MKArchiverSyncFailed` : sync was not successful.
+ 
+*/
+- (void)syncWithCloudFileAtURL:(NSURL *)URL completion:(void (^) (MKArchiverSyncResults syncResults))completion;
+
+///--------------------------------------------------
+/// @name Overwriting
+///--------------------------------------------------
 
 /**
  Adds the entire array given at creation to the end of the current stack.
@@ -77,5 +120,14 @@
  @return YES if the successful, NO if not.
 */
 - (BOOL)addAllItemsToPath:(NSString *)path;
+
+/**
+ Adds the entire array given at creation to the end of the current stack.
+ 
+ @param URL the URL location of the local cloud file
+ 
+ @return YES if the successful, NO if not.
+*/
+- (BOOL)addAllItemsToCloudURL:(NSURL *)URL;
 
 @end

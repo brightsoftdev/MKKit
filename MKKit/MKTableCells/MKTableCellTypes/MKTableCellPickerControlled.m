@@ -9,6 +9,8 @@
 #import "MKTableCellPickerControlled.h"
 #import "MKDeffinitions.h"
 
+#import <MKKit/MKKit/NSString+MKKit.h>
+
 @interface MKTableCellPickerControlled ()
 
 - (void)showPickerInRect:(CGRect)frame;
@@ -107,7 +109,7 @@ pickerArray=_pickerArray;
 }
 
 - (void)changeDate:(UIDatePicker *)sender {
-	MKStrings *string = [[MKStrings alloc] init];
+	NSString *string = [[NSString alloc] init];
 	self.pickerLabel.textColor = BLACK;
     
 	if (pickerType == MKTableCellPickerTypeDate) {
@@ -283,7 +285,7 @@ pickerArray=_pickerArray;
 		[aDatePicker setDate:[NSDate date] animated:YES];
 		[aDatePicker addTarget:self.pickerCell action:@selector(changeDate:) forControlEvents:UIControlEventValueChanged];
 		
-		MKStrings *string = [[MKStrings alloc] init];
+		NSString *string = [[NSString alloc] init];
         self.pickerCell.pickerLabel.text = [string date:aDatePicker.date withFormat:@"MMM dd, yyyy"];
 		[string release];
 		
