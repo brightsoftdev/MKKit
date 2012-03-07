@@ -3,11 +3,11 @@
 //  MKKitDemo
 //
 //  Created by Matthew King on 1/29/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Matt King. All rights reserved.
 //
 
 #import "MKDTableCellls.h"
-
+#import "MKDTextEntryCells.h"
 
 @implementation MKDTableCellls
 
@@ -108,7 +108,7 @@
     }
     if (indexPath.row == 2) {
         cell.theLabel.text = @"Cell Accessories";
-        cell.image = [MKImage imageNamed:@"ControlIcon.png" graphicStruct:nil];
+        cell.image = [MKImage imageNamed:@"AccessoriesIcon.png" graphicStruct:nil];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 
     }   
     
@@ -159,16 +159,12 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        MKDTextEntryCells *viewController = [[MKDTextEntryCells alloc] initWithStyle:UITableViewStyleGrouped];
+        [self.navigationController pushViewController:viewController animated:YES];
+        [viewController release];
+    }
 }
 
 @end

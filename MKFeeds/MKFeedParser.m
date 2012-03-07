@@ -104,6 +104,10 @@ archiveSuccessBlock;
 	if (theConnection) {
 		requestData = [[NSMutableData data] retain];
 	} 
+    
+    if ([self.delegate respondsToSelector:@selector(requestStartedForFeed:)]) {
+        [self.delegate requestStartedForFeed:self];
+    }
 }
 
 - (void)requestWithCompletionBlock:(MKRequestComplete)block {
@@ -155,6 +159,10 @@ archiveSuccessBlock;
     
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
 	[urlRequest release];
+    
+    if ([self.delegate respondsToSelector:@selector(requestCompleteForFeed:)]) {
+        [self.delegate requestCompleteForFeed:self];
+    }
 }
 
 #pragma mark - Parse Results
@@ -208,27 +216,37 @@ archiveSuccessBlock;
 
 - (void)archiveComplete:(id)results {
     BOOL successful = YES;
-    BOOL complete = YES;
-    
+        
     if ([results isKindOfClass:[NSError class]]) {
         successful = NO;
         
         NSError *archiveError = (NSError *)results;
         
         if ([archiveError code] == kMKFeedItemArchiveSyncIncompleteCode) {
-            self.numberOfItems = (self.numberOfItems + 5);
+            self.numberOfItems = (self.numberOfItems + 25);
             [self request];
-//#warning : sync Test Log
-            //NSLog(@"Request to Item %i", self.numberOfItems);
+            
+            if ([self.delegate respondsToSelector:@selector(feed:changedToArchiveStatus:)]) {
+                [self.delegate feed:self changedToArchiveStatus:MKArchiverSyncIncomplete];
+            }
+        }
+        else if ([archiveError code] == kMKFeedItemArchiveErrorCode) {
+            if ([self.delegate respondsToSelector:@selector(feed:changedToArchiveStatus:)]) {
+                [self.delegate feed:self changedToArchiveStatus:MKArchiverSyncFailed];
+            }
         }
     }
     
-    if (complete) {
-        if (self.archiveSuccessBlock) {
-            self.archiveSuccessBlock(successful);
-        }
-        if ([self.delegate respondsToSelector:@selector(feed:didArchiveResuslts:)]) {
-            [self.delegate feed:self didArchiveResuslts:successful];
+    if (self.archiveSuccessBlock) {
+        self.archiveSuccessBlock(successful);
+    }
+    if ([self.delegate respondsToSelector:@selector(feed:didArchiveResuslts:)]) {
+        [self.delegate feed:self didArchiveResuslts:successful];
+    }
+    
+    if (successful) {
+        if ([self.delegate respondsToSelector:@selector(feed:changedToArchiveStatus:)]) {
+            [self.delegate feed:self changedToArchiveStatus:MKArchiverSyncComplete];
         }
     }
 }
@@ -316,7 +334,7 @@ archiveSuccessBlock;
                 if (syncResults == MKArchiverSyncComplete) {
                     [target performSelectorOnMainThread:mainThreadCallBack withObject:nil waitUntilDone:YES];
                 }
-                else if (syncResults == MKArchiverSyncIncomplete) {
+                else if (syncResults == MKArchiverSyncFailed) {
                     MKFeedItemArchiveError = @"MKFeedItemArchiveError";
                     NSError *error = [NSError errorWithDomain:MKFeedItemArchiveError code:kMKFeedItemArchiveErrorCode userInfo:nil];
                     
@@ -335,7 +353,7 @@ archiveSuccessBlock;
                 if (syncResults == MKArchiverSyncComplete) {
                     [target performSelectorOnMainThread:mainThreadCallBack withObject:nil waitUntilDone:YES];
                 }
-                else if (syncResults == MKArchiverSyncIncomplete) {
+                else if (syncResults == MKArchiverSyncFailed) {
                     MKFeedItemArchiveError = @"MKFeedItemArchiveError";
                     NSError *error = [NSError errorWithDomain:MKFeedItemArchiveError code:kMKFeedItemArchiveErrorCode userInfo:nil];
                     

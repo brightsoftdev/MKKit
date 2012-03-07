@@ -10,6 +10,7 @@
 
 #import "MKFeedsAvailability.h"
 #import "MKFeedsErrorControl.h"
+#import "MKFeedItemArchiver.h"
 
 typedef void (^MKRequestComplete)(NSArray *feedInfo, NSError *error);
 typedef void (^MKArchiveSuccessful)(BOOL successful);
@@ -224,8 +225,10 @@ NSString *MKGoogleJSONAuthor MK_VISIBLE_ATTRIBUTE;
 ------------------------------------------------------------------------------------*/
 @protocol MKFeedParserDelegate <NSObject>
 
+@optional
+
 ///-----------------------------------------------
-/// @name Required Methods
+/// @name Handeling Data
 ///-----------------------------------------------
 
 /**
@@ -237,10 +240,8 @@ NSString *MKGoogleJSONAuthor MK_VISIBLE_ATTRIBUTE;
 */
 - (void)feed:(MKFeedParser *)feed didReturnData:(NSArray *)data;
 
-@optional
-
 ///-----------------------------------------------
-/// @name Optional Methods
+/// @name Archiving Methods
 ///-----------------------------------------------
 
 /**
@@ -251,6 +252,33 @@ NSString *MKGoogleJSONAuthor MK_VISIBLE_ATTRIBUTE;
  @param successful `YES` if the archive was successful, `NO` if not.
 */
 - (void)feed:(MKFeedParser *)feed didArchiveResuslts:(BOOL)successful;
+
+/**
+ Called when an archive changes it status
+ 
+ @param feed the feed instance that is archiving
+ 
+ @param results the stats of the archive process
+*/
+- (void)feed:(MKFeedParser *)feed changedToArchiveStatus:(MKArchiverSyncResults)results;
+
+///------------------------------------------------
+/// @name Observing Progress
+///------------------------------------------------
+
+/**
+ Called a request starts
+ 
+ @param feed the instance starting the request
+*/
+- (void)requestStartedForFeed:(MKFeedParser *)feed;
+
+/**
+ Called when a request is complete
+ 
+ @param feed the instance that fininshed the request
+*/
+- (void)requestCompleteForFeed:(MKFeedParser *)feed;
 
 @end
 

@@ -9,7 +9,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKV-uh-3w5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="IpJ-lI-ExQ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="g0u-1i-7Fy"/>
+                    <tabBarItem key="tabBarItem" title="Table Cells" image="TableCellsIcon.png" id="g0u-1i-7Fy"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="68Y-WX-Kgs">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -18,7 +18,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="685" y="167"/>
+            <point key="canvasLocation" x="603" y="180"/>
         </scene>
         <scene sceneID="JRZ-rb-7As">
             <objects>
@@ -37,7 +37,7 @@
                     <navigationItem key="navigationItem" id="duk-ao-9Hq"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1239" y="181"/>
+            <point key="canvasLocation" x="1008" y="180"/>
         </scene>
         <scene sceneID="15">
             <objects>
@@ -57,6 +57,9 @@
             <point key="canvasLocation" x="132" y="180"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="TableCellsIcon.png" width="30" height="30"/>
+    </resources>
     <classes>
         <class className="MKDTableCellls" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MKDTableCellls.h"/>

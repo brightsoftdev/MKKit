@@ -3,7 +3,7 @@
 //  MKKitDemo
 //
 //  Created by Matthew King on 2/25/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Matt King. All rights reserved.
 //
 
 #import "MKDTextEntryCells.h"
@@ -77,10 +77,11 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    /*
     NSInteger rows = 0;
     switch (section) {
         case 0: rows = 2; break;
@@ -88,19 +89,36 @@
         default: break;
     }
     return rows;
-    
+    */
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
+    MKTableCell *cell = nil;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    static NSString *TextFieldCell = @"TextCell";
+    
+    if (indexPath.section == 0) {
+        cell = (MKTableCell *)[tableView dequeueReusableCellWithIdentifier:TextFieldCell];
+        if (indexPath.row == 0) {
+            if (cell == nil) {
+                cell = [[[MKTableCellTextEntry alloc] initWithType:MKTextEntryCellTypeStandard reuseIdentifier:TextFieldCell] autorelease];
+            }
+            
+            cell.theLabel.text = @"Standard";
+            ((MKTableCellTextEntry *)cell).theTextField.placeholder =@"Typing...";
+            
+        }
+        if (indexPath.row == 1) {
+            if (cell == nil) {
+                cell = [[[MKTableCellTextEntry alloc] initWithType:MKTextEntryCellTypeFull reuseIdentifier:TextFieldCell] autorelease];
+            }
+            
+            cell.image = [MKImage imageNamed:@"PenIconMask.png" graphicStruct:nil];
+            ((MKTableCellTextEntry *)cell).theTextField.placeholder =@"Typing...";
+        }
     }
-    
-    // Configure the cell...
-    
+        
     return cell;
 }
 

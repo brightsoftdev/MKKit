@@ -48,7 +48,7 @@
 				<div class="section section-tasks">
 					<h2 class="subtitle subtitle-tasks">Tasks</h2>
 					
-					<h3 class="subsubtitle task-title">Required Methods</h3>
+					<h3 class="subsubtitle task-title">Handeling Data</h3>
 
 					<ul class="task-list">
 						<li>
@@ -56,17 +56,41 @@
 		<code><a href="#//api/name/feed:didReturnData:">- feed:didReturnData:</a></code>
 		<span class="tooltip"> Called when a request is finished. </span>
 	</span>
-	<span class="task-item-suffix">required method</span>
+	
 </li>
 					</ul>
 					
-					<h3 class="subsubtitle task-title">Optional Methods</h3>
+					<h3 class="subsubtitle task-title">Archiving Methods</h3>
 
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/feed:didArchiveResuslts:">- feed:didArchiveResuslts:</a></code>
 		<span class="tooltip"> Called when a archive is finished. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/feed:changedToArchiveStatus:">- feed:changedToArchiveStatus:</a></code>
+		<span class="tooltip"> Called when an archive changes it status </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Observing Progress</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestStartedForFeed:">- requestStartedForFeed:</a></code>
+		<span class="tooltip"> Called a request starts </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestCompleteForFeed:">- requestCompleteForFeed:</a></code>
+		<span class="tooltip"> Called when a request is complete </span>
 	</span>
 	
 </li>
@@ -82,6 +106,53 @@
 				
 				<div class="section section-methods">
 					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/feed:changedToArchiveStatus:" title="feed:changedToArchiveStatus:"></a>
+	<h3 class="subsubtitle method-title">feed:changedToArchiveStatus:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Called when an archive changes it status </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)feed:(MKFeedParser *)<em>feed</em> changedToArchiveStatus:(MKArchiverSyncResults)<em>results</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>feed</em></dt>
+			<dd> the feed instance that is archiving </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>results</em></dt>
+			<dd> the stats of the archive process </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedParser.h</code><br />
+	</div>				
+	
+	
+</div>
 					
 					<div class="section-method">
 	<a name="//api/name/feed:didArchiveResuslts:" title="feed:didArchiveResuslts:"></a>
@@ -177,6 +248,90 @@
 	
 </div>
 					
+					<div class="section-method">
+	<a name="//api/name/requestCompleteForFeed:" title="requestCompleteForFeed:"></a>
+	<h3 class="subsubtitle method-title">requestCompleteForFeed:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Called when a request is complete </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)requestCompleteForFeed:(MKFeedParser *)<em>feed</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>feed</em></dt>
+			<dd> the instance that fininshed the request </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedParser.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/requestStartedForFeed:" title="requestStartedForFeed:"></a>
+	<h3 class="subsubtitle method-title">requestStartedForFeed:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Called a request starts </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)requestStartedForFeed:(MKFeedParser *)<em>feed</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>feed</em></dt>
+			<dd> the instance starting the request </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKFeedParser.h</code><br />
+	</div>				
+	
+	
+</div>
+					
 				</div>
 				
 				
@@ -192,7 +347,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-19)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-03-06)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

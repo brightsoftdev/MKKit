@@ -3,7 +3,7 @@
 //  MKKitDemo
 //
 //  Created by Matthew King on 1/29/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Matt King. All rights reserved.
 //
 
 #import "MKDAppDelegate.h"

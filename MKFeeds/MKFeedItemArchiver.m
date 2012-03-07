@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Matt King. All rights reserved.
 //
 
-#import "MKFeedItemArchiver.h"
 #import "MKFeedItem.h"
 
 #pragma mark - Cloud Document
@@ -104,13 +103,9 @@
                 newItems = (newItems + 1);
             }
         }
-//#warning : sync Test Logs        
-        //NSLog(@"Request Items = %i", [mItems count]);
-        //NSLog(@"New Items = %i", newItems);
         
         if (newItems != 0) {
             if (newItems == [mItems count]) {
-                NSLog(@"Max Fill");
                 completion(MKArchiverSyncIncomplete);
             }
             else {
@@ -157,13 +152,9 @@
                 newItems = (newItems + 1);
             }
         }
-//#warning : sync Test Logs        
-        //NSLog(@"Request Items = %i", [mItems count]);
-        //NSLog(@"New Items = %i", newItems);
         
         if (newItems != 0) {
             if (newItems == [mItems count]) {
-                NSLog(@"Max Fill");
                 completion(MKArchiverSyncIncomplete);
             }
             else {
@@ -178,6 +169,10 @@
                     return;
                 }
             }
+        }
+        else {
+            completion(MKArchiverSyncComplete);
+            return;
         }
     }
 }
