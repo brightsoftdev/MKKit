@@ -46,7 +46,7 @@ typedef void (^MKCloudLoadedFileHandler)(NSURL *fielURL);
 + (BOOL)iCloudIsAvailable;
 
 ///-------------------------------
-/// @name Load Files
+/// @name File Operations
 ///-------------------------------
 
 /**
@@ -58,6 +58,17 @@ typedef void (^MKCloudLoadedFileHandler)(NSURL *fielURL);
  @param result the block to excute when the file is found.
 */
 - (void)urlForFileNamed:(NSString *)name result:(MKCloudLoadedFileHandler)result;
+
+/**
+ Removes a file from the cloud if the file exists.
+ 
+ @param name the name of the file to remove
+ 
+ @param directory the directory if any the file was saved into or nil if no directory was used.
+ 
+ @param successful the code block to be preformed upon the completion of the file removal. 
+*/
+- (void)removeCloudFileNamed:(NSString *)name directory:(NSString *)directory successful:(void(^)(BOOL successful))successful;
 
 ///-------------------------------
 /// @name Blocks

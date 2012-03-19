@@ -355,8 +355,9 @@ htmlHeaderString, articalTitleSet, URL;
         MKHTMLAttributeValue *third = [[[MKHTMLAttributeValue alloc] initWithAttribute:@"id" value:@"post"] autorelease];
         MKHTMLAttributeValue *fourth = [[[MKHTMLAttributeValue alloc] initWithAttribute:@"class" value:@"entry"] autorelease];
         MKHTMLAttributeValue *fifth = [[[MKHTMLAttributeValue alloc] initWithAttribute:@"id" value:@"content"] autorelease];
-        
-        attributesArray = [[NSArray alloc] initWithObjects:first, second, third, fourth, fifth, nil];
+        MKHTMLAttributeValue *sixth = [[[MKHTMLAttributeValue alloc] initWithAttribute:@"class" value:@"MboxContent"] autorelease];
+                
+        attributesArray = [[NSArray alloc] initWithObjects:first, second, third, fourth, fifth, sixth, nil];
         
         self.attemptCount = 0;
     }

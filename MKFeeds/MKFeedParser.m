@@ -97,7 +97,7 @@ archiveSuccessBlock;
     NSString *q = [NSString stringWithFormat:@"&q=%@", mUrl];
     NSString *requestURL = [NSString stringWithFormat:@"%@%@%@", MK_FEED_BASE_URL, num, q];
     
-	urlRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestURL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
+	urlRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestURL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:20.0];
     
 	theConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
 	
@@ -121,6 +121,7 @@ archiveSuccessBlock;
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -131,7 +132,6 @@ archiveSuccessBlock;
     [theConnection release];
 	[requestData release];
 	
-    [[NSURLCache sharedURLCache] removeCachedResponseForRequest:urlRequest];
 	[urlRequest release];
     
     if (MKRSSFeedTags.usesCompletionBlock) {

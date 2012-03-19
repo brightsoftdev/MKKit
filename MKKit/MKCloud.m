@@ -38,7 +38,8 @@
     return availible;
 }
 
-#pragma mark - File URL
+#pragma mark - File Operations
+#pragma mark Load File
 
 - (void)urlForFileNamed:(NSString *)name result:(MKCloudLoadedFileHandler)result {
     self.loadFileHandler = result;
@@ -55,6 +56,33 @@
     
     [self retain];
 }
+
+#pragma mark Remove File
+
+- (void)removeCloudFileNamed:(NSString *)name directory:(NSString *)directory successful:(void (^)(BOOL))successful {
+    NSFileManager *defaultManager = [NSFileManager defaultManager];
+    NSURL *ubiq = [defaultManager URLForUbiquityContainerIdentifier:nil];
+    NSURL *ubiqPackage = nil;
+    
+    if (directory) {
+        ubiqPackage = [[ubiq URLByAppendingPathComponent:directory] URLByAppendingPathComponent:name];
+    }
+    else {
+        ubiqPackage = [ubiq URLByAppendingPathComponent:name];
+    }
+    
+    NSError *removeError;
+    [defaultManager removeItemAtURL:ubiqPackage error:&removeError];
+    
+    if (removeError) {
+        successful(NO);
+    }
+    else {
+        successful(YES);
+    }
+}
+
+#pragma mark - Query Results
 
 - (void)queryDidFinish:(NSNotification *)notification {
     NSMetadataQuery *query = (NSMetadataQuery *)[notification object];
