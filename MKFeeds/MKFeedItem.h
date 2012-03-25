@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 11/26/11.
-//  Copyright (c) 2011 Matt King. All rights reserved.
+//  Copyright (c) 2011-2012 Matt King. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -32,7 +32,7 @@
 
 @interface MKFeedItem : NSObject <NSCoding> {
 @private 
-    MKFeedSourceType mContentType;
+    //MKFeedSourceType mContentType;
     NSString *mItemTitle;
     NSString *mItemContent;
     NSString *mItemLinkURL;

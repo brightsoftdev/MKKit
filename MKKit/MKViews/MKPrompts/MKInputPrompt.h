@@ -3,12 +3,10 @@
 //  MKKit
 //
 //  Created by Matthew King on 5/18/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011-2012 Matt King. All rights reserved.
 //
 
 #import "MKPromptView.h"
-
-typedef void (^MKTextFieldIsDoneBlock)(NSString *text);
 
 /**----------------------------------------------------------------------------------------
  The MKInputPrompt class provides a pop-over text input prompt. The input prompt includes
@@ -17,7 +15,6 @@ typedef void (^MKTextFieldIsDoneBlock)(NSString *text);
 -----------------------------------------------------------------------------------------*/
 
 @interface MKInputPrompt : MKPromptView <UITextFieldDelegate> {
-    MKTextFieldIsDoneBlock mOnDoneBlock;
     UITextField *mTextField;
 }
 
@@ -42,7 +39,7 @@ typedef void (^MKTextFieldIsDoneBlock)(NSString *text);
  
  @param completionBlock the block of code to preform when the Done button is touched.
 */
-+ (void)showWithMessage:(NSString *)message onDone:(MKTextFieldIsDoneBlock)completionBlock;
++ (void)showWithMessage:(NSString *)message onDone:(void(^)(NSString *text))completionBlock;
 
 ///--------------------------------------------------------------------------------------
 /// @name Elements
@@ -50,12 +47,5 @@ typedef void (^MKTextFieldIsDoneBlock)(NSString *text);
 
 /** The text field on the prompt. */
 @property (nonatomic, retain) UITextField *textField;
-
-///--------------------------------------------------------------------------------------
-/// @name Code Blocks
-///--------------------------------------------------------------------------------------
-
-/** The completion code block. */
-@property (nonatomic, copy) MKTextFieldIsDoneBlock onDoneBlock;
 
 @end

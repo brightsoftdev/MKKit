@@ -3,20 +3,27 @@
 //  MKKit
 //
 //  Created by Matthew King on 10/23/11.
-//  Copyright (c) 2011 Matt King. All rights reserved.
+//  Copyright (c) 2011-2012 Matt King. All rights reserved.
 //
 
 #import <MKKit/MKFeeds/MKFeedsAvailability.h>
 #import <MKKit/MKFeeds/MKFeedsErrorControl.h>
 
 typedef void (^MKHTMLExtractorRequestHandler)(NSDictionary *results, NSError *error);
-typedef void (^MKHTMLExtractorPageTextHandler)(NSString *pageText, NSError *error);
 
 typedef enum {
     MKHTMLExtractorRequestNone,
     MKHTMLExtractorMainBodyHTMLRequest,
     MKHTMLExtractorFirstParagraph,
 } MKHTMLExtractorRequestType;
+
+typedef struct {
+    int fontSize;
+    NSString *fontColor;
+    NSString *backgroundColor;
+} MKHTMLExtractorStyleSheet;
+
+MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *fontColor, NSString *backgroundColor);
 
 @class MKHTMLParser;
 
@@ -50,12 +57,15 @@ typedef enum {
     NSString *mHTMLString;
     NSString *URL;
     
+    MKHTMLExtractorStyleSheet mStyleSheet;
+    
     struct {
         BOOL requestComplete;
         BOOL requestFromURL;
         BOOL usesCustomStyle;
         BOOL articalTitleSet;
         BOOL combinesPages;
+        BOOL useStyleSheet;
         int currentPage;
     } MKHTMLExtractorFlags;
 }
@@ -94,17 +104,11 @@ typedef enum {
 ///--------------------------------------------
 
 /**
- Set this property to `YES` to optimize the HTML output for display on 
- the iPhone. HTML code will be added inserted into the output to assist with
- display.
+ Set this property to `YES` to compine mulitpul pages into one document, if any are
+ found. Default is `NO`.
  
- When set to `YES` the delegate method extactorHTMLHeaderPath: method is called.
- If this method is not used or returns `nil`, generic HTML code will be added.
- 
- @see MKHTMLExtractorDelegate for more information.
+ When set to `YES` no data will be returned every time a new page is fouund.
 */
-@property (nonatomic, assign) BOOL styledOutput;
-
 @property (nonatomic, assign) BOOL combinesPages;
 
 /**
@@ -116,6 +120,39 @@ typedef enum {
  `MKHTMLExtractorMainBodyHTMLRequest`.
 */
 @property (nonatomic, copy) NSString *articleTitle;
+
+///--------------------------------------------
+/// @name Styling Output
+///--------------------------------------------
+
+/**
+ Set this property to `YES` to optimize the HTML output for display on 
+ the iPhone. HTML code will be inserted into the output to assist with
+ display.
+ 
+ When set to `YES` the delegate method extactorHTMLHeaderPath: method is called.
+ If this method is not used or returns `nil`, generic HTML code will be added.
+ 
+ @see MKHTMLExtractorDelegate for more information.
+*/
+@property (nonatomic, assign) BOOL styledOutput;
+
+/**
+ Provide a `MKHTMLExtractorStyleSheet` and the extractor will generate css code
+ and add it the generated output. 
+ 
+ You can create a`MKHTMLExtractorStyleSheet` by using the 
+ `MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *fontColor, NSString *backgroundColor)`
+ function. 
+ 
+ The font color and backgroundColor parameters need to be a string representation of 
+ the hexidecimal color code.  For example white would be `#ffffff` or black would be `#000000`.
+ 
+ @warning *Note* Setting this property will automaically set the styledOutput property to `YES`.
+ the extractorHTMLHeaderPath: delegate method returns the path to an HTML header, the styles provided
+ here will be overiden.
+*/
+@property (nonatomic, assign) MKHTMLExtractorStyleSheet styleSheet;
 
 ///--------------------------------------------
 /// @name Preforming Requests
@@ -136,7 +173,7 @@ typedef enum {
  The block will pass to parameters of and NSString, and NSError. The block
  is called each time a page is found.
 */
-- (void)requestType:(MKHTMLExtractorRequestType)type handler:(MKHTMLExtractorPageTextHandler)handler;
+- (void)requestType:(MKHTMLExtractorRequestType)type handler:(void (^)(NSString *pageText, NSError *error))handler;
 
 /**
  Makes a request from the supplied URL, performs and extraction, and pass
@@ -146,7 +183,7 @@ typedef enum {
  looks for follow on pages. The handler block is called each time a page is 
  found.
 */
-- (void)requestPagesWithHandler:(MKHTMLExtractorPageTextHandler)handler;
+- (void)requestPagesWithHandler:(void (^)(NSString *pageText, NSError *error))handler;
 
 /** The request that is currently being used. */
 @property (nonatomic, assign) MKHTMLExtractorRequestType requestType;
@@ -159,13 +196,6 @@ typedef enum {
  The MKHTMLExtractorDelegate
 */
 @property (assign) id<MKHTMLExtractorDelegate> delegate;
-
-///--------------------------------------------
-/// @name Handeler Blocks
-///--------------------------------------------
-
-/** Reference to the request handler block. */
-@property (nonatomic, copy) MKHTMLExtractorPageTextHandler pageTextHandler;
 
 ///-------------------------------------------
 /// @name Deprecations

@@ -11,17 +11,29 @@
 #import <MKKit/MKKit/MKTableCells/MKTableCell.h>
 #import <MKKit/MKKit/MKControls/MKButton.h>
 
+//---------------------------------------------------------------
+// Implementaion
+//---------------------------------------------------------------
+
 @implementation MKPopOutView (MKTableCell)
 
 @dynamic aIndexPath;
 
 #pragma mark - Accessor Methods
 
+//---------------------------------------------------------------
+// Accessor Methods
+//---------------------------------------------------------------
+
 - (NSIndexPath *)aIndexPath {
     return nil;
 }
 
 #pragma mark - Displaying
+
+//---------------------------------------------------------------
+// Displaying
+//---------------------------------------------------------------
 
 - (void)showFromCell:(MKTableCell *)cell onView:(UITableView *)tableView {
     CGRect cellRect = [tableView rectForRowAtIndexPath:cell.indexPath];
@@ -69,7 +81,6 @@
 
 - (void)adjustToCell {
     CGRect cellRect = [self.tableView rectForRowAtIndexPath:self.cell.indexPath];
-    //self.maxWidth = (CGRectGetWidth(cellRect) - 20.0);
     
     MKTableCell *cell = (MKTableCell *)[self.tableView cellForRowAtIndexPath:self.cell.indexPath];
     
@@ -108,7 +119,11 @@
     [self.tableView scrollRectToVisible:self.frame animated:YES];
 }
 
-#pragma mark - Elements
+#pragma mark - Accessories
+
+//---------------------------------------------------------------
+// Accessories
+//---------------------------------------------------------------
 
 - (void)setDisclosureButtonWithTarget:(id)target selector:(SEL)selector {
     mView.frame = CGRectMake(mView.frame.origin.x, mView.frame.origin.y, (mView.frame.size.width - 33.0), mView.frame.size.height);

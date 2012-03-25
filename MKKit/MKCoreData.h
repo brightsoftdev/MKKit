@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 5/12/10.
-//  Copyright 2010-2011 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,8 +11,6 @@
 #import <MKKit/MKKit/MKErrorContol/MKErrorHandeling.h>
 
 #import "MKObject.h"
-
-typedef void (^MKFetchCompletionBlock)(NSMutableArray *results, NSError *error);
 
 /**---------------------------------------------------------------------------------------------
 
@@ -24,7 +22,7 @@ typedef void (^MKFetchCompletionBlock)(NSMutableArray *results, NSError *error);
 -----------------------------------------------------------------------------------------------*/
 
 @interface MKCoreData : MKObject {
-	MKFetchCompletionBlock mFetchCompletionBlock;
+	
 }
 
 ///---------------------------------------
@@ -85,13 +83,6 @@ typedef void (^MKFetchCompletionBlock)(NSMutableArray *results, NSError *error);
  
  @param result Code block to preform when the fech is complete
 */
-- (void)fetchResultsForEntity:(NSString *)entity sortedBy:(NSString *)attribute accending:(BOOL)accending result:(MKFetchCompletionBlock)result;
-
-///---------------------------------------
-/// @name Code Blocks
-///---------------------------------------
-
-/** the code to be preformed when a fech is complete. You should not set this property directly.*/
-@property (nonatomic, copy) MKFetchCompletionBlock fechCompletionBlock;
+- (void)fetchResultsForEntity:(NSString *)entity sortedBy:(NSString *)attribute accending:(BOOL)accending result:(void(^)(NSMutableArray *results, NSError *error))result;
 
 @end

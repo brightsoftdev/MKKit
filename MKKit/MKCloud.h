@@ -8,8 +8,6 @@
 
 #import "MKObject.h"
 
-typedef void (^MKCloudLoadedFileHandler)(NSURL *fielURL);
-
 /**--------------------------------------------------------------------------
  *Overview*
  
@@ -57,7 +55,7 @@ typedef void (^MKCloudLoadedFileHandler)(NSURL *fielURL);
  
  @param result the block to excute when the file is found.
 */
-- (void)urlForFileNamed:(NSString *)name result:(MKCloudLoadedFileHandler)result;
+- (void)urlForFileNamed:(NSString *)name result:(void(^)(NSURL *fielURL))result;
 
 /**
  Removes a file from the cloud if the file exists.
@@ -70,11 +68,5 @@ typedef void (^MKCloudLoadedFileHandler)(NSURL *fielURL);
 */
 - (void)removeCloudFileNamed:(NSString *)name directory:(NSString *)directory successful:(void(^)(BOOL successful))successful;
 
-///-------------------------------
-/// @name Blocks
-///-------------------------------
-
-/** Reference to the file query result handler */
-@property (nonatomic, copy) MKCloudLoadedFileHandler loadFileHandler;
 
 @end

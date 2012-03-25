@@ -46,10 +46,16 @@ typedef enum {
 
 #pragma mark - MKFeedParser
 
+typedef void (^MKRequestComplete)(NSArray *feedInfo, NSError *error);
+typedef void (^MKArchiveSuccessful)(BOOL successful);
+
 @interface MKFeedParser () 
 
 - (void)parserResults:(id)results;
 - (void)archiveComplete:(id)results;
+
+@property (nonatomic, copy) MKRequestComplete requestCompleteBlock;
+@property (nonatomic, copy) MKArchiveSuccessful archiveSuccessBlock;
 
 @end
 
@@ -202,7 +208,7 @@ archiveSuccessBlock;
     mArchiveType = MKFeedArchiveWithFile;
     
     self.archiveResults = YES;
-    self.archivePath = [path copy];
+    self.archivePath = path;
     self.archiveSuccessBlock = successful;
 }
 

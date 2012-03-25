@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 10/5/10.
-//  Copyright 2010-2011 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import "MKControl.h"
@@ -53,9 +53,15 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
     return color;
 }
 
+@interface MKControl ()
+
+@property (nonatomic, copy) MKActionBlock action;
+
+@end
+
 @implementation MKControl
 
-@synthesize delegate=mDelegate, working=mWorking, action;
+@synthesize delegate=mDelegate, working=mWorking, action=mAction;
 
 @dynamic location, controlState, graphicsStructure;
 

@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 10/5/10.
-//  Copyright 2010-2011 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -84,11 +84,13 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
 -----------------------------------------------------------------------------------------------*/
 
 @interface MKControl : UIControl <MKGraphicFactory> {
+@public
     id mDelegate;
     BOOL mWorking;
     NSMutableSet *mTargets;
     MKGraphicsStructures *mGraphics;
     MKControlState mControlState;
+    MKActionBlock mAction;
     
     struct {
         bool blockUsage;
@@ -124,7 +126,7 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
  The action block is in this format `^(MKAction action)`.
  MKAction is the action that was completed.
 */
-- (void)completedAction:(MKActionBlock)actionBlock;
+- (void)completedAction:(void(^)(MKAction action))actionBlock;
 
 /**
  Sets the target and callback method to perform after an action takes place.
@@ -166,7 +168,7 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
 ///---------------------------------------------------------
 
 /** the action completion block */
-@property (nonatomic, copy) MKActionBlock action;
+//@property (nonatomic, copy) MKActionBlock action;
 
 ///---------------------------------------------------------
 /// @name Sending Actions

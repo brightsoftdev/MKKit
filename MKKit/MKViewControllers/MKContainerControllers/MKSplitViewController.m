@@ -8,6 +8,10 @@
 
 #import "MKSplitViewController.h"
 
+//---------------------------------------------------------------
+// Functions
+//---------------------------------------------------------------
+
 CGRect rectForListView(MKViewMetrics metrics, BOOL hasTabBar);
 CGRect rectForListNavigationBar(void);
 
@@ -89,6 +93,10 @@ CGRect startRectForListNavigationBarTransition(void) {
 
 #pragma mark - Views
 
+//---------------------------------------------------------------
+// Interfaces
+//---------------------------------------------------------------
+
 @interface MKSplitView : MKView {
 @private
     
@@ -125,11 +133,19 @@ typedef enum {
 
 @end
 
+//---------------------------------------------------------------
+// Implenentaions
+//---------------------------------------------------------------
+
 @implementation MKSplitViewController
 
-@dynamic listViewController, detailViewController, listViewNavigationItem, detailViewNavigationItem, listViewIsVisable;
+@dynamic listViewController, detailViewController, listViewIsVisable;
 
 #pragma mark - Creation
+
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
 
 - (id)initWithListViewController:(UIViewController *)listViewController detailViewController:(UIViewController *)detailViewController {
     self = [super initWithNibName:nil bundle:nil];
@@ -148,6 +164,10 @@ typedef enum {
 
 #pragma  mark - Memory
 
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
+
 - (void)dealloc {
     [mListViewController release];
     [mDetailViewController release];
@@ -159,6 +179,10 @@ typedef enum {
 
 #pragma mark - View lifecycle
 
+//---------------------------------------------------------------
+// View LifeCycle
+//---------------------------------------------------------------
+
 - (void)loadView {
     MKSplitView *splitView = [[MKSplitView alloc] initWithFrame:CGRectZero];
     splitView.controller = self;
@@ -168,15 +192,12 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    mListViewNavigationItem = nil;
-    mDetailViewNavigationItem = nil;
-    [self viewsForMetrics:MKMetricsCurrentOrientationMetrics() inital:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self viewsForMetrics:MKMetricsCurrentOrientationMetrics() inital:YES];
     [self.navigationController setNavigationBarHidden:YES];
 }
 
@@ -189,6 +210,10 @@ typedef enum {
 
 #pragma mark - Rotataion
 
+//---------------------------------------------------------------
+// Rotation
+//---------------------------------------------------------------
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
 }
@@ -199,7 +224,6 @@ typedef enum {
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     MKViewMetrics toMetrics = MKMetricsOrientationMetrics(toInterfaceOrientation);
-    mListViewNavigationItem = nil;
     
     [self viewsForMetrics:toMetrics inital:NO];
     
@@ -212,6 +236,11 @@ typedef enum {
 }
 
 #pragma mark - Accessor Methods
+
+//---------------------------------------------------------------
+// Accessor Methods
+//---------------------------------------------------------------
+
 #pragma mark Getters
 
 - (UIViewController *)detailViewController {
@@ -222,39 +251,15 @@ typedef enum {
     return mListViewController;
 }
 
-- (UINavigationItem *)listViewNavigationItem {
-    if (mListViewNavigationItem == nil) {
-        mListViewNavigationItem = [[UINavigationItem alloc] initWithTitle:mListViewNavigationItem.title];
-        
-        NSArray *items = [NSArray arrayWithObject:mListViewNavigationItem];
-        
-        UINavigationBar *navBar = (UINavigationBar *)[self.view viewWithTag:kMKListViewNavigationBarTag];
-        [navBar setItems:items animated:NO];
-        
-        [mListViewNavigationItem release];
-    }
-    return mListViewNavigationItem;
-}
-
-- (UINavigationItem *)detailViewNavigationItem {
-    if (!mDetailViewNavigationItem) {
-        mDetailViewNavigationItem = [[UINavigationItem alloc] initWithTitle:mDetailViewController.title];
-        
-        NSArray *items = [NSArray arrayWithObject:mDetailViewNavigationItem];
-        
-        UINavigationBar *navBar = (UINavigationBar *)[self.view viewWithTag:kMKDetailViewNavigaionBarTag];
-        [navBar setItems:items animated:NO];
-        
-        [mDetailViewNavigationItem release];
-    }
-    return mDetailViewNavigationItem;
-}
-
 - (BOOL)listViewIsVisable {
     return mListViewIsVisable;
 }
 
 #pragma mark - Subview Controller
+
+//---------------------------------------------------------------
+// Subview layouts
+//---------------------------------------------------------------
 
 - (void)viewsForMetrics:(MKViewMetrics)metrics inital:(BOOL)inital {
     mDetailViewController.view.frame = CGRectZero;
@@ -278,8 +283,7 @@ typedef enum {
         else {
             [(MKSplitView *)self.view addListNavigationBar];
             [self.view addSubview:mListViewController.view];
-            
-            [self.detailViewNavigationItem setLeftBarButtonItems:nil animated:NO];
+            [self.detailViewController.navigationItem setLeftBarButtonItems:nil];
         }
         
         MKDividerView *divider = (MKDividerView *)[self.view viewWithTag:kMKDividerViewTag];
@@ -301,7 +305,7 @@ typedef enum {
         
         if (self.navigationController) {
             UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backButton:)];
-            self.listViewNavigationItem.leftBarButtonItem = back;
+            self.listViewController.navigationItem.leftBarButtonItem = back;
             [back release];
         }
     }
@@ -319,19 +323,17 @@ typedef enum {
             [divider removeFromSuperview];
             [listBar removeFromSuperview];
             [self.listViewController.view removeFromSuperview];
-            
-            mListViewNavigationItem = nil;
         }
         
         UIBarButtonItem *list = [[UIBarButtonItem alloc] initWithTitle:self.listViewController.title style:UIBarButtonItemStyleBordered target:self action:@selector(listButton:)];
         
         if (self.navigationController) {
             UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backButton:)];
-            [self.detailViewNavigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:back, list, nil] animated:NO];
+            [self.detailViewController.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:back, list, nil] animated:NO];
             [back release];
         }
         else {
-            [self.detailViewNavigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:list, nil] animated:NO];
+            [self.detailViewController.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:list, nil] animated:NO];
         }
         
         [list release];
@@ -343,6 +345,10 @@ typedef enum {
 }
 
 #pragma mark - Actions
+
+//---------------------------------------------------------------
+// Actons
+//---------------------------------------------------------------
 
 - (void)backButton:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -359,6 +365,10 @@ typedef enum {
 
 #pragma mark - Display Control
 
+//---------------------------------------------------------------
+// Display Contols
+//---------------------------------------------------------------
+
 - (void)presentListController {
     BOOL tabBar = NO;
     
@@ -374,7 +384,6 @@ typedef enum {
                          mListViewController.view.frame = rectForListView(MKMetricsPortrait, tabBar);
                      }
                      completion:^ (BOOL finished) {
-                         mListViewNavigationItem = nil;
                          mListViewIsVisable = YES;
                          
                          [self addListShaddow];
@@ -391,6 +400,7 @@ typedef enum {
         }
         
         MKDividerView *divider = (MKDividerView *)[self.view viewWithTag:kMKDividerViewTag];
+        [divider removeFromSuperview];
         
         [UIView animateWithDuration:0.25
                          animations:^ {
@@ -398,9 +408,7 @@ typedef enum {
                          }
                          completion:^ (BOOL finished) {
                              [mListViewController.view removeFromSuperview];
-                             [divider removeFromSuperview];
                              mListViewIsVisable = NO;
-                             mListViewNavigationItem = nil;
                          }];
         
     }
@@ -427,9 +435,17 @@ typedef enum {
 
 #pragma mark -
 
+//---------------------------------------------------------------
+// Split View Implementation
+//---------------------------------------------------------------
+
 @implementation MKSplitView
 
 #pragma mark - Creation
+
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -440,6 +456,10 @@ typedef enum {
 }
 
 #pragma mark - Layout
+
+//---------------------------------------------------------------
+// Layout
+//---------------------------------------------------------------
 
 - (void)layoutForMetrics:(MKViewMetrics)metrics {
     self.width = MKMetricsWidthForMetrics(metrics);
@@ -481,11 +501,20 @@ typedef enum {
 
 #pragma mark - Navigation Bars
 
+//---------------------------------------------------------------
+// Navigation Bars
+//---------------------------------------------------------------
+
 - (void)addDetailNavigationBar {
     UINavigationBar *detailNavBar = [[UINavigationBar alloc] initWithFrame:rectForDetailNavigationBar(MKMetricsCurrentOrientationMetrics())];
     detailNavBar.tag = kMKDetailViewNavigaionBarTag;
     
     [self addSubview:detailNavBar];
+    
+    MKSplitViewController *controller = (MKSplitViewController *)self.controller;
+    NSArray *items = [NSArray arrayWithObject:controller.detailViewController.navigationItem];
+    
+    [detailNavBar setItems:items animated:NO];
     [detailNavBar release];
 }
 
@@ -494,6 +523,11 @@ typedef enum {
     listNavBar.tag = kMKListViewNavigationBarTag;
     
     [self addSubview:listNavBar];
+    
+    MKSplitViewController *controller = (MKSplitViewController *)self.controller;
+    NSArray *items = [NSArray arrayWithObject:controller.listViewController.navigationItem];
+    
+    [listNavBar setItems:items animated:YES];
     [listNavBar release];
 }
 
@@ -501,12 +535,24 @@ typedef enum {
 
 #pragma mark -
 
+//---------------------------------------------------------------
+// Functions
+//---------------------------------------------------------------
+
 void drawSplitShadow(CGContextRef context, CGRect rect);
 void drawOverlapShadow(CGContextRef context, CGRect rect);
+
+//---------------------------------------------------------------
+// Implementation
+//---------------------------------------------------------------
 
 @implementation MKDividerView
 
 #pragma mark - Creation
+
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
 
 - (id)initWithFrame:(CGRect)frame type:(MKDividerViewType)_type {
     self = [super initWithFrame:frame];
@@ -518,6 +564,10 @@ void drawOverlapShadow(CGContextRef context, CGRect rect);
 }
 
 #pragma mark - Drawing
+
+//---------------------------------------------------------------
+// Drawing
+//---------------------------------------------------------------
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();

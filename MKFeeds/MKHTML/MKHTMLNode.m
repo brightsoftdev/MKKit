@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 10/24/11.
-//  Copyright (c) 2011 Matt King. All rights reserved.
+//  Copyright (c) 2011-2012 Matt King. All rights reserved.
 //
 
 #import "MKHTMLNode.h"
@@ -182,7 +182,7 @@ MKHTMLNodeType nodeType(xmlNode *node);
 }
 
 - (NSArray *)childrenNamed:(NSString *)name {
-    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *array = [[[NSMutableArray alloc] initWithCapacity:0] autorelease];
     [self childNamed:name XMLNode:mNode array:array];
     
     return array;

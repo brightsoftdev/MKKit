@@ -61,6 +61,7 @@
         [archiver finishEncoding];
         
         [currentItems addObject:data];
+        [archiver release];
     }
     
     BOOL complete = [currentItems writeToFile:path atomically:YES];
@@ -241,6 +242,8 @@
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
     [item encodeWithCoder:archiver];
     [archiver finishEncoding];
+    
+    [archiver release];
     
     return data;
 }

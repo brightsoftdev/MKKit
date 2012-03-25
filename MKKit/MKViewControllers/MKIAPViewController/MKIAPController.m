@@ -3,16 +3,24 @@
 //  MKKit
 //
 //  Created by Matthew King on 5/28/11.
-//  Copyright 2010-2011 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import "MKIAPController.h"
+
+typedef void (^MKProductResponseBlock)(SKProductsResponse *response, NSError *error);
+typedef void (^MKPurchaseCompletionBlock)(SKPaymentTransaction *transaction, NSError *error);
+typedef void (^MKRestoreCompletionBlock)(SKPaymentTransaction *transaction, NSError *error);
 
 @interface MKIAPController ()
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction;
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction;
 - (void)failedTransaction:(SKPaymentTransaction *)transaction;
+
+@property (nonatomic, copy) MKProductResponseBlock productResponse;
+@property (nonatomic, copy) MKPurchaseCompletionBlock purchaseCompleteBlock;
+@property (nonatomic, copy) MKRestoreCompletionBlock restoreCompleteBlock;
 
 @end
 

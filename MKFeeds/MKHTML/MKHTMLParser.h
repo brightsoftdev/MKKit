@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 10/24/11.
-//  Copyright (c) 2011 Matt King. All rights reserved.
+//  Copyright (c) 2011-2012 Matt King. All rights reserved.
 //
 //  MKHTMLParser is based on Ben Reeves HTMLParser object.
 //  https://github.com/zootreeves/Objective-C-HMTL-Parser
@@ -26,7 +26,6 @@
 
 @interface MKHTMLParser : NSObject {
 @private
-    MKHTMLNode *mCurrentNode;
     htmlDocPtr htmlDoc;
 }
 

@@ -12,6 +12,7 @@
 #import "MKHTMLExtractorDelegate.h"
 
 #import <MKKit/MKFeeds/NSString+MKFeedParser.h>
+#import <UIKit/UIKit.h>
 
 #pragma mark - Extraction Operation
 
@@ -64,6 +65,18 @@
 
 #pragma mark - HTML Extractor
 
+typedef void (^MKHTMLExtractorPageTextHandler)(NSString *pageText, NSError *error);
+
+MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *fontColor, NSString *backgroundColor) {
+    MKHTMLExtractorStyleSheet sheet;
+    
+    sheet.fontSize = fontSize;
+    sheet.fontColor = fontColor;
+    sheet.backgroundColor = backgroundColor;
+    
+    return sheet;
+}
+
 @interface MKHTMLExtractor ()
 
 - (id)init;
@@ -73,13 +86,15 @@
 - (void)startExtractionOperation;
 - (void)extractionResult:(id)result;
 
+@property (nonatomic, copy) MKHTMLExtractorPageTextHandler pageTextHandler;
+
 @end
 
 @implementation MKHTMLExtractor
 
 @synthesize articleTitle, requestHandler, requestType, delegate, pageTextHandler;
 
-@dynamic results, numberOfPages, optimizeOutputForiPhone, combinesPages, styledOutput;
+@dynamic results, numberOfPages, optimizeOutputForiPhone, combinesPages, styledOutput, styleSheet;
 
 - (id)init {
     self = [super init];
@@ -153,7 +168,17 @@
     return MKHTMLExtractorFlags.combinesPages;
 }
 
+- (MKHTMLExtractorStyleSheet)styleSheet {
+    return mStyleSheet;
+}
+
 #pragma mark Setters
+
+- (void)setStyleSheet:(MKHTMLExtractorStyleSheet)_styleSheet {
+    mStyleSheet = _styleSheet;
+    MKHTMLExtractorFlags.useStyleSheet = YES;
+    self.styledOutput = YES;
+}
 
 - (void)setStyledOutput:(BOOL)_styledOutput {
     MKHTMLExtractorFlags.usesCustomStyle = _styledOutput;
@@ -162,10 +187,20 @@
             mHTMLHeaderString = [[NSString alloc] initWithContentsOfFile:[self.delegate extractorHTMLHeaderPath:self] encoding:NSUTF8StringEncoding error:nil];
         }
         else {
-            mHTMLHeaderString = [[NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"initial-scale = 1.0, user-scalable = no, width = 320\"/><style type=\"text/css\">.title { font-size: 16pt; font-weight: bold;} .artical { font-size: 12pt; } </style><head><body>"] retain];
+            NSString *fontSize = @"12";
+            NSString *titleFontSize = @"16";
+            NSString *fontColor = @"#000000";
+            NSString *backgroundColor = @"#ffffff";
+            
+            if (MKHTMLExtractorFlags.useStyleSheet) {
+                fontSize = [NSString stringWithFormat:@"%i", mStyleSheet.fontSize];
+                titleFontSize = [NSString stringWithFormat:@"%i", (mStyleSheet.fontSize + 4)];
+                fontColor = mStyleSheet.fontColor;
+                backgroundColor = mStyleSheet.backgroundColor;
+            }
+            mHTMLHeaderString = [[NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"initial-scale = 1.0, user-scalable = no\"/><style type=\"text/css\">.title { font-size: %@pt; font-weight: bold; color: %@;} .article { font-size: %@pt; color: %@;} </style><head><body bgColor=\"%@\">", titleFontSize, fontColor, fontSize, fontColor, backgroundColor] retain];
         }
     }
-
 }
 
 - (void)setArticleTitle:(NSString *)title {
@@ -190,7 +225,7 @@
     requestData = [[NSMutableData data] retain];
 }
 
-- (void)requestType:(MKHTMLExtractorRequestType)type handler:(MKHTMLExtractorPageTextHandler)handler {
+- (void)requestType:(MKHTMLExtractorRequestType)type handler:(void (^)(NSString *pageText, NSError *error))handler; {
     self.pageTextHandler = handler;
     self.requestType = type;
     
@@ -208,7 +243,7 @@
     }
 }
 
-- (void)requestPagesWithHandler:(MKHTMLExtractorPageTextHandler)handler {
+- (void)requestPagesWithHandler:(void (^)(NSString *pageText, NSError *error))handler; {
     self.pageTextHandler = handler;
     self.requestType = MKHTMLExtractorMainBodyHTMLRequest;
     
@@ -543,21 +578,26 @@ htmlHeaderString, articalTitleSet, URL;
 - (NSString *)styledEmbedFromNode:(MKHTMLNode *)node {
     NSMutableString *rtn = [NSMutableString string];
     
-    NSString *src = [node valueOfAttribute:@"src"];
-    
-    NSString *baseURL = [[NSURL URLWithString:src] host];
-    
-    if (!baseURL) {
-        NSString *host = [[NSURL URLWithString:URL] host];
-        NSString *scheme = [[NSURL URLWithString:URL] scheme];
-        src = [NSString stringWithFormat:@"%@://%@%@", scheme, host, src];
-        src = [src stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    if (MK_DEVICE_IS_IPHONE) {
+        NSString *src = [node valueOfAttribute:@"src"];
+        
+        NSString *baseURL = [[NSURL URLWithString:src] host];
+        
+        if (!baseURL) {
+            NSString *host = [[NSURL URLWithString:URL] host];
+            NSString *scheme = [[NSURL URLWithString:URL] scheme];
+            src = [NSString stringWithFormat:@"%@://%@%@", scheme, host, src];
+            src = [src stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        }
+        
+        switch ([node nodeType]) {
+            case MKHTMLNodeIFrame:  [rtn appendFormat:@"<iframe allowfullscreen=\"\" frameborder=\"0\" heigh=\"\" width=\"300\" src=\"%@\"></iframe>", src]; break;
+            case MKHTMLNodeImg:     [rtn appendFormat:@"<img src=\"%@\" width=\"300\" />", src]; break;
+            default:                [rtn appendString:[node htmlString]]; break;
+        }
     }
-    
-    switch ([node nodeType]) {
-        case MKHTMLNodeIFrame:  [rtn appendFormat:@"<iframe allowfullscreen=\"\" frameborder=\"0\" heigh=\"\" width=\"300\" src=\"%@\"></iframe>", src]; break;
-        case MKHTMLNodeImg:     [rtn appendFormat:@"<img src=\"%@\" width=\"300\" />", src]; break;
-        default:                [rtn appendString:[node htmlString]]; break;
+    else {
+        [rtn appendString:[node htmlString]];
     }
     
     return rtn;

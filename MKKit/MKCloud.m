@@ -8,11 +8,23 @@
 
 #import "MKCloud.h"
 
+typedef void (^MKCloudLoadedFileHandler)(NSURL *fielURL);
+
+//---------------------------------------------------------------
+// Interfaces
+//---------------------------------------------------------------
+
 @interface MKCloud ()
 
 - (void)queryDidFinish:(NSNotification *)notification;
 
+@property (nonatomic, copy) MKCloudLoadedFileHandler loadFileHandler;
+
 @end
+
+//---------------------------------------------------------------
+// Implementation
+//---------------------------------------------------------------
 
 @implementation MKCloud
 
@@ -20,11 +32,19 @@
 
 #pragma mark - Creating 
 
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
+
 + (id)cloudManager {
     return [[[[self class] alloc] init] autorelease];
 }
 
 #pragma mark - Availability
+
+//---------------------------------------------------------------
+// Finding Availability
+//---------------------------------------------------------------
 
 + (BOOL)iCloudIsAvailable {
     BOOL availible = NO;
@@ -39,6 +59,11 @@
 }
 
 #pragma mark - File Operations
+
+//---------------------------------------------------------------
+// File Operations
+//---------------------------------------------------------------
+
 #pragma mark Load File
 
 - (void)urlForFileNamed:(NSString *)name result:(MKCloudLoadedFileHandler)result {
@@ -82,7 +107,13 @@
     }
 }
 
-#pragma mark - Query Results
+#pragma mark - Notifications
+
+//---------------------------------------------------------------
+// Notifications
+//---------------------------------------------------------------
+
+#pragma mark Query Results
 
 - (void)queryDidFinish:(NSNotification *)notification {
     NSMetadataQuery *query = (NSMetadataQuery *)[notification object];

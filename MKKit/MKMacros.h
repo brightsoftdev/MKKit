@@ -38,7 +38,7 @@
 #define DEVICE_ORIENTATION_IS_LANDSCAPED                [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight
 #define DEVICE_ORIENTATION_IS_PORTRAIT                  [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown
 
-//  devices NEW//
+//  devices
 
 #define MK_DEVICE_IS_IPAD                               [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
 #define MK_DEVICE_IS_IPHONE                             [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone

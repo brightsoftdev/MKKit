@@ -29,8 +29,8 @@
  MKSplitViewController creates its own navigation bars, if it is pushed onto a navaigation
  stack it will hide the navigation controllers navigation bar and replace it with its own.
  
- To set navigation items use `listViewNavigationItem` and `detailViewNavigationItem` 
- properties.
+ The navigation navigation bars get their navigation items from the navigationItem property
+ of the given view controllers.
  
  *Reqiured Classes*
  
@@ -48,8 +48,6 @@
 @private
     UIViewController *mListViewController;
     UIViewController *mDetailViewController;
-    UINavigationItem *mListViewNavigationItem;
-    UINavigationItem *mDetailViewNavigationItem;
     BOOL mListViewIsVisable;
 }
 
@@ -78,16 +76,6 @@
 
 /** Refernce to the detailViewController */
 @property (nonatomic, retain, readonly) IBOutlet UIViewController *detailViewController;
-
-///--------------------------------------
-/// @name Navigation Item
-///--------------------------------------
-
-/** Reference to the navigation items for the list view controller. */
-@property (nonatomic, retain, readonly) UINavigationItem *listViewNavigationItem;
-
-/** Reference to the navigation items for the detail view controller. */
-@property (nonatomic, retain, readonly) UINavigationItem *detailViewNavigationItem;
 
 ///-------------------------------------
 /// @name Display Controll

@@ -3,14 +3,18 @@
 //  MKKit
 //
 //  Created by Matthew King on 5/18/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011-2012 Matt King. All rights reserved.
 //
 
 #import "MKInputPrompt.h"
 
+typedef void (^MKTextFieldIsDoneBlock)(NSString *text);
+
 @interface MKInputPrompt ()
 
 - (void)onDone:(id)sender;
+
+@property (nonatomic, copy) MKTextFieldIsDoneBlock onDoneBlock;
 
 @end
 
@@ -21,7 +25,7 @@
 
 @implementation MKInputPrompt
 
-@synthesize textField=mTextField, onDoneBlock=mOnDoneBlock;
+@synthesize textField=mTextField, onDoneBlock;
 
 #pragma mark - Initalization
 
@@ -153,7 +157,7 @@
 #pragma mark - Memory Management
 
 - (void)dealloc {
-    [mOnDoneBlock release];
+    onDoneBlock = nil;
     
     [super dealloc];
 }

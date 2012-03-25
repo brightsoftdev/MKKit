@@ -84,7 +84,7 @@
 - (void)setTableArray:(NSArray *)array {
 	_tableArray = [[NSArray arrayWithArray:array] retain];
 	
-	[self.tableArray retain];
+	//[self.tableArray retain];
 	[self.theTableView reloadData];
 	
 	[_tableArray release];

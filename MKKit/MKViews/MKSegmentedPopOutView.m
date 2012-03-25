@@ -12,6 +12,12 @@
 #import "MKView+Internal.h"
 #import "MKPopoutView+MKTableCell.h"
 
+//---------------------------------------------------------------
+// Functions
+//---------------------------------------------------------------
+
+#pragma mark - Functions
+
 MKSegment MKSegmentMake(MKSegmentPosition pos, CFStringRef text, CGRect rect, int idnumber);
 MKSegment MKSegmentMake(MKSegmentPosition pos, CFStringRef text, CGRect rect, int idnumber) {
     MKSegment segment;
@@ -49,6 +55,10 @@ void drawSegmentText(CGContextRef context, CGRect rect, MKSegment segment) {
 
 void drawSegmentSeperator(CGContextRef context, MKSegment segment);
 
+//---------------------------------------------------------------
+// Interfaces
+//---------------------------------------------------------------
+
 #pragma mark - Segments
 
 @interface MKSegmentView : MKView {
@@ -69,13 +79,19 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment);
 
 @end
 
-@class MKSegmentView;
+//---------------------------------------------------------------
+// Implementation
+//---------------------------------------------------------------
 
 @implementation MKSegmentedPopOutView
 
 @dynamic selectedIndex;
 
 #pragma mark - Creation
+
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
 
 - (id)initWithItems:(NSArray *)items type:(MKPopOutViewType)type graphics:(MKGraphicsStructures *)graphics {
     self = [super initWithFrame:CGRectMake(0.0, 0.0, 300.0, 70.0)]; 
@@ -104,6 +120,10 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment);
 
 #pragma mark - Memory
 
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
+
 - (void)dealloc {
     [mItems release];
     
@@ -114,6 +134,11 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment);
 }
 
 #pragma mark - Accessor Methods
+
+//---------------------------------------------------------------
+// Accessor Methods
+//---------------------------------------------------------------
+
 #pragma mark Getters
 
 - (NSInteger)selectedIndex {
@@ -121,6 +146,10 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment);
 }
 
 #pragma mark - Drawing
+
+//---------------------------------------------------------------
+// Drawing
+//---------------------------------------------------------------
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
@@ -195,6 +224,10 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment) {
 
 #pragma mark - Action Handling
 
+//---------------------------------------------------------------
+// Actoin Handling
+//---------------------------------------------------------------
+
 - (void)addTarget:(id)target selector:(SEL)selector {
     if (!mTargets) {
         mTargets = [[NSMutableSet alloc] initWithCapacity:1];
@@ -216,6 +249,10 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment) {
 
 #pragma mark - Touches
 
+//---------------------------------------------------------------
+// Touches
+//---------------------------------------------------------------
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //Overide super class touch events
 }
@@ -226,10 +263,17 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment) {
 
 @end
 
+//---------------------------------------------------------------
+// Implementaion
+//---------------------------------------------------------------
 
 @implementation MKSegmentView 
 
 #pragma mark - Creation
+
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
 
 - (id)initWithSegment:(MKSegment)segment parent:(MKSegmentedPopOutView *)parent {
     self = [super initWithFrame:segment.rect];
@@ -244,11 +288,19 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment) {
 
 #pragma mark - Memory
 
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
+
 - (void)dealloc {
     [super dealloc];
 }
 
 #pragma mark - Drawing
+
+//---------------------------------------------------------------
+// Drawing
+//---------------------------------------------------------------
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -265,6 +317,8 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment) {
             CGContextClip(context);
             drawGlossAndLinearGradient(context, rect, fillColor, fillColor);
             CGContextRestoreGState(context);
+            
+            CFRelease(path);
         }
         else if (mSegment.pos == MKSegmentRight) {
             CGMutablePathRef path = createRighSideRoundedRectForRect(rect, 10.0);
@@ -274,6 +328,8 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment) {
             CGContextClip(context);
             drawGlossAndLinearGradient(context, rect, fillColor, fillColor);
             CGContextRestoreGState(context);
+            
+            CFRelease(path);
         }
         else {
             CGContextSaveGState(context);
@@ -287,6 +343,10 @@ void drawSegmentSeperator(CGContextRef context, MKSegment segment) {
 }
 
 #pragma mark - Touches
+
+//---------------------------------------------------------------
+// Touches
+//---------------------------------------------------------------
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     mParent->mSelectedIndex = mSegment.idnumber;

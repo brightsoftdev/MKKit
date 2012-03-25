@@ -30,9 +30,9 @@
 - (id)initWithStyle:(UITableViewStyle)style {
 	if ((self = [super initWithStyle:style])) {
 		NSString *path = [[NSBundle mainBundle] pathForResource:@"CreditNames" ofType:@"plist"];
-		_creditsArray = [[[NSArray alloc] initWithContentsOfFile:path] copy];
+		_creditsArray = [[NSMutableArray alloc] initWithContentsOfFile:path];
 
-		[_creditsArray release];
+		//[_creditsArray release];
 	}
 	return self;
 }

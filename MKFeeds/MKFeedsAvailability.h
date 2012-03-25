@@ -17,4 +17,6 @@
 #else
     #define MK_VISIBLE_ATTRIBUTE                __attribute__((visibility ("default")))
     #define MK_DEPRECATED_1_0                   __attribute__((deprecated))
+    #define MK_DEVICE_IS_IPAD                   [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
+    #define MK_DEVICE_IS_IPHONE                 [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone
 #endif

@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 8/13/10.
-//  Copyright 2010-2011 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,9 +11,6 @@
 #import "MKFeedsAvailability.h"
 #import "MKFeedsErrorControl.h"
 #import "MKFeedItemArchiver.h"
-
-typedef void (^MKRequestComplete)(NSArray *feedInfo, NSError *error);
-typedef void (^MKArchiveSuccessful)(BOOL successful);
 
 typedef enum {
     MKFeedContentPlainText,
@@ -70,13 +67,11 @@ typedef enum {
 @interface MKFeedParser : NSObject <NSXMLParserDelegate> {
 	NSString *mUrl;
 	id delegate;
-    MKRequestComplete mRequestCompleteBlock;
     
 @private
 	NSMutableURLRequest *urlRequest; 
 	NSMutableData *requestData;
     NSURLConnection *theConnection;
-    NSURLCache *requestCache;
     
     MKFeedArchiveType mArchiveType;
 
@@ -120,7 +115,7 @@ typedef enum {
  
  @param block the code block to run when the request is complete.
 */
-- (void)requestWithCompletionBlock:(MKRequestComplete)block;
+- (void)requestWithCompletionBlock:(void(^)(NSArray *feedInfo, NSError *error))block;
 
 ///-----------------------------------------------
 /// @name Feed Information
@@ -163,7 +158,7 @@ typedef enum {
  * `MKArchiverSyncComplete` : sync was successful.
  * `MKArchiverSyncFailed` : sync was not successful.
 */
-- (void)setArchiveResultsToPath:(NSString *)path successful:(MKArchiveSuccessful)successful;
+- (void)setArchiveResultsToPath:(NSString *)path successful:(void(^)(BOOL successful))successful;
 
 /**
  Tells the parser to sync the results with the given iCloud file URL.
@@ -181,7 +176,7 @@ typedef enum {
  to requesting data.  It does not check for iCloud avialbility or the existance of a file at the 
  given file URL.
 */
-- (void)setArchiveResultsToCloudURL:(NSURL *)URL successful:(MKArchiveSuccessful)successful;
+- (void)setArchiveResultsToCloudURL:(NSURL *)URL successful:(void(^)(BOOL successful))successful;
 
 ///-----------------------------------------------
 /// @name Delegate
@@ -189,16 +184,6 @@ typedef enum {
 
 /** The MKRSSFeedDelegate */
 @property (assign) id<MKFeedParserDelegate> delegate;
-
-///-----------------------------------------------
-/// @name Blocks
-///-----------------------------------------------
-
-/** The request complete block. This block is ran when a request is finished. */
-@property (nonatomic, copy) MKRequestComplete requestCompleteBlock;
-
-/** The archive complete block. This block is ran when a archive is finished. */
-@property (nonatomic, copy) MKArchiveSuccessful archiveSuccessBlock;
 
 ///----------------------------------------------
 /// @name Deprecated

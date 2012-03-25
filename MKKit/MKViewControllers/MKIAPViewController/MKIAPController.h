@@ -3,17 +3,13 @@
 //  MKKit
 //
 //  Created by Matthew King on 5/28/11.
-//  Copyright 2011 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import <StoreKit/StoreKit.h>
 #import <UIKit/UIKit.h>
 
 #import <MKKit/MKKit/MKObject.h>
-
-typedef void (^MKProductResponseBlock)(SKProductsResponse *response, NSError *error);
-typedef void (^MKPurchaseCompletionBlock)(SKPaymentTransaction *transaction, NSError *error);
-typedef void (^MKRestoreCompletionBlock)(SKPaymentTransaction *transaction, NSError *error);
 
 @protocol MKObjectDelegate;
 @protocol MKIAPDelegate;
@@ -124,7 +120,7 @@ typedef void (^MKRestoreCompletionBlock)(SKPaymentTransaction *transaction, NSEr
  
  The MKProductResponseBlock is in the this format : `^(SKProductsResponse *response, NSError *error)`
 */
-+ (void)productsRequestWithIdentifiers:(NSSet *)identifiers response:(MKProductResponseBlock)response;
++ (void)productsRequestWithIdentifiers:(NSSet *)identifiers response:(void(^)(SKProductsResponse *response, NSError *error))response;
 
 /**
  Requests product information for the given set of identifiers and notifies the delegate when a response
@@ -148,7 +144,7 @@ typedef void (^MKRestoreCompletionBlock)(SKPaymentTransaction *transaction, NSEr
  
  The MKPurchaseCompletionBlock is in this format : `^(SKPaymentTransaction *transaction, NSError *error)`
 */
-+ (void)purchaseRequestWithIdentifiers:(NSSet *)identifiers completion:(MKPurchaseCompletionBlock)completion;
++ (void)purchaseRequestWithIdentifiers:(NSSet *)identifiers completion:(void(^)(SKPaymentTransaction *transaction, NSError *error))completion;
 
 /**
  Requests the purchase of a the products given in the set, and notifies the delegate when the purchase
@@ -170,7 +166,7 @@ typedef void (^MKRestoreCompletionBlock)(SKPaymentTransaction *transaction, NSEr
  
  The MKRestoreCompletionBlock is in this format : `^(SKPaymentTransaction *transaction, NSError *error)`
 */
-+ (void)restorePurchase:(MKRestoreCompletionBlock)completion;
++ (void)restorePurchase:(void(^)(SKPaymentTransaction *transaction, NSError *error))completion;
 
 /**
  Restores previouse purchases that were made on the account, and notifies the delegate when
@@ -184,31 +180,6 @@ typedef void (^MKRestoreCompletionBlock)(SKPaymentTransaction *transaction, NSEr
 
 /** The MKIAPDelegate */
 @property (nonatomic, assign) id<MKIAPDelegate> delegate;
-
-///----------------------------------------------------------------
-/// @name Code Blocks
-///----------------------------------------------------------------
-
-/**
- The response the code block to perform when a responces is given. 
- 
- The MKProductResponseBlock is in the this format : `^(SKProductsResponse *response, NSError *error)`
-*/
-@property (nonatomic, copy) MKProductResponseBlock productResponse;
-
-/**
- The completion the code block to perform when the purchase is completed.
- 
- The MKPurchaseCompletionBlock is in this format : `^(SKPaymentTransaction *transaction, NSError *error)`
-*/
-@property (nonatomic, copy) MKPurchaseCompletionBlock purchaseCompleteBlock;
-
-/**
- The completion block the code block to perform when the restore is complete
- 
- The MKRestoreCompletionBlock is in this format : `^(SKPaymentTransaction *transaction, NSError *error)`
-*/
-@property (nonatomic, copy) MKRestoreCompletionBlock restoreCompleteBlock;
 
 @end
 

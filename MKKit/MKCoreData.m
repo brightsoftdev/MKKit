@@ -3,27 +3,41 @@
 //  MKKit
 //
 //  Created by Matthew King on 5/12/10.
-//  Copyright 2010-2011 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import "MKCoreData.h"
+
+typedef void (^MKFetchCompletionBlock)(NSMutableArray *results, NSError *error);
+
+//---------------------------------------------------------------
+// Interface
+//---------------------------------------------------------------
 
 @interface MKCoreData ()
 
 - (id)initWithContext:(NSManagedObjectContext *)context;
 
+@property (nonatomic, copy) MKFetchCompletionBlock fechCompletionBlock;
+
 @end
 
+//---------------------------------------------------------------
+// Implementation
+//---------------------------------------------------------------
 
 @implementation MKCoreData
 
-@synthesize fechCompletionBlock=mFetchCompletionBlock;
+@synthesize fechCompletionBlock;
 
 static NSManagedObjectContext *managedObjectContext = nil;
 static MKCoreData *sharedData = nil;
 
-#pragma mark -
-#pragma mark Set Up
+#pragma mark - Creation
+
+//---------------------------------------------------------------
+// Creataion
+//---------------------------------------------------------------
 
 + (MKCoreData *)sharedData {
     @synchronized(self) {
@@ -62,15 +76,21 @@ static MKCoreData *sharedData = nil;
 	return self;
 }
 
-#pragma mark -
-#pragma mark Managed Object Context
+#pragma mark - Accessor Methods
+
+//---------------------------------------------------------------
+// Accessor Methods
+//---------------------------------------------------------------
 
 - (NSManagedObjectContext *)getContext {
 	return managedObjectContext;
 }
 
-#pragma mark -
-#pragma mark Feched Results
+#pragma mark - Feched Results
+
+//---------------------------------------------------------------
+// Fetched Results
+//---------------------------------------------------------------
 
 - (NSMutableArray *)fetchedResultsForEntity:(NSString *)entity sortedBy:(NSString *)attribute accending:(BOOL)accendeing {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init]; 
@@ -125,8 +145,11 @@ static MKCoreData *sharedData = nil;
 	[request release]; 
 }
 
-#pragma mark -
-#pragma mark Memory Management
+#pragma mark - Memory Management
+
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
 
 - (void)removeSharedData {
 	sharedData = nil;
@@ -144,7 +167,7 @@ static MKCoreData *sharedData = nil;
 	}
 	
 	[managedObjectContext release];
-    [mFetchCompletionBlock release];
+    self.fechCompletionBlock = nil;
 	
 	if (sharedData) {
 		sharedData = nil;

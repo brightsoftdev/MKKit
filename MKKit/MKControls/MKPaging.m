@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 12/4/11.
-//  Copyright (c) 2011 Matt King. All rights reserved.
+//  Copyright (c) 2011-2012 Matt King. All rights reserved.
 //
 
 #import "MKPaging.h"
@@ -151,6 +151,8 @@
         CGContextAddPath(context, dotPath);
         CGContextFillPath(context);
         CGContextSaveGState(context);
+        
+        CFRelease(dotPath);
     }
     
     CFRelease(leftArrowPath);
@@ -170,7 +172,7 @@
     if (CGRectContainsPoint(rightArrowRect, touchPoint)) {
         if (MKPagingFlags.rightArrowActive) {
             if (MKControlFlags.blockUsage) {
-                self.action(MKActionValueIncreased);
+                mAction(MKActionValueIncreased);
             }
             if (MKControlFlags.targetUsage) {
                 for (MKControlTarget *aTarget in mTargets) {
@@ -187,7 +189,7 @@
     else if (CGRectContainsPoint(leftArrowRect, touchPoint)) {
         if (MKPagingFlags.leftArrowActive) {
             if (MKControlFlags.blockUsage) {
-                self.action(MKActionValueDecreased);
+                mAction(MKActionValueDecreased);
             }
             if (MKControlFlags.targetUsage) {
                 for (MKControlTarget *aTarget in mTargets) {

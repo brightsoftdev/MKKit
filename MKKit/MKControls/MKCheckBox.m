@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 10/3/10.
-//  Copyright 2010 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import "MKCheckBox.h"
@@ -62,7 +62,7 @@
     CGContextSetAllowsAntialiasing(context, YES);
     
     CGRect drawRect = CGRectInset(rect, 2.0, 2.0);
-    CGMutablePathRef path;
+    CGMutablePathRef path = nil;
     
     if (mType == MKCheckBoxRoundedRect) {
         path = createRoundedRectForRect(drawRect, 5.0);

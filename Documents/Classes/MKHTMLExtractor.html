@@ -75,14 +75,32 @@
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/styledOutput"> styledOutput</a></code>
-		<span class="tooltip"> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be added inserted into the output to assist with display. </span>
+		<code><a href="#//api/name/combinesPages"> combinesPages</a></code>
+		<span class="tooltip"> Set this property to <code>YES</code> to compine mulitpul pages into one document, if any are found. Default is <code>NO</code>. </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/articleTitle"> articleTitle</a></code>
 		<span class="tooltip"> Set a NSString to this property for the title of an article. If the property is set the extractor will not look for the title of an article, but use the this property instead. <p class="warning"> <strong> Note </strong> Setting this property does nothing if the <a href="#//api/name/requestType">requestType</a> is not <code>MKHTMLExtractorMainBodyHTMLRequest</code>. </p></span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Styling Output</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/styledOutput"> styledOutput</a></code>
+		<span class="tooltip"> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be inserted into the output to assist with display. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/styleSheet"> styleSheet</a></code>
+		<span class="tooltip"> Provide a <code>MKHTMLExtractorStyleSheet</code> and the extractor will generate css code and add it the generated output. </span>
 	</span>
 	
 </li>
@@ -119,18 +137,6 @@
 	<span class="tooltip">
 		<code><a href="#//api/name/delegate"> delegate</a></code>
 		<span class="tooltip"> The <a href="../Protocols/MKHTMLExtractorDelegate.html">MKHTMLExtractorDelegate</a></span>
-	</span>
-	
-</li>
-					</ul>
-					
-					<h3 class="subsubtitle task-title">Handeler Blocks</h3>
-
-					<ul class="task-list">
-						<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/pageTextHandler"> pageTextHandler</a></code>
-		<span class="tooltip"> Reference to the request handler block. </span>
 	</span>
 	
 </li>
@@ -308,7 +314,7 @@
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)requestPagesWithHandler:(MKHTMLExtractorPageTextHandler)<em>handler</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)requestPagesWithHandler:(void ( ^ ) ( NSString *pageText , NSError *error ))<em>handler</em></code></div>
 	
 	
 	
@@ -349,7 +355,7 @@
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)requestType:(MKHTMLExtractorRequestType)<em>type</em> handler:(MKHTMLExtractorPageTextHandler)<em>handler</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)requestType:(MKHTMLExtractorRequestType)<em>type</em> handler:(void ( ^ ) ( NSString *pageText , NSError *error ))<em>handler</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -489,6 +495,47 @@
 </div>
 					
 					<div class="section-method">
+	<a name="//api/name/combinesPages" title="combinesPages"></a>
+	<h3 class="subsubtitle method-title">combinesPages</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Set this property to <code>YES</code> to compine mulitpul pages into one document, if any are found. Default is <code>NO</code>. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL combinesPages</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		
+		<p> Set this property to <code>YES</code> to compine mulitpul pages into one document, if any are found. Default is <code>NO</code>. </p>
+		
+		<p> When set to <code>YES</code> no data will be returned every time a new page is fouund. </p>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
 	<a name="//api/name/delegate" title="delegate"></a>
 	<h3 class="subsubtitle method-title">delegate</h3>
 	
@@ -585,38 +632,6 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/pageTextHandler" title="pageTextHandler"></a>
-	<h3 class="subsubtitle method-title">pageTextHandler</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p> Reference to the request handler block. </p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) MKHTMLExtractorPageTextHandler pageTextHandler</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
-	</div>				
-	
-	
-</div>
-					
-					<div class="section-method">
 	<a name="//api/name/requestType" title="requestType"></a>
 	<h3 class="subsubtitle method-title">requestType</h3>
 	
@@ -681,13 +696,56 @@
 </div>
 					
 					<div class="section-method">
+	<a name="//api/name/styleSheet" title="styleSheet"></a>
+	<h3 class="subsubtitle method-title">styleSheet</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Provide a <code>MKHTMLExtractorStyleSheet</code> and the extractor will generate css code and add it the generated output. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) MKHTMLExtractorStyleSheet styleSheet</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		
+		<p> Provide a <code>MKHTMLExtractorStyleSheet</code> and the extractor will generate css code and add it the generated output. </p>
+		
+		<p> You can create a <code>MKHTMLExtractorStyleSheet</code> by using the <code>MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *fontColor, NSString *backgroundColor)</code> function. </p>
+		
+		<p> The font color and backgroundColor parameters need to be a string representation of the hexidecimal color code. For example white would be <code>#ffffff</code> or black would be <code>#000000</code>. <p class="warning"> <strong> Note </strong> Setting this property will automaically set the <a href="#//api/name/styledOutput">styledOutput</a> property to <code>YES</code>. the extractorHTMLHeaderPath: <a href="#//api/name/delegate">delegate</a> method returns the path to an HTML header, the styles provided here will be overiden. </p></p>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKHTMLExtractor.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
 	<a name="//api/name/styledOutput" title="styledOutput"></a>
 	<h3 class="subsubtitle method-title">styledOutput</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be added inserted into the output to assist with display. </p>
+		<p> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be inserted into the output to assist with display. </p>
 	</div>		
 	
 	
@@ -701,7 +759,7 @@
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		
-		<p> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be added inserted into the output to assist with display. </p>
+		<p> Set this property to <code>YES</code> to optimize the HTML output for display on the iPhone. HTML code will be inserted into the output to assist with display. </p>
 		
 		<p> When set to <code>YES</code> the <a href="#//api/name/delegate">delegate</a> method extactorHTMLHeaderPath: method is called. If this method is not used or returns <code>nil</code>, generic HTML code will be added. </p>
 		
@@ -743,7 +801,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-02-16)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-03-25)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

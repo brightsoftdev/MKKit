@@ -45,7 +45,7 @@
 
 <p> <strong> Observing Actions </strong></p>
 
-<p> <a href="MKControl.html">MKControl</a> objects dispatch events in three ways, <a href="#//api/name/delegate">delegate</a> methods, blocks, and by assigning targets and selectors. Each one sends actions according to one or more of the MKAction types. You should be looking for one of the following <a href="#//api/name/action">action</a> types: <ul><li> <code>MKActionTouchDown</code>: a touch down action. </li><li> <code>MKActionTouchUp</code>: a touch up action. </li><li> <code>MKActionValueChanged</code>: a change of value action. </li><li> <code>MKActionValueIncreased</code>: a increase of a controls value. </li><li> <code>MKActionValueDecreased</code>: a decrease of a controls value. </li></ul> <p class="warning"> <strong> Note </strong> Not all controls dispatch every action. Check the documention of the control you are using to see what events it will dispatch. </p></p>
+<p> <a href="MKControl.html">MKControl</a> objects dispatch events in three ways, <a href="#//api/name/delegate">delegate</a> methods, blocks, and by assigning targets and selectors. Each one sends actions according to one or more of the MKAction types. You should be looking for one of the following action types: <ul><li> <code>MKActionTouchDown</code>: a touch down action. </li><li> <code>MKActionTouchUp</code>: a touch up action. </li><li> <code>MKActionValueChanged</code>: a change of value action. </li><li> <code>MKActionValueIncreased</code>: a increase of a controls value. </li><li> <code>MKActionValueDecreased</code>: a decrease of a controls value. </li></ul> <p class="warning"> <strong> Note </strong> Not all controls dispatch every action. Check the documention of the control you are using to see what events it will dispatch. </p></p>
 
 <p> <strong> Changing/Observing Control States </strong></p>
 
@@ -87,13 +87,13 @@
 						<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/completedAction:">- completedAction:</a></code>
-		<span class="tooltip"> Sets a code block to complete after an <a href="#//api/name/action">action</a> is completed. </span>
+		<span class="tooltip"> Sets a code block to complete after an action is completed. </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/addTarget:selector:action:">- addTarget:selector:action:</a></code>
-		<span class="tooltip"> Sets the target and callback method to perform after an <a href="#//api/name/action">action</a> takes place. </span>
+		<span class="tooltip"> Sets the target and callback method to perform after an action takes place. </span>
 	</span>
 	
 </li>
@@ -124,18 +124,6 @@
 	<span class="tooltip">
 		<code><a href="#//api/name/delegate"> delegate</a></code>
 		<span class="tooltip"> <a href="#//api/name/delegate">delegate</a> the controls <a href="#//api/name/delegate">delegate</a></span>
-	</span>
-	
-</li>
-					</ul>
-					
-					<h3 class="subsubtitle task-title">Code Blocks</h3>
-
-					<ul class="task-list">
-						<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/action"> action</a></code>
-		<span class="tooltip"> the <a href="#//api/name/action">action</a> completion block </span>
 	</span>
 	
 </li>
@@ -225,7 +213,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Sets the target and callback method to perform after an <a href="#//api/name/action">action</a> takes place. </p>
+		<p> Sets the target and callback method to perform after an action takes place. </p>
 	</div>		
 	
 	
@@ -247,7 +235,7 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>action</em></dt>
-			<dd> the <a href="#//api/name/action">action</a> to listen for. </dd>
+			<dd> the action to listen for. </dd>
 		</dl>
 		
 	</div>
@@ -277,11 +265,11 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Sets a code block to complete after an <a href="#//api/name/action">action</a> is completed. </p>
+		<p> Sets a code block to complete after an action is completed. </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)completedAction:(MKActionBlock)<em>actionBlock</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)completedAction:(void ( ^ ) ( MKAction action ))<em>actionBlock</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -301,9 +289,9 @@
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		
-		<p> Sets a code block to complete after an <a href="#//api/name/action">action</a> is completed. </p>
+		<p> Sets a code block to complete after an action is completed. </p>
 		
-		<p> The <a href="#//api/name/action">action</a> block is in this format <code>^(MKAction action)</code>. MKAction is the <a href="#//api/name/action">action</a> that was completed. </p>
+		<p> The action block is in this format <code>^(MKAction action)</code>. MKAction is the action that was completed. </p>
 		
 	</div>
 	
@@ -498,7 +486,7 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>action</em></dt>
-			<dd> the <a href="#//api/name/action">action</a> to send </dd>
+			<dd> the action to send </dd>
 		</dl>
 		
 	</div>
@@ -572,38 +560,6 @@
 	
 	
 	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL working MK_DEPRECATED_0_9</code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">MKControl.h</code><br />
-	</div>				
-	
-	
-</div>
-					
-					<div class="section-method">
-	<a name="//api/name/action" title="action"></a>
-	<h3 class="subsubtitle method-title">action</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p> the <a href="#//api/name/action">action</a> completion block </p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) MKActionBlock action</code></div>
 	
 	
 	
@@ -765,7 +721,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2011 Matt King. All rights reserved. (Last updated: 2011-12-31)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-03-25)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>
