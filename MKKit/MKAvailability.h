@@ -18,6 +18,46 @@
 #define MK_VISIBLE_ATTRIBUTE                __attribute__((visibility ("default")))
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////// DEBUG/EVENT LOGGING TOGGLE ON OR OFF TO LOG MKKIT EVENTS  ///////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#define MK_EVENT_LOGGING_ON                 1 // 1=ON 0=OFF ////////////////////////////////////////
+#define MK_STATUS_LOGGING_ON                1 // 1=ON 0=OFF ////////////////////////////////////////
+#define MK_THREAD_LOGGING_ON                0 // 1=ON 0=OFF ////////////////////////////////////////
+#define MK_MEMORY_LOGGING_ON                1 // 1=ON 0=OFF ////////////////////////////////////////
+
+#if MK_LOGGING_ON
+    #define MK_LOG(...)                     NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+
+    #if MK_EVENT_LOGGING_ON
+        #define MK_E_LOG(...)               MK_LOG(__VA_ARGS__)
+    #else
+        #define MK_E_LOG(...)
+    #endif
+    
+    #if MK_STATUS_LOGGING_ON
+        #define MK_S_LOG(...)               MK_LOG(__VA_ARGS__)
+    #else
+        #define MK_S_LOG(...)
+    #endif
+
+    #if MK_MEMORY_LOGGING_ON
+        #define MK_M_LOG(...)               MK_LOG(__VA_ARGS__)
+    #else
+        #define MK_M_LOG(...)
+    #endif
+
+    #if MK_THREAD_LOGGING_ON
+        #define MK_T_LOG(...)               MK_LOG(__VA_ARGS__)
+    #else
+        #define MK_T_LOG(...)
+    #endif
+
+#else
+    #define MK_LOG(...)
+#endif
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 /// ADDTIONAL LIBRARIES AVAILABLE TO MKKIT TOGGLE THE MACROS TO MAKE LIBRARIES AVAILABLE OR NOT.  // 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

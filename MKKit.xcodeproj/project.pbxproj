@@ -83,6 +83,8 @@
 		AA02E1AF12DB0899003B3560 /* MKTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = AA02E1AD12DB0899003B3560 /* MKTextField.h */; };
 		AA02E1B012DB0899003B3560 /* MKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AA02E1AE12DB0899003B3560 /* MKTextField.m */; };
 		AA06E09713927DA1000071C0 /* MKIAPObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = AA06E09613927DA1000071C0 /* MKIAPObserver.h */; };
+		AA0752AE1523E6AE004E1A4C /* MKDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0752AC1523E6AE004E1A4C /* MKDocument.h */; };
+		AA0752AF1523E6AE004E1A4C /* MKDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0752AD1523E6AE004E1A4C /* MKDocument.m */; };
 		AA0D155813F308200067BA2A /* MKTableCellBadgeView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0D155613F3081F0067BA2A /* MKTableCellBadgeView.h */; };
 		AA0D155913F308200067BA2A /* MKTableCellBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D155713F3081F0067BA2A /* MKTableCellBadgeView.m */; };
 		AA0D1A6914C352F100F0D778 /* MKMetrics.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0D1A6714C352F100F0D778 /* MKMetrics.h */; };
@@ -190,6 +192,8 @@
 		AAAE8713148A688C003E2060 /* MKImage.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAE8711148A688C003E2060 /* MKImage.m */; };
 		AAAE8716148BC657003E2060 /* MKPaging.h in Headers */ = {isa = PBXBuildFile; fileRef = AAAE8714148BC656003E2060 /* MKPaging.h */; };
 		AAAE8717148BC657003E2060 /* MKPaging.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAE8715148BC656003E2060 /* MKPaging.m */; };
+		AAB370D4152676F700A8795F /* NSURL+MKKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB370D2152676F700A8795F /* NSURL+MKKit.h */; };
+		AAB370D5152676F700A8795F /* NSURL+MKKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB370D3152676F700A8795F /* NSURL+MKKit.m */; };
 		AAB4D1E113E86A720061A6BD /* MKPopOutView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB4D1DF13E86A700061A6BD /* MKPopOutView.h */; };
 		AAB4D1E213E86A720061A6BD /* MKPopOutView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB4D1E013E86A700061A6BD /* MKPopOutView.m */; };
 		AAB4D1E513E884410061A6BD /* MKTitleView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB4D1E313E884400061A6BD /* MKTitleView.h */; };
@@ -318,6 +322,8 @@
 		AA02E1AD12DB0899003B3560 /* MKTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKTextField.h; sourceTree = "<group>"; };
 		AA02E1AE12DB0899003B3560 /* MKTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKTextField.m; sourceTree = "<group>"; };
 		AA06E09613927DA1000071C0 /* MKIAPObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKIAPObserver.h; sourceTree = "<group>"; };
+		AA0752AC1523E6AE004E1A4C /* MKDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDocument.h; sourceTree = "<group>"; };
+		AA0752AD1523E6AE004E1A4C /* MKDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDocument.m; sourceTree = "<group>"; };
 		AA0D155613F3081F0067BA2A /* MKTableCellBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKTableCellBadgeView.h; sourceTree = "<group>"; };
 		AA0D155713F3081F0067BA2A /* MKTableCellBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKTableCellBadgeView.m; sourceTree = "<group>"; };
 		AA0D1A6714C352F100F0D778 /* MKMetrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMetrics.h; sourceTree = "<group>"; };
@@ -432,6 +438,8 @@
 		AAAE8711148A688C003E2060 /* MKImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKImage.m; sourceTree = "<group>"; };
 		AAAE8714148BC656003E2060 /* MKPaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPaging.h; sourceTree = "<group>"; };
 		AAAE8715148BC656003E2060 /* MKPaging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPaging.m; sourceTree = "<group>"; };
+		AAB370D2152676F700A8795F /* NSURL+MKKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+MKKit.h"; sourceTree = "<group>"; };
+		AAB370D3152676F700A8795F /* NSURL+MKKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+MKKit.m"; sourceTree = "<group>"; };
 		AAB4D1DF13E86A700061A6BD /* MKPopOutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPopOutView.h; sourceTree = "<group>"; };
 		AAB4D1E013E86A700061A6BD /* MKPopOutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPopOutView.m; sourceTree = "<group>"; };
 		AAB4D1E313E884400061A6BD /* MKTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKTitleView.h; sourceTree = "<group>"; };
@@ -759,6 +767,8 @@
 				AAD9CE3414F9601D003A27FE /* MKCloud.m */,
 				AA02DDDD12DAE2B7003B3560 /* MKCoreData.h */,
 				AA02DDDE12DAE2B7003B3560 /* MKCoreData.m */,
+				AA0752AC1523E6AE004E1A4C /* MKDocument.h */,
+				AA0752AD1523E6AE004E1A4C /* MKDocument.m */,
 				AAAE8710148A688C003E2060 /* MKImage.h */,
 				AAAE8711148A688C003E2060 /* MKImage.m */,
 				AA02DDE512DAE2B7003B3560 /* MKMath.h */,
@@ -780,6 +790,8 @@
 				AA21BAA314A9364E00556B06 /* MKObject+Internal.m */,
 				AAFFB41614F2A8960048B57F /* NSString+MKKit.h */,
 				AAFFB41714F2A8970048B57F /* NSString+MKKit.m */,
+				AAB370D2152676F700A8795F /* NSURL+MKKit.h */,
+				AAB370D3152676F700A8795F /* NSURL+MKKit.m */,
 				AA0D1A6B14C3683B00F0D778 /* UIView+MKMetrics.h */,
 				AA0D1A6C14C3683B00F0D778 /* UIView+MKMetrics.m */,
 			);
@@ -1199,6 +1211,8 @@
 				AAFFB41814F2A8980048B57F /* NSString+MKKit.h in Headers */,
 				AAFFB41A14F2A8AF0048B57F /* MKOperation.h in Headers */,
 				AAD9CE3514F9601D003A27FE /* MKCloud.h in Headers */,
+				AA0752AE1523E6AE004E1A4C /* MKDocument.h in Headers */,
+				AAB370D4152676F700A8795F /* NSURL+MKKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1405,6 +1419,8 @@
 				AAFFB41914F2A8980048B57F /* NSString+MKKit.m in Sources */,
 				AAFFB41B14F2A8B60048B57F /* MKOperation.m in Sources */,
 				AAD9CE3614F9601D003A27FE /* MKCloud.m in Sources */,
+				AA0752AF1523E6AE004E1A4C /* MKDocument.m in Sources */,
+				AAB370D5152676F700A8795F /* NSURL+MKKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1515,6 +1531,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
+				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "MK_LOGGING_ON=1";
 				HEADER_SEARCH_PATHS = "/Users/Jullie/Desktop/iPhone-Projects/Frameworks/";
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
@@ -1534,6 +1551,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
+				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "MK_LOGGING_ON=0";
 				HEADER_SEARCH_PATHS = "/Users/Jullie/Desktop/iPhone-Projects/Frameworks/";
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;

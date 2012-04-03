@@ -15,6 +15,7 @@
 #import <MKKit/MKKit/MKCloud.h>
 #import <MKKit/MKKit/MKConsolidatedViewTags.h>
 #import <MKKit/MKKit/MKCoreData.h>
+#import <MKKit/MKKit/MKDocument.h>
 #import <MKKit/MKKit/MKImage.h>
 #import <MKKit/MKKit/MKMath.h>
 #import <MKKit/MKKit/MKNotificationController.h>
@@ -33,8 +34,9 @@
 #import <MKKit/MKKit/MKViewControllers/MKViewContorllerHeaders.h>
 #import <MKKit/MKKit/MKViews/MKViewHeader.h>
 
-#import <MKKit/MKKit/UIView+MKMetrics.h>
 #import <MKKit/MKKit/NSString+MKKit.h>
+#import <MKKit/MKKit/NSURL+MKKit.h>
+#import <MKKit/MKKit/UIView+MKMetrics.h>
 
 #if MK_FEEDS_ALLOWED
     #import <MKKit/MKFeed.h>

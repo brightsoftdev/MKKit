@@ -3,11 +3,43 @@
 //  MKKit
 //
 //  Created by Matthew King on 3/28/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Matt King. All rights reserved.
 //
 
 #import "MKDocument.h"
+#import "MKAvailability.h"
 
 @implementation MKDocument
+
+@synthesize content, /*fileName,*/ cloudDocument;
+
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
+
+- (void)dealloc {
+    MK_M_LOG(@"Released document named: %@", self.localizedName);
+    
+    self.content = nil;
+    //self.fileName = nil;
+    
+    [super dealloc];
+}
+
+//---------------------------------------------------------------
+// Load Files
+//---------------------------------------------------------------
+
+- (BOOL)loadFromContents:(id)contents ofType:(NSString *)typeName error:(NSError **)outError {
+    if (contents) {
+        self.content = (NSData *)contents;
+        return YES;
+    }
+    return NO;
+}
+
+- (id)contentsForType:(NSString *)typeName error:(NSError **)outError {
+    return self.content;
+}
 
 @end

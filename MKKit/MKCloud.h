@@ -6,7 +6,12 @@
 //  Copyright (c) 2012 Matt King. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+#import <dispatch/dispatch.h>
+
 #import "MKObject.h"
+
+@class MKDocument;
 
 /**--------------------------------------------------------------------------
  *Overview*
@@ -17,7 +22,7 @@
 @interface MKCloud : MKObject {
 @private
     NSMetadataQuery *mQuery;
-    
+    dispatch_queue_t backgroundqueue; 
 }
 
 ///-------------------------------
@@ -44,8 +49,40 @@
 + (BOOL)iCloudIsAvailable;
 
 ///-------------------------------
-/// @name File Operations
+/// @name Manage Documents
 ///-------------------------------
+
+- (void)addDocument:(MKDocument *)document;
+
+- (void)removeDocument:(MKDocument *)document;
+
+///-------------------------------
+/// @name Getting Documents
+///-------------------------------
+
+- (MKDocument *)documentNamed:(NSString *)name;
+
+@property (retain) NSMutableSet *documents;
+
+///-------------------------------
+/// @name Document Operations
+///-------------------------------
+
+- (void)createDocumentNamed:(NSString *)name content:(NSData *)content successful:(void(^)(BOOL successful))successful;
+
+- (void)openDocumentNamed:(NSString *)name content:(void(^)(id content))content;
+
+- (void)saveDocumentNamed:(NSString *)name successful:(void(^)(BOOL successful))successful;
+
+- (void)closeDocumentNamed:(NSString *)name successful:(void(^)(BOOL sucessful))successful;
+
+///-------------------------------
+/// @name Cloud Operations
+///-------------------------------
+
+- (void)pushDocumentToCloud:(MKDocument *)document named:(NSString *)name successful:(void(^)(BOOL successful))successful; 
+
+- (void)removeDocumentNamed:(NSString *)name successful:(void(^)(BOOL successful))successful;
 
 /**
  Checks if the given file exists in the local cloud directory and retuns an NSURL 
@@ -66,7 +103,7 @@
  
  @param successful the code block to be preformed upon the completion of the file removal. 
 */
-- (void)removeCloudFileNamed:(NSString *)name directory:(NSString *)directory successful:(void(^)(BOOL successful))successful;
+//- (void)removeCloudFileNamed:(NSString *)name directory:(NSString *)directory successful:(void(^)(BOOL successful))successful;
 
 
 @end
