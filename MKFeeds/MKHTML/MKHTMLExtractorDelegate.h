@@ -40,7 +40,9 @@
  code is added to the output to support styling of the page. 
  
  * Titles will be wraped in `<div class="title"></div>` tags.
- * Paragaraphs will be wraped in `<div class="article"></di>` tags.
+ * Authors will be wraped in `<div class"author"></div>` tags.
+ * Paragaraphs will be wraped in `<div class="article"></div>` tags.
+ * Sources will be wraped in `<div class="source"></div>` tags.
  
  @return NSString The path to an HTML file containg <head> tag information.
 */

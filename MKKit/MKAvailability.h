@@ -21,10 +21,15 @@
 ////////////////// DEBUG/EVENT LOGGING TOGGLE ON OR OFF TO LOG MKKIT EVENTS  ///////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define MK_EVENT_LOGGING_ON                 1 // 1=ON 0=OFF ////////////////////////////////////////
-#define MK_STATUS_LOGGING_ON                1 // 1=ON 0=OFF ////////////////////////////////////////
-#define MK_THREAD_LOGGING_ON                0 // 1=ON 0=OFF ////////////////////////////////////////
-#define MK_MEMORY_LOGGING_ON                1 // 1=ON 0=OFF ////////////////////////////////////////
+#if DEBUG
+    #define MK_EVENT_LOGGING_ON                 1 // 1=ON 0=OFF /////////////////////////////////////
+    #define MK_STATUS_LOGGING_ON                1 // 1=ON 0=OFF /////////////////////////////////////
+    #define MK_MEMORY_LOGGING_ON                1 // 1=ON 0=OFF /////////////////////////////////////
+#else
+    #define MK_EVENT_LOGGING_ON                 
+    #define MK_STATUS_LOGGING_ON                
+    #define MK_MEMORY_LOGGING_ON
+#endif
 
 #if MK_LOGGING_ON
     #define MK_LOG(...)                     NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
@@ -46,15 +51,11 @@
     #else
         #define MK_M_LOG(...)
     #endif
-
-    #if MK_THREAD_LOGGING_ON
-        #define MK_T_LOG(...)               MK_LOG(__VA_ARGS__)
-    #else
-        #define MK_T_LOG(...)
-    #endif
-
 #else
     #define MK_LOG(...)
+    #define MK_E_LOG(...)
+    #define MK_S_LOG(...)
+    #define MK_M_LOG(...)
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

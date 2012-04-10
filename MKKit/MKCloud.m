@@ -86,7 +86,6 @@ static MKCloud *sharedCloud;
     self = [super init];
     if (self) {
         backgroundqueue = dispatch_queue_create("com.mkkit.document access thread", NULL);
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movedToBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     }
     return self;
@@ -104,10 +103,10 @@ static MKCloud *sharedCloud;
     
     [self.documents removeAllObjects]; self.documents = nil;
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
     dispatch_release(backgroundqueue);
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
-
     MK_M_LOG(@"Released Sigleton");
     
     [super dealloc];
@@ -141,11 +140,11 @@ static MKCloud *sharedCloud;
     
     NSURL *directoryURL = [NSURL documentsDirectoryURL];
     NSURL *fileURL = [directoryURL URLByAppendingPathComponent:name];
-        
+    
     dispatch_async(backgroundqueue,  ^ (void) {
         MKDocument *document = [[MKDocument alloc] initWithFileURL:fileURL];
         document.content = content;
-
+        
         [document saveToURL:fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler: ^ (BOOL success) {
             BOOL completed;
             
@@ -155,7 +154,7 @@ static MKCloud *sharedCloud;
                 NSURL *cloudURL = [ubiquitousDirectory URLByAppendingPathComponent:name];
                 
                 NSError *error = nil;
-                [manager setUbiquitous:YES itemAtURL:fileURL destinationURL:cloudURL error:&error];
+                [manager setUbiquitous:YES itemAtURL:document.fileURL destinationURL:cloudURL error:&error];
                 
                 if (!error) {
                     completed = YES;
@@ -164,7 +163,6 @@ static MKCloud *sharedCloud;
                     MK_E_LOG(@"Created cloud document named %@", name);
                 }
             }
-            
             dispatch_async(dispatch_get_main_queue(), ^ (void) {
                 [self documentCreated:document success:completed]; 
             });
@@ -180,7 +178,7 @@ static MKCloud *sharedCloud;
     __block MKDocument *document = [self documentNamed:name];
         
     if (document) {
-        [self openDocument:document]; 
+        content(document.content);
     }
         
     else {
@@ -216,19 +214,51 @@ static MKCloud *sharedCloud;
 }
 
 - (void)saveDocumentNamed:(NSString *)name successful:(void(^)(BOOL))successful {
-    dispatch_queue_t backgournd = dispatch_queue_create("com.mkkit.document access thread", NULL);
-    dispatch_async(backgournd, ^ (void) {
+    dispatch_async(backgroundqueue, ^ (void) {
         MKDocument *document = [self documentNamed:name];
         
-        [document saveToURL:document.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler: ^ (BOOL success) {
-            MK_E_LOG(@"Saved document named: %@", document.localizedName); 
-        }];
-        
+        if (document) {
+            [document saveToURL:document.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler: ^ (BOOL success) {
+                MK_E_LOG(@"Saved document named: %@", document.localizedName); 
+                
+                dispatch_async(dispatch_get_main_queue(), ^ (void) {
+                    if (successful) {
+                        successful(success);
+                    }
+                });
+            }];
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^ (void) {
+                MK_E_LOG(@"Could not find document named: %@", name);
+                if (successful) {
+                    successful(NO);
+                } 
+            });
+        }
     });
 }
 
 - (void)closeDocumentNamed:(NSString *)name successful:(void(^)(BOOL))successful {
+    MKDocument *document = [self documentNamed:name];
     
+    dispatch_async(backgroundqueue, ^ (void) {
+        [document closeWithCompletionHandler: ^ (BOOL success) {
+            if (successful) {
+                MK_E_LOG(@"Closed document named: %@", name);
+                
+                dispatch_async(dispatch_get_main_queue(), ^ (void) { [self removeDocument:document]; });
+            }
+            else {
+                MK_E_LOG(@"Unable to close document named: %@", name);
+            }
+            dispatch_async(dispatch_get_main_queue(), ^ (void) {
+                if (successful) {
+                    successful(success);
+                }
+            });
+        }];
+    });
 }
 
 #pragma mark - Cloud Operations
@@ -260,6 +290,9 @@ static MKCloud *sharedCloud;
                 complete = YES;
                 document.cloudDocument = YES;
             }
+            else {
+                MK_E_LOG(@"Error: %@", [error localizedDescription]);
+            }
                         
             dispatch_async(dispatch_get_main_queue(), ^ (void) {
                 [self documentAddedToCloud:document success:complete];
@@ -289,12 +322,19 @@ static MKCloud *sharedCloud;
             MK_E_LOG(@"Removed document named: %@", name);
             complete = YES;
         }
+        else {
+            MK_E_LOG(@"Error: %@", [error localizedDescription]);
+        }
         
         dispatch_async(dispatch_get_main_queue(), ^ (void) {
-            MKDocument *document = [self documentNamed:name];
-            document.cloudDocument = NO;
-            
-            [self removeDocument:document]; 
+            if (complete) {
+                MKDocument *document = [self documentNamed:name];
+                document.cloudDocument = NO;
+            }
+                        
+            if (successful) {
+                successful(complete);
+            }
         });
     });
 }
@@ -371,32 +411,6 @@ static MKCloud *sharedCloud;
     [self retain];
 }
 
-/*
-#pragma mark Remove File
-
-- (void)removeCloudFileNamed:(NSString *)name directory:(NSString *)directory successful:(void (^)(BOOL))successful {
-    NSFileManager *defaultManager = [NSFileManager defaultManager];
-    NSURL *ubiq = [defaultManager URLForUbiquityContainerIdentifier:nil];
-    NSURL *ubiqPackage = nil;
-    
-    if (directory) {
-        ubiqPackage = [[ubiq URLByAppendingPathComponent:directory] URLByAppendingPathComponent:name];
-    }
-    else {
-        ubiqPackage = [ubiq URLByAppendingPathComponent:name];
-    }
-    
-    NSError *removeError;
-    [defaultManager removeItemAtURL:ubiqPackage error:&removeError];
-    
-    if (removeError) {
-        successful(NO);
-    }
-    else {
-        successful(YES);
-    }
-}
-*/
 #pragma mark - Notifications
 
 //---------------------------------------------------------------
@@ -464,11 +478,13 @@ static MKCloud *sharedCloud;
 - (void)openDocument:(MKDocument *)document {
     [document openWithCompletionHandler: ^ (BOOL successful) {
         if (successful) {
-            self.openFileHandler(document.content);
+            [self addDocument:document];
+            
+            if (self.openFileHandler) {
+                self.openFileHandler(document.content);
+            }
             
             MK_E_LOG(@"Opened document named %@", document.localizedName);
-            
-            [self addDocument:document];
         } 
     }];
 }

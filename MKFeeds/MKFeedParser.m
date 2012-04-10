@@ -10,14 +10,29 @@
 #import "MKFeedItem.h"
 #import "MKFeedItemArchiver.h"
 
+//---------------------------------------------------------------
+// Macros
+//---------------------------------------------------------------
+
 #define MK_FEED_BASE_URL        @"https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&scoring=h"
+
+//---------------------------------------------------------------
+// Type Deffinitions
+//---------------------------------------------------------------
 
 typedef enum {
     MKFeedParserOperation,
     MKFeedArchiveOperation,
 } MKFeedOperationType;
 
+typedef void (^MKRequestComplete)(NSArray *feedInfo, NSError *error);
+typedef void (^MKArchiveSuccessful)(BOOL complete);
+
 #pragma mark - JSON Parse Operation
+
+//---------------------------------------------------------------
+// Interfaces
+//---------------------------------------------------------------
 
 @interface MKFeedParseOperation : NSOperation {
 @private
@@ -38,16 +53,16 @@ typedef enum {
 @property (nonatomic, assign) NSInteger fromIndex;
 
 @property (nonatomic, copy) NSString *archivePath;
-@property (nonatomic, retain) NSURL *archiveCloudURL;
 
 @property (nonatomic, assign) MKFeedArchiveType archiveType;
+
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+@property (nonatomic, retain) NSString *cloudDocumentName;
+#endif
 
 @end
 
 #pragma mark - MKFeedParser
-
-typedef void (^MKRequestComplete)(NSArray *feedInfo, NSError *error);
-typedef void (^MKArchiveSuccessful)(BOOL successful);
 
 @interface MKFeedParser () 
 
@@ -59,12 +74,26 @@ typedef void (^MKArchiveSuccessful)(BOOL successful);
 
 @end
 
+//---------------------------------------------------------------
+// Implemntaion
+//---------------------------------------------------------------
+
 @implementation MKFeedParser
 
-@synthesize url=mUrl, delegate, requestCompleteBlock=mRequestCompleteBlock, numberOfItems, archivePath, cloudURL, archiveResults, 
+@synthesize url=mUrl, delegate, requestCompleteBlock=mRequestCompleteBlock, numberOfItems, archivePath, archiveResults, 
 archiveSuccessBlock;
 
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+@synthesize cloudDocumentName;
+#endif
+
 @dynamic sourceType, contentType;
+
+#pragma mark - Creation
+
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
 
 - (id)initWithURL:(NSString *)aURL delegate:(id<MKFeedParserDelegate>)theDelegate {
 	if (self = [super init]) {
@@ -83,10 +112,18 @@ archiveSuccessBlock;
 
 #pragma mark - Memory Management
 
+//---------------------------------------------------------------
+// Memory Managment
+//---------------------------------------------------------------
+
 -(void)dealloc {
     self.delegate = nil;
     self.requestCompleteBlock = nil;
     self.archivePath = nil;
+
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+    self.cloudDocumentName = nil;
+#endif
     
     [mUrl release];
     
@@ -94,6 +131,10 @@ archiveSuccessBlock;
 }
 
 #pragma mark - request
+
+//---------------------------------------------------------------
+// Requests
+//---------------------------------------------------------------
 
 - (void)request {
     [[NSURLCache sharedURLCache] setDiskCapacity:0];
@@ -122,9 +163,11 @@ archiveSuccessBlock;
     [self request];
 }
 
-#pragma mark -
-#pragma mark Connection Delegate
+#pragma mark - Connection Delegate
 
+//---------------------------------------------------------------
+// Connection Delegate
+//---------------------------------------------------------------
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 
@@ -173,6 +216,10 @@ archiveSuccessBlock;
 
 #pragma mark - Parse Results
 
+//---------------------------------------------------------------
+// Parse Results
+//---------------------------------------------------------------
+
 - (void)parserResults:(id)results {
     if ([results isKindOfClass:[NSMutableArray class]]) {
         if (MKRSSFeedTags.usesCompletionBlock) {
@@ -189,11 +236,11 @@ archiveSuccessBlock;
             if (mArchiveType == MKFeedArchiveWithFile) {
                 operation.archivePath = self.archivePath;
             }
+#if MKKIT_AVAILABLE_TO_MKFEEDS
             else {
-                operation.archiveCloudURL = self.cloudURL;
+                operation.cloudDocumentName = self.cloudDocumentName;
             }
-
-            
+#endif
             NSOperationQueue *operationQueue = [NSOperationQueue mainQueue];
             [operationQueue addOperation:operation];
             
@@ -204,7 +251,11 @@ archiveSuccessBlock;
 
 #pragma mark - Archiving
 
-- (void)setArchiveResultsToPath:(NSString *)path successful:(MKArchiveSuccessful)successful {
+//---------------------------------------------------------------
+// Archiving
+//---------------------------------------------------------------
+
+- (void)setArchiveResultsToPath:(NSString *)path successful:(void (^)(BOOL complete))successful {
     mArchiveType = MKFeedArchiveWithFile;
     
     self.archiveResults = YES;
@@ -212,13 +263,17 @@ archiveSuccessBlock;
     self.archiveSuccessBlock = successful;
 }
 
-- (void)setArchiveResultsToCloudURL:(NSURL *)URL successful:(MKArchiveSuccessful)successful {
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+
+- (void)setArchiveToCloudFileNamed:(NSString *)name successful:(void (^)(BOOL complete))successful {
     mArchiveType = MKFeedArchiveWithCloud;
     
     self.archiveResults = YES;
-    self.cloudURL = URL;
+    self.cloudDocumentName = name;
     self.archiveSuccessBlock = successful;
 }
+
+#endif
 
 - (void)archiveComplete:(id)results {
     BOOL successful = YES;
@@ -259,6 +314,10 @@ archiveSuccessBlock;
 
 #pragma mark - Deprecations
 
+//---------------------------------------------------------------
+// Depreceated Methods
+//---------------------------------------------------------------
+
 - (void)setSourceType:(MKFeedSourceType)type {
 }
 
@@ -274,11 +333,23 @@ archiveSuccessBlock;
 
 #pragma mark - JSON Parse Operation
 
+//---------------------------------------------------------------
+// Implementation
+//---------------------------------------------------------------
+
 @implementation MKFeedParseOperation
 
-@synthesize archive, fromIndex, archivePath, archiveCloudURL, archiveType;
+@synthesize archive, fromIndex, archivePath, archiveType;
+
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+@synthesize cloudDocumentName;
+#endif
 
 #pragma mark - Creation
+
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
 
 - (id)initWithData:(NSData *)data target:(id)_target mainThreadCallBack:(SEL)callBack {
     self = [super init];
@@ -311,19 +382,30 @@ archiveSuccessBlock;
 
 #pragma mark - Memory
 
+//---------------------------------------------------------------
+// Memory Managment
+//---------------------------------------------------------------
+
 - (void)dealloc {
     [items release];
     [JSONData release];
     [target release];
     
     mainThreadCallBack = nil;
-    self.archiveCloudURL = nil;
     self.archivePath = nil;
+    
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+    self.cloudDocumentName = nil;
+#endif
     
     [super dealloc];
 }
 
 #pragma mark - Main
+
+//---------------------------------------------------------------
+// Main Method
+//---------------------------------------------------------------
 
 - (void)main {
     if (operationType == MKFeedParserOperation) {
@@ -354,8 +436,9 @@ archiveSuccessBlock;
                 }
             }];
         }
+#if MKKIT_AVAILABLE_TO_MKFEEDS
         else if (self.archiveType == MKFeedArchiveWithCloud) {
-            [archiver syncWithCloudFileAtURL:self.archiveCloudURL completion: ^ (MKArchiverSyncResults syncResults) {
+            [archiver syncWithCloudFileNamed:self.cloudDocumentName completion: ^ (MKArchiverSyncResults syncResults) {
                 if (syncResults == MKArchiverSyncComplete) {
                     [target performSelectorOnMainThread:mainThreadCallBack withObject:nil waitUntilDone:YES];
                 }
@@ -373,12 +456,17 @@ archiveSuccessBlock;
                 }
             }];
         }
+#endif
 
         [archiver release];
     }
 }
 
 #pragma mark - Parse
+
+//---------------------------------------------------------------
+// Parse Action
+//---------------------------------------------------------------
 
 - (void)JSONParseWithData:(NSData *)data result:(void (^)(id resultObject))result {
     NSError *error;

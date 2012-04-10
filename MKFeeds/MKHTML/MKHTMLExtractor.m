@@ -14,6 +14,30 @@
 #import <MKKit/MKFeeds/NSString+MKFeedParser.h>
 #import <UIKit/UIKit.h>
 
+//---------------------------------------------------------------
+// Type Deffs
+//---------------------------------------------------------------
+
+typedef void (^MKHTMLExtractorPageTextHandler)(NSString *pageText, NSError *error);
+
+//---------------------------------------------------------------
+// Functions
+//---------------------------------------------------------------
+
+MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *fontColor, NSString *backgroundColor) {
+    MKHTMLExtractorStyleSheet sheet;
+    
+    sheet.fontSize = fontSize;
+    sheet.fontColor = fontColor;
+    sheet.backgroundColor = backgroundColor;
+    
+    return sheet;
+}
+
+//---------------------------------------------------------------
+// Interfaces
+//---------------------------------------------------------------
+
 #pragma mark - Extraction Operation
 
 @interface MKHTMLExtractionOperation : NSOperation {
@@ -65,18 +89,6 @@
 
 #pragma mark - HTML Extractor
 
-typedef void (^MKHTMLExtractorPageTextHandler)(NSString *pageText, NSError *error);
-
-MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *fontColor, NSString *backgroundColor) {
-    MKHTMLExtractorStyleSheet sheet;
-    
-    sheet.fontSize = fontSize;
-    sheet.fontColor = fontColor;
-    sheet.backgroundColor = backgroundColor;
-    
-    return sheet;
-}
-
 @interface MKHTMLExtractor ()
 
 - (id)init;
@@ -90,11 +102,21 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 
 @end
 
+//---------------------------------------------------------------
+// Implementation
+//---------------------------------------------------------------
+
 @implementation MKHTMLExtractor
 
-@synthesize articleTitle, requestHandler, requestType, delegate, pageTextHandler;
+@synthesize articleTitle, articleAuthor, requestHandler, requestType, delegate, pageTextHandler;
 
 @dynamic results, numberOfPages, optimizeOutputForiPhone, combinesPages, styledOutput, styleSheet;
+
+#pragma mark - Creation
+
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
 
 - (id)init {
     self = [super init];
@@ -140,6 +162,10 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 
 #pragma mark - Memory Mangament
 
+//---------------------------------------------------------------
+// Interfaces
+//---------------------------------------------------------------
+
 - (void)dealloc {
     self.articleTitle = nil;
     self.pageTextHandler = nil;
@@ -158,6 +184,11 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 }
 
 #pragma mark - Accessor Methods
+
+//---------------------------------------------------------------
+// Accessor Methods
+//---------------------------------------------------------------
+
 #pragma mark Getters
 
 - (BOOL)styledOutput {
@@ -190,15 +221,24 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
             NSString *fontSize = @"12";
             NSString *titleFontSize = @"16";
             NSString *fontColor = @"#000000";
+            NSString *authorFontsize = @"10";
             NSString *backgroundColor = @"#ffffff";
             
             if (MKHTMLExtractorFlags.useStyleSheet) {
                 fontSize = [NSString stringWithFormat:@"%i", mStyleSheet.fontSize];
                 titleFontSize = [NSString stringWithFormat:@"%i", (mStyleSheet.fontSize + 4)];
+                authorFontsize = [NSString stringWithFormat:@"%i", (mStyleSheet.fontSize - 2)];
                 fontColor = mStyleSheet.fontColor;
                 backgroundColor = mStyleSheet.backgroundColor;
             }
-            mHTMLHeaderString = [[NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"initial-scale = 1.0, user-scalable = no\"/><style type=\"text/css\">.title { font-size: %@pt; font-weight: bold; color: %@;} .article { font-size: %@pt; color: %@;} </style><head><body bgColor=\"%@\">", titleFontSize, fontColor, fontSize, fontColor, backgroundColor] retain];
+            mHTMLHeaderString = [NSString stringWithFormat:@"<html><head><meta name=\"viewport\" content=\"initial-scale = 1.0, user-scalable = no\"/><style type=\"text/css\">"]; 
+            mHTMLHeaderString = [mHTMLHeaderString stringByAppendingFormat:@".title { font-size: %@pt; font-weight: bold; color: %@;}", titleFontSize, fontColor]; 
+            mHTMLHeaderString = [mHTMLHeaderString stringByAppendingFormat:@".article { font-size: %@pt; color: %@;}", fontSize, fontColor];
+            mHTMLHeaderString = [mHTMLHeaderString stringByAppendingFormat:@".author { font-size: %@pt; color: %@; font-style: italic;}", authorFontsize, fontColor];
+            mHTMLHeaderString = [mHTMLHeaderString stringByAppendingFormat:@".source { font-size: %@pt; color: %@; font-style: italic;}", authorFontsize, fontColor];
+            mHTMLHeaderString = [mHTMLHeaderString stringByAppendingFormat:@"</style></head><body bgColor=\"%@\">", backgroundColor];
+            
+            [mHTMLHeaderString retain];
         }
     }
 }
@@ -209,11 +249,21 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
     mHTMLHeaderString = [[mHTMLHeaderString stringByAppendingFormat:@"<div class=\"title\">%@</div>", title] retain];
 }
 
+- (void)setArticleAuthor:(NSString *)_articleAuthor {
+    MKHTMLExtractorFlags.articalAuthorSet = YES;
+    
+    mHTMLHeaderString = [[mHTMLHeaderString stringByAppendingFormat:@"<br><div class=\"author\">%@</div>", _articleAuthor] retain];
+}
+
 - (void)setCombinesPages:(BOOL)_combinesPages {
     MKHTMLExtractorFlags.combinesPages = _combinesPages;
 }
 
 #pragma mark - Request Methods
+
+//---------------------------------------------------------------
+// Reqest
+//---------------------------------------------------------------
 
 - (void)request {
     [[NSURLCache sharedURLCache] setMemoryCapacity:0];
@@ -257,6 +307,9 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 
 #pragma mark - Connection Delegate
 
+//---------------------------------------------------------------
+// Connection Delegate
+//---------------------------------------------------------------
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 }
@@ -285,6 +338,10 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 }
 
 #pragma mark - Extration Operations
+
+//---------------------------------------------------------------
+// Extraction Operations
+//---------------------------------------------------------------
 
 - (void)startExtractionOperation {
     MKHTMLExtractionOperation *operation = [[MKHTMLExtractionOperation alloc] initWithData:requestData target:self mainThreadCallBack:@selector(extractionResult:)];
@@ -348,6 +405,10 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 
 #pragma mark - Deprecations
 
+//---------------------------------------------------------------
+// Depreceations
+//---------------------------------------------------------------
+
 - (NSDictionary *)results {
     return nil;
 }
@@ -371,12 +432,20 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 
 #pragma mark - Extraction Opertation
 
+//---------------------------------------------------------------
+// Implementation
+//---------------------------------------------------------------
+
 @implementation MKHTMLExtractionOperation
 
 @synthesize combinesPages, currentPage, requestType, useCustomStyle, attemptCount, requestComplete,
 htmlHeaderString, articalTitleSet, URL;
 
 #pragma mark - Creation
+
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
 
 - (id)initWithData:(NSData *)_data target:(id)_target mainThreadCallBack:(SEL)callBack {
     self = [super init];
@@ -401,6 +470,10 @@ htmlHeaderString, articalTitleSet, URL;
 
 #pragma mark - Memory
 
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
+
 - (void)dealloc {
     self.htmlHeaderString = nil;
     self.URL = nil;
@@ -413,11 +486,19 @@ htmlHeaderString, articalTitleSet, URL;
 }
 #pragma mark - Main
 
+//---------------------------------------------------------------
+// Main Method
+//---------------------------------------------------------------
+
 - (void)main {
     [self extractFromData:data];
 }
 
 #pragma mark - Extractor Methods
+
+//---------------------------------------------------------------
+// Etraction Methods
+//---------------------------------------------------------------
 
 - (void)extractFromData:(NSData *)_data {
     MKHTMLParser *parsedData = nil;
@@ -439,6 +520,8 @@ htmlHeaderString, articalTitleSet, URL;
                 if ([text length] > 1) {
                     if (self.useCustomStyle && self.currentPage == 1) {
                         text = [self.htmlHeaderString stringByAppendingString:text];
+                        text = [text stringByAppendingString:@"<p><div class=\"source\">"];
+                        text = [text stringByAppendingFormat:@"Source: %@</div>", self.URL];
                         text = [text stringByAppendingString:@"</body></html>"];
                     }
                     
@@ -546,6 +629,11 @@ htmlHeaderString, articalTitleSet, URL;
 
 #pragma mark Main Body Helpers
 
+//---------------------------------------------------------------
+// Extraction Helpers
+//---------------------------------------------------------------
+
+
 - (NSString *)styledTitleFromNode:(MKHTMLNode *)node {
     NSMutableString *rtn = [NSMutableString string];
     
@@ -615,6 +703,10 @@ htmlHeaderString, articalTitleSet, URL;
 
 #pragma mark Linked Pages
 
+//---------------------------------------------------------------
+// Linked Pages
+//---------------------------------------------------------------
+
 - (void)findNextPageFromParsedData:(MKHTMLParser *)parsedData {
     NSString *nextPageNumber = [NSString stringWithFormat:@"%i", (self.currentPage + 1)];
     NSArray *links = [[parsedData body] childrenNamed:@"a"];
@@ -641,6 +733,10 @@ htmlHeaderString, articalTitleSet, URL;
 
 #pragma mark Errors
 
+//---------------------------------------------------------------
+// Errors
+//---------------------------------------------------------------
+
 - (void)postExtractionError {
     MKHTMLExtractorNoResultsFoundError = @"MKHTMLExtratorNoResultsFoundError";
     MKHTMLExtractorErrorUserInfoURLKey = @"MKHTMLExtractorErrorUserInfoURLKey";
@@ -655,9 +751,19 @@ htmlHeaderString, articalTitleSet, URL;
 
 #pragma mark - Attribute Value
 
+//---------------------------------------------------------------
+// Implementation
+//---------------------------------------------------------------
+
 @implementation MKHTMLAttributeValue
 
 @synthesize attribute, value;
+
+#pragma mark - Creation
+
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
 
 - (id)initWithAttribute:(NSString *)attrib value:(NSString *)val {
     self = [super init];
@@ -668,6 +774,11 @@ htmlHeaderString, articalTitleSet, URL;
     return self;
 }
 
+#pragma mark - Memory
+
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
 
 - (void)dealloc {
     self.attribute = nil;

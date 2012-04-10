@@ -26,8 +26,11 @@ typedef enum {
 } MKFeedSourceType;
 
 typedef enum {
+    MKFeedArchiveNone,
     MKFeedArchiveWithFile,
+#if MKKIT_AVAILABLE_TO_MKFEEDS
     MKFeedArchiveWithCloud,
+#endif
 } MKFeedArchiveType;
 
 @class MKFeedItem;
@@ -55,9 +58,9 @@ typedef enum {
  MKFeedParser can sync to iCloud documents as well use the setArchiveResultsToCloudURL:successful:
  method to sync to the cloud.
  
- @warning *Note* MKFeedParser assumes that all the require iCloud use checks have been done prior
- to requesting data.  It does not check for iCloud avialbility or the existance of a file at the 
- given file URL.
+ @warning *Note* Cloud syncing methods can only be used if the MKKit library is available to MKFeeds. 
+ Toggle the `MKKIT_AVAILABLE_TO_MKFEEDS` macro in the `MKAvailablity.h` file to make MKKit available or 
+ not.
  
  If you set the properties yourself the feed:didArchiveResults: delegate method will notify
  you of an archives success or failure.  If you use the  setArchiveResultsToPath:successful:
@@ -109,6 +112,8 @@ typedef enum {
 */
 - (void)request;
 
+#if NS_BLOCKS_AVAILABLE
+
 /**
  Starts the request for data from the provided URL, and returns the results
  through the MKRequestComplete block.
@@ -116,6 +121,8 @@ typedef enum {
  @param block the code block to run when the request is complete.
 */
 - (void)requestWithCompletionBlock:(void(^)(NSArray *feedInfo, NSError *error))block;
+
+#endif
 
 ///-----------------------------------------------
 /// @name Feed Information
@@ -142,8 +149,7 @@ typedef enum {
 /** The path to write/sync the parsed results to. */
 @property (nonatomic, copy) NSString *archivePath;
 
-/** The iCloud file URL to sync the parsed results to. */
-@property (nonatomic, retain) NSURL *cloudURL;
+#if NS_BLOCKS_AVAILABLE
 
 /** 
  Tells the parser if it should archive the results and retuns the results throught the
@@ -158,7 +164,16 @@ typedef enum {
  * `MKArchiverSyncComplete` : sync was successful.
  * `MKArchiverSyncFailed` : sync was not successful.
 */
-- (void)setArchiveResultsToPath:(NSString *)path successful:(void(^)(BOOL successful))successful;
+- (void)setArchiveResultsToPath:(NSString *)path successful:(void(^)(BOOL complete))successful;
+
+#endif
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+
+///------------------------------------------------
+/// @name Cloud Archiving and Syncing
+///------------------------------------------------
+
+#if NS_BLOCKS_AVAILABLE
 
 /**
  Tells the parser to sync the results with the given iCloud file URL.
@@ -175,9 +190,19 @@ typedef enum {
  @warning *Note* MKFeedParser assumes that all the require iCloud use checks have been done prior
  to requesting data.  It does not check for iCloud avialbility or the existance of a file at the 
  given file URL.
+ 
+ @warning *Note* This method can only be used if the MKKit library is available to MKFeeds. Toggle
+ the `MKKIT_AVAILABLE_TO_MKFEEDS` macro in the `MKAvailablity.h` file to make MKKit available or 
+ not.
 */
-- (void)setArchiveResultsToCloudURL:(NSURL *)URL successful:(void(^)(BOOL successful))successful;
+- (void)setArchiveToCloudFileNamed:(NSString *)name successful:(void(^)(BOOL complete))successful;
 
+#endif
+
+/** The iCloud file URL to sync the parsed results to. */
+@property (nonatomic, copy) NSString *cloudDocumentName;
+
+#endif
 ///-----------------------------------------------
 /// @name Delegate
 ///-----------------------------------------------
@@ -236,7 +261,7 @@ NSString *MKGoogleJSONAuthor MK_VISIBLE_ATTRIBUTE;
  
  @param successful `YES` if the archive was successful, `NO` if not.
 */
-- (void)feed:(MKFeedParser *)feed didArchiveResuslts:(BOOL)successful;
+- (void)feed:(MKFeedParser *)feed didArchiveResuslts:(MKArchiverSyncResults)results;
 
 /**
  Called when an archive changes it status

@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "MKFeedsAvailability.h"
+
 typedef enum {
-    MKArchiverSyncIncomplete,
-    MKArchiverSyncComplete,
-    MKArchiverSyncFailed,
+    MKArchiverSyncIncomplete = 0,
+    MKArchiverSyncComplete   = 1,
+    MKArchiverSyncFailed     = 2,
 } MKArchiverSyncResults;
 
 @class MKFeedParser;
@@ -28,8 +30,13 @@ typedef enum {
  
  Call the setArchiveResults:path:successful: method of an MKFeedParser instance to automatically
  sync the results to an archive. You can also use this class directly to archive feed items
- on your own.  
+ on your own.
  
+ MKFeedArchiver can sync feed results with documents stored on the cloud, however it is required
+ that the MKKit library is available in order for the methods to work. Toggle the 
+ `MKKIT_AVAILABLE_TO_MKFEEDS` macro in the MKFeedsAvailability.h to make the functions available 
+ for use.
+
  @warning *Note* MKFeedArchiver contains heavy processing methods. Its is recomended that it
  used off of the main thread.
 ------------------------------------------------------------------------------------*/
@@ -51,6 +58,20 @@ typedef enum {
 */
 - (id)initWithItems:(NSArray *)items;
 
+///--------------------------------------------------
+/// @name Overwriting
+///--------------------------------------------------
+
+/**
+ Adds the entire array given at creation to the end of the current stack.
+ 
+ @param path the path of file to add the array to.
+ 
+ @return YES if the successful, NO if not.
+ */
+- (BOOL)addAllItemsToPath:(NSString *)path;
+
+#if NS_BLOCKS_AVAILABLE
 ///------------------------------------------------
 /// @name Archiving
 ///------------------------------------------------
@@ -63,11 +84,6 @@ typedef enum {
  
  @param completion the block called upon the completion of the sync. Returns `YES` if the 
  sync was successful, `NO` if it was not.
- 
- * `MKArchiverSyncIncomplete` : sync was successful, but there may be a gap in the items.
- * `MKArchiverSyncComplete` : sync was successful.
- * `MKArchiverSyncFailed` : sync was not successful.
- 
 */
 - (void)archiveToFileAtPath:(NSString *)path completion:(void (^) (BOOL finished))completion;
 
@@ -91,6 +107,12 @@ typedef enum {
 */
 - (void)syncWithArchiveFileAtPath:(NSString *)path completion:(void (^) (MKArchiverSyncResults syncResults))completion;
 
+///--------------------------------------------------
+/// @name Cloud Syncing
+///--------------------------------------------------
+
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+
 /**
  Syncs items from the array provided at creation and writes the new file to cloud. New items are added 
  to the top of the existing stack.
@@ -105,29 +127,10 @@ typedef enum {
  * `MKArchiverSyncComplete` : sync was successful.
  * `MKArchiverSyncFailed` : sync was not successful.
  
-*/
-- (void)syncWithCloudFileAtURL:(NSURL *)URL completion:(void (^) (MKArchiverSyncResults syncResults))completion;
+ */
+- (void)syncWithCloudFileNamed:(NSString *)name completion:(void (^) (MKArchiverSyncResults syncResults))completion;
 
-///--------------------------------------------------
-/// @name Overwriting
-///--------------------------------------------------
-
-/**
- Adds the entire array given at creation to the end of the current stack.
- 
- @param path the path of file to add the array to.
- 
- @return YES if the successful, NO if not.
-*/
-- (BOOL)addAllItemsToPath:(NSString *)path;
-
-/**
- Adds the entire array given at creation to the end of the current stack.
- 
- @param URL the URL location of the local cloud file
- 
- @return YES if the successful, NO if not.
-*/
-- (BOOL)addAllItemsToCloudURL:(NSURL *)URL;
+#endif
+#endif
 
 @end

@@ -64,6 +64,7 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
         BOOL requestFromURL;
         BOOL usesCustomStyle;
         BOOL articalTitleSet;
+        BOOL articalAuthorSet;
         BOOL combinesPages;
         BOOL useStyleSheet;
         int currentPage;
@@ -121,6 +122,9 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 */
 @property (nonatomic, copy) NSString *articleTitle;
 
+/** Set this string to list the articles author below the title.*/
+@property (nonatomic, copy) NSString *articleAuthor;
+
 ///--------------------------------------------
 /// @name Styling Output
 ///--------------------------------------------
@@ -158,6 +162,8 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 /// @name Preforming Requests
 ///--------------------------------------------
 
+#if NS_BLOCKS_AVAILABLE
+
 /**
  Makes a request from the supplied URL, preforms an extraction, and
  passes the results through the handler block.
@@ -184,6 +190,8 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
  found.
 */
 - (void)requestPagesWithHandler:(void (^)(NSString *pageText, NSError *error))handler;
+
+#endif
 
 /** The request that is currently being used. */
 @property (nonatomic, assign) MKHTMLExtractorRequestType requestType;

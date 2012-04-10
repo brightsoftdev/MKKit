@@ -38,7 +38,23 @@
 					
 <p> <strong> Overview </strong></p>
 
-<p> <a href="MKCloud.html">MKCloud</a> provides some basic funtions for using iCloud data storage. </p>
+<p> <a href="MKCloud.html">MKCloud</a> provides functions to easly manage <a href="#//api/name/documents">documents</a> in and out of the Cloud. <a href="MKCloud.html">MKCloud</a> creats a singleton instance to manage your apps documents. Documents can be created, saved, closed, deleted, as well as pushed and pulled from the Cloud. The singleton also retains all open <a href="#//api/name/documents">documents</a> for fast retreaval. </p>
+
+<p> <strong> Usage </strong></p>
+
+<p> <a href="MKCloud.html">MKCloud</a> is desinged to work as singleton. You can access the singleton by calling the <code><a href="#//api/name/cloudManager">cloudManager</a></code> class method. The singleton does most of its work on a background thread. The threading is built in methods should be called from the main thread. All blocks passed to <a href="MKCloud.html">MKCloud</a> are performed on the main thread. </p>
+
+<p> When using <a href="MKCloud.html">MKCloud</a> <a href="#//api/name/documents">documents</a> are referenced by name. The expected name is the same as the file name used when creating the document. Be sure not to confuse the name with the <a href="#//api/name/documents">documents</a> <code>display name</code>. </p>
+
+<p> The singleton controls the retention/release of <a href="#//api/name/documents">documents</a> automatically. By all <a href="#//api/name/documents">documents</a> that are created or opened by the singleton are retained until they are closed. Documents can added or removed manually by calling the <a href="#//api/name/addDocument:">addDocument:</a> or <a href="#//api/name/removeDocument:">removeDocument:</a> methods. </p>
+
+<p> <strong> Document Types </strong></p>
+
+<p> <a href="MKCloud.html">MKCloud</a> only supports <a href="#//api/name/documents">documents</a> from the MKDocuments subclass. All <a href="#//api/name/documents">documents</a> created by <a href="MKCloud.html">MKCloud</a> are created using this subclass. See MKDocuments for more information. </p>
+
+<p> <strong> Addtional Information </strong></p>
+
+<p> <a href="MKCloud.html">MKCloud</a> supports the default Debug/Event login of MKKit. You can toggle what type of lodding you want to use from the <code>MKAvailability.h</code> file. </p>
 
 				</div>
 				
@@ -48,13 +64,13 @@
 				<div class="section section-tasks">
 					<h2 class="subtitle subtitle-tasks">Tasks</h2>
 					
-					<h3 class="subsubtitle task-title">Creating Instances</h3>
+					<h3 class="subsubtitle task-title">Getting Instances</h3>
 
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/cloudManager">+ cloudManager</a></code>
-		<span class="tooltip"> Creates an autoreleasing instance MKCloud. </span>
+		<span class="tooltip"> Returns a singleton instance of MKCloud. </span>
 	</span>
 	
 </li>
@@ -66,25 +82,97 @@
 						<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/iCloudIsAvailable">+ iCloudIsAvailable</a></code>
-		<span class="tooltip"> Checks if iCloud is available for the current device/user. returns <code>YES</code> if available, <code>NO</code> if not. </span>
+		<span class="tooltip"> Checks if iCloud is available for the current device/user. Returns <code>YES</code> if available, <code>NO</code> if not. </span>
 	</span>
 	
 </li>
 					</ul>
 					
-					<h3 class="subsubtitle task-title">File Operations</h3>
+					<h3 class="subsubtitle task-title">Manage Documents</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addDocument:">- addDocument:</a></code>
+		<span class="tooltip"> Adds an instance <a href="MKDocument.html">MKDocument</a> for the singleton to mangage. It is usually not required to add a document manually. The singleton instance manages the retention/release of docuemnts automatically. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removeDocument:">- removeDocument:</a></code>
+		<span class="tooltip"> Removes an instance <a href="MKDocument.html">MKDocument</a> from the singletons management. It is usually not required to remove a document manually. The singleton instance manages the retention/release of docuemnts automatically. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Getting Documents</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/documentNamed:">- documentNamed:</a></code>
+		<span class="tooltip"> Returns an instance of <a href="MKDocument.html">MKDocument</a> if it is currently being managed by MKCloud, or <code>nil</code> if not. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/documents"> documents</a></code>
+		<span class="tooltip"> A set of all <a href="#//api/name/documents">documents</a> currently being managed by MKCloud. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/createDocumentNamed:content:successful:">- createDocumentNamed:content:successful:</a></code>
+		<span class="tooltip"> Creates a document with given name and content. By default this method pushes the document to the cloud after it is created. If you do not want the document to be on the cloud call the <a href="#//api/name/removeDocumentNamed:successful:">removeDocumentNamed:successful:</a> method in the successful block of this method. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/openDocumentNamed:content:">- openDocumentNamed:content:</a></code>
+		<span class="tooltip"> Opens the document that has the given file name. This method will add a document the singletons managed <a href="#//api/name/documents">documents</a> if it is not already there. This method works in three stages: <ol><li> Check for existing <a href="#//api/name/documents">documents</a> in the manager and uses them if availble. </li></ol> <ol><li> Seaches the devices cloud directories for the document and returns it when found. </li></ol> <ol><li> Look for the document in apps local <a href="#//api/name/documents">documents</a> directory and returns it when found. </li></ol></span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/saveDocumentNamed:successful:">- saveDocumentNamed:successful:</a></code>
+		<span class="tooltip"> Saves the document that has the given file name. This method assumes the document being saved is currently being managed by the singleton. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/closeDocumentNamed:successful:">- closeDocumentNamed:successful:</a></code>
+		<span class="tooltip"> Closes the docuemnt that has the given file name. This method assums the document being closed if currenetly being manged by the singleton. The singleton will remove the docuemnt from its managed list when the closing is complete. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Cloud Operations</h3>
+
+					<ul class="task-list">
+						<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pushDocumentToCloud:named:successful:">- pushDocumentToCloud:named:successful:</a></code>
+		<span class="tooltip"> Pushes a document to the cloud and adds it to the singletons managed list if it is not already part of the docuemnts being managed. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removeDocumentNamed:successful:">- removeDocumentNamed:successful:</a></code>
+		<span class="tooltip"> Pulls the document off of the cloud and moves it to the apps <a href="#//api/name/documents">documents</a> directory. The document will still be managed by the singleton after it is pulled from the cloud. </span>
+	</span>
+	
+</li>
+					</ul>
+					
+					<h3 class="subsubtitle task-title">Finding Documents</h3>
 
 					<ul class="task-list">
 						<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/urlForFileNamed:result:">- urlForFileNamed:result:</a></code>
 		<span class="tooltip"> Checks if the given file exists in the local cloud directory and retuns an NSURL instance if the file exists. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/removeCloudFileNamed:directory:successful:">- removeCloudFileNamed:directory:successful:</a></code>
-		<span class="tooltip"> Removes a file from the cloud if the file exists. </span>
 	</span>
 	
 </li>
@@ -106,7 +194,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Creates an autoreleasing instance MKCloud. </p>
+		<p> Returns a singleton instance of MKCloud. </p>
 	</div>		
 	
 	
@@ -125,9 +213,9 @@
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		
-		<p> Creates an autoreleasing instance MKCloud. </p>
+		<p> Returns a singleton instance of MKCloud. </p>
 		
-		<p> This should be the only method used to create an instance. </p>
+		<p> This should be the only method used to get an instance. Creating instances yourself may degrade the preformance of Cloud documents. </p>
 		
 	</div>
 	
@@ -152,7 +240,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Checks if iCloud is available for the current device/user. returns <code>YES</code> if available, <code>NO</code> if not. </p>
+		<p> Checks if iCloud is available for the current device/user. Returns <code>YES</code> if available, <code>NO</code> if not. </p>
 	</div>		
 	
 	
@@ -185,17 +273,59 @@
 					<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 					
 					<div class="section-method">
-	<a name="//api/name/removeCloudFileNamed:directory:successful:" title="removeCloudFileNamed:directory:successful:"></a>
-	<h3 class="subsubtitle method-title">removeCloudFileNamed:directory:successful:</h3>
+	<a name="//api/name/addDocument:" title="addDocument:"></a>
+	<h3 class="subsubtitle method-title">addDocument:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Removes a file from the cloud if the file exists. </p>
+		<p> Adds an instance <a href="MKDocument.html">MKDocument</a> for the singleton to mangage. It is usually not required to add a document manually. The singleton instance manages the retention/release of docuemnts automatically. </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)removeCloudFileNamed:(NSString *)<em>name</em> directory:(NSString *)<em>directory</em> successful:(void ( ^ ) ( BOOL successful ))<em>successful</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)addDocument:(MKDocument *)<em>document</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>document</em></dt>
+			<dd> an instance of <a href="MKDocument.html">MKDocument</a></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/closeDocumentNamed:successful:" title="closeDocumentNamed:successful:"></a>
+	<h3 class="subsubtitle method-title">closeDocumentNamed:successful:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Closes the docuemnt that has the given file name. This method assums the document being closed if currenetly being manged by the singleton. The singleton will remove the docuemnt from its managed list when the closing is complete. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)closeDocumentNamed:(NSString *)<em>name</em> successful:(void ( ^ ) ( BOOL sucessful ))<em>successful</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -203,17 +333,355 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>name</em></dt>
-			<dd> the name of the file to remove </dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>directory</em></dt>
-			<dd> the directory if any the file was saved into or nil if no directory was used. </dd>
+			<dd> the file name of the document </dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>successful</em></dt>
-			<dd> the code block to be preformed upon the completion of the file removal. </dd>
+			<dd> the block called when the closing is complete </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/createDocumentNamed:content:successful:" title="createDocumentNamed:content:successful:"></a>
+	<h3 class="subsubtitle method-title">createDocumentNamed:content:successful:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Creates a document with given name and content. By default this method pushes the document to the cloud after it is created. If you do not want the document to be on the cloud call the <a href="#//api/name/removeDocumentNamed:successful:">removeDocumentNamed:successful:</a> method in the successful block of this method. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)createDocumentNamed:(NSString *)<em>name</em> content:(NSData *)<em>content</em> successful:(void ( ^ ) ( BOOL successful ))<em>successful</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd> the file name of the document </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>content</em></dt>
+			<dd> the content of the document in the form of an NSData instance </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>successful</em></dt>
+			<dd> the code block that is called upon completion of this method </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		
+		<p> Creates a document with given name and content. By default this method pushes the document to the cloud after it is created. If you do not want the document to be on the cloud call the <a href="#//api/name/removeDocumentNamed:successful:">removeDocumentNamed:successful:</a> method in the successful block of this method. </p>
+		
+		<p> The document instance created here are automatically retained by the singleton. </p>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/documentNamed:" title="documentNamed:"></a>
+	<h3 class="subsubtitle method-title">documentNamed:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Returns an instance of <a href="MKDocument.html">MKDocument</a> if it is currently being managed by MKCloud, or <code>nil</code> if not. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (MKDocument *)documentNamed:(NSString *)<em>name</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd> the file name of the document </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p> <a href="MKDocument.html">MKDocument</a> instance or <code>nil</code></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/openDocumentNamed:content:" title="openDocumentNamed:content:"></a>
+	<h3 class="subsubtitle method-title">openDocumentNamed:content:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Opens the document that has the given file name. This method will add a document the singletons managed <a href="#//api/name/documents">documents</a> if it is not already there. This method works in three stages: <ol><li> Check for existing <a href="#//api/name/documents">documents</a> in the manager and uses them if availble. </li></ol> <ol><li> Seaches the devices cloud directories for the document and returns it when found. </li></ol> <ol><li> Look for the document in apps local <a href="#//api/name/documents">documents</a> directory and returns it when found. </li></ol></p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)openDocumentNamed:(NSString *)<em>name</em> content:(void ( ^ ) ( id content ))<em>content</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd> the file name of the document </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>content</em></dt>
+			<dd> the content of the document <p class="warning"> <strong> Note </strong> The content will always be an instance of NSData when retuned in the content block. Content will <code>nil</code> if no document could be found. </p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/pushDocumentToCloud:named:successful:" title="pushDocumentToCloud:named:successful:"></a>
+	<h3 class="subsubtitle method-title">pushDocumentToCloud:named:successful:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Pushes a document to the cloud and adds it to the singletons managed list if it is not already part of the docuemnts being managed. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)pushDocumentToCloud:(MKDocument *)<em>document</em> named:(NSString *)<em>name</em> successful:(void ( ^ ) ( BOOL successful ))<em>successful</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>document</em></dt>
+			<dd> the document to push to the cloud </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd> the file name of the docuemnt </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>successful</em></dt>
+			<dd> the block called when the closing is complete </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/removeDocument:" title="removeDocument:"></a>
+	<h3 class="subsubtitle method-title">removeDocument:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Removes an instance <a href="MKDocument.html">MKDocument</a> from the singletons management. It is usually not required to remove a document manually. The singleton instance manages the retention/release of docuemnts automatically. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)removeDocument:(MKDocument *)<em>document</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>document</em></dt>
+			<dd> an instance of <a href="MKDocument.html">MKDocument</a></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/removeDocumentNamed:successful:" title="removeDocumentNamed:successful:"></a>
+	<h3 class="subsubtitle method-title">removeDocumentNamed:successful:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Pulls the document off of the cloud and moves it to the apps <a href="#//api/name/documents">documents</a> directory. The document will still be managed by the singleton after it is pulled from the cloud. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)removeDocumentNamed:(NSString *)<em>name</em> successful:(void ( ^ ) ( BOOL successful ))<em>successful</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd> the file name of the document </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>successful</em></dt>
+			<dd> the block called when the movement is complete </dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/saveDocumentNamed:successful:" title="saveDocumentNamed:successful:"></a>
+	<h3 class="subsubtitle method-title">saveDocumentNamed:successful:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Saves the document that has the given file name. This method assumes the document being saved is currently being managed by the singleton. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)saveDocumentNamed:(NSString *)<em>name</em> successful:(void ( ^ ) ( BOOL successful ))<em>successful</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd> the file name of the document </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>successful</em></dt>
+			<dd> code block called when the save is complete </dd>
 		</dl>
 		
 	</div>
@@ -287,6 +755,43 @@
 				
 				
 				
+				<div class="section section-methods">
+					<h2 class="subtitle subtitle-methods">Properties</h2>
+					
+					<div class="section-method">
+	<a name="//api/name/documents" title="documents"></a>
+	<h3 class="subsubtitle method-title">documents</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> A set of all <a href="#//api/name/documents">documents</a> currently being managed by MKCloud. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (retain) NSMutableSet *documents</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+				</div>
+				
 				
 			</div>
 			<div class="main-navigation navigation-bottom">
@@ -298,7 +803,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-03-25)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-04-09)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

@@ -51,7 +51,7 @@
 
 <p> <a href="MKFeedParser.html">MKFeedParser</a> instances can automatically archive the results of the <a href="#//api/name/request">request</a> to disk by using MKFeedItemArchiver. Set the archiveResults, and <a href="#//api/name/archivePath">archivePath</a> properties, or call the <a href="#//api/name/setArchiveResultsToPath:successful:">setArchiveResultsToPath:successful:</a> method to create or sync to an archive file. </p>
 
-<p> <a href="MKFeedParser.html">MKFeedParser</a> can sync to iCloud documents as well use the <a href="#//api/name/setArchiveResultsToCloudURL:successful:">setArchiveResultsToCloudURL:successful:</a> method to sync to the cloud. <p class="warning"> <strong> Note </strong> <a href="MKFeedParser.html">MKFeedParser</a> assumes that all the require iCloud use checks have been done prior to requesting data. It does not check for iCloud avialbility or the existance of a file at the given file URL. </p></p>
+<p> <a href="MKFeedParser.html">MKFeedParser</a> can sync to iCloud documents as well use the setArchiveResultsToCloudURL:successful: method to sync to the cloud. <p class="warning"> <strong> Note </strong> Cloud syncing methods can only be used if the MKKit library is available to MKFeeds. Toggle the <code>MKKIT_AVAILABLE_TO_MKFEEDS</code> macro in the <code>MKAvailablity.h</code> file to make MKKit available or not. </p></p>
 
 <p> If you set the properties yourself the feed:didArchiveResults: <a href="#//api/name/delegate">delegate</a> method will notify you of an archives success or failure. If you use the <a href="#//api/name/setArchiveResultsToPath:successful:">setArchiveResultsToPath:successful:</a> the successful block is called upon completion. </p>
 
@@ -128,20 +128,20 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/cloudURL"> cloudURL</a></code>
-		<span class="tooltip"> The iCloud file URL to sync the parsed results to. </span>
-	</span>
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/setArchiveResultsToPath:successful:">- setArchiveResultsToPath:successful:</a></code>
 		<span class="tooltip"> Tells the parser if it should archive the results and retuns the results throught the successful block. </span>
 	</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/setArchiveResultsToCloudURL:successful:">- setArchiveResultsToCloudURL:successful:</a></code>
+		<code><a href="#//api/name/setArchiveToCloudFileNamed:successful:">- setArchiveToCloudFileNamed:successful:</a></code>
 		<span class="tooltip"> Tells the parser to sync the results with the given iCloud file URL. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/cloudDocumentName"> cloudDocumentName</a></code>
+		<span class="tooltip"> The iCloud file URL to sync the parsed results to. </span>
 	</span>
 	
 </li>
@@ -325,30 +325,30 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/setArchiveResultsToCloudURL:successful:" title="setArchiveResultsToCloudURL:successful:"></a>
-	<h3 class="subsubtitle method-title">setArchiveResultsToCloudURL:successful:</h3>
+	<a name="//api/name/setArchiveResultsToPath:successful:" title="setArchiveResultsToPath:successful:"></a>
+	<h3 class="subsubtitle method-title">setArchiveResultsToPath:successful:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Tells the parser to sync the results with the given iCloud file URL. </p>
+		<p> Tells the parser if it should archive the results and retuns the results throught the successful block. </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)setArchiveResultsToCloudURL:(NSURL *)<em>URL</em> successful:(void ( ^ ) ( BOOL successful ))<em>successful</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)setArchiveResultsToPath:(NSString *)<em>path</em> successful:(void ( ^ ) ( BOOL complete ))<em>successful</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>URL</em></dt>
-			<dd> an iCloud file URL to sync with </dd>
+			<dt><em>path</em></dt>
+			<dd> the path to write/sync the parsed results to. </dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>sucessul</em></dt>
-			<dd> the block to call when the sync is complete. Block will pass of three <code>MKArchiverSyncResults</code>: <ul><li> <code>MKArchiverSyncIncomplete</code>: sync was successful, but there may be a gap in the items. </li><li> <code>MKArchiverSyncComplete</code>: sync was successful. </li><li> <code>MKArchiverSyncFailed</code>: sync was not successful. </li></ul> <p class="warning"> <strong> Note </strong> <a href="MKFeedParser.html">MKFeedParser</a> assumes that all the require iCloud use checks have been done prior to requesting data. It does not check for iCloud avialbility or the existance of a file at the given file URL. </p></dd>
+			<dd> the block to call when the sync is complete. Block will pass of three <code>MKArchiverSyncResults</code>: <ul><li> <code>MKArchiverSyncIncomplete</code>: sync was successful, but there may be a gap in the items. </li><li> <code>MKArchiverSyncComplete</code>: sync was successful. </li><li> <code>MKArchiverSyncFailed</code>: sync was not successful. </li></ul></dd>
 		</dl>
 		
 	</div>
@@ -372,30 +372,30 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/setArchiveResultsToPath:successful:" title="setArchiveResultsToPath:successful:"></a>
-	<h3 class="subsubtitle method-title">setArchiveResultsToPath:successful:</h3>
+	<a name="//api/name/setArchiveToCloudFileNamed:successful:" title="setArchiveToCloudFileNamed:successful:"></a>
+	<h3 class="subsubtitle method-title">setArchiveToCloudFileNamed:successful:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Tells the parser if it should archive the results and retuns the results throught the successful block. </p>
+		<p> Tells the parser to sync the results with the given iCloud file URL. </p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)setArchiveResultsToPath:(NSString *)<em>path</em> successful:(void ( ^ ) ( BOOL successful ))<em>successful</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)setArchiveToCloudFileNamed:(NSString *)<em>name</em> successful:(void ( ^ ) ( BOOL complete ))<em>successful</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>path</em></dt>
-			<dd> the path to write/sync the parsed results to. </dd>
+			<dt><em>URL</em></dt>
+			<dd> an iCloud file URL to sync with </dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>sucessul</em></dt>
-			<dd> the block to call when the sync is complete. Block will pass of three <code>MKArchiverSyncResults</code>: <ul><li> <code>MKArchiverSyncIncomplete</code>: sync was successful, but there may be a gap in the items. </li><li> <code>MKArchiverSyncComplete</code>: sync was successful. </li><li> <code>MKArchiverSyncFailed</code>: sync was not successful. </li></ul></dd>
+			<dd> the block to call when the sync is complete. Block will pass of three <code>MKArchiverSyncResults</code>: <ul><li> <code>MKArchiverSyncIncomplete</code>: sync was successful, but there may be a gap in the items. </li><li> <code>MKArchiverSyncComplete</code>: sync was successful. </li><li> <code>MKArchiverSyncFailed</code>: sync was not successful. </li></ul> <p class="warning"> <strong> Note </strong> <a href="MKFeedParser.html">MKFeedParser</a> assumes that all the require iCloud use checks have been done prior to requesting data. It does not check for iCloud avialbility or the existance of a file at the given file URL. </p> <p class="warning"> <strong> Note </strong> This method can only be used if the MKKit library is available to MKFeeds. Toggle the <code>MKKIT_AVAILABLE_TO_MKFEEDS</code> macro in the <code>MKAvailablity.h</code> file to make MKKit available or not. </p></dd>
 		</dl>
 		
 	</div>
@@ -522,8 +522,8 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/cloudURL" title="cloudURL"></a>
-	<h3 class="subsubtitle method-title">cloudURL</h3>
+	<a name="//api/name/cloudDocumentName" title="cloudDocumentName"></a>
+	<h3 class="subsubtitle method-title">cloudDocumentName</h3>
 	
 	
 	
@@ -532,7 +532,7 @@
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, retain) NSURL *cloudURL</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *cloudDocumentName</code></div>
 	
 	
 	
@@ -703,7 +703,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-03-25)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-04-09)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>
