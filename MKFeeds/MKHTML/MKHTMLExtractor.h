@@ -46,6 +46,11 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
  MKHTMLExtractor supports the use of code blocks to handle responces from an extraction
  request. Call the requestType:handler: method to make use of the handler block.
  The handle block will pass an NSString object with the extraction results. 
+ 
+ *Addtional Information*
+ 
+ Supports the default Debug/Event loggin of MKKit, if MKKit is available. You can toggle what
+ type of logging you want to use from the `MKAvailability.h` file.
 ------------------------------------------------------------------------------------*/
 
 @interface MKHTMLExtractor : NSObject {
@@ -105,14 +110,6 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 ///--------------------------------------------
 
 /**
- Set this property to `YES` to compine mulitpul pages into one document, if any are
- found. Default is `NO`.
- 
- When set to `YES` no data will be returned every time a new page is fouund.
-*/
-@property (nonatomic, assign) BOOL combinesPages;
-
-/**
  Set a NSString to this property for the title of an article. If the property
  is set the extractor will not look for the title of an article, but use the 
  this property instead.
@@ -122,7 +119,7 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 */
 @property (nonatomic, copy) NSString *articleTitle;
 
-/** Set this string to list the articles author below the title.*/
+/** Set this string to list the articles author below the title. */
 @property (nonatomic, copy) NSString *articleAuthor;
 
 ///--------------------------------------------

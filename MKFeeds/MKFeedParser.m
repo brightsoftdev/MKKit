@@ -123,6 +123,8 @@ archiveSuccessBlock;
 
 #if MKKIT_AVAILABLE_TO_MKFEEDS
     self.cloudDocumentName = nil;
+    
+    MK_M_LOG(@"Dealloc");
 #endif
     
     [mUrl release];
@@ -148,6 +150,10 @@ archiveSuccessBlock;
     
 	theConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
 	
+#if MKKIT_AVAILABLE_TO_MKFEEDS 
+    MK_E_LOG(@"Feed Request Made");
+#endif
+    
 	if (theConnection) {
 		requestData = [[NSMutableData data] retain];
 	} 
@@ -170,7 +176,7 @@ archiveSuccessBlock;
 //---------------------------------------------------------------
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -187,6 +193,9 @@ archiveSuccessBlock;
         self.requestCompleteBlock(nil, error);
     }
 	
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+    MK_E_LOG(@"Error %@", [error localizedDescription]);
+#endif
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -196,6 +205,10 @@ archiveSuccessBlock;
     
 	//NSString *data = [[NSString alloc] initWithData:requestData encoding:NSUTF8StringEncoding];
 	//NSLog(@"%@", data);
+    
+#if MKKIT_AVAILABLE_TO_MKFEEDS 
+    MK_E_LOG(@"Connection Finished");
+#endif
     
     NSOperationQueue *parseQueue = [NSOperationQueue mainQueue];
 	
@@ -221,6 +234,10 @@ archiveSuccessBlock;
 //---------------------------------------------------------------
 
 - (void)parserResults:(id)results {
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+    MK_S_LOG(@"Parse Results Returned");
+#endif
+    
     if ([results isKindOfClass:[NSMutableArray class]]) {
         if (MKRSSFeedTags.usesCompletionBlock) {
             self.requestCompleteBlock(results, nil);
@@ -396,6 +413,8 @@ archiveSuccessBlock;
     
 #if MKKIT_AVAILABLE_TO_MKFEEDS
     self.cloudDocumentName = nil;
+    
+    MK_M_LOG(@"Dealloc");
 #endif
     
     [super dealloc];

@@ -9,9 +9,24 @@
 #import "MKDocument.h"
 #import "MKAvailability.h"
 
+//---------------------------------------------------------------
+// Implementation
+//---------------------------------------------------------------
+
 @implementation MKDocument
 
-@synthesize content, /*fileName,*/ cloudDocument;
+@synthesize content; /*fileName,*/ 
+
+@dynamic cloudDocument;
+
+//---------------------------------------------------------------
+// Accessors
+//---------------------------------------------------------------
+
+- (BOOL)cloudDocument {
+    BOOL ubiq = [[NSFileManager defaultManager] isUbiquitousItemAtURL:self.fileURL];
+    return ubiq;
+}
 
 //---------------------------------------------------------------
 // Memory

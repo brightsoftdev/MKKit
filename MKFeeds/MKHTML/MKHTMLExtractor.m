@@ -64,7 +64,6 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, assign) NSInteger attemptCount;
 
-@property (nonatomic, assign) BOOL combinesPages;
 @property (nonatomic, assign) BOOL useCustomStyle;
 @property (nonatomic, assign) BOOL requestComplete;
 @property (nonatomic, assign) BOOL articalTitleSet;
@@ -110,7 +109,7 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 
 @synthesize articleTitle, articleAuthor, requestHandler, requestType, delegate, pageTextHandler;
 
-@dynamic results, numberOfPages, optimizeOutputForiPhone, combinesPages, styledOutput, styleSheet;
+@dynamic results, numberOfPages, optimizeOutputForiPhone, /*combinesPages,*/ styledOutput, styleSheet;
 
 #pragma mark - Creation
 
@@ -180,6 +179,10 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
         [URL release];
     }
     
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+    MK_M_LOG(@"Dealloc");
+#endif
+    
     [super dealloc];
 }
 
@@ -235,7 +238,7 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
             mHTMLHeaderString = [mHTMLHeaderString stringByAppendingFormat:@".title { font-size: %@pt; font-weight: bold; color: %@;}", titleFontSize, fontColor]; 
             mHTMLHeaderString = [mHTMLHeaderString stringByAppendingFormat:@".article { font-size: %@pt; color: %@;}", fontSize, fontColor];
             mHTMLHeaderString = [mHTMLHeaderString stringByAppendingFormat:@".author { font-size: %@pt; color: %@; font-style: italic;}", authorFontsize, fontColor];
-            mHTMLHeaderString = [mHTMLHeaderString stringByAppendingFormat:@".source { font-size: %@pt; color: %@; font-style: italic;}", authorFontsize, fontColor];
+            mHTMLHeaderString = [mHTMLHeaderString stringByAppendingFormat:@".source { font-size: %@pt; color: %@; font-style: italic; word-wrap:break-word;}", authorFontsize, fontColor];
             mHTMLHeaderString = [mHTMLHeaderString stringByAppendingFormat:@"</style></head><body bgColor=\"%@\">", backgroundColor];
             
             [mHTMLHeaderString retain];
@@ -273,6 +276,10 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 	aConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 	
     requestData = [[NSMutableData data] retain];
+    
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+    MK_S_LOG(@"Request Made");
+#endif
 }
 
 - (void)requestType:(MKHTMLExtractorRequestType)type handler:(void (^)(NSString *pageText, NSError *error))handler; {
@@ -335,6 +342,11 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 	//NSLog(@"%@", data);
     
     [self startExtractionOperation];
+    
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+    MK_S_LOG(@"Begining Extraction");
+#endif
+    
 }
 
 #pragma mark - Extration Operations
@@ -346,7 +358,6 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 - (void)startExtractionOperation {
     MKHTMLExtractionOperation *operation = [[MKHTMLExtractionOperation alloc] initWithData:requestData target:self mainThreadCallBack:@selector(extractionResult:)];
     operation.currentPage = MKHTMLExtractorFlags.currentPage;
-    operation.combinesPages = MKHTMLExtractorFlags.combinesPages;
     operation.useCustomStyle = MKHTMLExtractorFlags.usesCustomStyle;
     operation.articalTitleSet = MKHTMLExtractorFlags.articalTitleSet;
     operation.htmlHeaderString = mHTMLHeaderString;
@@ -367,6 +378,11 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
         if ([self.delegate respondsToSelector:@selector(extractor:didFindPage:content:)]) {
             [self.delegate extractor:self didFindPage:MKHTMLExtractorFlags.currentPage content:(NSString *)result];
         }
+        
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+        MK_S_LOG(@"Found Article body");
+#endif
+
     }
     else if ([result isKindOfClass:[NSURL class]] ) {
         MKHTMLExtractorFlags.currentPage = (MKHTMLExtractorFlags.currentPage + 1);
@@ -378,9 +394,19 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
         aConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
         
         requestData = [[NSMutableData data] retain];
+        
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+        MK_S_LOG(@"Found next page");
+#endif
+
     }
     else if ([result isKindOfClass:[NSError class]]) {
         [self postExtractionError:(NSError *)result];
+        
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+        MK_S_LOG(@"Error: %@", [(NSError *)result localizedDescription]);
+#endif
+
     }
 }
 
@@ -438,7 +464,7 @@ MKHTMLExtractorStyleSheet MKHTMLExtractorStyleSheetMake(int fontSize, NSString *
 
 @implementation MKHTMLExtractionOperation
 
-@synthesize combinesPages, currentPage, requestType, useCustomStyle, attemptCount, requestComplete,
+@synthesize currentPage, requestType, useCustomStyle, attemptCount, requestComplete,
 htmlHeaderString, articalTitleSet, URL;
 
 #pragma mark - Creation
@@ -482,6 +508,10 @@ htmlHeaderString, articalTitleSet, URL;
     [target release];
     [attributesArray release];
     
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+    MK_M_LOG(@"Dealloc");
+#endif
+    
     [super dealloc];
 }
 #pragma mark - Main
@@ -520,9 +550,6 @@ htmlHeaderString, articalTitleSet, URL;
                 if ([text length] > 1) {
                     if (self.useCustomStyle && self.currentPage == 1) {
                         text = [self.htmlHeaderString stringByAppendingString:text];
-                        text = [text stringByAppendingString:@"<p><div class=\"source\">"];
-                        text = [text stringByAppendingFormat:@"Source: %@</div>", self.URL];
-                        text = [text stringByAppendingString:@"</body></html>"];
                     }
                     
                     [target performSelectorOnMainThread:mainThreadCallBack withObject:text waitUntilDone:YES];
@@ -711,9 +738,12 @@ htmlHeaderString, articalTitleSet, URL;
     NSString *nextPageNumber = [NSString stringWithFormat:@"%i", (self.currentPage + 1)];
     NSArray *links = [[parsedData body] childrenNamed:@"a"];
     
+    BOOL linkFound = NO;
+    
     for (MKHTMLNode *node in links) {
         if ([[node allText] isEqualToString:nextPageNumber]) {
             self.currentPage = [nextPageNumber intValue];
+            linkFound = YES;
             
             NSString *url = [node valueOfAttribute:@"href"];
             
@@ -726,8 +756,19 @@ htmlHeaderString, articalTitleSet, URL;
                 }
                 NSURL *nextPageURL = [NSURL URLWithString:url];
                 [target performSelectorOnMainThread:mainThreadCallBack withObject:nextPageURL waitUntilDone:YES];
+                return;
             }
         }
+    }
+    
+    if (!linkFound) {
+        NSString *text = [NSString string];
+        text = [text stringByAppendingString:@"<p><div class=\"source\">"];
+        text = [text stringByAppendingFormat:@"Source: %@</div>", self.URL];
+        text = [text stringByAppendingString:@"</body></html>"];
+        
+        [target performSelectorOnMainThread:mainThreadCallBack withObject:text waitUntilDone:YES];
+        return;
     }
 }
 

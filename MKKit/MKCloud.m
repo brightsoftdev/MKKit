@@ -54,6 +54,8 @@ typedef void (^MKCloudOpenDocumentHandler)(id content);
 
 @synthesize loadFileHandler, createFileHandler, removeFileHandler, pushFileHandler, openFileHandler, documents;
 
+@dynamic cloudIsAvailable;
+
 static MKCloud *sharedCloud;
 
 #pragma mark - Creating 
@@ -112,6 +114,25 @@ static MKCloud *sharedCloud;
     [super dealloc];
 }
 
+#pragma mark - Accessor Methods
+
+//---------------------------------------------------------------
+// Accessor Methods
+//---------------------------------------------------------------
+
+#pragma mark Getters
+
+- (BOOL)cloudIsAvailable {
+    BOOL availible = NO;
+    
+    NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    if (ubiq) {
+        availible = YES;
+    } 
+    
+    return availible;
+}
+
 #pragma mark - Availability
 
 //---------------------------------------------------------------
@@ -149,18 +170,23 @@ static MKCloud *sharedCloud;
             BOOL completed;
             
             if (success) {
-                NSFileManager *manager = [NSFileManager defaultManager];
-                NSURL *ubiquitousDirectory = [NSURL ubiquitousDocumentsDirectoryURL];
-                NSURL *cloudURL = [ubiquitousDirectory URLByAppendingPathComponent:name];
-                
-                NSError *error = nil;
-                [manager setUbiquitous:YES itemAtURL:document.fileURL destinationURL:cloudURL error:&error];
-                
-                if (!error) {
-                    completed = YES;
-                    document.cloudDocument = YES;
+                if (self.cloudIsAvailable) {
+                    NSFileManager *manager = [NSFileManager defaultManager];
+                    NSURL *ubiquitousDirectory = [NSURL ubiquitousDocumentsDirectoryURL];
+                    NSURL *cloudURL = [ubiquitousDirectory URLByAppendingPathComponent:name];
                     
-                    MK_E_LOG(@"Created cloud document named %@", name);
+                    NSError *error = nil;
+                    [manager setUbiquitous:YES itemAtURL:document.fileURL destinationURL:cloudURL error:&error];
+                    
+                    if (!error) {
+                        completed = YES;
+                        
+                        MK_E_LOG(@"Created cloud document named %@", name);
+                    }
+                }
+                else {
+                    MK_E_LOG(@"Created local document named %@", name);
+                    completed = YES;
                 }
             }
             dispatch_async(dispatch_get_main_queue(), ^ (void) {
@@ -182,34 +208,51 @@ static MKCloud *sharedCloud;
     }
         
     else {
-        MK_S_LOG(@"Searching for document named: %@", name);
-        
-        [self urlForFileNamed:name result: ^ (NSURL *result) { 
-            if (result) {
-                document = [[[MKDocument alloc] initWithFileURL:result] autorelease];
-                document.cloudDocument = YES;
-                
-                [self openDocument:document];
-            }
-            else {
-                NSString *directory = [NSString stringWithDocumentsDirectoryPath];
-                NSString *path = [NSString stringWithFormat:@"%@/%@", directory, name];
-                
-                if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-                    NSURL *documentDirectory = [NSURL documentsDirectoryURL];
-                    NSURL *fileURL = [documentDirectory URLByAppendingPathComponent:name];
-                
-                    document = [[[MKDocument alloc] initWithFileURL:fileURL] autorelease];
-                    document.cloudDocument = NO;
+        if (self.cloudIsAvailable) {
+            MK_S_LOG(@"Searching for document named: %@", name);
+            
+            [self urlForFileNamed:name result: ^ (NSURL *result) { 
+                if (result) {
+                    document = [[[MKDocument alloc] initWithFileURL:result] autorelease];
                     
                     [self openDocument:document];
                 }
                 else {
-                    MK_E_LOG(@"Could not find document named: %@", name);
-                    content(nil); 
+                    NSString *directory = [NSString stringWithDocumentsDirectoryPath];
+                    NSString *path = [NSString stringWithFormat:@"%@/%@", directory, name];
+                    
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                        NSURL *documentDirectory = [NSURL documentsDirectoryURL];
+                        NSURL *fileURL = [documentDirectory URLByAppendingPathComponent:name];
+                        
+                        document = [[[MKDocument alloc] initWithFileURL:fileURL] autorelease];
+                        
+                        [self openDocument:document];
+                    }
+                    else {
+                        MK_E_LOG(@"Could not find document named: %@", name);
+                        content(nil); 
+                    }
                 }
+            }];
+        }
+        else {
+            NSString *directory = [NSString stringWithDocumentsDirectoryPath];
+            NSString *path = [NSString stringWithFormat:@"%@/%@", directory, name];
+            
+            if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                NSURL *documentDirectory = [NSURL documentsDirectoryURL];
+                NSURL *fileURL = [documentDirectory URLByAppendingPathComponent:name];
+                
+                document = [[[MKDocument alloc] initWithFileURL:fileURL] autorelease];
+                
+                [self openDocument:document];
             }
-        }];
+            else {
+                MK_E_LOG(@"Could not find document named: %@", name);
+                content(nil); 
+            }
+        }
     }
 }
 
@@ -288,7 +331,6 @@ static MKCloud *sharedCloud;
             if (!error) {
                 MK_E_LOG(@"Pushed document named %@", name);
                 complete = YES;
-                document.cloudDocument = YES;
             }
             else {
                 MK_E_LOG(@"Error: %@", [error localizedDescription]);
@@ -305,37 +347,40 @@ static MKCloud *sharedCloud;
     self.removeFileHandler = successful;
     
     dispatch_async(backgroundqueue,  ^ (void) {
-        BOOL complete = NO;
-        
-        NSURL *directoryURL = [NSURL documentsDirectoryURL];
-        NSURL *fileURL = [directoryURL URLByAppendingPathComponent:name];
-        
-        NSURL *cloudDirectory = [NSURL ubiquitousDocumentsDirectoryURL];
-        NSURL *cloudFileURL = [cloudDirectory URLByAppendingPathComponent:name];
-        
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        
-        NSError *error = nil;
-        [fileManager setUbiquitous:NO itemAtURL:cloudFileURL destinationURL:fileURL error:&error];
-        
-        if (!error) {
-            MK_E_LOG(@"Removed document named: %@", name);
-            complete = YES;
+        if (self.cloudIsAvailable) {
+            BOOL complete = NO;
+            
+            NSURL *directoryURL = [NSURL documentsDirectoryURL];
+            NSURL *fileURL = [directoryURL URLByAppendingPathComponent:name];
+            
+            NSURL *cloudDirectory = [NSURL ubiquitousDocumentsDirectoryURL];
+            NSURL *cloudFileURL = [cloudDirectory URLByAppendingPathComponent:name];
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            
+            NSError *error = nil;
+            [fileManager setUbiquitous:NO itemAtURL:cloudFileURL destinationURL:fileURL error:&error];
+            
+            if (!error) {
+                MK_E_LOG(@"Removed document named: %@", name);
+                complete = YES;
+            }
+            else {
+                MK_E_LOG(@"Error: %@", [error localizedDescription]);
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^ (void) {
+                if (successful) {
+                    successful(complete);
+                }
+            });
         }
         else {
-            MK_E_LOG(@"Error: %@", [error localizedDescription]);
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^ (void) {
-            if (complete) {
-                MKDocument *document = [self documentNamed:name];
-                document.cloudDocument = NO;
-            }
-                        
+            MK_E_LOG(@"No document named: %@", name);
             if (successful) {
-                successful(complete);
+                successful(NO);
             }
-        });
+        }
     });
 }
 
@@ -446,6 +491,10 @@ static MKCloud *sharedCloud;
 - (void)movedToBackground:(NSNotification *)notification {
     [sharedCloud release], sharedCloud = nil;
 }
+
+//---------------------------------------------------------------
+// Document Operation Completers
+//---------------------------------------------------------------
 
 #pragma mark - Document Events
 

@@ -44,6 +44,6 @@
  Tells if the documnet is availble to the cloud or not. `YES` for
  available, `NO` if not.
 */
-@property (nonatomic, assign) BOOL cloudDocument;
+@property (nonatomic, readonly) BOOL cloudDocument;
 
 @end

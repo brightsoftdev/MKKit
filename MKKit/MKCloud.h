@@ -25,7 +25,7 @@
  
  MKCloud is desinged to work as singleton. You can access the singleton by calling
  the `cloudManager` class method. The singleton does most of its work on a
- background thread. The threading is built in methods should be called from
+ background thread. The threading is built in so all methods should be called from
  the main thread. All blocks passed to MKCloud are performed on the main thread.
  
  When using MKCloud documents are referenced by name. The expected name is the 
@@ -45,8 +45,8 @@
  
  *Addtional Information*
  
- MKCloud supports the default Debug/Event login of MKKit. You can toggle what
- type of lodding you want to use from the `MKAvailability.h` file.
+ MKCloud supports the default Debug/Event loggin of MKKit. You can toggle what
+ type of logging you want to use from the `MKAvailability.h` file.
 ---------------------------------------------------------------------------*/
 
 @interface MKCloud : MKObject {
@@ -78,6 +78,8 @@
  available, `NO` if not.
 */
 + (BOOL)iCloudIsAvailable;
+
+@property (readonly) BOOL cloudIsAvailable;
 
 ///-------------------------------
 /// @name Manage Documents

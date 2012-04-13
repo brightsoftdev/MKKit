@@ -13,7 +13,7 @@
 // * CLOUD SYNC AND CLOUD ARCHIVING OF FEED RESULTS           //
 ////////////////////////////////////////////////////////////////
 
-#define MKKIT_AVAILABLE_TO_MKFEEDS              0  // 1=AVAILABLE 0=NONAVAILABLE // 
+#define MKKIT_AVAILABLE_TO_MKFEEDS              1  // 1=AVAILABLE 0=NONAVAILABLE // 
 
 #if MKKIT_AVAILABLE_TO_MKFEEDS
     #import <MKKit/MKKit/MKMacros.h>

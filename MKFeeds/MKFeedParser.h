@@ -55,7 +55,7 @@ typedef enum {
  MKFeedItemArchiver. Set the archiveResults, and archivePath properties, or call the 
  setArchiveResultsToPath:successful: method to create or sync to an archive file. 
  
- MKFeedParser can sync to iCloud documents as well use the setArchiveResultsToCloudURL:successful:
+ MKFeedParser can sync to iCloud documents as well use the setArchiveToCloudFileNamed:successful:
  method to sync to the cloud.
  
  @warning *Note* Cloud syncing methods can only be used if the MKKit library is available to MKFeeds. 
@@ -65,6 +65,11 @@ typedef enum {
  If you set the properties yourself the feed:didArchiveResults: delegate method will notify
  you of an archives success or failure.  If you use the  setArchiveResultsToPath:successful:
  the successful block is called upon completion.
+ 
+ *Addtional Information*
+ 
+ Supports the default Debug/Event loggin of MKKit, if MKKit is available. You can toggle what
+ type of logging you want to use from the `MKAvailability.h` file.
 ----------------------------------------------------------------------------------*/
 
 @interface MKFeedParser : NSObject <NSXMLParserDelegate> {
