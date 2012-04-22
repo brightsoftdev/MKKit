@@ -198,17 +198,19 @@ static MKCloud *sharedCloud;
     });
 }
 
-- (void)openDocumentNamed:(NSString *)name content:(void(^)(id))content {
+- (void)openDocumentNamed:(NSString *)name localCopy:(BOOL)localCopy content:(void(^)(id))content {
     self.openFileHandler = content;
     
     __block MKDocument *document = [self documentNamed:name];
+    
+    NSLog(@"%i", localCopy);
         
     if (document) {
         content(document.content);
     }
         
     else {
-        if (self.cloudIsAvailable) {
+        if (self.cloudIsAvailable && localCopy) {
             MK_S_LOG(@"Searching for document named: %@", name);
             
             [self urlForFileNamed:name result: ^ (NSURL *result) { 
@@ -247,6 +249,8 @@ static MKCloud *sharedCloud;
                 document = [[[MKDocument alloc] initWithFileURL:fileURL] autorelease];
                 
                 [self openDocument:document];
+                
+                MK_E_LOG(@"Using local copy of file named: %@", name);
             }
             else {
                 MK_E_LOG(@"Could not find document named: %@", name);
@@ -343,6 +347,44 @@ static MKCloud *sharedCloud;
     });
 }
 
+- (void)pullDocumentNamed:(NSString *)name successful:(void (^)(BOOL))successful {
+    MKDocument *document = [self documentNamed:name];
+    
+    dispatch_async(backgroundqueue, ^ (void) {
+        BOOL complete = NO;
+        
+        if (self.cloudIsAvailable) {
+            NSURL *directoryURL = [NSURL documentsDirectoryURL];
+            NSURL *fileURL = [directoryURL URLByAppendingPathComponent:name];
+            
+            NSURL *cloudDirectory = [NSURL ubiquitousDocumentsDirectoryURL];
+            NSURL *cloudFileURL = [cloudDirectory URLByAppendingPathComponent:name];
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            
+            NSError *error = nil;
+            [fileManager copyItemAtURL:cloudFileURL toURL:fileURL error:&error];
+            
+            if (!error) {
+                MK_E_LOG(@"Pulled file named: %@", name);
+                complete = YES;
+            }
+            else {
+                MK_E_LOG(@"Error: %@", [error localizedDescription]);
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^ (void) {
+            if (successful) {
+                successful(complete);
+            } 
+            if (complete && document) {
+                [self removeDocument:document];
+            }
+        });
+    });
+}
+
 - (void)removeDocumentNamed:(NSString *)name successful:(void(^)(BOOL))successful {
     self.removeFileHandler = successful;
     
@@ -377,9 +419,12 @@ static MKCloud *sharedCloud;
         }
         else {
             MK_E_LOG(@"No document named: %@", name);
-            if (successful) {
-                successful(NO);
-            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^ (void) {
+                if (successful) {
+                    successful(NO);
+                }
+            });
         }
     });
 }

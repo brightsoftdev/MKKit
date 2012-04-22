@@ -15,7 +15,7 @@
 
 @implementation MKDocument
 
-@synthesize content; /*fileName,*/ 
+@synthesize content; 
 
 @dynamic cloudDocument;
 
@@ -36,7 +36,6 @@
     MK_M_LOG(@"Released document named: %@", self.localizedName);
     
     self.content = nil;
-    //self.fileName = nil;
     
     [super dealloc];
 }

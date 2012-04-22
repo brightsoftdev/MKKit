@@ -156,12 +156,15 @@
  
  @param name the file name of the document
  
+ @param localCopy `YES` if the manager should open a document that is stored on the device
+ locally. `NO` to look for the document on the cloud.
+ 
  @param content the content of the document
  
  @warning *Note* The content will always be an instance of NSData when retuned in the 
  content block. Content will `nil` if no document could be found.
 */
-- (void)openDocumentNamed:(NSString *)name content:(void(^)(id content))content;
+- (void)openDocumentNamed:(NSString *)name localCopy:(BOOL)localCopy content:(void(^)(id content))content;
 
 /**
  Saves the document that has the given file name. This method assumes the document being
@@ -201,7 +204,18 @@
 - (void)pushDocumentToCloud:(MKDocument *)document named:(NSString *)name successful:(void(^)(BOOL successful))successful; 
 
 /**
- Pulls the document off of the cloud and moves it to the apps documents directory. The 
+ Pulls the document off of the cloud and creates a copy in the apps documents directory.
+ After the local copy of the document is created it can be opened using the openDocumentNamed:localCopy:successful:
+ method, and passing `YES` to the localCopy parameter.
+ 
+ @param name the name of the document to pull from the cloud
+ 
+ @param successful the block to call when the operation is finished.
+*/
+- (void)pullDocumentNamed:(NSString *)name successful:(void(^)(BOOL successful))successful;
+
+/**
+ Removes the document off of the cloud and moves it to the apps documents directory. The 
  document will still be managed by the singleton after it is pulled from the cloud.
  
  @param name the file name of the document

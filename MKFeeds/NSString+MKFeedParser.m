@@ -90,8 +90,10 @@
             [result appendString:@"<"];
         else if ([scanner scanString:@"&gt;" intoString:NULL])
             [result appendString:@">"];
-        else if ([scanner scanString:@"$#160;" intoString:NULL])
+        else if ([scanner scanString:@"&#160;" intoString:NULL])
             [result appendString:@" "];
+        else if ([scanner scanString:@"&#nbsp;" intoString:NULL])
+            [result appendString:@"\n"];
         else if ([scanner scanString:@"&#" intoString:NULL]) {
             BOOL gotNumber;
             unsigned charCode;

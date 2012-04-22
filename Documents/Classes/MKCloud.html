@@ -129,7 +129,7 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/openDocumentNamed:content:">- openDocumentNamed:content:</a></code>
+		<code><a href="#//api/name/openDocumentNamed:localCopy:content:">- openDocumentNamed:localCopy:content:</a></code>
 		<span class="tooltip"> Opens the document that has the given file name. This method will add a document the singletons managed <a href="#//api/name/documents">documents</a> if it is not already there. This method works in three stages: <ol><li> Check for existing <a href="#//api/name/documents">documents</a> in the manager and uses them if availble. </li></ol> <ol><li> Seaches the devices cloud directories for the document and returns it when found. </li></ol> <ol><li> Look for the document in apps local <a href="#//api/name/documents">documents</a> directory and returns it when found. </li></ol></span>
 	</span>
 	
@@ -159,8 +159,14 @@
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/pullDocumentNamed:successful:">- pullDocumentNamed:successful:</a></code>
+		<span class="tooltip"> Pulls the document off of the cloud and creates a copy in the apps <a href="#//api/name/documents">documents</a> directory. After the local copy of the document is created it can be opened using the openDocumentNamed:localCopy:successful: method, and passing <code>YES</code> to the localCopy parameter. </span>
+	</span>
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/removeDocumentNamed:successful:">- removeDocumentNamed:successful:</a></code>
-		<span class="tooltip"> Pulls the document off of the cloud and moves it to the apps <a href="#//api/name/documents">documents</a> directory. The document will still be managed by the singleton after it is pulled from the cloud. </span>
+		<span class="tooltip"> Removes the document off of the cloud and moves it to the apps <a href="#//api/name/documents">documents</a> directory. The document will still be managed by the singleton after it is pulled from the cloud. </span>
 	</span>
 	
 </li>
@@ -470,8 +476,8 @@
 </div>
 					
 					<div class="section-method">
-	<a name="//api/name/openDocumentNamed:content:" title="openDocumentNamed:content:"></a>
-	<h3 class="subsubtitle method-title">openDocumentNamed:content:</h3>
+	<a name="//api/name/openDocumentNamed:localCopy:content:" title="openDocumentNamed:localCopy:content:"></a>
+	<h3 class="subsubtitle method-title">openDocumentNamed:localCopy:content:</h3>
 	
 	
 	
@@ -480,7 +486,7 @@
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)openDocumentNamed:(NSString *)<em>name</em> content:(void ( ^ ) ( id content ))<em>content</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)openDocumentNamed:(NSString *)<em>name</em> localCopy:(BOOL)<em>localCopy</em> content:(void ( ^ ) ( id content ))<em>content</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -492,8 +498,60 @@
 		</dl>
 		
 		<dl class="argument-def parameter-def">
+			<dt><em>localCopy</em></dt>
+			<dd> <code>YES</code> if the manager should open a document that is stored on the device locally. <code>NO</code> to look for the document on the cloud. </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
 			<dt><em>content</em></dt>
 			<dd> the content of the document <p class="warning"> <strong> Note </strong> The content will always be an instance of NSData when retuned in the content block. Content will <code>nil</code> if no document could be found. </p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MKCloud.h</code><br />
+	</div>				
+	
+	
+</div>
+					
+					<div class="section-method">
+	<a name="//api/name/pullDocumentNamed:successful:" title="pullDocumentNamed:successful:"></a>
+	<h3 class="subsubtitle method-title">pullDocumentNamed:successful:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p> Pulls the document off of the cloud and creates a copy in the apps <a href="#//api/name/documents">documents</a> directory. After the local copy of the document is created it can be opened using the openDocumentNamed:localCopy:successful: method, and passing <code>YES</code> to the localCopy parameter. </p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)pullDocumentNamed:(NSString *)<em>name</em> successful:(void ( ^ ) ( BOOL successful ))<em>successful</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd> the name of the document to pull from the cloud </dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>successful</em></dt>
+			<dd> the block to call when the operation is finished. </dd>
 		</dl>
 		
 	</div>
@@ -617,7 +675,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p> Pulls the document off of the cloud and moves it to the apps <a href="#//api/name/documents">documents</a> directory. The document will still be managed by the singleton after it is pulled from the cloud. </p>
+		<p> Removes the document off of the cloud and moves it to the apps <a href="#//api/name/documents">documents</a> directory. The document will still be managed by the singleton after it is pulled from the cloud. </p>
 	</div>		
 	
 	
@@ -803,7 +861,7 @@
 			<div id="footer">
 				<hr />
 				<div class="footer-copyright">
-					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-04-12)</span><br />
+					<p><span class="copyright">&copy; 2012 Matt King. All rights reserved. (Last updated: 2012-04-21)</span><br />
 					<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0b3</a>.</span></p>
 				</div>
 			</div>

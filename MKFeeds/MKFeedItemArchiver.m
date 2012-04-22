@@ -50,6 +50,11 @@
 
 - (void)dealloc {
     [mItems release];
+    
+#if MKKIT_AVAILABLE_TO_MKFEEDS
+    MK_M_LOG(@"Dealloc");
+#endif
+    
     [super dealloc];
 }
 
@@ -146,7 +151,7 @@
     
     MKCloud *cloudManager = [MKCloud cloudManager];
         
-    [cloudManager openDocumentNamed:name content: ^ (id content) {
+    [cloudManager openDocumentNamed:name localCopy:NO content: ^ (id content) {
         if (content) {
             MKDocument *document = [cloudManager documentNamed:name];
             NSData *documentContent = (NSData *)content;
