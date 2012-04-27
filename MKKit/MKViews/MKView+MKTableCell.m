@@ -10,15 +10,6 @@
 
 #import <MKKit/MKKit/MKTableCells/MKTableCell.h>
 
-@interface MKView ()
-
-- (CGRect)iconRect;
-- (CGRect)primaryRect;
-- (CGRect)secondaryRect;
-- (CGRect)detailRect;
-
-@end
-
 @implementation MKView (MKTableCell)
 
 @dynamic pinnedSecondaryElement, pinnedPrimaryElement;

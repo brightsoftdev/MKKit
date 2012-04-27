@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <objc/runtime.h>
 
 #import <MKKit/MKKit/MKControls/MKContolHeaders.h>
 #import <MKKit/MKKit/MKErrorContol/MKInputValidation.h>
@@ -28,6 +27,11 @@ typedef enum {
 } MKTableCellType;
 
 typedef enum {
+    MKTableCellAccentTypePrimaryView,
+    MKTableCellAccentTypeFull,
+} MKTableCellAccentType;
+
+typedef enum {
 	MKTableCellAccessoryNone        = 0,
     MKTableCellAccessoryActivity    = 1,
     MKTableCellAccessoryAdd         = 2,
@@ -35,11 +39,6 @@ typedef enum {
     MKTableCellAccessorySubtract    = 4,
 	MKTableCellAccessoryWarningIcon = 5,
 } MKTableCellAccessoryViewType;
-
-typedef enum {
-    MKTableCellAccentTypePrimaryView,
-    MKTableCellAccentTypeFull,
-} MKTableCellAccentType;
 
 typedef struct {
     CGColorRef color;
@@ -412,42 +411,6 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
  @warning *Deprecated v0.9* Use accessoryImage property instead.
 */
 @property (nonatomic, retain) UIImage *accessoryIcon;// MK_DEPRECATED_0_9;
-
-@end
-
-/**--------------------------------------------------------------------------
- This catagory of MKControl provides the control for table cell accessories.
- ---------------------------------------------------------------------------*/
-@interface MKControl (MKTableCell)
-
-///------------------------------------------
-/// @name Creating
-///------------------------------------------
-
-/**
- Retuns an istance for the specified type.
- 
- @param type the type of accessory to create
- 
- @return MKControl instance
- */
-- (id)initWithType:(MKTableCellAccessoryViewType)type;
-
-/**
- Returns an instance that displays the specified image.
- 
- @param image the image to display as the cells accessory
- 
- @return MKControl instance
- */
-- (id)initWithImage:(UIImage *)image;
-
-///----------------------------------------
-/// @name Type
-///----------------------------------------
-
-/** Reference to the MKTableCellAccessoryViewType */
-@property (nonatomic, assign) id viewType;
 
 @end
 

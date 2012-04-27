@@ -15,6 +15,10 @@
 
 @dynamic working;
 
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
+
 #pragma mark - Creation
 
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -41,6 +45,10 @@
     return self;
 }
 
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
+
 #pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
@@ -53,6 +61,10 @@
 - (void)dealloc {
     [super dealloc];
 }
+
+//---------------------------------------------------------------
+// Accessors
+//---------------------------------------------------------------
 
 #pragma mark - Accessor Methods
 #pragma mark Setters
@@ -77,6 +89,10 @@
     return MKPullTableViewControllerFlags.isWorking;
 }
 
+//---------------------------------------------------------------
+// Monitoring Actions
+//---------------------------------------------------------------
+
 #pragma mark - Actions
 
 - (void)didPullDownPullDownView {
@@ -99,6 +115,10 @@
    
 }
 
+//---------------------------------------------------------------
+// Notification Responce
+//---------------------------------------------------------------
+
 #pragma mark - Notifications
 
 - (void)shouldReturnPullDownView {
@@ -111,6 +131,10 @@
                          self.tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
                      }];
 }
+
+//---------------------------------------------------------------
+// Delegates
+//---------------------------------------------------------------
 
 #pragma mark - Delegates
 #pragma ScrollView
@@ -135,9 +159,6 @@
         if (scrollView.contentOffset.y < -mContentHeight) {
             [self didPullDownPullDownView];
         } 
-        else { 
-            [self didPushUpPullDownView];
-        }
     }
 }
 
@@ -150,6 +171,9 @@
     
     if (scrollView.contentOffset.y <= -mContentHeight) {
         [self didReleasePullDownView];
+    }
+    else {
+        [self didPushUpPullDownView];
     }
 }
 

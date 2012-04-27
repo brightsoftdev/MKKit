@@ -8,6 +8,11 @@
 
 #import "MKControl.h"
 #import "MKControl+Internal.h"
+#import "MKControl+MKTableCell.h"
+
+//---------------------------------------------------------------
+// Functions
+//---------------------------------------------------------------
 
 #pragma mark - Drawing Helpers
 
@@ -53,17 +58,29 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
     return color;
 }
 
+//---------------------------------------------------------------
+// Interface
+//---------------------------------------------------------------
+
 @interface MKControl ()
 
 @property (nonatomic, copy) MKActionBlock action;
 
 @end
 
+//---------------------------------------------------------------
+// Implementation
+//---------------------------------------------------------------
+
 @implementation MKControl
 
 @synthesize delegate=mDelegate, working=mWorking, action=mAction;
 
 @dynamic location, controlState, graphicsStructure;
+
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
 
 #pragma mark - Creation 
 
@@ -87,6 +104,10 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
     }
     return self;
 }
+
+//---------------------------------------------------------------
+// Accessors
+//---------------------------------------------------------------
 
 #pragma mark - Accessor Methods
 #pragma makr Setters
@@ -128,6 +149,10 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
 - (MKGraphicsStructures *)graphicsStructure {
     return mGraphics;
 }
+
+//---------------------------------------------------------------
+// Action Responders
+//---------------------------------------------------------------
 
 #pragma mark - Action Responders
 
@@ -172,6 +197,10 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
 
 }
 
+//---------------------------------------------------------------
+// Touches
+//---------------------------------------------------------------
+
 #pragma mark - Touches
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -194,15 +223,13 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
     }
 }
 
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
+
 #pragma mark - Memory Management
 
-- (void)didRelease {
-    //method for catagories use.
-}
-
 - (void)dealloc { 
-    [self didRelease];
-    
     self.action = nil;
     self.graphicsStructure = nil;
         
@@ -210,10 +237,26 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
         [mTargets release];
     }
     
+    if (self.viewType) {
+        objc_removeAssociatedObjects(self.viewType);
+    }
+    
     [super dealloc];
 }
 
+//---------------------------------------------------------------
+// Deprecations
+//---------------------------------------------------------------
+
+- (void)didRelease {
+    
+}
+
 @end
+
+//---------------------------------------------------------------
+// Control Target
+//---------------------------------------------------------------
 
 @implementation MKControlTarget
 

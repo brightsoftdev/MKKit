@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <objc/runtime.h>
 
 #import <MKKit/MKKit/MKMacros.h>
 #import <MKKit/MKKit/MKGraphics/MKGraphics.h>
@@ -182,14 +183,11 @@ CGColorRef bottomColorForControlState(MKControlState state, MKGraphicsStructures
 - (void)processAction:(MKAction)action;
 
 ///--------------------------------------------------------
-/// @name Observing Changes
+/// @name Depreceated
 ///--------------------------------------------------------
 
-/**
- This method is for catagories to observer dealloc calls. Default 
- implemtation does nothing.
-*/
-- (void)didRelease;
+/** *DEPRECEATED V1.0* */
+- (void)didRelease MK_DEPRECATED_1_0;
 
 @end
 

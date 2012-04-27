@@ -215,6 +215,8 @@
 		AABF4D9113921DA0001B547A /* MKIAPController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABF4D8F13921DA0001B547A /* MKIAPController.m */; };
 		AABF4D9413921E1A001B547A /* MKTableCellIAP.h in Headers */ = {isa = PBXBuildFile; fileRef = AABF4D9213921E1A001B547A /* MKTableCellIAP.h */; };
 		AABF4D9513921E1A001B547A /* MKTableCellIAP.m in Sources */ = {isa = PBXBuildFile; fileRef = AABF4D9313921E1A001B547A /* MKTableCellIAP.m */; };
+		AAC3C0EE154A2EF10067034B /* MKControl+MKTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC3C0EC154A2EF10067034B /* MKControl+MKTableCell.h */; };
+		AAC3C0EF154A2EF10067034B /* MKControl+MKTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC3C0ED154A2EF10067034B /* MKControl+MKTableCell.m */; };
 		AAC828EF14CC898E00521470 /* MKView+MKTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC828ED14CC898D00521470 /* MKView+MKTableCell.h */; };
 		AAC828F014CC898E00521470 /* MKView+MKTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC828EE14CC898D00521470 /* MKView+MKTableCell.m */; };
 		AAD0024214131FAE0088D5F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
@@ -461,6 +463,8 @@
 		AABF4D8F13921DA0001B547A /* MKIAPController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKIAPController.m; sourceTree = "<group>"; };
 		AABF4D9213921E1A001B547A /* MKTableCellIAP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKTableCellIAP.h; sourceTree = "<group>"; };
 		AABF4D9313921E1A001B547A /* MKTableCellIAP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKTableCellIAP.m; sourceTree = "<group>"; };
+		AAC3C0EC154A2EF10067034B /* MKControl+MKTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKControl+MKTableCell.h"; sourceTree = "<group>"; };
+		AAC3C0ED154A2EF10067034B /* MKControl+MKTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKControl+MKTableCell.m"; sourceTree = "<group>"; };
 		AAC828ED14CC898D00521470 /* MKView+MKTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKView+MKTableCell.h"; sourceTree = "<group>"; };
 		AAC828EE14CC898D00521470 /* MKView+MKTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKView+MKTableCell.m"; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1016,6 +1020,8 @@
 			children = (
 				AA21BA9E14A914B400556B06 /* MKControl+Internal.h */,
 				AA21BA9F14A914B500556B06 /* MKControl+Internal.m */,
+				AAC3C0EC154A2EF10067034B /* MKControl+MKTableCell.h */,
+				AAC3C0ED154A2EF10067034B /* MKControl+MKTableCell.m */,
 			);
 			name = "Control Categories";
 			sourceTree = "<group>";
@@ -1213,6 +1219,7 @@
 				AAD9CE3514F9601D003A27FE /* MKCloud.h in Headers */,
 				AA0752AE1523E6AE004E1A4C /* MKDocument.h in Headers */,
 				AAB370D4152676F700A8795F /* NSURL+MKKit.h in Headers */,
+				AAC3C0EE154A2EF10067034B /* MKControl+MKTableCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1292,7 +1299,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "MKKit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1421,6 +1428,7 @@
 				AAD9CE3614F9601D003A27FE /* MKCloud.m in Sources */,
 				AA0752AF1523E6AE004E1A4C /* MKDocument.m in Sources */,
 				AAB370D5152676F700A8795F /* NSURL+MKKit.m in Sources */,
+				AAC3C0EF154A2EF10067034B /* MKControl+MKTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -81,7 +81,12 @@
 /** @warning *DEPRECATED PROPERTY* */
 @property (nonatomic, assign) BOOL pinnedSecondaryElement;// MK_DEPRECATED_1_0;
 
+// Undocumented Methods: Should not be called directly //
 
+- (CGRect)iconRect;
+- (CGRect)primaryRect;
+- (CGRect)secondaryRect;
+- (CGRect)detailRect;
 
 @end
 
@@ -90,7 +95,6 @@ static const CGFloat kCellIconRectWidth             = 30.0;
 static const CGFloat kCellPrimaryElementX           = 7.0;
 static const CGFloat kCellPrimaryElementWidth       = 294.0;
 static const CGFloat kCellSecondaryElementX         = 115.0;
-//static const CGFloat kCellSecondaryElementWidth     = 191.0;
 static const CGFloat kCellDetailElementY            = 29.0;
 static const CGFloat kCellDetailElementWidth        = 294.0;
 static const CGFloat kCellDetailElementHeight       = 12.0;

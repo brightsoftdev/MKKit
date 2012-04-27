@@ -12,6 +12,10 @@
 #import "MKTableElements/MKElementAccentView.h"
 #import "MKTableElements/MKTableCellAccentView.h"
 
+//---------------------------------------------------------------
+// Interface
+//---------------------------------------------------------------
+
 @interface MKTableCell ()
 
 - (void)accessoryButton:(id)sender;
@@ -20,6 +24,10 @@
 - (void)resetLongPressRecognizer;
 
 @end
+
+//---------------------------------------------------------------
+// Functions
+//---------------------------------------------------------------
 
 #pragma mark - Functions
 
@@ -41,6 +49,10 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     return iAccent;
 }
 
+//---------------------------------------------------------------
+// Implementation
+//---------------------------------------------------------------
+
 @implementation MKTableCell
 
 @synthesize delegate, type, theLabel=mTheLabel, smallLabel=mSmallLabel, key=mKey, accessoryViewType, 
@@ -49,6 +61,10 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
             recognizeLeftToRightSwipe, recognizeRightToLeftSwipe, recognizeLongPress, indexPath,
             primaryViewTrim, badge, accent, cellView=mCellView, stroryboardPrototype, image, accessoryImage,
             dynamicHeight, secondaryElementWidth;
+
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
 
 #pragma mark - Creating
 
@@ -103,6 +119,10 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 	return self;
 }
 
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
+
 #pragma mark - Memory Management
 
 - (void)dealloc {
@@ -113,6 +133,10 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     
     [super dealloc];
 }
+
+//---------------------------------------------------------------
+// Cell Selection
+//---------------------------------------------------------------
 
 #pragma mark - Selection
 
@@ -125,6 +149,10 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
         }
     }
 }
+
+//---------------------------------------------------------------
+// Accessors
+//---------------------------------------------------------------
 
 #pragma mark - Accessor Methods
 #pragma mark Accessories
@@ -172,6 +200,10 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     [iconView release];
 }
 
+//---------------------------------------------------------------
+// Validation
+//---------------------------------------------------------------
+
 #pragma mark Validation
 
 - (void)setValidationType:(MKValidationType)valType {
@@ -195,6 +227,10 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     }
 }
 
+//---------------------------------------------------------------
+// Icons
+//---------------------------------------------------------------
+
 #pragma mark Icons
 
 - (void)setImage:(MKImage *)img {
@@ -209,6 +245,10 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
         [[mCellView viewWithTag:kIconViewTag] removeFromSuperview];
     }
 }
+
+//---------------------------------------------------------------
+// Accents
+//---------------------------------------------------------------
 
 #pragma mark Accents
 
@@ -263,6 +303,10 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     [badgeView release];
 }
 
+//---------------------------------------------------------------
+// Gestures
+//---------------------------------------------------------------
+
 #pragma mark Gestures
 
 - (void)setRecognizeRightToLeftSwipe:(BOOL)recognize {
@@ -312,12 +356,20 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     }
 }
 
+//---------------------------------------------------------------
+// Storyboard
+//---------------------------------------------------------------
+
 #pragma mark - Storyboard
 
 - (void)storyboardPrototypeWithType:(MKTableCellType)celltype {
     self.type = celltype;
     self = [self initWithType:celltype reuseIdentifier:self.reuseIdentifier];
 }
+
+//---------------------------------------------------------------
+// Elements
+//---------------------------------------------------------------
 
 #pragma mark - Elements
 
@@ -336,6 +388,10 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     [mCellView addSubview:abadge];
     [abadge release];
 }
+
+//---------------------------------------------------------------
+// Apperence
+//---------------------------------------------------------------
 
 #pragma mark - Appearance
 
@@ -370,11 +426,19 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     //}
 }
 
+//---------------------------------------------------------------
+// Validation
+//---------------------------------------------------------------
+
 #pragma mark - Validation Methods
 
 - (BOOL)validatedWithType:(MKValidationType)aType {
 	return YES;
 }
+
+//---------------------------------------------------------------
+// Actions
+//---------------------------------------------------------------
 
 #pragma mark - Actions
 
@@ -387,6 +451,10 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 		[self.delegate didTapAccessoryForKey:self.key indexPath:self.indexPath];
 	}
 }
+
+//---------------------------------------------------------------
+// Gesture Actions
+//---------------------------------------------------------------
 
 #pragma mark - Gesture Actions
 
@@ -417,6 +485,10 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     self.recognizeLongPress = YES;
 }
 
+//---------------------------------------------------------------
+// Deprecations
+//---------------------------------------------------------------
+
 #pragma mark - Deprecated
 
 - (void)setIconMask:(UIImage *)lIconMask {
@@ -429,206 +501,6 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
 
 - (void)setAccessoryIcon:(UIImage *)lIcon {
     //Deprecated Method//
-}
-
-@end
-
-#pragma mark - 
-
-static const char *TypeTagKey = "TypeTag";
-
-@implementation MKControl (MKTableCell)
-
-void drawWarningIcon(CGContextRef context, CGRect rect);
-void drawAddIcon(CGContextRef context, CGRect rect);
-void drawSubtractIcon(CGContextRef context, CGRect rect);
-
-@dynamic viewType;
-
-#pragma mark - Initalizer
-
-- (id)initWithType:(MKTableCellAccessoryViewType)type {
-    self = [super init];
-    if (self) {
-        self.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
-        self.backgroundColor = CLEAR;
-        self.opaque = NO;
-        self.viewType = [NSNumber numberWithInt:type];
-        
-        if (((int)type) == MKTableCellAccessoryWarningIcon) {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 5.0, 30.0, 25.0)];
-            label.textAlignment = UITextAlignmentCenter;
-            label.backgroundColor = CLEAR;
-            label.textColor = WHITE;
-            label.shadowColor = RED;
-            label.shadowOffset = CGSizeMake(0.0, -1.0);
-            label.font = SYSTEM_BOLD(24.0);
-            label.text = @"!";
-            
-            [self addSubview:label];
-            [label release];
-        }
-    }
-    return self;
-}
-
-- (id)initWithImage:(UIImage *)image {
-    self = [super init];
-    if (self) {
-        self.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
-        self.backgroundColor = CLEAR;
-        self.opaque = NO;
-        self.viewType = [NSNumber numberWithInt:MKTableCellAccessoryNone];
-        
-        UIImageView *view = [[UIImageView alloc] initWithImage:image];
-        view.frame = self.frame;
-        [self addSubview:view];
-        [view release];
-    }
-    return self;
-}
-
-#pragma mark - Accessors
-
-- (void)setViewType:(id)type {
-    objc_setAssociatedObject(self, TypeTagKey, type, OBJC_ASSOCIATION_ASSIGN);
-}
-
-- (id)viewType {
-    return objc_getAssociatedObject(self, TypeTagKey);
-}
-
-#pragma mark - Drawing
-
-- (void)drawRect:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetAllowsAntialiasing(context, YES);
-    
-    if ([(NSNumber *)self.viewType intValue] == MKTableCellAccessoryWarningIcon) {
-        drawWarningIcon(context, rect);
-    }
-    if ([(NSNumber *)self.viewType intValue] == MKTableCellAccessoryAdd) {
-        drawAddIcon(context, rect);
-    }
-    if ([(NSNumber *)self.viewType intValue] == MKTableCellAccessorySubtract) {
-        drawSubtractIcon(context, rect);
-    }
-}
-
-#pragma mark Warning Icon
-
-void drawWarningIcon(CGContextRef context, CGRect rect) {
-    CGColorRef redColor = RED.CGColor;
-    
-    CGPoint p1 = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
-    CGPoint p2 = CGPointMake(CGRectGetMinX(rect), CGRectGetMaxY(rect));
-    CGPoint p3 = CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
-    
-    CGMutablePathRef path = CGPathCreateMutable();
-    
-    CGPathMoveToPoint(path, NULL, p1.x, p1.y);
-    CGPathAddLineToPoint(path, NULL, p2.x, p2.y);
-    CGPathAddLineToPoint(path, NULL, p3.x, p3.y);
-    CGPathAddLineToPoint(path, NULL, p1.x, p1.y);
-    
-    CGPathCloseSubpath(path);
-    
-    CGContextSaveGState(context);
-    CGContextSetFillColorWithColor(context, redColor);
-    CGContextAddPath(context, path);
-    CGContextClip(context);
-    drawGlossAndLinearGradient(context, rect, redColor, redColor);
-    CGContextSaveGState(context);
-    
-    CFRelease(path);
-}
-
-#pragma mark Add Icon
-
-void drawAddIcon(CGContextRef context, CGRect rect) {
-    CGColorRef fillColor = MK_COLOR_HSB(117.0, 96.0, 91.0, 1.0).CGColor;
-    CGColorRef plusShadowColor = MK_COLOR_HSB(117.0, 96.0, 57.0, 1.0).CGColor;
-    
-    CGRect drawRect = CGRectInset(rect, 4.0, 4.0);
-    CGRect plusRect = CGRectInset(drawRect, 5.0, 5.0);
-    
-    CGMutablePathRef path = createCircularPathForRect(drawRect);
-    
-    CGContextSaveGState(context);
-    CGContextSetFillColorWithColor(context, fillColor);
-    CGContextAddPath(context, path);
-    CGContextClip(context);
-    CGContextFillRect(context, drawRect);
-    drawCurvedGloss(context, rect, rect.size.width);
-    CGContextRestoreGState(context);
-    
-    CGContextSaveGState(context);
-    CGContextSetLineWidth(context, 2.0);
-    CGContextSetStrokeColorWithColor(context, WHITE.CGColor);
-    CGContextSetShadowWithColor(context, CGSizeMake(0.0, 1.0), 3.0, MK_SHADOW_COLOR);
-    CGContextAddPath(context, path);
-    CGContextStrokePath(context);
-    CGContextRestoreGState(context);
-    
-    CGContextSaveGState(context);
-    CGContextSetLineWidth(context, 3.0);
-    CGContextSetStrokeColorWithColor(context, WHITE.CGColor);
-    CGContextSetShadowWithColor(context, CGSizeMake(0.0, -1.0), 1.0, plusShadowColor);
-    CGContextMoveToPoint(context, CGRectGetMidX(plusRect), CGRectGetMinY(plusRect));
-    CGContextAddLineToPoint(context, CGRectGetMidX(plusRect), CGRectGetMaxY(plusRect));
-    CGContextMoveToPoint(context, CGRectGetMinX(plusRect), CGRectGetMidY(plusRect));
-    CGContextAddLineToPoint(context, CGRectGetMaxX(plusRect), CGRectGetMidY(plusRect));
-    CGContextStrokePath(context);
-    CGContextRestoreGState(context);
-    
-    CFRelease(path);
-}
-
-#pragma mark Subtract Icon
-
-void drawSubtractIcon(CGContextRef context, CGRect rect) {
-    CGColorRef fillColor = RED.CGColor;
-    CGColorRef plusShadowColor = RED.CGColor;
-    
-    CGRect drawRect = CGRectInset(rect, 4.0, 4.0);
-    CGRect plusRect = CGRectInset(drawRect, 5.0, 5.0);
-    
-    CGMutablePathRef path = createCircularPathForRect(drawRect);
-    
-    CGContextSaveGState(context);
-    CGContextSetFillColorWithColor(context, fillColor);
-    CGContextAddPath(context, path);
-    CGContextClip(context);
-    CGContextFillRect(context, drawRect);
-    drawCurvedGloss(context, rect, rect.size.width);
-    CGContextRestoreGState(context);
-    
-    CGContextSaveGState(context);
-    CGContextSetLineWidth(context, 2.0);
-    CGContextSetStrokeColorWithColor(context, WHITE.CGColor);
-    CGContextSetShadowWithColor(context, CGSizeMake(0.0, 1.0), 3.0, MK_SHADOW_COLOR);
-    CGContextAddPath(context, path);
-    CGContextStrokePath(context);
-    CGContextRestoreGState(context);
-    
-    CGContextSaveGState(context);
-    CGContextSetLineWidth(context, 3.0);
-    CGContextSetStrokeColorWithColor(context, WHITE.CGColor);
-    CGContextSetShadowWithColor(context, CGSizeMake(0.0, -1.0), 1.0, plusShadowColor);
-    CGContextMoveToPoint(context, CGRectGetMinX(plusRect), CGRectGetMidY(plusRect));
-    CGContextAddLineToPoint(context, CGRectGetMaxX(plusRect), CGRectGetMidY(plusRect));
-    CGContextStrokePath(context);
-    CGContextRestoreGState(context);
-    
-    CFRelease(path);
-}
-
-#pragma mark - Memory Mangament
-
-- (void)didRelease {
-    if (self.viewType) {
-        objc_removeAssociatedObjects(self.viewType);
-    }
 }
 
 @end

@@ -14,3 +14,5 @@
 #import "MKPaging.h"
 #import "MKSlider.h"
 #import "MKTextField.h"
+
+#import "MKControl+MKTableCell.h"

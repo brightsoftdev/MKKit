@@ -49,4 +49,8 @@
 /** Reference to the label that display the title text. */
 @property (nonatomic, retain) UILabel *titleLabel;
 
+// Undocumented Methods: Should not be called directly //
+
+- (void)titleViewLabelWithText:(NSString *)text;
+
 @end

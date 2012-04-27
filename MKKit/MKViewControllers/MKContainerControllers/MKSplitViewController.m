@@ -171,6 +171,8 @@ typedef enum {
 - (void)dealloc {
     [mListViewController release];
     [mDetailViewController release];
+    
+    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning {

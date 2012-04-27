@@ -8,12 +8,6 @@
 
 #import "MKView+MKTitleView.h"
 
-@interface MKView ()
-
-- (void)titleViewLabelWithText:(NSString *)text;
-
-@end
-
 static const char *TitleLabelKey = "TitleLabelKey";
 
 @implementation MKView (MKTitleView)

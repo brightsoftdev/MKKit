@@ -202,8 +202,6 @@ static MKCloud *sharedCloud;
     self.openFileHandler = content;
     
     __block MKDocument *document = [self documentNamed:name];
-    
-    NSLog(@"%i", localCopy);
         
     if (document) {
         content(document.content);

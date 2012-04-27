@@ -94,6 +94,8 @@
             [result appendString:@" "];
         else if ([scanner scanString:@"&#nbsp;" intoString:NULL])
             [result appendString:@"\n"];
+        else if ([scanner scanString:@"&#39;" intoString:NULL])
+            [result appendString:@"'"];
         else if ([scanner scanString:@"&#" intoString:NULL]) {
             BOOL gotNumber;
             unsigned charCode;
