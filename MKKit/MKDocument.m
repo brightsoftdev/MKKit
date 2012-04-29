@@ -27,7 +27,7 @@
     BOOL ubiq = [[NSFileManager defaultManager] isUbiquitousItemAtURL:self.fileURL];
     return ubiq;
 }
-
+ 
 //---------------------------------------------------------------
 // Memory
 //---------------------------------------------------------------
