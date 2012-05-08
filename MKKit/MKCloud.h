@@ -79,6 +79,7 @@
 */
 + (BOOL)iCloudIsAvailable;
 
+/** Retuns `YES` if iCloud is available, `NO` if it is not */
 @property (readonly) BOOL cloudIsAvailable;
 
 ///-------------------------------

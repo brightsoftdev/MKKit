@@ -130,6 +130,7 @@ MKTableCellAccent MKTableCellAccentMake(MKTableCellAccentType type, MKTableCellP
     self.indexPath = nil;
     self.smallLabel = nil;
     self.image = nil;
+    self.theLabel = nil;
     
     [super dealloc];
 }

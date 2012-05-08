@@ -99,12 +99,14 @@
     element.tag = kPrimaryViewTag;
     
     [self addSubview:element];
+    //element.backgroundColor = BLUE;
 }
 
 - (void)addSecondaryElement:(UIView *)element {
     element.tag = kSecondaryViewTag;
     
     [self addSubview:element];
+    //element.backgroundColor = RED;
 }
 
 - (void)addIconElement:(UIView *)element {
@@ -155,7 +157,7 @@
     if (self.cell.secondaryElementWidth == 0.0) {
         self.cell.secondaryElementWidth = (cellWidth / 2.0);
     }
-    
+        
     float elementX = (cellWidth - self.cell.secondaryElementWidth);
     float secondayWidth = (cellWidth - elementX - kCellRightMarginPadding);
     

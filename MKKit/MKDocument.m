@@ -8,6 +8,7 @@
 
 #import "MKDocument.h"
 #import "MKAvailability.h"
+#import "MKCloud.h"
 
 //---------------------------------------------------------------
 // Implementation
@@ -27,6 +28,7 @@
     BOOL ubiq = [[NSFileManager defaultManager] isUbiquitousItemAtURL:self.fileURL];
     return ubiq;
 }
+
  
 //---------------------------------------------------------------
 // Memory
@@ -51,6 +53,10 @@
     }
     return NO;
 }
+
+//---------------------------------------------------------------
+// Save Files
+//---------------------------------------------------------------
 
 - (id)contentsForType:(NSString *)typeName error:(NSError **)outError {
     return self.content;

@@ -181,11 +181,11 @@ static MKCloud *sharedCloud;
                     if (!error) {
                         completed = YES;
                         
-                        MK_E_LOG(@"Created cloud document named %@", name);
+                        MK_E_LOG(@"Created cloud document named %@.%@", name, document.fileType);
                     }
                 }
                 else {
-                    MK_E_LOG(@"Created local document named %@", name);
+                    MK_E_LOG(@"Created local document named %@.%@", name, document.fileType);
                     completed = YES;
                 }
             }
@@ -264,7 +264,7 @@ static MKCloud *sharedCloud;
         
         if (document) {
             [document saveToURL:document.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler: ^ (BOOL success) {
-                MK_E_LOG(@"Saved document named: %@", document.localizedName); 
+                MK_E_LOG(@"Saved document named: %@.%@", document.localizedName, document.fileType); 
                 
                 dispatch_async(dispatch_get_main_queue(), ^ (void) {
                     if (successful) {
@@ -576,7 +576,7 @@ static MKCloud *sharedCloud;
                 self.openFileHandler(document.content);
             }
             
-            MK_E_LOG(@"Opened document named %@", document.localizedName);
+            MK_E_LOG(@"Opened document named %@.%@", document.localizedName, document.fileType);
         } 
     }];
 }

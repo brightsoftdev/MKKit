@@ -77,11 +77,10 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    /*
     NSInteger rows = 0;
     switch (section) {
         case 0: rows = 2; break;
@@ -89,14 +88,13 @@
         default: break;
     }
     return rows;
-    */
-    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MKTableCell *cell = nil;
     
     static NSString *TextFieldCell = @"TextCell";
+    static NSString *TextViewCell = @"TextViewCell";
     
     if (indexPath.section == 0) {
         cell = (MKTableCell *)[tableView dequeueReusableCellWithIdentifier:TextFieldCell];
@@ -118,8 +116,26 @@
             ((MKTableCellTextEntry *)cell).theTextField.placeholder =@"Typing...";
         }
     }
+    
+    if (indexPath.section == 1) {
+        cell = (MKTableCell *)[tableView dequeueReusableCellWithIdentifier:TextViewCell];
+        if (cell == nil) {
+            cell = [[[MKTableCellTextView alloc] initWithType:MKTableCellTypeNone reuseIdentifier:TextViewCell] autorelease];
+        }
+        
+        ((MKTableCellTextView *)cell).theTextView.text = @"Tap to type";
+    }
         
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat height = 44.0;
+    if (indexPath.section == 1) {
+        height = 73.0;
+    }
+    
+    return height;
 }
 
 /*

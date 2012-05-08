@@ -3,7 +3,7 @@
 //  MKKit
 //
 //  Created by Matthew King on 11/6/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,15 +11,23 @@
 
 @class MKTableCell;
 
-// Cell Height is 73.0
+/**-----------------------------------------------------------------------
+ *Overview*
+ 
+ MKTableCellTextView provides a table cell with a UITextView nested in it.
+ When the keyboard is displayed a toolbar is added above it with `Clear`
+ and `Done` buttons built in.
+ 
+ *Usage Notes*
+ 
+ MKTableCellTextView expects a cell height of 73.0.
+------------------------------------------------------------------------*/
 
 @interface MKTableCellTextView : MKTableCell <UITextViewDelegate> {
-	UITextView *_theTextView;
+	UITextView *mTheTextView;
 }
 
+/** Reference the UITextView instance nested in the cell. */
 @property (nonatomic, retain) UITextView *theTextView;
-
-- (void)clearTextView:(id)sender;
-- (void)resignTextView:(id)sender;
 
 @end

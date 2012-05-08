@@ -3,37 +3,70 @@
 //  MKKit
 //
 //  Created by Matthew King on 11/6/10.
-//  Copyright 2010 Matt King. All rights reserved.
+//  Copyright 2010-2012 Matt King. All rights reserved.
 //
 
 #import "MKTableCellTextView.h"
 
+//---------------------------------------------------------------
+// Interface
+//---------------------------------------------------------------
+
+@interface MKTableCellTextView ()
+
+- (void)clearTextView:(id)sender;
+- (void)resignTextView:(id)sender;
+
+@end
+
+//---------------------------------------------------------------
+// Implementaion
+//---------------------------------------------------------------
+
 @implementation MKTableCellTextView
 
-@synthesize theTextView=_theTextView;
+@synthesize theTextView=mTheTextView;
 
-#pragma mark -
-#pragma mark Initalize
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
+
+#pragma mark - Creation
 
 - (id)initWithType:(MKTableCellType)cellType reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithType:MKTableCellTypeNone reuseIdentifier:reuseIdentifier];
     if (self) {
         CGRect textViewFrame = CGRectMake(5.0, 6.0, 285.0, 73.0);
 		
-		_theTextView = [[UITextView alloc] initWithFrame:textViewFrame];
-		_theTextView.editable = YES;
-		_theTextView.delegate = self;
-        _theTextView.backgroundColor = CLEAR;
-		_theTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
+		mTheTextView = [[UITextView alloc] initWithFrame:textViewFrame];
+		mTheTextView.editable = YES;
+		mTheTextView.delegate = self;
+        mTheTextView.backgroundColor = CLEAR;
+		mTheTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
 		
-		[self.contentView addSubview:_theTextView];
-		[_theTextView release];
+		[self.contentView addSubview:mTheTextView];
+		[mTheTextView release];
     }
     return self;
 }
 
-#pragma mark -
-#pragma mark Cell Behavior
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
+
+#pragma mark - Memory Managment
+
+- (void)dealloc {
+    //self.theTextView = nil;
+    
+    [super dealloc];
+}
+
+//---------------------------------------------------------------
+// Selection
+//---------------------------------------------------------------
+
+#pragma mark - Selection
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
 
@@ -42,8 +75,11 @@
     // Configure the view for the selected state
 }
 
-#pragma mark -
-#pragma mark TextView Methods
+//---------------------------------------------------------------
+// Text View Contol
+//---------------------------------------------------------------
+
+#pragma mark - Text View Control
 
 - (void)clearTextView:(id)sender {
 	self.theTextView.text = @"";
@@ -57,9 +93,11 @@
 	[self.theTextView resignFirstResponder];
 }
 
-#pragma mark -
-#pragma mark Delegates
+//---------------------------------------------------------------
+// Delegates
+//---------------------------------------------------------------
 
+#pragma mark - Delegates
 #pragma mark TextView 
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
@@ -85,13 +123,5 @@
 	[toolBar release];
 	return YES;
 }
-
-#pragma mark -
-#pragma mark Memory Managment
-
-- (void)dealloc {
-    [super dealloc];
-}
-
 
 @end

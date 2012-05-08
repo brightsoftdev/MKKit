@@ -9,6 +9,10 @@
 #import "MKTableCellTextEntry.h"
 #import "MKDeffinitions.h"
 
+//---------------------------------------------------------------
+// Interface
+//---------------------------------------------------------------
+
 @interface MKTableCellTextEntry ()
 
 - (void)textChanged:(id)sender;
@@ -17,12 +21,19 @@
 
 @end
 
+//---------------------------------------------------------------
+// Implementaion
+//---------------------------------------------------------------
+
 @implementation MKTableCellTextEntry
 
 @synthesize theTextField=mTheTextField, textEntryType=mTextEntryType;
 
-#pragma mark -
-#pragma mark Initalizer
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
+
+#pragma mark - Creation
 
 - (id)initWithType:(MKTextEntryCellType)cellType reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithType:MKTableCellTypeNone reuseIdentifier:reuseIdentifier];
@@ -30,6 +41,7 @@
         mTextEntryType = cellType;
         
         mCellView = [[MKView alloc] initWithCell:self];
+        self.secondaryElementWidth = (mCellView.width - 125.0);
         
         mTheTextField = [[MKTextField alloc] initWithFrame:CGRectZero];
 		mTheTextField.textAlignment = UITextAlignmentCenter;
@@ -70,9 +82,31 @@
     }
     return self;
 }
- 
-#pragma mark -
-#pragma mark Cell Behavior
+
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
+
+#pragma mark - Memory Managment
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:PICKER_DID_SHOW_NOTIFICATION object:nil];
+    
+    self.theTextField = nil;
+    
+    if (mValidationError) {
+        mValidationError = nil;
+        [mValidationError release];
+    }
+    
+    [super dealloc];
+}
+
+//---------------------------------------------------------------
+// Selection
+//---------------------------------------------------------------
+
+#pragma mark - Selection
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -89,8 +123,11 @@
     }	
 }
 
-#pragma mark -
-#pragma mark Validation Methods
+//---------------------------------------------------------------
+// Validation
+//---------------------------------------------------------------
+
+#pragma mark - Validation Methods
 
 - (BOOL)validatedWithType:(MKValidationType)aType {
     BOOL validated = YES;
@@ -135,8 +172,11 @@
     return validated;
 }
 
-#pragma mark -
-#pragma mark Actions
+//---------------------------------------------------------------
+// Actions
+//---------------------------------------------------------------
+
+#pragma mark - Actions
 
 - (void)textChanged:(id)sender {
 	if ([delegate respondsToSelector:@selector(valueDidChange:forKey:)]) {
@@ -152,9 +192,11 @@
 	}
 }
 
-#pragma mark -
-#pragma mark Delegates
+//---------------------------------------------------------------
+// Delegate
+//---------------------------------------------------------------
 
+#pragma mark - Delegate
 #pragma mark TextField
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {		
@@ -181,26 +223,14 @@
 	return YES;
 }
 
-#pragma mark -
-#pragma mark Observer Methods
+//---------------------------------------------------------------
+// Observations
+//---------------------------------------------------------------
+
+#pragma mark - Observer Methods
 
 - (void)pickerPosted {
 	[self.theTextField resignFirstResponder];
 }
-
-#pragma mark -
-#pragma mark Memory Managment
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PICKER_DID_SHOW_NOTIFICATION object:nil];
-    
-    if (mValidationError) {
-        mValidationError = nil;
-        [mValidationError release];
-    }
-    
-    [super dealloc];
-}
-
 
 @end
