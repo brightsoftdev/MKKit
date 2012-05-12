@@ -41,7 +41,6 @@
         mTextEntryType = cellType;
         
         mCellView = [[MKView alloc] initWithCell:self];
-        self.secondaryElementWidth = (mCellView.width - 125.0);
         
         mTheTextField = [[MKTextField alloc] initWithFrame:CGRectZero];
 		mTheTextField.textAlignment = UITextAlignmentCenter;
@@ -121,6 +120,14 @@
 	if (!selected) {
 		[self.theTextField resignFirstResponder];
     }	
+}
+
+//---------------------------------------------------------------
+// Accessors
+//---------------------------------------------------------------
+
+- (CGFloat)secondaryElementWidth {
+    return (mCellView.width - 125.0);
 }
 
 //---------------------------------------------------------------

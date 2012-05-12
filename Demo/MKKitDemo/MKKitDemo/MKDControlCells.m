@@ -1,15 +1,18 @@
 //
-//  MKDTextEntryCells.m
+//  MKDControlCells.m
 //  MKKitDemo
 //
-//  Created by Matthew King on 2/25/12.
+//  Created by Matt King on 5/11/12.
 //  Copyright (c) 2012 Matt King. All rights reserved.
 //
 
-#import "MKDTextEntryCells.h"
+#import "MKDControlCells.h"
 
+@interface MKDControlCells ()
 
-@implementation MKDTextEntryCells
+@end
+
+@implementation MKDControlCells
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -19,16 +22,6 @@
     }
     return self;
 }
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
@@ -48,93 +41,54 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return YES;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger rows = 0;
-    switch (section) {
-        case 0: rows = 2; break;
-        case 1: rows = 1; break;
-        default: break;
-    }
-    return rows;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MKTableCell *cell = nil;
     
-    static NSString *TextFieldCell = @"TextCell";
-    static NSString *TextViewCell = @"TextViewCell";
+    static NSString *CheckBoxCell = @"CheckBoxCell";
+    static NSString *SwitchCell = @"SwitchCell";
+    static NSString *SliderCell = @"SliderCell";
     
     if (indexPath.section == 0) {
-        cell = (MKTableCell *)[tableView dequeueReusableCellWithIdentifier:TextFieldCell];
         if (indexPath.row == 0) {
+            cell = (MKTableCellCheckBox *)[tableView dequeueReusableCellWithIdentifier:CheckBoxCell];
             if (cell == nil) {
-                cell = [[[MKTableCellTextEntry alloc] initWithType:MKTextEntryCellTypeStandard reuseIdentifier:TextFieldCell] autorelease];
+                cell = [[[MKTableCellCheckBox alloc] initWithType:MKTableCellTypeNone reuseIdentifier:CheckBoxCell] autorelease];
             }
             
-            cell.theLabel.text = @"Standard";
-            ((MKTableCellTextEntry *)cell).theTextField.placeholder =@"Typing...";
-            
+            cell.theLabel.text = @"Check Box";
         }
         if (indexPath.row == 1) {
+            cell = (MKTableCellSwitch *)[tableView dequeueReusableCellWithIdentifier:SwitchCell];
             if (cell == nil) {
-                cell = [[[MKTableCellTextEntry alloc] initWithType:MKTextEntryCellTypeFull reuseIdentifier:TextFieldCell] autorelease];
+                cell = [[[MKTableCellSwitch alloc] initWithType:MKTableCellTypeNone reuseIdentifier:SwitchCell] autorelease];
             }
             
-            cell.image = [MKImage imageNamed:@"PenIconMask.png" graphicStruct:nil];
-            ((MKTableCellTextEntry *)cell).theTextField.placeholder =@"Typing...";
+            cell.theLabel.text = @"Switch";
+        }
+        if (indexPath.row == 2) {
+            cell = (MKTableCellSlider *)[tableView dequeueReusableCellWithIdentifier:SliderCell];
+            if (cell == nil) {
+                cell = [[[MKTableCellSlider alloc] initWithType:MKTableCellTypeNone reuseIdentifier:SliderCell] autorelease];
+            }
         }
     }
     
-    if (indexPath.section == 1) {
-        cell = (MKTableCell *)[tableView dequeueReusableCellWithIdentifier:TextViewCell];
-        if (cell == nil) {
-            cell = [[[MKTableCellTextView alloc] initWithType:MKTableCellTypeNone reuseIdentifier:TextViewCell] autorelease];
-        }
-        
-        ((MKTableCellTextView *)cell).theTextView.text = @"Tap to type";
-    }
-        
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat height = 44.0;
-    if (indexPath.section == 1) {
-        height = 73.0;
-    }
-    
-    return height;
 }
 
 /*

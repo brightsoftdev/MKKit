@@ -20,7 +20,7 @@
  method when the slider is moved.
  
  @warning *Note* The value of the slider is passed through the delegate
- as an instance of NSNumber.2
+ as an instance of NSNumber.
 ----------------------------------------------------------------------*/
 @interface MKTableCellSlider : MKTableCell {
     

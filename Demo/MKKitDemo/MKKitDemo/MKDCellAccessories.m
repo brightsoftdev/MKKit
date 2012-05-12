@@ -1,15 +1,18 @@
 //
-//  MKDTextEntryCells.m
+//  MKDCellAccessories.m
 //  MKKitDemo
 //
-//  Created by Matthew King on 2/25/12.
+//  Created by Matt King on 5/11/12.
 //  Copyright (c) 2012 Matt King. All rights reserved.
 //
 
-#import "MKDTextEntryCells.h"
+#import "MKDCellAccessories.h"
 
+@interface MKDCellAccessories ()
 
-@implementation MKDTextEntryCells
+@end
+
+@implementation MKDCellAccessories
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -19,16 +22,6 @@
     }
     return self;
 }
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
@@ -48,93 +41,50 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
     return YES;
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger rows = 0;
-    switch (section) {
-        case 0: rows = 2; break;
-        case 1: rows = 1; break;
-        default: break;
-    }
-    return rows;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MKTableCell *cell = nil;
+    static NSString *CellIdentifier = @"Cell";
+    MKTableCell *cell = (MKTableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    static NSString *TextFieldCell = @"TextCell";
-    static NSString *TextViewCell = @"TextViewCell";
-    
-    if (indexPath.section == 0) {
-        cell = (MKTableCell *)[tableView dequeueReusableCellWithIdentifier:TextFieldCell];
-        if (indexPath.row == 0) {
-            if (cell == nil) {
-                cell = [[[MKTableCellTextEntry alloc] initWithType:MKTextEntryCellTypeStandard reuseIdentifier:TextFieldCell] autorelease];
-            }
-            
-            cell.theLabel.text = @"Standard";
-            ((MKTableCellTextEntry *)cell).theTextField.placeholder =@"Typing...";
-            
-        }
-        if (indexPath.row == 1) {
-            if (cell == nil) {
-                cell = [[[MKTableCellTextEntry alloc] initWithType:MKTextEntryCellTypeFull reuseIdentifier:TextFieldCell] autorelease];
-            }
-            
-            cell.image = [MKImage imageNamed:@"PenIconMask.png" graphicStruct:nil];
-            ((MKTableCellTextEntry *)cell).theTextField.placeholder =@"Typing...";
-        }
+    if (cell == nil) {
+        cell = [[[MKTableCell alloc] initWithType:MKTableCellTypeLabel reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    if (indexPath.section == 1) {
-        cell = (MKTableCell *)[tableView dequeueReusableCellWithIdentifier:TextViewCell];
-        if (cell == nil) {
-            cell = [[[MKTableCellTextView alloc] initWithType:MKTableCellTypeNone reuseIdentifier:TextViewCell] autorelease];
-        }
-        
-        ((MKTableCellTextView *)cell).theTextView.text = @"Tap to type";
+    if (indexPath.row == 0) {
+        cell.theLabel.text = @"Add Icon";
+        cell.accessoryViewType = MKTableCellAccessoryAdd;
     }
-        
+    if (indexPath.row == 1) {
+        cell.theLabel.text = @"Minus Icon";
+        cell.accessoryViewType = MKTableCellAccessorySubtract;
+    }
+    if (indexPath.row == 2) {
+        cell.theLabel.text = @"Warning Icon";
+        cell.accessoryViewType = MKTableCellAccessoryWarningIcon;
+    }
+    if (indexPath.row == 3) {
+        cell.theLabel.text = @"Info Icon";
+        cell.accessoryViewType = MKTableCellAccessoryInfoButton;
+    }
+    if (indexPath.row == 4) {
+        cell.theLabel.text = @"Working Indicator";
+        cell.accessoryViewType = MKTableCellAccessoryActivity;
+    }
+    
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat height = 44.0;
-    if (indexPath.section == 1) {
-        height = 73.0;
-    }
-    
-    return height;
 }
 
 /*

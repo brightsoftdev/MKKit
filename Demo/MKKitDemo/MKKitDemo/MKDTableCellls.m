@@ -8,6 +8,8 @@
 
 #import "MKDTableCellls.h"
 #import "MKDTextEntryCells.h"
+#import "MKDControlCells.h"
+#import "MKDCellAccessories.h"
 
 @implementation MKDTableCellls
 
@@ -162,6 +164,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         MKDTextEntryCells *viewController = [[MKDTextEntryCells alloc] initWithStyle:UITableViewStyleGrouped];
+        [self.navigationController pushViewController:viewController animated:YES];
+        [viewController release];
+    }
+    if (indexPath.row == 1) {
+        MKDControlCells *viewController = [[MKDControlCells alloc] initWithStyle:UITableViewStyleGrouped];
+        [self.navigationController pushViewController:viewController animated:YES];
+        [viewController release];
+    }
+    if (indexPath.row == 2) {
+        MKDCellAccessories *viewController = [[MKDCellAccessories alloc] initWithStyle:UITableViewStyleGrouped];
         [self.navigationController pushViewController:viewController animated:YES];
         [viewController release];
     }

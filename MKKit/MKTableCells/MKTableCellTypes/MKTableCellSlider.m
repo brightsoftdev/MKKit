@@ -8,11 +8,25 @@
 
 #import "MKTableCellSlider.h"
 
+//---------------------------------------------------------------
+// Interface
+//---------------------------------------------------------------
+
+@interface MKSliderTracking : UISlider 
+
+@end
+
 @interface MKTableCellSlider ()
 
 - (void)slideEnded:(id)sender;
 
 @end
+
+#pragma mark -
+
+//---------------------------------------------------------------
+// Implementaion (MKTableCellSlider)
+//---------------------------------------------------------------
 
 @implementation MKTableCellSlider
 
@@ -20,12 +34,16 @@
 
 #pragma mark - Creation
 
+//---------------------------------------------------------------
+// Creation
+//---------------------------------------------------------------
+
 - (id)initWithType:(MKTableCellType)cellType reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithType:MKTableCellTypeNone reuseIdentifier:reuseIdentifier];
     if (self) {
         mCellView = [[MKView alloc] initWithCell:self];
         
-        self.slider = [[UISlider alloc] initWithFrame:CGRectZero];
+        self.slider = [[MKSliderTracking alloc] initWithFrame:CGRectZero];
         self.slider.continuous = NO;
         [self.slider addTarget:self action:@selector(slideEnded:) forControlEvents:UIControlEventValueChanged];
         
@@ -39,6 +57,10 @@
 
 #pragma mark - Memory
 
+//---------------------------------------------------------------
+// Memory
+//---------------------------------------------------------------
+
 - (void)dealloc {
     self.slider = nil;
     
@@ -47,6 +69,10 @@
 
 #pragma mark - Actions
 
+//---------------------------------------------------------------
+// Action Responces
+//---------------------------------------------------------------
+
 - (void)slideEnded:(id)sender {
     NSNumber *value = [NSNumber numberWithFloat:[(UISlider *)sender value]];
     if ([self.delegate respondsToSelector:@selector(valueDidChange:forKey:)]) {
@@ -54,5 +80,37 @@
     }
 }
 
+@end
+
+#pragma mark -
+
+//---------------------------------------------------------------
+// Implementaion (MKSliderTracking)
+//---------------------------------------------------------------
+
+@implementation MKSliderTracking
+
+#pragma mark - Touch Tracking
+
+//---------------------------------------------------------------
+// Touch Tracking
+//---------------------------------------------------------------
+
+- (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+    [super beginTrackingWithTouch:touch withEvent:event];
+    //NSLog(@"Begin");
+    return YES;
+}
+
+- (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+    [super continueTrackingWithTouch:touch withEvent:event];
+    //NSLog(@"Traking");
+    return YES;
+}
+
+- (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+    [super endTrackingWithTouch:touch withEvent:event];
+    //NSLog(@"End");
+}
 
 @end

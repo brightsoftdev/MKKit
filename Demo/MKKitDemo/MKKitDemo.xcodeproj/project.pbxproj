@@ -13,6 +13,8 @@
 		AAAAAE6B150704F4003D819D /* AccessoriesIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAAAAE69150704F4003D819D /* AccessoriesIcon@2x.png */; };
 		AAAAAE6E15070795003D819D /* TableCellsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AAAAAE6C15070795003D819D /* TableCellsIcon.png */; };
 		AAAAAE6F15070795003D819D /* TableCellsIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAAAAE6D15070795003D819D /* TableCellsIcon@2x.png */; };
+		AAD1DD01155DE79F00914C31 /* MKDControlCells.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD1DD00155DE79F00914C31 /* MKDControlCells.m */; };
+		AAD1DD05155DE7D700914C31 /* MKDCellAccessories.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD1DD04155DE7D700914C31 /* MKDCellAccessories.m */; };
 		AAD9CE4014F96401003A27FE /* MKDTextEntryCells.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD9CE3F14F96401003A27FE /* MKDTextEntryCells.m */; };
 		AAEADDEB14D6169900C234FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAEADDEA14D6169900C234FD /* UIKit.framework */; };
 		AAEADDED14D6169900C234FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAEADDEC14D6169900C234FD /* Foundation.framework */; };
@@ -43,6 +45,10 @@
 		AAAAAE69150704F4003D819D /* AccessoriesIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AccessoriesIcon@2x.png"; sourceTree = "<group>"; };
 		AAAAAE6C15070795003D819D /* TableCellsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableCellsIcon.png; sourceTree = "<group>"; };
 		AAAAAE6D15070795003D819D /* TableCellsIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TableCellsIcon@2x.png"; sourceTree = "<group>"; };
+		AAD1DCFF155DE79F00914C31 /* MKDControlCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDControlCells.h; sourceTree = "<group>"; };
+		AAD1DD00155DE79F00914C31 /* MKDControlCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDControlCells.m; sourceTree = "<group>"; };
+		AAD1DD03155DE7D700914C31 /* MKDCellAccessories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDCellAccessories.h; sourceTree = "<group>"; };
+		AAD1DD04155DE7D700914C31 /* MKDCellAccessories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDCellAccessories.m; sourceTree = "<group>"; };
 		AAD9CE3E14F96401003A27FE /* MKDTextEntryCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDTextEntryCells.h; sourceTree = "<group>"; };
 		AAD9CE3F14F96401003A27FE /* MKDTextEntryCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDTextEntryCells.m; sourceTree = "<group>"; };
 		AAEADDE614D6169900C234FD /* MKKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MKKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +192,10 @@
 				AAEADE2D14D61A1500C234FD /* MKDTableCellls.m */,
 				AAD9CE3E14F96401003A27FE /* MKDTextEntryCells.h */,
 				AAD9CE3F14F96401003A27FE /* MKDTextEntryCells.m */,
+				AAD1DCFF155DE79F00914C31 /* MKDControlCells.h */,
+				AAD1DD00155DE79F00914C31 /* MKDControlCells.m */,
+				AAD1DD03155DE7D700914C31 /* MKDCellAccessories.h */,
+				AAD1DD04155DE7D700914C31 /* MKDCellAccessories.m */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -216,7 +226,7 @@
 		AAEADDDD14D6169900C234FD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = AAEADDE014D6169900C234FD /* Build configuration list for PBXProject "MKKitDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -265,6 +275,8 @@
 				AAEADDFB14D6169900C234FD /* MKDAppDelegate.m in Sources */,
 				AAEADE2E14D61A1500C234FD /* MKDTableCellls.m in Sources */,
 				AAD9CE4014F96401003A27FE /* MKDTextEntryCells.m in Sources */,
+				AAD1DD01155DE79F00914C31 /* MKDControlCells.m in Sources */,
+				AAD1DD05155DE7D700914C31 /* MKDCellAccessories.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
